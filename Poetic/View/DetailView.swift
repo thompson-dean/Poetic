@@ -16,39 +16,62 @@ struct DetailView: View {
     
     
     var body: some View {
-        Form {
-            Section(header: Text("title")) {
-                Text(title)
-            }
-            Section(header: Text("Author")) {
-                Text(author)
-            }
-            Section(header: Text("Poem")) {
-                ForEach(0..<poemLines.count) { index in
+        GeometryReader { geo in
+            ScrollView {
+                
+                VStack {
                     
-                    HStack {
-                        Text("\(index + 1)")
-                            .font(.caption2)
-                            .frame(width: 15, height: 10)
-                            .padding(.trailing)
-                        
-                        
-                        Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
-                            .font(.subheadline)
-                            
+                    Text(title)
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .padding(.vertical, 9)
+                        .padding(.horizontal)
+                
+                    Text(author)
+                        .font(.headline)
+                        .padding(.bottom, 10)
+                        .padding(.horizontal)
+                    
+                    VStack(alignment: .leading) {
+                        ForEach(0..<poemLines.count) { index in
+                            HStack {
+                                if poemLines.count < 9 {
+                                    Text("\(index + 1)")
+                                        .font(.system(.caption2, design: .serif))
+                                        .frame(width: 20, height: 10)
+                                        .padding(.trailing, 5)
+                                } else {
+                                    Text((index + 1) % 5 == 0 ? "\(index + 1)" : "")
+                                        .font(.system(.caption2, design: .serif))
+                                        .frame(width: 20, height: 10)
+                                        .padding(.trailing, 5)
+                                }
+                                
+                                Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
+                                    .font(.system(.subheadline, design: .serif))
+                            }
+                        }
                     }
-                    
+                    .padding(5)
                 }
+                .frame(width: geo.size.width)
             }
-            Section(header: Text("Line Count")) {
-                Text(linecount)
-            }
+            .background(
+                Image("background")
+                    .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+                    .ignoresSafeArea()
+            )
         }
+        
+        
     }
+        
+    
 }
 
 struct DetailView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        DetailView(title: "JazzBox", author: "Deano", poemLines: ["Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong" ], linecount: "14")
+        DetailView(title: "Jazz Box", author: "Dean Thompson", poemLines: ["Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd", "Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd" ], linecount: "14")
     }
 }
