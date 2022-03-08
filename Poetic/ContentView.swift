@@ -7,6 +7,19 @@
 
 import SwiftUI
 
+struct LineBreak: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        
+        path.move(to: CGPoint(x: rect.minX, y: rect.midY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
+        
+        
+        
+        return path
+    }
+}
+
 struct ContentView: View {
     @StateObject var viewModel = SearchViewModel()
     @State private var authorSearch = true
@@ -14,77 +27,114 @@ struct ContentView: View {
         NavigationView {
             
             
-            Form {
+            ZStack {
+                Image("background")
+                    .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+                    .ignoresSafeArea()
                 
-                Section(header: Text("Search By...")) {
+                VStack(alignment: .leading) {
+                    
+                    
                     Picker("", selection: $authorSearch) {
                         Text("Author").tag(true)
                         Text("Title").tag(false)
                     }
                     .pickerStyle(SegmentedPickerStyle())
-                }
-                
-                Section {
-                    HStack {
-                        TextField("Search...", text: $viewModel.searchTerm)
+                    
+                    .padding()
+                    
+                    SearchBar(searchTerm: $viewModel.searchTerm)
+                            .padding(.horizontal, 8)
+                  
+                    if viewModel.searchTerm.isEmpty {
+                        VStack(alignment: .center) {
                             
-                        Button {
-                            if authorSearch {
-                                viewModel.loadPoem(searchterm: viewModel.searchTerm, filter: .author)
-                            } else {
-                                viewModel.loadPoem(searchterm: viewModel.searchTerm, filter: .title)
-                            }
-                        } label: {
-                            Image(systemName: "magnifyingglass")
-                                .foregroundColor(.primary)
+                            Image(systemName: "eyeglasses")
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundColor(.black)
+                                .frame(width: 250, height: 200)
+                            
+                            Text("Start searching for poems!")
+                                .font(.system(.title, design: .serif))
+                            
+                            
                         }
-                    }
-                }
-                
-                if viewModel.searchTerm.isEmpty {
-                    VStack(alignment: .center) {
-                        Text("Search for some poems!")
-                        Image(systemName: "magnifyingglass")
-                            .resizable()
-                            .scaledToFit()
-                            .foregroundColor(.purple)
-                            .frame(width: 200, height: 200)
-                            .padding()
-                    }
-                    .frame(width: 300, height: 300)
-                } else {
-                    List(viewModel.poems) { poem in
-                        NavigationLink {
-                            DetailView(title: poem.title, author: poem.author, poemLines: poem.lines, linecount: poem.linecount)
-                        } label: {
-                            VStack(alignment: .leading) {
-                                if authorSearch {
-                                    Text(poem.author)
-                                        .font(.headline)
-                                    Text(poem.title)
-                                        .font(.subheadline)
-                                } else {
-                                    Text(poem.title)
-                                        .font(.headline)
-                                    Text(poem.author)
-                                        .font(.subheadline)
+                        .frame(maxWidth: . infinity)
+                    } else {
+                        
+                        GeometryReader { geo in
+                            ScrollView {
+                            ForEach(viewModel.poems) { poem in
+                                NavigationLink {
+                                    DetailView(title: poem.title, author: poem.author, poemLines: poem.lines, linecount: poem.linecount)
+                                } label: {
+                                    VStack(alignment: .center) {
+                                        if authorSearch {
+                                            HStack {
+                                                Text(poem.author)
+                                                    .font(.system(.headline, design: .serif))
+                                                Spacer()
+                                            }
+                                            
+                                            HStack {
+                                                Text(poem.title)
+                                                    .font(.system(.subheadline, design: .serif))
+                                                    .multilineTextAlignment(.leading)
+                                                Spacer()
+                                            }
+                                            LineBreak()
+                                                .stroke(.black, style: StrokeStyle(lineWidth: 0.5))
+                                                .frame(width: geo.size.width / 2)
+                                        } else {
+                                            HStack {
+                                                Text(poem.title)
+                                                    .font(.system(.headline, design: .serif))
+                                                    .multilineTextAlignment(.leading)
+                                                Spacer()
+                                            }
+                                            HStack {
+                                                Text(poem.author)
+                                                    .font(.system(.subheadline, design: .serif))
+                                                Spacer()
+                                            }
+                                            LineBreak()
+                                                .stroke(.black, style: StrokeStyle(lineWidth: 0.5))
+                                                .frame(width: geo.size.width / 2)
+                                        }
+                                    }
+                                    .frame(width: geo.size.width)
+                                    .padding(.horizontal, 7)
+                                    
+                                    
+                                    
+                                    
+                                    
                                 }
                             }
-                            
+                            }
                         }
+                        .padding()
+                        
+                        
+                        
+                    }
+                    
+                    
+                    Spacer()
+                    
+                }
+                .onChange(of: viewModel.searchTerm) { _ in
+                    if authorSearch {
+                        viewModel.loadPoem(searchterm: viewModel.searchTerm, filter: .author)
+                    } else {
+                        viewModel.loadPoem(searchterm: viewModel.searchTerm, filter: .title)
                     }
                 }
-                
-                
+                .navigationTitle("Poetic")
+                .foregroundColor(.black)
             }
-            .onChange(of: viewModel.searchTerm) { _ in
-                if authorSearch {
-                    viewModel.loadPoem(searchterm: viewModel.searchTerm, filter: .author)
-                } else {
-                    viewModel.loadPoem(searchterm: viewModel.searchTerm, filter: .title)
-                }
-            }
-            .navigationTitle("Search Poems")
+            
         }
     }
 }
@@ -128,8 +178,11 @@ struct SearchBar: UIViewRepresentable {
     }
 }
 
+
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
+

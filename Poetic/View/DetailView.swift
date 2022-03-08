@@ -22,13 +22,13 @@ struct DetailView: View {
                 VStack {
                     
                     Text(title)
-                        .font(.title2)
+                        .font(.system(.title2, design: .serif))
                         .fontWeight(.semibold)
                         .padding(.vertical, 9)
                         .padding(.horizontal)
                 
                     Text(author)
-                        .font(.headline)
+                        .font(.system(.headline, design: .serif))
                         .padding(.bottom, 10)
                         .padding(.horizontal)
                     
@@ -72,6 +72,12 @@ struct DetailView: View {
 struct DetailView_Previews: PreviewProvider {
     
     static var previews: some View {
-        DetailView(title: "Jazz Box", author: "Dean Thompson", poemLines: ["Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd", "Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd" ], linecount: "14")
+        NavigationView {
+            DetailView(title: "Jazz Box", author: "Dean Thompson", poemLines: ["Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd", "Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd", "Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd", "Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd"  ], linecount: "14")
+                .navigationBarBackButtonHidden(false)
+            
+        }
+        
+        
     }
 }

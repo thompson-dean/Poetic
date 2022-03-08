@@ -144,6 +144,8 @@
 			dependencies = (
 			);
 			name = Poetic;
+			packageProductDependencies = (
+			);
 			productName = Poetic;
 			productReference = 2A17BA8F27D5D8E000E0D755 /* Poetic.app */;
 			productType = "com.apple.product-type.application";
@@ -172,6 +174,8 @@
 				Base,
 			);
 			mainGroup = 2A17BA8627D5D8E000E0D755;
+			packageReferences = (
+			);
 			productRefGroup = 2A17BA9027D5D8E000E0D755 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
