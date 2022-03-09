@@ -15,3 +15,8 @@ struct Poem: Codable, Identifiable {
     let lines: [String]
     let linecount: String
 }
+
+struct Authors: Codable, Identifiable {
+    let id = UUID()
+    let authors: [String]
+}

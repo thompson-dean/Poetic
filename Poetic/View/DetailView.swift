@@ -9,6 +9,8 @@ import SwiftUI
 
 struct DetailView: View {
     
+    @ObservedObject var viewModel: SearchViewModel
+    
     let title: String
     let author: String
     let poemLines: [String]
@@ -62,6 +64,18 @@ struct DetailView: View {
                     .ignoresSafeArea()
             )
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                   let newPoem = Poem(title: title, author: author, lines: poemLines, linecount: linecount)
+                    viewModel.favoritePoems.append(newPoem)
+                    print(viewModel.favoritePoems)
+                } label: {
+                    Image(systemName: "star")
+                }
+                
+            }
+        }
         
         
     }
@@ -73,7 +87,7 @@ struct DetailView_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationView {
-            DetailView(title: "Jazz Box", author: "Dean Thompson", poemLines: ["Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd", "Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd", "Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd", "Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd"  ], linecount: "14")
+            DetailView(viewModel: SearchViewModel(), title: "Jazz Box", author: "Dean Thompson", poemLines: ["Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd", "Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd", "Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd", "Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd"  ], linecount: "14")
                 .navigationBarBackButtonHidden(false)
             
         }

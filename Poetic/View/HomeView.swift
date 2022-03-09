@@ -9,7 +9,13 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Image("background")
+                .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+                .ignoresSafeArea()
+            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        }
+        
     }
 }
 

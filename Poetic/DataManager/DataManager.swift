@@ -14,29 +14,41 @@ class DataManager {
         case title = "title"
     }
     
-    func loadData(filter: SearchFilter, searchTerm: String, completion: @escaping(([Poem]) -> Void)) {
+    func loadData(filter: SearchFilter, searchTerm: String, completion: @escaping(Result<[Poem], ErrorType>) -> Void) {
         guard !searchTerm.isEmpty else { return }
         
         let api = "https://poetrydb.org/\(filter)/"
         guard let url = URL(string: "\(api)\(searchTerm)") else { return }
         print(url)
         let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data else {
-                print("jazz")
-                completion([])
+            
+            if let _ = error {
+                completion(.failure(.invalidSearch))
                 return
             }
             
-            let decoder = JSONDecoder()
-            if let poems = try? decoder.decode([Poem].self, from: data) {
-                completion(poems)
-            } else {
-                print("error")
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completion(.failure(.invalidResponse))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(.invalidData))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let poems = try decoder.decode([Poem].self, from: data)
+                completion(.success(poems))
+                
+            } catch {
+                completion(.failure(.invalidData))
             }
         }
-            dataTask.resume()
+        dataTask.resume()
     }
-        
+    
     
     
     
