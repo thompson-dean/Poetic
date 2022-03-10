@@ -9,6 +9,8 @@ import SwiftUI
 
 class DataManager {
     
+    private var dataTask: URLSessionDataTask?
+    
     enum SearchFilter: String {
         case author = "author"
         case title = "title"
@@ -16,11 +18,14 @@ class DataManager {
     
     func loadData(filter: SearchFilter, searchTerm: String, completion: @escaping(Result<[Poem], ErrorType>) -> Void) {
         guard !searchTerm.isEmpty else { return }
-        
         let api = "https://poetrydb.org/\(filter)/"
-        guard let url = URL(string: "\(api)\(searchTerm)") else { return }
+        guard let url = URL(string: "\(api)\(searchTerm)") else {
+            print(api)
+            print(searchTerm)
+            return
+        }
         print(url)
-        let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
+        dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
             
             if let _ = error {
                 completion(.failure(.invalidSearch))
@@ -41,12 +46,12 @@ class DataManager {
                 let decoder = JSONDecoder()
                 let poems = try decoder.decode([Poem].self, from: data)
                 completion(.success(poems))
-                
+                self.dataTask?.cancel()
             } catch {
                 completion(.failure(.invalidData))
             }
         }
-        dataTask.resume()
+        dataTask?.resume()
     }
     
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A0DCA1227D9E99B0071A541 /* SwiftUISearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0DCA1127D9E99B0071A541 /* SwiftUISearchBar.swift */; };
 		2A17BA9327D5D8E000E0D755 /* PoeticApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17BA9227D5D8E000E0D755 /* PoeticApp.swift */; };
 		2A17BA9527D5D8E000E0D755 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17BA9427D5D8E000E0D755 /* ContentView.swift */; };
 		2A17BA9727D5D8E000E0D755 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A17BA9627D5D8E000E0D755 /* Assets.xcassets */; };
@@ -24,10 +25,10 @@
 		2A37937927D8D42E00FA48ED /* Authors.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A37937827D8D42E00FA48ED /* Authors.json */; };
 		2A37937B27D8D48A00FA48ED /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A37937A27D8D48A00FA48ED /* Bundle-Decodable.swift */; };
 		2A37937D27D8DC1700FA48ED /* AuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A37937C27D8DC1700FA48ED /* AuthorView.swift */; };
-		2A37938027D8ED3600FA48ED /* AuthorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A37937F27D8ED3600FA48ED /* AuthorViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A0DCA1127D9E99B0071A541 /* SwiftUISearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUISearchBar.swift; sourceTree = "<group>"; };
 		2A17BA8F27D5D8E000E0D755 /* Poetic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poetic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A17BA9227D5D8E000E0D755 /* PoeticApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoeticApp.swift; sourceTree = "<group>"; };
 		2A17BA9427D5D8E000E0D755 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -46,7 +47,6 @@
 		2A37937827D8D42E00FA48ED /* Authors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Authors.json; path = ../../../../Authors.json; sourceTree = "<group>"; };
 		2A37937A27D8D48A00FA48ED /* Bundle-Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
 		2A37937C27D8DC1700FA48ED /* AuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorView.swift; sourceTree = "<group>"; };
-		2A37937F27D8ED3600FA48ED /* AuthorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +117,6 @@
 			isa = PBXGroup;
 			children = (
 				2A17BAAF27D641D200E0D755 /* SearchViewModel.swift */,
-				2A37937F27D8ED3600FA48ED /* AuthorViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -153,6 +152,7 @@
 			children = (
 				2A37936B27D8A4B800FA48ED /* LineBreak.swift */,
 				2A37936E27D8A57500FA48ED /* SearchBar.swift */,
+				2A0DCA1127D9E99B0071A541 /* SwiftUISearchBar.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -239,9 +239,9 @@
 				2A37937B27D8D48A00FA48ED /* Bundle-Decodable.swift in Sources */,
 				2A37937327D8C9CC00FA48ED /* Errors.swift in Sources */,
 				2A17BAB027D641D200E0D755 /* SearchViewModel.swift in Sources */,
+				2A0DCA1227D9E99B0071A541 /* SwiftUISearchBar.swift in Sources */,
 				2A17BAAE27D6418400E0D755 /* Poems.swift in Sources */,
 				2A17BAA827D5D94600E0D755 /* SearchView.swift in Sources */,
-				2A37938027D8ED3600FA48ED /* AuthorViewModel.swift in Sources */,
 				2A37937D27D8DC1700FA48ED /* AuthorView.swift in Sources */,
 				2A17BAA627D5D93700E0D755 /* HomeView.swift in Sources */,
 				2A17BA9527D5D8E000E0D755 /* ContentView.swift in Sources */,
