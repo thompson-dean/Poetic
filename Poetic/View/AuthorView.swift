@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AuthorView: View {
-    @StateObject var viewModel: SearchViewModel
+    @ObservedObject var viewModel: SearchViewModel
     
     let author: String
     

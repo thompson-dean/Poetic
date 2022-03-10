@@ -11,26 +11,39 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var viewModel = SearchViewModel()
+    
+    
+    
     var body: some View {
         TabView {
-            HomeView()
+            HomeView(viewModel: viewModel)
                 .tabItem {
                     Label("Home", systemImage: "house")
+                        
                 }
+                
             SearchView(viewModel: viewModel)
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")
+                        
                 }
+               
+                
             FavoritesView(viewModel: viewModel)
                 .tabItem {
                     Label("Favorites", systemImage: "star")
+                        
                 }
+                
             SettingsView()
                 .tabItem {
                     Label("Settings", systemImage: "gearshape")
+                        
                 }
+                
+            
         }
-        
+        .accentColor(.black)
     }
 }
 

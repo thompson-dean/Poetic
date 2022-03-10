@@ -11,13 +11,11 @@ struct FavoritesView: View {
     
     @ObservedObject var viewModel: SearchViewModel
     
+    
     var body: some View {
         NavigationView {
             
             ZStack {
-                Image("background")
-                    .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
-                    .ignoresSafeArea()
                 
                 GeometryReader { geo in
                     List {
@@ -25,12 +23,13 @@ struct FavoritesView: View {
                             NavigationLink {
                                 DetailView(viewModel: viewModel, title: poem.title, author: poem.author, poemLines: poem.lines, linecount: poem.linecount)
                             } label: {
-                                VStack(alignment: .leading) {
+                                VStack(alignment: .leading, spacing: 4) {
                                     Text(poem.title)
                                         .font(.system(.headline, design: .serif))
                                         .multilineTextAlignment(.leading)
                                     Text(poem.author)
                                         .font(.system(.subheadline, design: .serif))
+                                        
                                     
                                 }
                                 
@@ -40,11 +39,22 @@ struct FavoritesView: View {
                         .onDelete(perform: removeRows)
                     }
                 }
+                .background(
+                    Image("background")
+                        .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+                        .ignoresSafeArea()
+                    
+                )
+                .onAppear {
+                    // Set the default to clear
+                    UITableView.appearance().backgroundColor = .clear
+                }
                 .navigationTitle("Favorites")
                 .navigationBarTitleDisplayMode(.inline)
                 .foregroundColor(.black)
                 
             }
+            
             .toolbar {
                 EditButton()
             }
@@ -57,6 +67,7 @@ struct FavoritesView: View {
 }
 
 struct FavoritesView_Previews: PreviewProvider {
+    
     static var previews: some View {
         FavoritesView(viewModel: SearchViewModel())
     }

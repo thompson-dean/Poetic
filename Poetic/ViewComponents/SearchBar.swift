@@ -23,6 +23,7 @@ struct SearchBar: UIViewRepresentable {
 
     }
     func updateUIView(_ uiView: UISearchBar, context: Context) {
+        uiView.text = searchTerm
 
     }
 
@@ -42,6 +43,10 @@ struct SearchBar: UIViewRepresentable {
             searchTerm = searchBar.text ?? ""
             UIApplication.shared.windows.first { $0.isKeyWindow }?.endEditing(true)
         }
+        
+//        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//            searchTerm = searchText
+//        }
 
     }
 

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
-
+    
+    @ObservedObject var viewModel: SearchViewModel
     
     var example = Poem(title: "A Song of Autumn", author: "Adam Lindsay Gordon", lines: [
         "‘WHERE shall we go for our garlands glad",
@@ -27,65 +28,70 @@ struct HomeView: View {
         "You may gather again, my dear—",
         "But I go where the last year’s lost leaves go",
         "At the falling of the year.’"
-        ], linecount: "16")
+    ], linecount: "16")
     
     var body: some View {
-        
-        ZStack {
-            Image("background")
-                .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
-                .ignoresSafeArea()
-            VStack(alignment: .center, spacing: 10) {
-                
-                Text("Hello, Dean")
-                    .font(.system(.largeTitle, design: .serif))
-                    .fontWeight(.semibold)
-                
-                Text("Here is today's classic poem")
-                    .font(.system(.body, design: .serif))
-                Text("for your perusal.")
-                    .font(.system(.body, design: .serif))
-                
-                
+        NavigationView {
+            ZStack {
+                Image("background")
+                    .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+                    .ignoresSafeArea()
+                VStack(alignment: .center, spacing: 10) {
+                    
+                    Text("Hello, Dean")
+                        .font(.system(.largeTitle, design: .serif))
+                        .fontWeight(.semibold)
+                    
+                    Text("Here is today's classic poem")
+                        .font(.system(.body, design: .serif))
+                    Text("for your perusal.")
+                        .font(.system(.body, design: .serif))
+                    
+                    
                     GeometryReader { geo in
                         ScrollView {
-                            
-                            VStack {
-                                
-                                Text(example.title)
-                                    .font(.system(.title3, design: .serif))
-                                    .fontWeight(.semibold)
-                                    .padding(.top, 17)
-                                    .padding(.horizontal)
-                            
-                                Text(example.author)
-                                    .font(.system(.body, design: .serif))
-                                    .padding(.top, 1)
-                                    .padding(.horizontal)
-                                
-                                LineBreak()
-                                    .stroke(.black, style: StrokeStyle(lineWidth: 0.5))
-                                    .frame(width: geo.size.width / 1.4)
-                                    .padding(.horizontal, 20)
-                                
-                                VStack(alignment: .leading) {
-                                    ForEach(0..<example.lines.count, id: \.self) { index in
-                                        HStack {
-                                            
+                            NavigationLink {
+                                DetailView(viewModel: viewModel, title: example.title, author: example.author, poemLines: example.lines, linecount: example.linecount)
+                            } label: {
+                                VStack {
+                                    
+                                    Text(example.title)
+                                        .font(.system(.title3, design: .serif))
+                                        .fontWeight(.semibold)
+                                        .padding(.top, 17)
+                                        .padding(.horizontal)
+                                    
+                                    Text(example.author)
+                                        .font(.system(.body, design: .serif))
+                                        .padding(.top, 1)
+                                        .padding(.horizontal)
+                                    
+                                    LineBreak()
+                                        .stroke(.black, style: StrokeStyle(lineWidth: 0.5))
+                                        .frame(width: geo.size.width / 1.4)
+                                        .padding(.horizontal, 20)
+                                    
+                                    VStack(alignment: .leading) {
+                                        ForEach(0..<example.lines.count, id: \.self) { index in
+                                            HStack {
+                                                
                                                 Text("\(index + 1)")
                                                     .font(.system(.caption2, design: .serif))
                                                     .frame(width: 22, height: 10)
                                                     .padding(.trailing, 5)
-                                            
-                                            
-                                            Text(example.lines[index].trimmingCharacters(in: .whitespacesAndNewlines))
-                                                .font(.system(.subheadline, design: .serif))
+                                                
+                                                
+                                                Text(example.lines[index].trimmingCharacters(in: .whitespacesAndNewlines))
+                                                    .font(.system(.subheadline, design: .serif))
+                                            }
                                         }
                                     }
+                                    .padding(5)
                                 }
-                                .padding(5)
+                                .foregroundColor(.black)
+                                .frame(width: geo.size.width)
                             }
-                            .frame(width: geo.size.width)
+                            .buttonStyle(FlatLinkStyle())
                         }
                         .background(
                             Color.black.opacity(0.1)
@@ -94,23 +100,29 @@ struct HomeView: View {
                     }
                     .padding(10)
                     
-                
-                
-                
-                
-                Spacer()
+                    
+                    
+                    
+                    
+                    Spacer()
                 }
                 .frame(maxWidth: .infinity)
-                
                 .padding()
+            }
+            .navigationBarHidden(true)
+            
         }
-        
-        
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(viewModel: SearchViewModel())
+    }
+}
+
+struct FlatLinkStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
     }
 }
