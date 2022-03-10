@@ -26,6 +26,8 @@ class SearchViewModel: ObservableObject {
     @Published private(set) var state = State.idle
     
     
+    //SearchView Handling
+    
     func loadPoem(searchTerm: String, filter: DataManager.SearchFilter) {
         poems = []
         if searchTerm == "" {
@@ -49,6 +51,7 @@ class SearchViewModel: ObservableObject {
         }
     }
     
+    //AuthorView Handling
     
     func loadAuthorPoem(searchTerm: String) {
         print(searchTerm)
@@ -71,9 +74,23 @@ class SearchViewModel: ObservableObject {
         }
     }
     
-    func addPoemToFavorites(poem: Poem) {
-        favoritePoems.append(poem)
+    
+    //FAVORITES HANDLING
+    
+    func contains(_ poem: Poem) -> Bool {
+        favoritePoems.contains { $0.title == poem.title }
     }
     
+    func addToFavorites(_ poem: Poem) {
+        if contains(poem) {
+            return
+        } else {
+            favoritePoems.append(poem)
+        }
+    }
+    
+    func removePoemFromFavorites(_ poem: Poem) {
+        favoritePoems.removeAll(where: { $0.title == poem.title })
+    }
     
 }

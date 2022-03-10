@@ -40,7 +40,7 @@ struct DetailView: View {
                                 if poemLines.count < 9 {
                                     Text("\(index + 1)")
                                         .font(.system(.caption2, design: .serif))
-                                        .frame(width: 20, height: 10)
+                                        .frame(width: 22, height: 10)
                                         .padding(.trailing, 5)
                                 } else {
                                     Text((index + 1) % 5 == 0 ? "\(index + 1)" : "")
@@ -67,11 +67,21 @@ struct DetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                   let newPoem = Poem(title: title, author: author, lines: poemLines, linecount: linecount)
-                    viewModel.favoritePoems.append(newPoem)
-                    print(viewModel.favoritePoems)
+                let newPoem = Poem(title: title, author: author, lines: poemLines, linecount: linecount)
+                    if viewModel.contains(Poem(title: title, author: author, lines: poemLines, linecount: linecount)) {
+                        //add remove function here
+                        viewModel.removePoemFromFavorites(newPoem)
+                    } else {
+                        viewModel.addToFavorites(newPoem)
+                    }
+                    
                 } label: {
-                    Image(systemName: "star")
+                    if viewModel.contains(Poem(title: title, author: author, lines: poemLines, linecount: linecount)) {
+                        Image(systemName: "star.fill")
+                    } else {
+                        Image(systemName: "star")
+                    }
+                    
                 }
                 
             }

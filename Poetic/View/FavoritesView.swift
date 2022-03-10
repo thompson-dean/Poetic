@@ -20,8 +20,8 @@ struct FavoritesView: View {
                     .ignoresSafeArea()
                 
                 GeometryReader { geo in
-                    
-                        List(viewModel.favoritePoems) { poem in
+                    List {
+                        ForEach(viewModel.favoritePoems) { poem in
                             NavigationLink {
                                 DetailView(viewModel: viewModel, title: poem.title, author: poem.author, poemLines: poem.lines, linecount: poem.linecount)
                             } label: {
@@ -35,7 +35,9 @@ struct FavoritesView: View {
                                 }
                                 
                             }
-                        
+                            
+                        }
+                        .onDelete(perform: removeRows)
                     }
                 }
                 .navigationTitle("Favorites")
@@ -43,7 +45,14 @@ struct FavoritesView: View {
                 .foregroundColor(.black)
                 
             }
+            .toolbar {
+                EditButton()
+            }
         }
+    }
+    
+    func removeRows(at offsets: IndexSet) {
+        viewModel.favoritePoems.remove(atOffsets: offsets)
     }
 }
 

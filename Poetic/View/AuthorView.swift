@@ -50,7 +50,7 @@ struct AuthorView: View {
                                 NavigationLink {
                                     DetailView(viewModel: viewModel,
                                                title: viewModel.authorPoems[index].title,
-                                               author: viewModel.authorPoems[index].title,
+                                               author: viewModel.authorPoems[index].author,
                                                poemLines: viewModel.authorPoems[index].lines,
                                                linecount: viewModel.authorPoems[index].linecount)
                                 } label: {
@@ -61,6 +61,7 @@ struct AuthorView: View {
                                                 .frame(width: 20, height: 10)
                                                 .padding(.trailing, 5)
                                             Text(viewModel.authorPoems[index].title)
+                                                .multilineTextAlignment(.leading)
                                                 .font(.system(.body, design: .serif))
                                             Spacer()
                                             Image(systemName: "chevron.right")
