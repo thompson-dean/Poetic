@@ -16,6 +16,7 @@ struct DetailView: View {
     let poemLines: [String]
     let linecount: String
     
+    var quotes = [String]()
     
     var body: some View {
         GeometryReader { geo in
@@ -42,15 +43,18 @@ struct DetailView: View {
                                         .font(.system(.caption2, design: .serif))
                                         .frame(width: 22, height: 10)
                                         .padding(.trailing, 5)
+                                        
                                 } else {
                                     Text((index + 1) % 5 == 0 ? "\(index + 1)" : "")
                                         .font(.system(.caption2, design: .serif))
                                         .frame(width: 20, height: 10)
                                         .padding(.trailing, 5)
+                                        
                                 }
                                 
-                                Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
-                                    .font(.system(.subheadline, design: .serif))
+                                PoemView(viewModel: viewModel, author: author, title: title, index: index, poemLines: poemLines)
+                                
+                                
                             }
                         }
                     }
@@ -102,6 +106,36 @@ struct DetailView_Previews: PreviewProvider {
             
         }
         
+        
+    }
+}
+
+
+struct PoemView: View {
+    
+    @ObservedObject var viewModel: SearchViewModel
+    
+    let author: String
+    let title: String
+    let index: Int
+    let poemLines: [String]
+    var body: some View {
+        Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
+            .font(.system(.subheadline, design: .serif))
+            .contextMenu {
+                Button {
+                    viewModel.addQuote(Quote(title: title, author: author, quote: poemLines[index]))
+                    print("Tapped Favourites button")
+                } label: {
+                    Label("Add to Fav Quotes", systemImage: "quote.bubble.fill")
+                }
+                Button {
+                    print("Selected Cancel Button")
+                } label: {
+                    Label("Cancel", systemImage: "delete.left")
+                        .foregroundColor(.red)
+                }
+            }
         
     }
 }

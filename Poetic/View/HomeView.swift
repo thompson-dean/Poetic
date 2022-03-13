@@ -36,6 +36,8 @@ struct HomeView: View {
                 Image("background")
                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                     .ignoresSafeArea()
+                
+                
                 VStack(alignment: .center, spacing: 10) {
                     
                     Text("Hello, Dean")
@@ -75,15 +77,26 @@ struct HomeView: View {
                                         ForEach(0..<example.lines.count, id: \.self) { index in
                                             HStack {
                                                 
-                                                Text("\(index + 1)")
-                                                    .font(.system(.caption2, design: .serif))
-                                                    .frame(width: 22, height: 10)
-                                                    .padding(.trailing, 5)
+                                                if example.lines.count < 9 {
+                                                    Text("\(index + 1)")
+                                                        .font(.system(.caption2, design: .serif))
+                                                        .frame(width: 22, height: 10)
+                                                        .padding(.trailing, 5)
+                                                    
+                                                } else {
+                                                    Text((index + 1) % 5 == 0 ? "\(index + 1)" : "")
+                                                        .font(.system(.caption2, design: .serif))
+                                                        .frame(width: 22, height: 10)
+                                                        .padding(.trailing, 5)
+                                                }
+                                                
+                                                
                                                 
                                                 
                                                 Text(example.lines[index].trimmingCharacters(in: .whitespacesAndNewlines))
                                                     .font(.system(.subheadline, design: .serif))
                                             }
+                                            .padding(.trailing, 4)
                                         }
                                     }
                                     .padding(5)
@@ -94,11 +107,11 @@ struct HomeView: View {
                             .buttonStyle(FlatLinkStyle())
                         }
                         .background(
-                            Color.black.opacity(0.1)
+                            .white
                         )
                         .cornerRadius(10)
                     }
-                    .padding(10)
+                    .padding(5)
                     
                     
                     

@@ -16,7 +16,6 @@ struct FavoritesView: View {
         NavigationView {
             
             ZStack {
-                
                 GeometryReader { geo in
                     List {
                         ForEach(viewModel.favoritePoems) { poem in
@@ -29,7 +28,7 @@ struct FavoritesView: View {
                                         .multilineTextAlignment(.leading)
                                     Text(poem.author)
                                         .font(.system(.subheadline, design: .serif))
-                                        
+                                    
                                     
                                 }
                                 
@@ -38,6 +37,11 @@ struct FavoritesView: View {
                         }
                         .onDelete(perform: removeRows)
                     }
+                    
+                    
+                    
+                    
+                    
                 }
                 .background(
                     Image("background")

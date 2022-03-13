@@ -44,6 +44,8 @@ struct SearchBar: UIViewRepresentable {
             UIApplication.shared.windows.first { $0.isKeyWindow }?.endEditing(true)
         }
         
+        // Research how to implement dynamic search.
+        
 //        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 //            searchTerm = searchText
 //        }

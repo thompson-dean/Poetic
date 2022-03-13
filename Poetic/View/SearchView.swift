@@ -41,32 +41,35 @@ struct SearchView: View {
                     
                     switch authorSearch {
                     case true:
-                        GeometryReader { geo in
-                        ScrollView {
+                        List {
                             ForEach(authors.authors.filter { author in
                                 authorSearchTerm.isEmpty || author.contains(authorSearchTerm)
                             }, id: \.self) { author in
                                 NavigationLink {
                                     AuthorView(viewModel: viewModel, author: author)
                                 } label: {
-                                    VStack(alignment: .center) {
+                                    VStack(alignment: .leading) {
                                         HStack {
                                             Text(author)
-                                                .font(.system(.body, design: .serif))
-                                            Spacer()
-                                            Image(systemName: "chevron.right")
+                                                .font(.system(.headline, design: .serif))
+//                                            Spacer()
+//                                            Image(systemName: "chevron.right")
                                         }
-                                        .padding(.horizontal, 30)
-                                        .padding(.top, 4)
-                                        LineBreak()
-                                            .stroke(.black, style: StrokeStyle(lineWidth: 0.5))
-                                            .frame(width: geo.size.width / 1.4)
-                                            .padding(.horizontal, 20)
+//                                        .padding(.horizontal, 30)
+//                                        .padding(.top, 4)
+//                                        LineBreak()
+//                                            .stroke(.black, style: StrokeStyle(lineWidth: 0.5))
+//                                            .frame(width: geo.size.width / 1.4)
+//                                            .padding(.horizontal, 20)
                                     }
                                 }
                             }
                         }
-                    }
+                        .onAppear {
+                            // Set the default to clear
+                            UITableView.appearance().backgroundColor = .clear
+                        }
+                    
                                     
                     case false:
                         
@@ -151,52 +154,40 @@ extension SearchView {
     
     var resultsListView: some View {
         GeometryReader { geo in
-            ScrollView {
+            List {
             ForEach(viewModel.poems) { poem in
                 NavigationLink {
                     DetailView(viewModel: viewModel, title: poem.title, author: poem.author, poemLines: poem.lines, linecount: poem.linecount)
                 } label: {
                     VStack(alignment: .center) {
-                        if authorSearch {
-                            HStack {
-                                Text(poem.author)
-                                    .font(.system(.headline, design: .serif))
-                                Spacer()
-                            }
-                            
-                            HStack {
-                                Text(poem.title)
-                                    .font(.system(.subheadline, design: .serif))
-                                    .multilineTextAlignment(.leading)
-                                Spacer()
-                            }
-                            LineBreak()
-                                .stroke(.black, style: StrokeStyle(lineWidth: 0.5))
-                                .frame(width: geo.size.width / 2)
-                        } else {
-                            HStack {
-                                Text(poem.title)
-                                    .font(.system(.headline, design: .serif))
-                                    .multilineTextAlignment(.leading)
-                                Spacer()
-                            }
-                            HStack {
-                                Text(poem.author)
-                                    .font(.system(.subheadline, design: .serif))
-                                Spacer()
-                            }
-                            LineBreak()
-                                .stroke(.black, style: StrokeStyle(lineWidth: 0.5))
-                                .frame(width: geo.size.width / 2)
+                        
+                        HStack {
+                            Text(poem.title)
+                                .font(.system(.headline, design: .serif))
+                                .multilineTextAlignment(.leading)
+                            Spacer()
                         }
+                        HStack {
+                            Text(poem.author)
+                                .font(.system(.subheadline, design: .serif))
+                            Spacer()
+                        }
+                        //                            LineBreak()
+                        //                                .stroke(.black, style: StrokeStyle(lineWidth: 0.5))
+                        //                                .frame(width: geo.size.width / 2)
+                        
                     }
-                    .frame(width: geo.size.width)
-                    .padding(.horizontal, 7)
-
+                    //                    .frame(width: geo.size.width)
+                    //                    .padding(.horizontal, 7)
+                    
                 }
             }
             }
+            .onAppear {
+                // Set the default to clear
+                UITableView.appearance().backgroundColor = .clear
+            }
         }
-        .padding()
+//        .padding()
     }
 }

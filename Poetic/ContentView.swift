@@ -34,6 +34,12 @@ struct ContentView: View {
                     Label("Favorites", systemImage: "star")
                         
                 }
+            
+            QuoteView(viewModel: viewModel)
+                .tabItem {
+                    Label("Quotes", systemImage: "quote.bubble.fill")
+                        
+                }
                 
             SettingsView()
                 .tabItem {

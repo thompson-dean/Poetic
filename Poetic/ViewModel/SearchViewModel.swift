@@ -17,6 +17,7 @@ class SearchViewModel: ObservableObject {
     
     let dataManager = DataManager()
     
+    @Published var quotes = [Quote]()
     @Published private(set) var poems = [Poem]()
     @Published private(set) var authorPoems = [Poem]()
     @Published var favoritePoems = [Poem]()
@@ -93,4 +94,23 @@ class SearchViewModel: ObservableObject {
         favoritePoems.removeAll(where: { $0.title == poem.title })
     }
     
+    // QUOTES HANDLING
+    
+    func addQuote(_ quote: Quote) {
+        if quotes.contains(where: { $0.quote == quote.quote }) {
+            return
+        } else {
+            quotes.append(quote)
+            print(quotes)
+        }
+        
+        
+        
+        
+        
+    }
+    
 }
+
+
+
