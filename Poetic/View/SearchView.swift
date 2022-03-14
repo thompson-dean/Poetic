@@ -68,12 +68,13 @@ struct SearchView: View {
                         .onAppear {
                             // Set the default to clear
                             UITableView.appearance().backgroundColor = .clear
+                
                         }
                     
                                     
                     case false:
                         
-                        switch viewModel.state {
+                        switch viewModel.searchState {
                         case .idle:
                             idleView
                             

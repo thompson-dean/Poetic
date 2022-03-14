@@ -15,16 +15,26 @@ class SearchViewModel: ObservableObject {
         case loaded
     }
     
+    enum SearchTitleState {
+        case idle
+        case loading
+        case failed(Error)
+        case loaded
+    }
+    
     let dataManager = DataManager()
     
     @Published var quotes = [Quote]()
     @Published private(set) var poems = [Poem]()
     @Published private(set) var authorPoems = [Poem]()
+    @Published private(set) var randomPoems = [Poem]()
     @Published var favoritePoems = [Poem]()
     
     @Published var searchTerm: String = ""
     
     @Published private(set) var state = State.idle
+    @Published private(set) var searchState = SearchTitleState.idle
+    
     
     
     //SearchView Handling
@@ -32,18 +42,18 @@ class SearchViewModel: ObservableObject {
     func loadPoem(searchTerm: String, filter: DataManager.SearchFilter) {
         poems = []
         if searchTerm == "" {
-            state = .idle
+            searchState = .idle
             return
         } else {
-            state = .loading
-            dataManager.loadData(filter: filter, searchTerm: searchTerm) { result in
+            searchState = .loading
+            dataManager.loadData(filter: DataManager.SearchFilter.title, searchTerm: searchTerm) { result in
                 DispatchQueue.main.async {
                     switch result {
                     case .failure(let error):
-                        self.state = .failed(error)
+                        self.searchState = .failed(error)
                         print(error.localizedDescription)
                     case .success(let searchedPoems):
-                        self.state = .loaded
+                        self.searchState = .loaded
                         self.poems = searchedPoems
                     }
                 }
@@ -66,9 +76,30 @@ class SearchViewModel: ObservableObject {
                     print(error.localizedDescription)
                 case .success(let searchedPoems):
                     self.state = .loaded
-                    DispatchQueue.main.async {
-                        self.authorPoems = searchedPoems
-                    }
+                    
+                    self.authorPoems = searchedPoems
+                    
+                    
+                }
+            }
+        }
+    }
+    
+    func loadRandomPoems(searchTerm: String) {
+        print(searchTerm)
+        authorPoems = []
+        state = .loading
+        dataManager.loadData(filter: DataManager.SearchFilter.author, searchTerm: searchTerm) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .failure(let error):
+                    self.state = .failed(error)
+                    print(error.localizedDescription)
+                case .success(let searchedPoems):
+                    self.state = .loaded
+                    
+                    self.randomPoems = searchedPoems
+                    
                     
                 }
             }
@@ -103,11 +134,6 @@ class SearchViewModel: ObservableObject {
             quotes.append(quote)
             print(quotes)
         }
-        
-        
-        
-        
-        
     }
     
 }

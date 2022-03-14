@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct PoeticApp: App {
+    
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
