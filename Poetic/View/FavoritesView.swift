@@ -20,7 +20,7 @@ struct FavoritesView: View {
                     List {
                         ForEach(viewModel.favoritePoems) { poem in
                             NavigationLink {
-                                DetailView(viewModel: viewModel, title: poem.title, author: poem.author, poemLines: poem.lines, linecount: poem.linecount)
+                                DetailView(viewModel: viewModel, poem: poem)
                             } label: {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(poem.title)

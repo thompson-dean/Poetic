@@ -158,7 +158,7 @@ extension SearchView {
             List {
             ForEach(viewModel.poems) { poem in
                 NavigationLink {
-                    DetailView(viewModel: viewModel, title: poem.title, author: poem.author, poemLines: poem.lines, linecount: poem.linecount)
+                    DetailView(viewModel: viewModel, poem: poem)
                 } label: {
                     VStack(alignment: .center) {
                         

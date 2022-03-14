@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2A0DCA1227D9E99B0071A541 /* SwiftUISearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0DCA1127D9E99B0071A541 /* SwiftUISearchBar.swift */; };
+		2A0FE6EB27DF0E4D001AB281 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0FE6EA27DF0E4D001AB281 /* HomeViewModel.swift */; };
 		2A17BA9327D5D8E000E0D755 /* PoeticApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17BA9227D5D8E000E0D755 /* PoeticApp.swift */; };
 		2A17BA9527D5D8E000E0D755 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17BA9427D5D8E000E0D755 /* ContentView.swift */; };
 		2A17BA9727D5D8E000E0D755 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A17BA9627D5D8E000E0D755 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		2A0DCA1127D9E99B0071A541 /* SwiftUISearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUISearchBar.swift; sourceTree = "<group>"; };
+		2A0FE6EA27DF0E4D001AB281 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		2A17BA8F27D5D8E000E0D755 /* Poetic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poetic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A17BA9227D5D8E000E0D755 /* PoeticApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoeticApp.swift; sourceTree = "<group>"; };
 		2A17BA9427D5D8E000E0D755 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				2A17BAAF27D641D200E0D755 /* SearchViewModel.swift */,
+				2A0FE6EA27DF0E4D001AB281 /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				2A17BAAA27D5D95400E0D755 /* FavoritesView.swift in Sources */,
 				2A17BAB427D6507600E0D755 /* DetailView.swift in Sources */,
 				2A17BAAC27D5D96E00E0D755 /* DataManager.swift in Sources */,
+				2A0FE6EB27DF0E4D001AB281 /* HomeViewModel.swift in Sources */,
 				2A37936C27D8A4B800FA48ED /* LineBreak.swift in Sources */,
 				2AB4CE1727DDBBBF007937CC /* Quote.swift in Sources */,
 				2A37937B27D8D48A00FA48ED /* Bundle-Decodable.swift in Sources */,

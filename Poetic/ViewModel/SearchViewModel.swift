@@ -8,6 +8,8 @@
 import Foundation
 
 class SearchViewModel: ObservableObject {
+    
+    // loading state for Home View and Author View
     enum State {
         case idle
         case loading
@@ -15,6 +17,7 @@ class SearchViewModel: ObservableObject {
         case loaded
     }
     
+    //loading state for title search.
     enum SearchTitleState {
         case idle
         case loading
@@ -22,30 +25,36 @@ class SearchViewModel: ObservableObject {
         case loaded
     }
     
+    
     let dataManager = DataManager()
     
+    //Arrays
     @Published var quotes = [Quote]()
     @Published private(set) var poems = [Poem]()
     @Published private(set) var authorPoems = [Poem]()
     @Published private(set) var randomPoems = [Poem]()
     @Published var favoritePoems = [Poem]()
     
+    
     @Published var searchTerm: String = ""
     
+    //State variables
     @Published private(set) var state = State.idle
     @Published private(set) var searchState = SearchTitleState.idle
     
     
     
-    //SearchView Handling
+    //SearchView Handling - fetchs data for title search.
     
     func loadPoem(searchTerm: String, filter: DataManager.SearchFilter) {
         poems = []
+        
         if searchTerm == "" {
             searchState = .idle
             return
         } else {
             searchState = .loading
+            
             dataManager.loadData(filter: DataManager.SearchFilter.title, searchTerm: searchTerm) { result in
                 DispatchQueue.main.async {
                     switch result {
@@ -62,49 +71,49 @@ class SearchViewModel: ObservableObject {
         }
     }
     
-    //AuthorView Handling
-    
+    //AuthorView Handling - loads authors poems in AuthorView
     func loadAuthorPoem(searchTerm: String) {
-        print(searchTerm)
         authorPoems = []
         state = .loading
+        
         dataManager.loadData(filter: DataManager.SearchFilter.author, searchTerm: searchTerm) { result in
             DispatchQueue.main.async {
                 switch result {
+                    
                 case .failure(let error):
                     self.state = .failed(error)
                     print(error.localizedDescription)
+                    
                 case .success(let searchedPoems):
                     self.state = .loaded
                     
                     self.authorPoems = searchedPoems
-                    
-                    
                 }
             }
         }
     }
     
+    //HomeView Handling - fetchs random poem for Home Screen.
     func loadRandomPoems(searchTerm: String) {
-        print(searchTerm)
-        authorPoems = []
+        randomPoems = []
         state = .loading
+        
         dataManager.loadData(filter: DataManager.SearchFilter.author, searchTerm: searchTerm) { result in
             DispatchQueue.main.async {
                 switch result {
+                    
                 case .failure(let error):
                     self.state = .failed(error)
                     print(error.localizedDescription)
+                    
                 case .success(let searchedPoems):
                     self.state = .loaded
-                    
                     self.randomPoems = searchedPoems
-                    
-                    
                 }
             }
         }
     }
+    
     
     
     //FAVORITES HANDLING

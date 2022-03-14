@@ -11,34 +11,29 @@ struct DetailView: View {
     
     @ObservedObject var viewModel: SearchViewModel
     
-    let title: String
-    let author: String
-    let poemLines: [String]
-    let linecount: String
-    
-    var quotes = [String]()
-    
+    let poem: Poem
+   
     var body: some View {
         GeometryReader { geo in
             ScrollView {
                 
                 VStack {
                     
-                    Text(title)
+                    Text(poem.title)
                         .font(.system(.title2, design: .serif))
                         .fontWeight(.semibold)
                         .padding(.vertical, 9)
                         .padding(.horizontal)
                 
-                    Text(author)
+                    Text(poem.author)
                         .font(.system(.headline, design: .serif))
                         .padding(.bottom, 10)
                         .padding(.horizontal)
                     
                     VStack(alignment: .leading) {
-                        ForEach(0..<poemLines.count) { index in
+                        ForEach(0..<poem.lines.count) { index in
                             HStack {
-                                if poemLines.count < 9 {
+                                if poem.lines.count < 9 {
                                     Text("\(index + 1)")
                                         .font(.system(.caption2, design: .serif))
                                         .frame(width: 22, height: 10)
@@ -52,8 +47,7 @@ struct DetailView: View {
                                         
                                 }
                                 
-                                PoemView(viewModel: viewModel, author: author, title: title, index: index, poemLines: poemLines)
-                                
+                                PoemView(viewModel: viewModel, author: poem.author, title: poem.title, index: index, poemLines: poem.lines)
                                 
                             }
                         }
@@ -71,45 +65,25 @@ struct DetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                let newPoem = Poem(title: title, author: author, lines: poemLines, linecount: linecount)
-                    if viewModel.contains(Poem(title: title, author: author, lines: poemLines, linecount: linecount)) {
-                        //add remove function here
+                    let newPoem = Poem(title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
+                    if viewModel.contains(Poem(title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)) {
+                        
                         viewModel.removePoemFromFavorites(newPoem)
                     } else {
                         viewModel.addToFavorites(newPoem)
                     }
                     
                 } label: {
-                    if viewModel.contains(Poem(title: title, author: author, lines: poemLines, linecount: linecount)) {
+                    if viewModel.contains(Poem(title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)) {
                         Image(systemName: "star.fill")
                     } else {
                         Image(systemName: "star")
                     }
-                    
                 }
-                
             }
         }
-        
-        
-    }
-        
-    
-}
-
-struct DetailView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        NavigationView {
-            DetailView(viewModel: SearchViewModel(), title: "Jazz Box", author: "Dean Thompson", poemLines: ["Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd", "Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd", "Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd", "Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd"  ], linecount: "14")
-                .navigationBarBackButtonHidden(false)
-            
-        }
-        
-        
     }
 }
-
 
 struct PoemView: View {
     

@@ -73,10 +73,7 @@ struct AuthorView: View {
                             List(0..<viewModel.authorPoems.count, id: \.self) { index in
                                 NavigationLink {
                                     DetailView(viewModel: viewModel,
-                                               title: viewModel.authorPoems[index].title,
-                                               author: viewModel.authorPoems[index].author,
-                                               poemLines: viewModel.authorPoems[index].lines,
-                                               linecount: viewModel.authorPoems[index].linecount)
+                                               poem: viewModel.authorPoems[index])
                                 } label: {
                                     VStack(alignment: .leading) {
                                         HStack {

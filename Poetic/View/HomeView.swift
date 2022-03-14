@@ -9,9 +9,11 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @ObservedObject var viewModel: SearchViewModel
+    @StateObject var viewModel: SearchViewModel
+    
     @State var refresh = Refresh(started: false, released: false)
     @State var count = 0
+    
     var authors: Authors = Bundle.main.decode("Authors.json")
     
     var body: some View {
@@ -66,14 +68,46 @@ struct HomeView: View {
                                 .padding()
                             case .loaded:
                                 NavigationLink {
-                                    DetailView(viewModel: viewModel, title: viewModel.randomPoems[0].title, author: viewModel.randomPoems[0].author, poemLines: viewModel.randomPoems[0].lines, linecount: viewModel.randomPoems[0].linecount)
+                                    DetailView(viewModel: viewModel, poem: viewModel.randomPoems[0])
                                 } label: {
+                                    
+                                    GeometryReader { reader -> AnyView in
+                                        DispatchQueue.main.async {
+                                            if refresh.startOffset == 0 {
+                                                refresh.startOffset = reader.frame(in: .global).minY
+                                            }
+                                            
+                                            refresh.offset = reader.frame(in: .global).minY
+                                            
+                                            if refresh.offset - refresh.startOffset > 70 && !refresh.started {
+                                                refresh.started = true
+                                            }
+                                            
+                                            if refresh.startOffset == refresh.offset && refresh.started && !refresh.released {
+                                                
+                                                withAnimation(Animation.linear) {
+                                                    refresh.released = true
+                                                }
+                                                
+                                                viewModel.loadRandomPoems(searchTerm: authors.authors[Int.random(in: 0..<authors.authors.count)].replacingOccurrences(of: " ", with: "%20"))
+                                                refresh.started = false
+                                                refresh.released = false
+                                            }
+                                        }
+                                        return AnyView(Color.black)
+                                    }
+                                    .frame(width: 0, height: 0)
+                                    
                                     ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
+                                        
                                         
                                         Image(systemName: "arrow.down")
                                             .font(.system(size: 16, weight: .heavy))
                                             .foregroundColor(.gray)
-                                            .offset(y: -30)
+                                            .rotationEffect(.init(degrees: refresh.started ? 180 : 0))
+                                            .offset(y: refresh.released ? 40 : -30)
+                                            .animation(.easeIn)
+                                        
                                         
                                         VStack {
                                             
@@ -143,11 +177,6 @@ struct HomeView: View {
                     }
                     .padding(5)
                     
-                    Button {
-                        viewModel.loadRandomPoems(searchTerm: authors.authors[Int.random(in: 0..<authors.authors.count)].replacingOccurrences(of: " ", with: "%20"))
-                    } label: {
-                        Text("Refresh")
-                    }
                     
                     Spacer()
                 }
