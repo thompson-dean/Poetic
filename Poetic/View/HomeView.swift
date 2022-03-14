@@ -9,7 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @StateObject var viewModel: SearchViewModel
+    @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var pcViewModel: PersistenceController
     
     @State var refresh = Refresh(started: false, released: false)
     @State var count = 0
@@ -68,7 +69,7 @@ struct HomeView: View {
                                 .padding()
                             case .loaded:
                                 NavigationLink {
-                                    DetailView(viewModel: viewModel, poem: viewModel.randomPoems[0])
+                                    DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: viewModel.randomPoems[0].title, author: viewModel.randomPoems[0].author, lines: viewModel.randomPoems[0].lines, linecount: viewModel.randomPoems[0].linecount)
                                 } label: {
                                     
                                     GeometryReader { reader -> AnyView in
@@ -79,7 +80,7 @@ struct HomeView: View {
                                             
                                             refresh.offset = reader.frame(in: .global).minY
                                             
-                                            if refresh.offset - refresh.startOffset > 70 && !refresh.started {
+                                            if refresh.offset - refresh.startOffset > 80 && !refresh.started {
                                                 refresh.started = true
                                             }
                                             
@@ -88,10 +89,11 @@ struct HomeView: View {
                                                 withAnimation(Animation.linear) {
                                                     refresh.released = true
                                                 }
-                                                
+                                                simpleSuccess()
                                                 viewModel.loadRandomPoems(searchTerm: authors.authors[Int.random(in: 0..<authors.authors.count)].replacingOccurrences(of: " ", with: "%20"))
                                                 refresh.started = false
                                                 refresh.released = false
+                                                
                                             }
                                         }
                                         return AnyView(Color.black)
@@ -200,11 +202,16 @@ struct HomeView: View {
             
         }
     }
+    
+    func simpleSuccess() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(viewModel: SearchViewModel())
+        HomeView(viewModel: SearchViewModel(), pcViewModel: PersistenceController())
     }
 }
 

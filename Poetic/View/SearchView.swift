@@ -9,8 +9,9 @@ import SwiftUI
 
 struct SearchView: View {
     var authors: Authors = Bundle.main.decode("Authors.json")
-//    var authors = ["Dean Thompson", "Lloyd Barrett", "Dean Thompson", "Dean Thompson"]
+    
     @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var pcViewModel: PersistenceController
     @State private var authorSearch = false
     @State var authorSearchTerm = ""
     var body: some View {
@@ -46,7 +47,7 @@ struct SearchView: View {
                                 authorSearchTerm.isEmpty || author.contains(authorSearchTerm)
                             }, id: \.self) { author in
                                 NavigationLink {
-                                    AuthorView(viewModel: viewModel, author: author)
+                                    AuthorView(viewModel: viewModel, pcViewModel: pcViewModel, author: author)
                                 } label: {
                                     VStack(alignment: .leading) {
                                         HStack {
@@ -117,7 +118,7 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(viewModel: SearchViewModel())
+        SearchView(viewModel: SearchViewModel(), pcViewModel: PersistenceController())
     }
 }
 
@@ -158,7 +159,7 @@ extension SearchView {
             List {
             ForEach(viewModel.poems) { poem in
                 NavigationLink {
-                    DetailView(viewModel: viewModel, poem: poem)
+                    DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
                 } label: {
                     VStack(alignment: .center) {
                         

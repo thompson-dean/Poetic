@@ -10,8 +10,12 @@ import SwiftUI
 struct DetailView: View {
     
     @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var pcViewModel: PersistenceController
     
-    let poem: Poem
+    let title: String
+    let author: String
+    let lines: [String]
+    let linecount: String
    
     var body: some View {
         GeometryReader { geo in
@@ -19,21 +23,21 @@ struct DetailView: View {
                 
                 VStack {
                     
-                    Text(poem.title)
+                    Text(title)
                         .font(.system(.title2, design: .serif))
                         .fontWeight(.semibold)
                         .padding(.vertical, 9)
                         .padding(.horizontal)
                 
-                    Text(poem.author)
+                    Text(author)
                         .font(.system(.headline, design: .serif))
                         .padding(.bottom, 10)
                         .padding(.horizontal)
                     
                     VStack(alignment: .leading) {
-                        ForEach(0..<poem.lines.count) { index in
+                        ForEach(0..<lines.count) { index in
                             HStack {
-                                if poem.lines.count < 9 {
+                                if lines.count < 9 {
                                     Text("\(index + 1)")
                                         .font(.system(.caption2, design: .serif))
                                         .frame(width: 22, height: 10)
@@ -47,7 +51,7 @@ struct DetailView: View {
                                         
                                 }
                                 
-                                PoemView(viewModel: viewModel, author: poem.author, title: poem.title, index: index, poemLines: poem.lines)
+                                PoemView(viewModel: viewModel, pcViewModel: pcViewModel, author: author, title: title, index: index, poemLines: lines)
                                 
                             }
                         }
@@ -65,16 +69,14 @@ struct DetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    let newPoem = Poem(title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
-                    if viewModel.contains(Poem(title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)) {
-                        
-                        viewModel.removePoemFromFavorites(newPoem)
+                    if let entity = pcViewModel.favoritedPoems.first(where: { $0.title == title}) {
+                        pcViewModel.deleteFavoritedPoemFromTappingStar(entity: entity)
                     } else {
-                        viewModel.addToFavorites(newPoem)
+                        pcViewModel.addFavoritePoem(id: UUID(), title: title, author: author, lines: lines, linecount: linecount)
                     }
                     
                 } label: {
-                    if viewModel.contains(Poem(title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)) {
+                    if pcViewModel.favoritedPoems.contains(where: { $0.title == title })  {
                         Image(systemName: "star.fill")
                     } else {
                         Image(systemName: "star")
@@ -88,7 +90,7 @@ struct DetailView: View {
 struct PoemView: View {
     
     @ObservedObject var viewModel: SearchViewModel
-    
+    @ObservedObject var pcViewModel: PersistenceController
     let author: String
     let title: String
     let index: Int
@@ -98,7 +100,12 @@ struct PoemView: View {
             .font(.system(.subheadline, design: .serif))
             .contextMenu {
                 Button {
-                    viewModel.addQuote(Quote(title: title, author: author, quote: poemLines[index]))
+                    if let entity = pcViewModel.quotes.first(where: { $0.quote == poemLines[index]}) {
+                        //do nothing
+                    } else {
+                        pcViewModel.addQuote(id: UUID(), title: title, author: author, quote: poemLines[index])
+                    }
+                    
                     print("Tapped Favourites button")
                 } label: {
                     Label("Add to Fav Quotes", systemImage: "quote.bubble.fill")

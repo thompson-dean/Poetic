@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2A0DCA1227D9E99B0071A541 /* SwiftUISearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0DCA1127D9E99B0071A541 /* SwiftUISearchBar.swift */; };
-		2A0FE6EB27DF0E4D001AB281 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0FE6EA27DF0E4D001AB281 /* HomeViewModel.swift */; };
 		2A17BA9327D5D8E000E0D755 /* PoeticApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17BA9227D5D8E000E0D755 /* PoeticApp.swift */; };
 		2A17BA9527D5D8E000E0D755 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17BA9427D5D8E000E0D755 /* ContentView.swift */; };
 		2A17BA9727D5D8E000E0D755 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A17BA9627D5D8E000E0D755 /* Assets.xcassets */; };
@@ -25,16 +24,16 @@
 		2A37937327D8C9CC00FA48ED /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A37937227D8C9CC00FA48ED /* Errors.swift */; };
 		2A37937B27D8D48A00FA48ED /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A37937A27D8D48A00FA48ED /* Bundle-Decodable.swift */; };
 		2A37937D27D8DC1700FA48ED /* AuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A37937C27D8DC1700FA48ED /* AuthorView.swift */; };
+		2A38CF7927DF74BB00A44268 /* Poetic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2A38CF7727DF74BB00A44268 /* Poetic.xcdatamodeld */; };
+		2A38CF7B27DF74CC00A44268 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A38CF7A27DF74CC00A44268 /* PersistenceController.swift */; };
 		2AB4CE1727DDBBBF007937CC /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4CE1627DDBBBF007937CC /* Quote.swift */; };
 		2AF8600327DB16EA00B3BC40 /* Authors.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AF8600227DB16EA00B3BC40 /* Authors.json */; };
 		2AF8600527DC5B2C00B3BC40 /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8600427DC5B2C00B3BC40 /* QuoteView.swift */; };
 		2AF98E3B27DE2E00004D21DA /* Authors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF98E3A27DE2E00004D21DA /* Authors.swift */; };
-		2AFDE1D427DA2B62000526AA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFDE1D327DA2B62000526AA /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2A0DCA1127D9E99B0071A541 /* SwiftUISearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUISearchBar.swift; sourceTree = "<group>"; };
-		2A0FE6EA27DF0E4D001AB281 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		2A17BA8F27D5D8E000E0D755 /* Poetic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poetic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A17BA9227D5D8E000E0D755 /* PoeticApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoeticApp.swift; sourceTree = "<group>"; };
 		2A17BA9427D5D8E000E0D755 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -52,11 +51,12 @@
 		2A37937227D8C9CC00FA48ED /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		2A37937A27D8D48A00FA48ED /* Bundle-Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
 		2A37937C27D8DC1700FA48ED /* AuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorView.swift; sourceTree = "<group>"; };
+		2A38CF7827DF74BB00A44268 /* Poetic.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Poetic.xcdatamodel; sourceTree = "<group>"; };
+		2A38CF7A27DF74CC00A44268 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		2AB4CE1627DDBBBF007937CC /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		2AF8600227DB16EA00B3BC40 /* Authors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Authors.json; sourceTree = "<group>"; };
 		2AF8600427DC5B2C00B3BC40 /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
 		2AF98E3A27DE2E00004D21DA /* Authors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authors.swift; sourceTree = "<group>"; };
-		2AFDE1D327DA2B62000526AA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +118,6 @@
 				2A17BAA727D5D94600E0D755 /* SearchView.swift */,
 				2AF8600427DC5B2C00B3BC40 /* QuoteView.swift */,
 				2A37937C27D8DC1700FA48ED /* AuthorView.swift */,
-				2AFDE1D327DA2B62000526AA /* SettingsView.swift */,
 				2A17BAB327D6507500E0D755 /* DetailView.swift */,
 				2A17BAA927D5D95400E0D755 /* FavoritesView.swift */,
 			);
@@ -128,8 +127,8 @@
 		2A17BAA127D5D8FF00E0D755 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				2A38CF7A27DF74CC00A44268 /* PersistenceController.swift */,
 				2A17BAAF27D641D200E0D755 /* SearchViewModel.swift */,
-				2A0FE6EA27DF0E4D001AB281 /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -140,6 +139,7 @@
 				2A17BAAD27D6418400E0D755 /* Poem.swift */,
 				2AF98E3A27DE2E00004D21DA /* Authors.swift */,
 				2AB4CE1627DDBBBF007937CC /* Quote.swift */,
+				2A38CF7727DF74BB00A44268 /* Poetic.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -250,17 +250,17 @@
 				2A17BAAA27D5D95400E0D755 /* FavoritesView.swift in Sources */,
 				2A17BAB427D6507600E0D755 /* DetailView.swift in Sources */,
 				2A17BAAC27D5D96E00E0D755 /* DataManager.swift in Sources */,
-				2A0FE6EB27DF0E4D001AB281 /* HomeViewModel.swift in Sources */,
 				2A37936C27D8A4B800FA48ED /* LineBreak.swift in Sources */,
 				2AB4CE1727DDBBBF007937CC /* Quote.swift in Sources */,
 				2A37937B27D8D48A00FA48ED /* Bundle-Decodable.swift in Sources */,
 				2A37937327D8C9CC00FA48ED /* Errors.swift in Sources */,
+				2A38CF7927DF74BB00A44268 /* Poetic.xcdatamodeld in Sources */,
 				2A17BAB027D641D200E0D755 /* SearchViewModel.swift in Sources */,
 				2A0DCA1227D9E99B0071A541 /* SwiftUISearchBar.swift in Sources */,
 				2AF8600527DC5B2C00B3BC40 /* QuoteView.swift in Sources */,
 				2A17BAAE27D6418400E0D755 /* Poem.swift in Sources */,
-				2AFDE1D427DA2B62000526AA /* SettingsView.swift in Sources */,
 				2A17BAA827D5D94600E0D755 /* SearchView.swift in Sources */,
+				2A38CF7B27DF74CC00A44268 /* PersistenceController.swift in Sources */,
 				2A37937D27D8DC1700FA48ED /* AuthorView.swift in Sources */,
 				2A17BAA627D5D93700E0D755 /* HomeView.swift in Sources */,
 				2AF98E3B27DE2E00004D21DA /* Authors.swift in Sources */,
@@ -473,6 +473,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2A38CF7727DF74BB00A44268 /* Poetic.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2A38CF7827DF74BB00A44268 /* Poetic.xcdatamodel */,
+			);
+			currentVersion = 2A38CF7827DF74BB00A44268 /* Poetic.xcdatamodel */;
+			path = Poetic.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2A17BA8727D5D8E000E0D755 /* Project object */;
 }

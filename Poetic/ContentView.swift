@@ -11,41 +11,36 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var viewModel = SearchViewModel()
-    
+    @StateObject var pcViewModel = PersistenceController()
     
     
     var body: some View {
         TabView {
-            HomeView(viewModel: viewModel)
+            HomeView(viewModel: viewModel, pcViewModel: pcViewModel)
                 .tabItem {
                     Label("Home", systemImage: "house")
                         
                 }
                 
-            SearchView(viewModel: viewModel)
+            SearchView(viewModel: viewModel, pcViewModel: pcViewModel)
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                         
                 }
                
                 
-            FavoritesView(viewModel: viewModel)
+            FavoritesView(viewModel: viewModel, pcViewModel: pcViewModel)
                 .tabItem {
                     Label("Favorites", systemImage: "star")
                         
                 }
             
-            QuoteView(viewModel: viewModel)
+            QuoteView(viewModel: viewModel, pcViewModel: pcViewModel)
                 .tabItem {
                     Label("Quotes", systemImage: "quote.bubble.fill")
                         
                 }
-                
-            SettingsView()
-                .tabItem {
-                    Label("Settings", systemImage: "gearshape")
-                        
-                }
+            
                 
             
         }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AuthorView: View {
     @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var pcViewModel: PersistenceController
     
     let author: String
     
@@ -72,8 +73,7 @@ struct AuthorView: View {
                         case .loaded:
                             List(0..<viewModel.authorPoems.count, id: \.self) { index in
                                 NavigationLink {
-                                    DetailView(viewModel: viewModel,
-                                               poem: viewModel.authorPoems[index])
+                                    DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: viewModel.authorPoems[index].title, author: viewModel.authorPoems[index].author, lines: viewModel.authorPoems[index].lines, linecount: viewModel.authorPoems[index].linecount)
                                 } label: {
                                     VStack(alignment: .leading) {
                                         HStack {
@@ -127,6 +127,6 @@ struct AuthorView: View {
 
 struct AuthorView_Previews: PreviewProvider {
     static var previews: some View {
-        AuthorView(viewModel: SearchViewModel(), author: "Anne Bronte")
+        AuthorView(viewModel: SearchViewModel(), pcViewModel: PersistenceController(), author: "Anne Bronte")
     }
 }

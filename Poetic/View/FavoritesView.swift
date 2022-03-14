@@ -10,7 +10,7 @@ import SwiftUI
 struct FavoritesView: View {
     
     @ObservedObject var viewModel: SearchViewModel
-    
+    @ObservedObject var pcViewModel: PersistenceController
     
     var body: some View {
         NavigationView {
@@ -18,15 +18,15 @@ struct FavoritesView: View {
             ZStack {
                 GeometryReader { geo in
                     List {
-                        ForEach(viewModel.favoritePoems) { poem in
+                        ForEach(pcViewModel.favoritedPoems) { poem in
                             NavigationLink {
-                                DetailView(viewModel: viewModel, poem: poem)
+                                DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title ?? "", author: poem.author ?? "", lines: poem.lines ?? [""], linecount: poem.linecount ?? "")
                             } label: {
                                 VStack(alignment: .leading, spacing: 4) {
-                                    Text(poem.title)
+                                    Text(poem.title ?? "")
                                         .font(.system(.headline, design: .serif))
                                         .multilineTextAlignment(.leading)
-                                    Text(poem.author)
+                                    Text(poem.author ?? "")
                                         .font(.system(.subheadline, design: .serif))
                                     
                                     
@@ -35,7 +35,7 @@ struct FavoritesView: View {
                             }
                             
                         }
-                        .onDelete(perform: removeRows)
+                        .onDelete(perform: pcViewModel.deleteFavoritedPoem)
                     }
                     
                     
@@ -52,6 +52,7 @@ struct FavoritesView: View {
                 .onAppear {
                     // Set the default to clear
                     UITableView.appearance().backgroundColor = .clear
+                    pcViewModel.fetchFavoritedPoems()
                 }
                 .navigationTitle("Favorites")
                 .navigationBarTitleDisplayMode(.inline)
@@ -73,6 +74,6 @@ struct FavoritesView: View {
 struct FavoritesView_Previews: PreviewProvider {
     
     static var previews: some View {
-        FavoritesView(viewModel: SearchViewModel())
+        FavoritesView(viewModel: SearchViewModel(), pcViewModel: PersistenceController())
     }
 }

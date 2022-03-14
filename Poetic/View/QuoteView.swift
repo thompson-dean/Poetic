@@ -10,16 +10,18 @@ import SwiftUI
 struct QuoteView: View {
     
     @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var pcViewModel: PersistenceController
+    
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
                 
                     List {
-                        ForEach(0..<viewModel.quotes.count, id: \.self) { index in
+                        ForEach(0..<pcViewModel.quotes.count, id: \.self) { index in
                             VStack(alignment: .center, spacing: 4) {
                                 
                                 Text(("""
-                                            "\(viewModel.quotes[index].quote)"
+                                            "\(pcViewModel.quotes[index].quote!)"
                                         """).trimmingCharacters(in: .whitespacesAndNewlines))
                                     .font(.system(.headline, design: .serif))
                                     .multilineTextAlignment(.center)
@@ -29,14 +31,14 @@ struct QuoteView: View {
                                 HStack {
                                     Spacer()
                                     
-                                    Text(viewModel.quotes[index].title)
+                                    Text(pcViewModel.quotes[index].title ?? "")
                                         .font(.system(.caption, design: .serif))
                                         .multilineTextAlignment(.center)
                                     
                                     Text("-")
                                         .font(.system(.caption, design: .serif))
                                     
-                                    Text(viewModel.quotes[index].author)
+                                    Text(pcViewModel.quotes[index].author ?? "")
                                         .italic()
                                         .font(.system(.caption, design: .serif))
                                         .multilineTextAlignment(.center)
@@ -47,7 +49,7 @@ struct QuoteView: View {
                             }
                             .padding(.horizontal, 5)
                         }
-                        .onDelete(perform: removeRows)
+                        .onDelete(perform: pcViewModel.deleteQuotes)
                     }
                     .background(
                         Image("background")
@@ -58,6 +60,7 @@ struct QuoteView: View {
                     .onAppear {
                         // Set the default to clear
                         UITableView.appearance().backgroundColor = .clear
+                        pcViewModel.fetchQuotes()
                     }
                     .navigationTitle("Quotes")
                     .navigationBarTitleDisplayMode(.inline)
@@ -80,6 +83,6 @@ struct QuoteView: View {
 
 struct QuoteView_Previews: PreviewProvider {
     static var previews: some View {
-        QuoteView(viewModel: SearchViewModel())
+        QuoteView(viewModel: SearchViewModel(), pcViewModel: PersistenceController())
     }
 }
