@@ -11,6 +11,7 @@ struct HomeView: View {
     
     @ObservedObject var viewModel: SearchViewModel
     @State var refresh = Refresh(started: false, released: false)
+    @State var count = 0
     var authors: Authors = Bundle.main.decode("Authors.json")
     
     var body: some View {
@@ -156,6 +157,16 @@ struct HomeView: View {
                 
             }
             .navigationBarHidden(true)
+            .onAppear {
+                
+                if count == 0 {
+                    viewModel.loadRandomPoems(searchTerm: authors.authors[Int.random(in: 0..<authors.authors.count)].replacingOccurrences(of: " ", with: "%20"))
+                    count += 1
+                } else {
+                    //nothing
+                }
+                
+            }
             
             
         }
