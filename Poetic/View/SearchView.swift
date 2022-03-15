@@ -9,14 +9,19 @@ import SwiftUI
 
 struct SearchView: View {
     var authors: Authors = Bundle.main.decode("Authors.json")
-//    var authors = ["Dean Thompson", "Lloyd Barrett", "Dean Thompson", "Dean Thompson"]
+    
     @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var pcViewModel: PersistenceController
+    
     @State private var authorSearch = false
     @State var authorSearchTerm = ""
+    
+    var colors = Colors()
     var body: some View {
-        
         NavigationView {
             ZStack {
+//                colors.lightPink
+//                    .ignoresSafeArea(.all)
                 Image("background")
                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                     .ignoresSafeArea()
@@ -46,34 +51,24 @@ struct SearchView: View {
                                 authorSearchTerm.isEmpty || author.contains(authorSearchTerm)
                             }, id: \.self) { author in
                                 NavigationLink {
-                                    AuthorView(viewModel: viewModel, author: author)
+                                    AuthorView(viewModel: viewModel, pcViewModel: pcViewModel, author: author)
                                 } label: {
                                     VStack(alignment: .leading) {
                                         HStack {
                                             Text(author)
                                                 .font(.system(.headline, design: .serif))
-//                                            Spacer()
-//                                            Image(systemName: "chevron.right")
                                         }
-//                                        .padding(.horizontal, 30)
-//                                        .padding(.top, 4)
-//                                        LineBreak()
-//                                            .stroke(.black, style: StrokeStyle(lineWidth: 0.5))
-//                                            .frame(width: geo.size.width / 1.4)
-//                                            .padding(.horizontal, 20)
                                     }
                                 }
                             }
                         }
                         .onAppear {
-                            // Set the default to clear
                             UITableView.appearance().backgroundColor = .clear
                         }
-                    
-                                    
+                            
                     case false:
                         
-                        switch viewModel.state {
+                        switch viewModel.searchState {
                         case .idle:
                             idleView
                             
@@ -85,7 +80,6 @@ struct SearchView: View {
                             
                         case .failed:
                             showFailView
-                            
                             
                         case .loaded:
                             resultsListView
@@ -116,11 +110,12 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(viewModel: SearchViewModel())
+        SearchView(viewModel: SearchViewModel(), pcViewModel: PersistenceController())
     }
 }
 
 extension SearchView {
+    
     var idleView: some View {
         VStack(alignment: .center) {
             
@@ -157,7 +152,7 @@ extension SearchView {
             List {
             ForEach(viewModel.poems) { poem in
                 NavigationLink {
-                    DetailView(viewModel: viewModel, title: poem.title, author: poem.author, poemLines: poem.lines, linecount: poem.linecount)
+                    DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
                 } label: {
                     VStack(alignment: .center) {
                         
@@ -172,22 +167,13 @@ extension SearchView {
                                 .font(.system(.subheadline, design: .serif))
                             Spacer()
                         }
-                        //                            LineBreak()
-                        //                                .stroke(.black, style: StrokeStyle(lineWidth: 0.5))
-                        //                                .frame(width: geo.size.width / 2)
-                        
                     }
-                    //                    .frame(width: geo.size.width)
-                    //                    .padding(.horizontal, 7)
-                    
                 }
             }
             }
             .onAppear {
-                // Set the default to clear
                 UITableView.appearance().backgroundColor = .clear
             }
         }
-//        .padding()
     }
 }

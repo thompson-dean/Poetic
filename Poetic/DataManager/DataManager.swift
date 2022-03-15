@@ -16,6 +16,7 @@ class DataManager {
         case title = "title"
     }
     
+    
     func loadData(filter: SearchFilter, searchTerm: String, completion: @escaping(Result<[Poem], ErrorType>) -> Void) {
         guard !searchTerm.isEmpty else { return }
         let api = "https://poetrydb.org/\(filter)/"
@@ -53,10 +54,6 @@ class DataManager {
         }
         dataTask?.resume()
     }
-    
-    
-    
-    
 }
 
 

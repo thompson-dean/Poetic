@@ -8,15 +8,20 @@
 import Foundation
 
 
-struct Poem: Codable, Identifiable {
-    let id = UUID()
+struct Poem: Codable {
     let title: String
     let author: String
     let lines: [String]
     let linecount: String
 }
 
-struct Authors: Codable, Identifiable {
-    let id = UUID()
-    let authors: [String]
+extension Poem: Identifiable {
+    var id: UUID {
+        UUID()
+    }
 }
+
+
+
+
+

@@ -10,14 +10,13 @@ import SwiftUI
 struct DetailView: View {
     
     @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var pcViewModel: PersistenceController
     
     let title: String
     let author: String
-    let poemLines: [String]
+    let lines: [String]
     let linecount: String
-    
-    var quotes = [String]()
-    
+   
     var body: some View {
         GeometryReader { geo in
             ScrollView {
@@ -35,25 +34,28 @@ struct DetailView: View {
                         .padding(.bottom, 10)
                         .padding(.horizontal)
                     
+                    Divider()
+                        .frame(width: geo.size.width / 2)
+                        .padding(10)
+                    
                     VStack(alignment: .leading) {
-                        ForEach(0..<poemLines.count) { index in
+                        ForEach(0..<lines.count, id: \.self) { index in
                             HStack {
-                                if poemLines.count < 9 {
+                                if lines.count < 9 {
                                     Text("\(index + 1)")
                                         .font(.system(.caption2, design: .serif))
-                                        .frame(width: 22, height: 10)
+                                        .frame(width: 20, height: 10)
                                         .padding(.trailing, 5)
                                         
                                 } else {
                                     Text((index + 1) % 5 == 0 ? "\(index + 1)" : "")
                                         .font(.system(.caption2, design: .serif))
-                                        .frame(width: 20, height: 10)
+                                        .frame(width: 30, height: 10)
                                         .padding(.trailing, 5)
                                         
                                 }
                                 
-                                PoemView(viewModel: viewModel, author: author, title: title, index: index, poemLines: poemLines)
-                                
+                                PoemView(viewModel: viewModel, pcViewModel: pcViewModel, author: author, title: title, index: index, poemLines: lines)
                                 
                             }
                         }
@@ -71,49 +73,28 @@ struct DetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                let newPoem = Poem(title: title, author: author, lines: poemLines, linecount: linecount)
-                    if viewModel.contains(Poem(title: title, author: author, lines: poemLines, linecount: linecount)) {
-                        //add remove function here
-                        viewModel.removePoemFromFavorites(newPoem)
+                    if let entity = pcViewModel.favoritedPoems.first(where: { $0.title == title}) {
+                        pcViewModel.deleteFavoritedPoemFromTappingStar(entity: entity)
                     } else {
-                        viewModel.addToFavorites(newPoem)
+                        pcViewModel.addFavoritePoem(id: UUID(), title: title, author: author, lines: lines, linecount: linecount)
                     }
                     
                 } label: {
-                    if viewModel.contains(Poem(title: title, author: author, lines: poemLines, linecount: linecount)) {
+                    if pcViewModel.favoritedPoems.contains(where: { $0.title == title })  {
                         Image(systemName: "star.fill")
                     } else {
                         Image(systemName: "star")
                     }
-                    
                 }
-                
             }
         }
-        
-        
-    }
-        
-    
-}
-
-struct DetailView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        NavigationView {
-            DetailView(viewModel: SearchViewModel(), title: "Jazz Box", author: "Dean Thompson", poemLines: ["Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd", "Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd", "Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd", "Bong hello what are you  no way lad", "Bong asdf f f asdfasdf",  "Bong hello what are you you doing bro no way lad", "Bong", "Bong hello what are you you doing bro no way lad", "Bong asdfga asdfgasd"  ], linecount: "14")
-                .navigationBarBackButtonHidden(false)
-            
-        }
-        
-        
     }
 }
-
 
 struct PoemView: View {
     
     @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var pcViewModel: PersistenceController
     
     let author: String
     let title: String
@@ -124,16 +105,18 @@ struct PoemView: View {
             .font(.system(.subheadline, design: .serif))
             .contextMenu {
                 Button {
-                    viewModel.addQuote(Quote(title: title, author: author, quote: poemLines[index]))
-                    print("Tapped Favourites button")
+                    if !pcViewModel.quotes.contains(where: { $0.quote == poemLines[index]}) {
+                        pcViewModel.addQuote(id: UUID(), title: title, author: author, quote: poemLines[index])
+                        viewModel.simpleHapticSuccess()
+                    }
                 } label: {
                     Label("Add to Fav Quotes", systemImage: "quote.bubble.fill")
                 }
                 Button {
-                    print("Selected Cancel Button")
+                    
                 } label: {
                     Label("Cancel", systemImage: "delete.left")
-                        .foregroundColor(.red)
+                        
                 }
             }
         
