@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct QuoteView: View {
+   
     
     @ObservedObject var viewModel: SearchViewModel
     @ObservedObject var pcViewModel: PersistenceController
+    
+    @State private var showShareSheet = false
     
     var body: some View {
         NavigationView {
@@ -25,7 +28,7 @@ struct QuoteView: View {
                                         """).trimmingCharacters(in: .whitespacesAndNewlines))
                                     .font(.system(.headline, design: .serif))
                                     .multilineTextAlignment(.center)
-                                
+                                    .padding(.bottom, 5)
                                 
                                 
                                 HStack {
@@ -45,9 +48,23 @@ struct QuoteView: View {
                                     Spacer()
                                     
                                 }
-                                
+                                .padding(.bottom, 5)
+                                 
                             }
                             .padding(.horizontal, 5)
+                            .contextMenu {
+                                Button {
+                                    shareQuote(quote: pcViewModel.quotes[index].quote!, title: pcViewModel.quotes[index].title ?? "", author: pcViewModel.quotes[index].author ?? "")
+                                } label: {
+                                    Label("Share", systemImage: "square.and.arrow.up")
+                                }
+                                
+                                Button {
+                                    
+                                } label: {
+                                    Label("Cancel", systemImage: "delete.left")
+                                }
+                            }
                         }
                         .onDelete(perform: pcViewModel.deleteQuotes)
                     }
@@ -77,6 +94,15 @@ struct QuoteView: View {
     }
     func removeRows(at offsets: IndexSet) {
         viewModel.quotes.remove(atOffsets: offsets)
+    }
+    
+    func shareQuote(quote: String, title: String, author: String) {
+        let sharedString = """
+"\(quote)" A quote from \(title) by \(author), found on Poetic, your favorite classical poetry app. Available here:  https://apps.apple.com/us/app/poetic/id1614416936
+"""
+        let av = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
+        
     }
     
 }

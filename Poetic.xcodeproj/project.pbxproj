@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A0DCA1227D9E99B0071A541 /* SwiftUISearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0DCA1127D9E99B0071A541 /* SwiftUISearchBar.swift */; };
 		2A17BA9327D5D8E000E0D755 /* PoeticApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17BA9227D5D8E000E0D755 /* PoeticApp.swift */; };
 		2A17BA9527D5D8E000E0D755 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17BA9427D5D8E000E0D755 /* ContentView.swift */; };
 		2A17BA9727D5D8E000E0D755 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A17BA9627D5D8E000E0D755 /* Assets.xcassets */; };
@@ -26,6 +25,7 @@
 		2A37937D27D8DC1700FA48ED /* AuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A37937C27D8DC1700FA48ED /* AuthorView.swift */; };
 		2A38CF7927DF74BB00A44268 /* Poetic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2A38CF7727DF74BB00A44268 /* Poetic.xcdatamodeld */; };
 		2A38CF7B27DF74CC00A44268 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A38CF7A27DF74CC00A44268 /* PersistenceController.swift */; };
+		2AB4B9A827E05F1C008FB84B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4B9A727E05F1C008FB84B /* Color.swift */; };
 		2AB4CE1727DDBBBF007937CC /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4CE1627DDBBBF007937CC /* Quote.swift */; };
 		2AF8600327DB16EA00B3BC40 /* Authors.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AF8600227DB16EA00B3BC40 /* Authors.json */; };
 		2AF8600527DC5B2C00B3BC40 /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8600427DC5B2C00B3BC40 /* QuoteView.swift */; };
@@ -33,7 +33,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2A0DCA1127D9E99B0071A541 /* SwiftUISearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUISearchBar.swift; sourceTree = "<group>"; };
 		2A17BA8F27D5D8E000E0D755 /* Poetic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poetic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A17BA9227D5D8E000E0D755 /* PoeticApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoeticApp.swift; sourceTree = "<group>"; };
 		2A17BA9427D5D8E000E0D755 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +52,7 @@
 		2A37937C27D8DC1700FA48ED /* AuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorView.swift; sourceTree = "<group>"; };
 		2A38CF7827DF74BB00A44268 /* Poetic.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Poetic.xcdatamodel; sourceTree = "<group>"; };
 		2A38CF7A27DF74CC00A44268 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		2AB4B9A727E05F1C008FB84B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		2AB4CE1627DDBBBF007937CC /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		2AF8600227DB16EA00B3BC40 /* Authors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Authors.json; sourceTree = "<group>"; };
 		2AF8600427DC5B2C00B3BC40 /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
@@ -116,10 +116,10 @@
 			children = (
 				2A17BAA527D5D93700E0D755 /* HomeView.swift */,
 				2A17BAA727D5D94600E0D755 /* SearchView.swift */,
-				2AF8600427DC5B2C00B3BC40 /* QuoteView.swift */,
 				2A37937C27D8DC1700FA48ED /* AuthorView.swift */,
 				2A17BAB327D6507500E0D755 /* DetailView.swift */,
 				2A17BAA927D5D95400E0D755 /* FavoritesView.swift */,
+				2AF8600427DC5B2C00B3BC40 /* QuoteView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -158,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				2A37937227D8C9CC00FA48ED /* Errors.swift */,
+				2AB4B9A727E05F1C008FB84B /* Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -167,7 +168,6 @@
 			children = (
 				2A37936B27D8A4B800FA48ED /* LineBreak.swift */,
 				2A37936E27D8A57500FA48ED /* SearchBar.swift */,
-				2A0DCA1127D9E99B0071A541 /* SwiftUISearchBar.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -256,11 +256,11 @@
 				2A37937327D8C9CC00FA48ED /* Errors.swift in Sources */,
 				2A38CF7927DF74BB00A44268 /* Poetic.xcdatamodeld in Sources */,
 				2A17BAB027D641D200E0D755 /* SearchViewModel.swift in Sources */,
-				2A0DCA1227D9E99B0071A541 /* SwiftUISearchBar.swift in Sources */,
 				2AF8600527DC5B2C00B3BC40 /* QuoteView.swift in Sources */,
 				2A17BAAE27D6418400E0D755 /* Poem.swift in Sources */,
 				2A17BAA827D5D94600E0D755 /* SearchView.swift in Sources */,
 				2A38CF7B27DF74CC00A44268 /* PersistenceController.swift in Sources */,
+				2AB4B9A827E05F1C008FB84B /* Color.swift in Sources */,
 				2A37937D27D8DC1700FA48ED /* AuthorView.swift in Sources */,
 				2A17BAA627D5D93700E0D755 /* HomeView.swift in Sources */,
 				2AF98E3B27DE2E00004D21DA /* Authors.swift in Sources */,
@@ -405,6 +405,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
@@ -437,6 +438,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;

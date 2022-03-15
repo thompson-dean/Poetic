@@ -34,19 +34,23 @@ struct DetailView: View {
                         .padding(.bottom, 10)
                         .padding(.horizontal)
                     
+                    Divider()
+                        .frame(width: geo.size.width / 2)
+                        .padding(10)
+                    
                     VStack(alignment: .leading) {
                         ForEach(0..<lines.count, id: \.self) { index in
                             HStack {
                                 if lines.count < 9 {
                                     Text("\(index + 1)")
                                         .font(.system(.caption2, design: .serif))
-                                        .frame(width: 22, height: 10)
+                                        .frame(width: 20, height: 10)
                                         .padding(.trailing, 5)
                                         
                                 } else {
                                     Text((index + 1) % 5 == 0 ? "\(index + 1)" : "")
                                         .font(.system(.caption2, design: .serif))
-                                        .frame(width: 20, height: 10)
+                                        .frame(width: 30, height: 10)
                                         .padding(.trailing, 5)
                                         
                                 }
@@ -105,16 +109,14 @@ struct PoemView: View {
                         pcViewModel.addQuote(id: UUID(), title: title, author: author, quote: poemLines[index])
                         viewModel.simpleHapticSuccess()
                     }
-                    
-                    print("Tapped Favourites button")
                 } label: {
                     Label("Add to Fav Quotes", systemImage: "quote.bubble.fill")
                 }
                 Button {
-                    print("Selected Cancel Button")
+                    
                 } label: {
                     Label("Cancel", systemImage: "delete.left")
-                        .foregroundColor(.red)
+                        
                 }
             }
         

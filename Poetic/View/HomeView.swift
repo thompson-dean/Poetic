@@ -15,11 +15,17 @@ struct HomeView: View {
     @State var refresh = Refresh(started: false, released: false)
     @State var count = 0
     
+    var colors = Colors()
+    
     var authors: Authors = Bundle.main.decode("Authors.json")
     
     var body: some View {
         NavigationView {
             ZStack {
+                
+                
+//                colors.lightPink
+//                    .ignoresSafeArea(.all)
                 Image("background")
                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                     .ignoresSafeArea()
@@ -197,12 +203,14 @@ struct HomeView_Previews: PreviewProvider {
     }
 }
 
+//ButtonStyle for Navigation Link. Stops it from going to .opacity(0.5)
 struct FlatLinkStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
     }
 }
 
+//Model used for "swipe to refresh"
 struct Refresh {
     var startOffset: CGFloat = 0
     var offset: CGFloat = 0
