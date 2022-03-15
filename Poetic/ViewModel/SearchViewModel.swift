@@ -5,7 +5,8 @@
 //  Created by Dean Thompson on 2022/03/07.
 //
 
-import Foundation
+import SwiftUI
+import CoreHaptics
 
 class SearchViewModel: ObservableObject {
     
@@ -38,41 +39,60 @@ class SearchViewModel: ObservableObject {
     
     @Published var searchTerm: String = ""
     
-    //State variables
+    var authorTitleCache: [String: [Poem]] = [:]
+    
+    var timer: Timer?
+    
+    //State change variables
     @Published private(set) var state = State.idle
     @Published private(set) var searchState = SearchTitleState.idle
-    
     
     
     //SearchView Handling - fetchs data for title search.
     
     func loadPoem(searchTerm: String, filter: DataManager.SearchFilter) {
-        poems = []
         
-        if searchTerm == "" {
-            searchState = .idle
-            return
-        } else {
-            searchState = .loading
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
+            self.poems = []
             
-            dataManager.loadData(filter: DataManager.SearchFilter.title, searchTerm: searchTerm) { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .failure(let error):
-                        self.searchState = .failed(error)
-                        print(error.localizedDescription)
-                    case .success(let searchedPoems):
-                        self.searchState = .loaded
-                        self.poems = searchedPoems
+            if searchTerm == "" {
+                self.searchState = .idle
+                return
+            } else {
+                self.searchState = .loading
+                
+                self.dataManager.loadData(filter: DataManager.SearchFilter.title, searchTerm: searchTerm) { result in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .failure(let error):
+                            self.searchState = .failed(error)
+                            self.simpleHapticError()
+                            print(error.localizedDescription)
+                        case .success(let searchedPoems):
+                            self.searchState = .loaded
+                            self.poems = searchedPoems
+                        }
                     }
                 }
+                
             }
-            
         }
+        
     }
     
+    
     //AuthorView Handling - loads authors poems in AuthorView
+    
     func loadAuthorPoem(searchTerm: String) {
+        
+        //use cache to stop the API calling again.
+        if let cache = authorTitleCache[searchTerm] {
+            self.state = .loaded
+            self.authorPoems = cache
+            return
+        }
+        
         authorPoems = []
         state = .loading
         
@@ -83,17 +103,20 @@ class SearchViewModel: ObservableObject {
                 case .failure(let error):
                     self.state = .failed(error)
                     print(error.localizedDescription)
-                    
+                    self.simpleHapticError()
                 case .success(let searchedPoems):
                     self.state = .loaded
-                    
                     self.authorPoems = searchedPoems
+                    self.authorTitleCache[searchTerm] = searchedPoems
+
                 }
             }
         }
     }
     
+    
     //HomeView Handling - fetchs random poem for Home Screen.
+    
     func loadRandomPoems(searchTerm: String) {
         randomPoems = []
         state = .loading
@@ -105,7 +128,7 @@ class SearchViewModel: ObservableObject {
                 case .failure(let error):
                     self.state = .failed(error)
                     print(error.localizedDescription)
-                    
+                    self.simpleHapticError()
                 case .success(let searchedPoems):
                     self.state = .loaded
                     self.randomPoems = searchedPoems
@@ -115,12 +138,12 @@ class SearchViewModel: ObservableObject {
     }
     
     
-    
     //FAVORITES HANDLING
     
     func contains(_ poem: Poem) -> Bool {
         favoritePoems.contains { $0.title == poem.title }
     }
+    
     
     func addToFavorites(_ poem: Poem) {
         if contains(poem) {
@@ -130,9 +153,11 @@ class SearchViewModel: ObservableObject {
         }
     }
     
+    
     func removePoemFromFavorites(_ poem: Poem) {
         favoritePoems.removeAll(where: { $0.title == poem.title })
     }
+    
     
     // QUOTES HANDLING
     
@@ -145,6 +170,16 @@ class SearchViewModel: ObservableObject {
         }
     }
     
+    //Handle Haptics
+    func simpleHapticSuccess() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
+    
+    func simpleHapticError() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.error)
+    }
 }
 
 

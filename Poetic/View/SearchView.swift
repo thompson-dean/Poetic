@@ -12,10 +12,11 @@ struct SearchView: View {
     
     @ObservedObject var viewModel: SearchViewModel
     @ObservedObject var pcViewModel: PersistenceController
+    
     @State private var authorSearch = false
     @State var authorSearchTerm = ""
+    
     var body: some View {
-        
         NavigationView {
             ZStack {
                 Image("background")
@@ -53,26 +54,15 @@ struct SearchView: View {
                                         HStack {
                                             Text(author)
                                                 .font(.system(.headline, design: .serif))
-//                                            Spacer()
-//                                            Image(systemName: "chevron.right")
                                         }
-//                                        .padding(.horizontal, 30)
-//                                        .padding(.top, 4)
-//                                        LineBreak()
-//                                            .stroke(.black, style: StrokeStyle(lineWidth: 0.5))
-//                                            .frame(width: geo.size.width / 1.4)
-//                                            .padding(.horizontal, 20)
                                     }
                                 }
                             }
                         }
                         .onAppear {
-                            // Set the default to clear
                             UITableView.appearance().backgroundColor = .clear
-                
                         }
-                    
-                                    
+                            
                     case false:
                         
                         switch viewModel.searchState {
@@ -87,7 +77,6 @@ struct SearchView: View {
                             
                         case .failed:
                             showFailView
-                            
                             
                         case .loaded:
                             resultsListView
@@ -123,6 +112,7 @@ struct SearchView_Previews: PreviewProvider {
 }
 
 extension SearchView {
+    
     var idleView: some View {
         VStack(alignment: .center) {
             
@@ -174,22 +164,13 @@ extension SearchView {
                                 .font(.system(.subheadline, design: .serif))
                             Spacer()
                         }
-                        //                            LineBreak()
-                        //                                .stroke(.black, style: StrokeStyle(lineWidth: 0.5))
-                        //                                .frame(width: geo.size.width / 2)
-                        
                     }
-                    //                    .frame(width: geo.size.width)
-                    //                    .padding(.horizontal, 7)
-                    
                 }
             }
             }
             .onAppear {
-                // Set the default to clear
                 UITableView.appearance().backgroundColor = .clear
             }
         }
-//        .padding()
     }
 }

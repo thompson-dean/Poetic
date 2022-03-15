@@ -7,7 +7,12 @@
 
 import SwiftUI
 
-struct Authors: Codable, Identifiable {
-    let id = UUID()
+struct Authors: Codable {
     var authors: [String]
+}
+
+extension Authors: Identifiable {
+    var id: UUID {
+        UUID()
+    }
 }

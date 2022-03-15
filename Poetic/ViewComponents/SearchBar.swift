@@ -46,9 +46,9 @@ struct SearchBar: UIViewRepresentable {
         
         // Research how to implement dynamic search.
         
-//        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//            searchTerm = searchText
-//        }
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            searchTerm = searchText
+        }
 
     }
 

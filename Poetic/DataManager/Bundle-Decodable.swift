@@ -24,7 +24,5 @@ extension Bundle {
         }
         
         return loaded
-        
     }
-
 }

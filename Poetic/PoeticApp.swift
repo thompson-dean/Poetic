@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct PoeticApp: App {
+    
     @StateObject private var persistenceController = PersistenceController()
     
     var body: some Scene {

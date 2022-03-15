@@ -35,7 +35,7 @@ struct DetailView: View {
                         .padding(.horizontal)
                     
                     VStack(alignment: .leading) {
-                        ForEach(0..<lines.count) { index in
+                        ForEach(0..<lines.count, id: \.self) { index in
                             HStack {
                                 if lines.count < 9 {
                                     Text("\(index + 1)")
@@ -91,6 +91,7 @@ struct PoemView: View {
     
     @ObservedObject var viewModel: SearchViewModel
     @ObservedObject var pcViewModel: PersistenceController
+    
     let author: String
     let title: String
     let index: Int
@@ -100,10 +101,9 @@ struct PoemView: View {
             .font(.system(.subheadline, design: .serif))
             .contextMenu {
                 Button {
-                    if let entity = pcViewModel.quotes.first(where: { $0.quote == poemLines[index]}) {
-                        //do nothing
-                    } else {
+                    if !pcViewModel.quotes.contains(where: { $0.quote == poemLines[index]}) {
                         pcViewModel.addQuote(id: UUID(), title: title, author: author, quote: poemLines[index])
+                        viewModel.simpleHapticSuccess()
                     }
                     
                     print("Tapped Favourites button")

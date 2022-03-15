@@ -9,14 +9,15 @@ import Foundation
 import CoreData
 
 class PersistenceController: ObservableObject {
+    
     static let shared = PersistenceController()
+    let container: NSPersistentContainer
     
     @Published var favoritedPoems: [PoemEntity] = []
     @Published var quotes: [QuoteEntity] = []
     
-    let container: NSPersistentContainer
-    
     init() {
+        
         container = NSPersistentContainer(name: "Poetic")
         
         container.loadPersistentStores { storeDescription, error in
@@ -57,8 +58,6 @@ class PersistenceController: ObservableObject {
         } else {
             saveData()
         }
-        
-        
     }
     
     //Fetching Favorite Quotes
@@ -90,7 +89,6 @@ class PersistenceController: ObservableObject {
     
     func saveData() {
         do {
-            
             try container.viewContext.save()
             fetchFavoritedPoems()
             fetchQuotes()
@@ -98,7 +96,6 @@ class PersistenceController: ObservableObject {
         } catch {
             print(error.localizedDescription)
         }
-         
     }
     
     func deleteFavoritedPoemFromTappingStar(entity poem: PoemEntity) {

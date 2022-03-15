@@ -10,7 +10,7 @@ import SwiftUI
 struct AuthorView: View {
     @ObservedObject var viewModel: SearchViewModel
     @ObservedObject var pcViewModel: PersistenceController
-    
+    @State var count = 0
     let author: String
     
     var body: some View {
@@ -114,11 +114,17 @@ struct AuthorView: View {
 //            }
             
         }
+        .navigationTitle(author)
+        .navigationBarTitleDisplayMode(.inline)
         
 //        .padding(.top)
         .onAppear {
+            
+            
             viewModel.loadAuthorPoem(searchTerm: author.replacingOccurrences(of: " ", with: "%20"))
             print(viewModel.searchTerm)
+            
+            
         }
         
     }
