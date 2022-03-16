@@ -7,7 +7,7 @@ See below for what was learned through creating this app.
 
 **Features:**
 
-- Search through thousands of classic English poetry by author or by title.
+- Search through thousands of classic English poems by author or by title.
 
 - Save favorite poems into your favorites.
 
@@ -17,7 +17,7 @@ See below for what was learned through creating this app.
 
 **App Screenshots**
 
-<img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen01.png" width=17% height=17%>  <img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen02.png" width=17% height=17%>  <img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen03.png" width=17% height=17%>  <img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen04.png" width=17% height=17%>  <img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen05.png" width=17% height=17%>  
+<img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen01.png" width=20% height=20%>  <img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen02.png" width=20% height=20%>  <img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen03.png" width=20% height=20%>  <img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen04.png" width=20% height=20%>  <img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen05.png" width=20% height=20%>  
 
 
 **Links:**
