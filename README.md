@@ -22,14 +22,15 @@ See below for what was learned through creating this app.
 
 **Links:**
 
-[Poetry in the App Store](https://apps.apple.com/us/app/poetic/id1614416936)
+[Poetic in the App Store](https://apps.apple.com/us/app/poetic/id1614416936)
 
 **Feel free to contribute!**
 
 This project is open source. Let's share fantastic poems with as many people as possible!
 
 **What I learned building this app**
-_Core Data, Result, @escaping, debouncing searches, Share Sheets, ContextMenu, MVVM, tracking app state using enums, tracking errors with enums, UIViewRepresentable_
+
+_Core Data, Result, @escaping, debouncing searches, Share Sheets, ContextMenu, MVVM, tracking app state using enums, tracking errors with enums, UIViewRepresentable_ <br>
 It was really fun to dive into the deep end and try out building an app by myself. I'd like to thank 100 Days of SwiftUI by PaulHudson that fueled me with the necessary knowledge to complete this application. 
 
 
