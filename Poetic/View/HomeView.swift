@@ -89,12 +89,14 @@ struct HomeView: View {
                                                 
                                                 if refresh.offset - refresh.startOffset > 80 && !refresh.started {
                                                     refresh.started = true
+                                                    viewModel.mediumImpactHaptic()
                                                 }
                                                 
                                                 if refresh.startOffset == refresh.offset && refresh.started && !refresh.released {
                                                     
                                                     withAnimation(Animation.linear) {
                                                         refresh.released = true
+                                                        
                                                     }
                                                     viewModel.simpleHapticSuccess()
                                                     viewModel.loadRandomPoems(searchTerm: authors.authors[Int.random(in: 0..<authors.authors.count)].replacingOccurrences(of: " ", with: "%20"))
@@ -157,6 +159,7 @@ struct HomeView: View {
                                                             .font(.system(.subheadline, design: .serif))
                                                     }
                                                     .padding(.trailing, 4)
+                                                    .padding(.vertical, 1)
                                                 }
                                             }
                                             .padding(5)

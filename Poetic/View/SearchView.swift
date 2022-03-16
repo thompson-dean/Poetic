@@ -83,6 +83,7 @@ struct SearchView: View {
                             
                         case .loaded:
                             resultsListView
+                                
                         }
                     }
                     
@@ -97,12 +98,15 @@ struct SearchView: View {
                 }
                 
                 .navigationTitle("Search")
-                .navigationBarTitleDisplayMode(.inline)
+                .navigationViewStyle(.stack)
+//                .navigationBarTitleDisplayMode(.inline)
                 .foregroundColor(.black)
             }
             
             
+            
         }
+       
         
     }
         
@@ -150,7 +154,7 @@ extension SearchView {
     var resultsListView: some View {
         GeometryReader { geo in
             List {
-            ForEach(viewModel.poems) { poem in
+                ForEach(viewModel.poems, id: \.self) { poem in
                 NavigationLink {
                     DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
                 } label: {

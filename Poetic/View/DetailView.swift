@@ -58,6 +58,7 @@ struct DetailView: View {
                                 PoemView(viewModel: viewModel, pcViewModel: pcViewModel, author: author, title: title, index: index, poemLines: lines)
                                 
                             }
+                            .padding(.vertical, 1)
                         }
                     }
                     .padding(5)
@@ -86,6 +87,10 @@ struct DetailView: View {
                         Image(systemName: "star")
                     }
                 }
+            
+            }
+            ToolbarItem(placement: .navigationBarLeading) {
+                HStack {}
             }
         }
     }
