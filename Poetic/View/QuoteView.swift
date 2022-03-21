@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct QuoteView: View {
+    @Environment(\.colorScheme) var colorScheme
    
-    
     @ObservedObject var viewModel: SearchViewModel
     @ObservedObject var pcViewModel: PersistenceController
     
@@ -69,7 +69,7 @@ struct QuoteView: View {
                         .onDelete(perform: pcViewModel.deleteQuotes)
                     }
                     .background(
-                        Image("background")
+                        Image(colorScheme == .light ? "background" : "background-dark")
                             .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                             .ignoresSafeArea()
                         
@@ -81,7 +81,7 @@ struct QuoteView: View {
                     }
                     .navigationTitle("Quotes")
                     .navigationBarTitleDisplayMode(.inline)
-                    .foregroundColor(.black)
+                    .foregroundColor(.primary)
                 
                 
                 

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     
+    @Environment(\.colorScheme) var colorScheme
+    
     @ObservedObject var viewModel: SearchViewModel
     @ObservedObject var pcViewModel: PersistenceController
     
@@ -26,7 +28,7 @@ struct HomeView: View {
                 
                 //                colors.lightPink
                 //                    .ignoresSafeArea(.all)
-                Image("background")
+                Image(colorScheme == .light ? "background" : "background-dark")
                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                     .ignoresSafeArea()
                 
@@ -64,12 +66,12 @@ struct HomeView: View {
                                     Image(systemName: "exclamationmark.triangle")
                                         .resizable()
                                         .scaledToFit()
-                                        .foregroundColor(.black)
-                                        .frame(width: 150, height: 100)
-                                        .padding()
+                                        .frame(width: 44, height: 44)
+                                        .padding(.top, 5)
                                     
-                                    Text("Error: Search Again")
-                                        .font(.system(.title, design: .serif))
+                                    Text("Please connect to the internet")
+                                        .font(.system(.body, design: .serif))
+                                        .padding(.top, 3)
                                 }
                                 .frame(maxWidth: . infinity)
                                 .padding()
@@ -165,7 +167,7 @@ struct HomeView: View {
                                             .padding(5)
                                         }
                                         
-                                        .foregroundColor(.black)
+                                        .foregroundColor(.primary)
                                         .frame(width: geo.size.width)
                                     }
                                     .offset(y: -10)
@@ -173,7 +175,7 @@ struct HomeView: View {
                                 .buttonStyle(FlatLinkStyle())
                             }
                         }
-                        .background(Color.white)
+                        .background(colorScheme == .light ? Color.white : Color("homeScreenDark"))
                         .cornerRadius(10)
                         
                     }

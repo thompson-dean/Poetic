@@ -36,7 +36,7 @@ struct ContentView: View {
                     Label("Quotes", systemImage: "quote.bubble.fill")
                 }
         }
-        .accentColor(.black)
+        .accentColor(.primary)
     }
 }
 

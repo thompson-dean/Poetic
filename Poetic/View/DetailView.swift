@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DetailView: View {
+    @Environment(\.colorScheme) var colorScheme
     
     @ObservedObject var viewModel: SearchViewModel
     @ObservedObject var pcViewModel: PersistenceController
@@ -66,7 +67,7 @@ struct DetailView: View {
                 .frame(width: geo.size.width)
             }
             .background(
-                Image("background")
+                Image(colorScheme == .light ? "background" : "background-dark")
                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                     .ignoresSafeArea()
             )
