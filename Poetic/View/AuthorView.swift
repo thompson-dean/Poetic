@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AuthorView: View {
+    @Environment(\.colorScheme) var colorScheme
+    
     @ObservedObject var viewModel: SearchViewModel
     @ObservedObject var pcViewModel: PersistenceController
     @State var count = 0
@@ -22,13 +24,13 @@ struct AuthorView: View {
                             
                         case .idle:
                             ZStack {
-                                Image("background")
+                                Image(colorScheme == .light ? "background" : "background-dark")
                                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                                     .ignoresSafeArea()
                                 
                                 
                                 VStack(alignment: .center) {
-                                    ProgressView("Idle")
+                                    ProgressView()
                                 }
                                 .frame(maxWidth: . infinity)
                             }
@@ -36,7 +38,7 @@ struct AuthorView: View {
                             
                         case .loading:
                             ZStack {
-                                Image("background")
+                                Image(colorScheme == .light ? "background" : "background-dark")
                                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                                     .ignoresSafeArea()
                                 
@@ -50,7 +52,7 @@ struct AuthorView: View {
                             
                         case .failed:
                             ZStack {
-                                Image("background")
+                                Image(colorScheme == .light ? "background" : "background-dark")
                                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                                     .ignoresSafeArea()
                                 
@@ -59,12 +61,16 @@ struct AuthorView: View {
                                     Image(systemName: "exclamationmark.triangle")
                                         .resizable()
                                         .scaledToFit()
-                                        .foregroundColor(.black)
-                                        .frame(width: 150, height: 100)
+                                        .frame(width: 44, height: 44)
                                         .padding()
                                     
-                                    Text("Error: Search Again")
-                                        .font(.system(.title, design: .serif))
+                                    Text("Connection error: Connect to the internet and try again")
+                                        .font(.system(.body, design: .serif))
+                                        .multilineTextAlignment(.center)
+                                        .padding(.horizontal)
+                                    
+                                    Spacer()
+                                    
                                 }
                                 .frame(maxWidth: . infinity)
                             }
@@ -96,11 +102,11 @@ struct AuthorView: View {
                                         
                                         
                                     }
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.primary)
                                 }
                             }
                             .background(
-                                Image("background")
+                                Image(colorScheme == .light ? "background" : "background-dark")
                                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                                     .ignoresSafeArea()
                                 
@@ -117,7 +123,6 @@ struct AuthorView: View {
         .navigationTitle(author)
         .navigationBarTitleDisplayMode(.inline)
         
-//        .padding(.top)
         .onAppear {
             
             

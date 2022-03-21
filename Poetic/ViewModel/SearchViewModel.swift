@@ -53,7 +53,7 @@ class SearchViewModel: ObservableObject {
     func loadPoem(searchTerm: String, filter: DataManager.SearchFilter) {
         
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) { _ in
             self.poems = []
             
             if searchTerm == "" {
@@ -180,6 +180,13 @@ class SearchViewModel: ObservableObject {
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.error)
     }
+    
+    func mediumImpactHaptic() {
+        let generator = UIImpactFeedbackGenerator()
+        generator.impactOccurred(intensity: 1.0)
+    }
+    
+    
 }
 
 

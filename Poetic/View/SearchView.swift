@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SearchView: View {
+    @Environment(\.colorScheme) var colorScheme
+    
     var authors: Authors = Bundle.main.decode("Authors.json")
     
     @ObservedObject var viewModel: SearchViewModel
@@ -22,7 +24,7 @@ struct SearchView: View {
             ZStack {
 //                colors.lightPink
 //                    .ignoresSafeArea(.all)
-                Image("background")
+                Image(colorScheme == .light ? "background" : "background-dark")
                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                     .ignoresSafeArea()
                 
@@ -83,6 +85,7 @@ struct SearchView: View {
                             
                         case .loaded:
                             resultsListView
+                                
                         }
                     }
                     
@@ -98,11 +101,13 @@ struct SearchView: View {
                 
                 .navigationTitle("Search")
                 .navigationBarTitleDisplayMode(.inline)
-                .foregroundColor(.black)
+                .foregroundColor(.primary)
             }
             
             
+            
         }
+       
         
     }
         
@@ -122,7 +127,6 @@ extension SearchView {
             Image(systemName: "eyeglasses")
                 .resizable()
                 .scaledToFit()
-                .foregroundColor(.black)
                 .frame(width: 250, height: 200)
             
             Text("Start searching for poems!")
@@ -136,21 +140,21 @@ extension SearchView {
             Image(systemName: "exclamationmark.triangle")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 150, height: 100)
+                .frame(width: 44, height: 44)
                 .padding(.top)
             
             Text("No titles for this search. Try again.")
-                .font(.system(.title3, design: .serif))
+                .font(.system(.body, design: .serif))
                 .padding()
         }
-        .foregroundColor(.black).opacity(0.7)
-        .frame(maxWidth: . infinity)
+        .foregroundColor(.primary)
+        .frame(maxWidth: .infinity)
     }
     
     var resultsListView: some View {
         GeometryReader { geo in
             List {
-            ForEach(viewModel.poems) { poem in
+                ForEach(viewModel.poems, id: \.self) { poem in
                 NavigationLink {
                     DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
                 } label: {

@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Poem: Codable {
+struct Poem: Codable, Hashable {
     let title: String
     let author: String
     let lines: [String]
