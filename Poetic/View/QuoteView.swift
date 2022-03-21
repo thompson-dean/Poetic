@@ -15,6 +15,8 @@ struct QuoteView: View {
     
     @State private var showShareSheet = false
     
+    let links = Links()
+    
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
@@ -54,7 +56,7 @@ struct QuoteView: View {
                             .padding(.horizontal, 5)
                             .contextMenu {
                                 Button {
-                                    shareQuote(quote: pcViewModel.quotes[index].quote!, title: pcViewModel.quotes[index].title ?? "", author: pcViewModel.quotes[index].author ?? "")
+                                    links.shareQuote(quote: pcViewModel.quotes[index].quote!, title: pcViewModel.quotes[index].title ?? "", author: pcViewModel.quotes[index].author ?? "")
                                 } label: {
                                     Label("Share", systemImage: "square.and.arrow.up")
                                 }
@@ -96,14 +98,7 @@ struct QuoteView: View {
         viewModel.quotes.remove(atOffsets: offsets)
     }
     
-    func shareQuote(quote: String, title: String, author: String) {
-        let sharedString = """
-"\(quote)" A quote from \(title) by \(author), found on Poetic, your favorite classical poetry app. Available here:  https://apps.apple.com/us/app/poetic/id1614416936
-"""
-        let av = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
-        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
-        
-    }
+    
     
 }
 

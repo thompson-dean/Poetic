@@ -29,6 +29,14 @@ class SearchViewModel: ObservableObject {
     
     let dataManager = DataManager()
     
+    @Published var fontSize: CGFloat = 14
+    @AppStorage("darkModeEnabled") var darkModeEnabled = false
+    @AppStorage("systemThemeEnabled") var systemThemeEnabled = true
+    
+    var floatedFontSize: CGFloat {
+        CGFloat(fontSize)
+    }
+    
     //Arrays
     @Published var quotes = [Quote]()
     @Published private(set) var poems = [Poem]()
@@ -168,6 +176,10 @@ class SearchViewModel: ObservableObject {
             quotes.append(quote)
             print(quotes)
         }
+    }
+    
+    func removeQuoteFromQuotes(_ quote: Quote) {
+        quotes.removeAll(where: { $0.quote == quote.title })
     }
     
     //Handle Haptics

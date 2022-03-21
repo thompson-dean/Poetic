@@ -35,12 +35,15 @@ struct ContentView: View {
                 .tabItem {
                     Label("Quotes", systemImage: "quote.bubble.fill")
                 }
-            SettingsView()
+            SettingsView(viewModel: viewModel)
                 .tabItem {
                     Label("Menu", systemImage: "line.3.horizontal")
                 }
         }
         .accentColor(.primary)
+        .onAppear {
+            SystemThemeManager.shared.handleTheme(darkMode: viewModel.darkModeEnabled, system: viewModel.systemThemeEnabled)
+        }
     }
 }
 

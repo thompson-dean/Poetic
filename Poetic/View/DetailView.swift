@@ -99,6 +99,8 @@ struct DetailView: View {
 
 struct PoemView: View {
     
+    let links = Links()
+    
     @ObservedObject var viewModel: SearchViewModel
     @ObservedObject var pcViewModel: PersistenceController
     
@@ -111,20 +113,18 @@ struct PoemView: View {
         if pcViewModel.quotes.contains(where: { $0.quote == poemLines[index] }) {
             Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
                 .font(.system(.subheadline, design: .serif))
-                .bold()
+                .background(Color.yellow)
+                
                 .contextMenu {
                     Button {
-                        if !pcViewModel.quotes.contains(where: { $0.quote == poemLines[index]}) {
-                            pcViewModel.addQuote(id: UUID(), title: title, author: author, quote: poemLines[index])
-                            viewModel.simpleHapticSuccess()
-                        }
+                        links.shareQuote(quote: poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines), title: title, author: author)
                     } label: {
-                        Label("Add to Fav Quotes", systemImage: "quote.bubble.fill")
+                        Label("Share this quote", systemImage: "chevron.right")
                     }
                     Button {
-                        
+                        //ADD DELETE FOR QUOTE
                     } label: {
-                        Label("Cancel", systemImage: "delete.left")
+                        Label("Delete quote", systemImage: "delete.left")
                             
                     }
                 }

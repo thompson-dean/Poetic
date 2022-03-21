@@ -6,13 +6,19 @@
 //
 
 import SwiftUI
+import StoreKit
+
 
 struct SettingsView: View {
     
     @Environment(\.colorScheme) var colorScheme
     
+    let links = Links()
+    @ObservedObject var viewModel: SearchViewModel
+    
+    @State private var showLoading: Bool = false
     @State private var lightOrDark = false
-    @State private var fontAmount = 0.0
+   
     @State private var exampleText = "The quick brown fox jumps over the lazy dog"
     
     var body: some View {
@@ -20,17 +26,30 @@ struct SettingsView: View {
             VStack(alignment: .center) {
                 Form {
                     Section(header: Text("Appearance")) {
-                        Picker("", selection: $lightOrDark) {
-                            Text("Light").tag(false)
-                            Text("Dark").tag(true)
-                            
+                        
+                        Toggle("Adaptive background", isOn: $viewModel.systemThemeEnabled)
+                            .onChange(of: viewModel.systemThemeEnabled) { _ in
+                                SystemThemeManager.shared.handleTheme(darkMode: viewModel.darkModeEnabled, system: viewModel.systemThemeEnabled)
+                            }
+                        
+                        if !viewModel.systemThemeEnabled {
+                            Picker("", selection: $viewModel.darkModeEnabled) {
+                                Text("Light").tag(false)
+                                Text("Dark").tag(true)
+                                
+                            }
+                            .pickerStyle(SegmentedPickerStyle())
+                            .onChange(of: viewModel.darkModeEnabled) { _ in
+                                SystemThemeManager.shared.handleTheme(darkMode: viewModel.darkModeEnabled, system: viewModel.systemThemeEnabled)
+                            }
                         }
-                        .pickerStyle(SegmentedPickerStyle())
+                        
+                        
                         
                         
                         
                         Text("The quick brown fox jumps over the lazy dog")
-                            .font(.system(size: CGFloat(fontAmount), design: .serif))
+                            .font(.system(size: viewModel.floatedFontSize, design: .serif))
                             .frame(maxWidth: .infinity)
                         
                             .padding()
@@ -39,69 +58,66 @@ struct SettingsView: View {
                             .cornerRadius(5)
                         
                         
+                        HStack {
+                            Text("Font size:  ")
+                                .font(.caption)
+                            Slider(value: $viewModel.fontSize, in: 12...26, step: 2)
+                        }
                         
-                        Slider(value: $fontAmount, in: 12...26, step: 1)
-                        Text("Drag to change font size")
-                            .font(.caption)
+                        
                     }
                     
                     Section(header: Text("Resources")) {
                         NavigationLink {
-                            
+                            if let url = URL(string: links.poetryDBURLSTring) {
+                                WebView(url: url, showLoading: $showLoading)
+                                    .overlay(showLoading ? ProgressView("Loading...").toAnyView() : EmptyView().toAnyView())
+                            } else {
+                                
+                            }
                         } label: {
                             Text("PoetryDB's fantastic poetry API")
                         }
                         NavigationLink {
-                            
+                            if let url = URL(string: links.PoeticURLString) {
+                                WebView(url: url, showLoading: $showLoading)
+                                    .overlay(showLoading ? ProgressView("Loading...").toAnyView() : EmptyView().toAnyView())
+                            } else {
+                                
+                            }
                         } label: {
                             Text("Poetic open source repository")
                         }
                     }
                     
-                    Section {
-                        HStack(spacing: 30) {
-                            Image("poeticPic")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 50, height: 50)
-                                .cornerRadius(5)
-                               
-                            VStack(spacing: 5) {
-                                Text("Poetic version 1.2")
-                                HStack(spacing: 0) {
-                                    Text("Made with love by ")
-                                    Button {
-                                        print("tapped")
-                                    } label: {
-                                        Text("@DeanWThompson")
-                                            .foregroundColor(.blue)
-                                    }
-                                    .buttonStyle(FlatLinkStyle())
-                                }
-                                .font(.caption)
-                                
-                                
-                            }
-                            
-                        }
-                    }
+                    
                     
                     Section {
-                        HStack {
-                            Image(systemName: "hand.thumbsup")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 32, height: 32)
-                                .padding(.trailing)
-                            VStack(alignment: .leading, spacing: 3) {
-                                Text("Leave a rating")
+                        
+                        Button {
+                            if let url = URL(string: "itms-apps://apple.com/app/id1614416936") {
+                                        UIApplication.shared.open(url)
+                                    } else {
+                                        print("error with app store URL")
+                                    }
+                        } label: {
+                            HStack {
+                                Image(systemName: "hand.thumbsup")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 32, height: 32)
+                                    .padding(.trailing)
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text("Leave a rating")
                                     
-                                Text("Support this app, support poetry!")
-                                    .font(.caption)
+                                    Text("Support this app, support poetry!")
+                                        .font(.caption)
+                                }
                             }
+                            .foregroundColor(.primary)
                         }
                         Button {
-                            
+                            links.shareApp()
                         } label: {
                             HStack {
                                 Image(systemName: "square.and.arrow.up")
@@ -111,7 +127,7 @@ struct SettingsView: View {
                                     .padding(.trailing)
                                 VStack(alignment: .leading, spacing: 3) {
                                     Text("Share")
-                                        
+                                    
                                     Text("Send to your friend's who love poetry.")
                                         .font(.caption)
                                 }
@@ -119,21 +135,30 @@ struct SettingsView: View {
                             .foregroundColor(.primary)
                         }
                         
-                        HStack {
-                            Image(systemName: "envelope")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 32, height: 32)
-                                .padding(.trailing)
-                            VStack(alignment: .leading, spacing: 3) {
-                                Text("Send feedback")
+                        NavigationLink {
+                            if let url = URL(string: links.twitterURLString) {
+                                WebView(url: url, showLoading: $showLoading)
+                                    .overlay(showLoading ? ProgressView("Loading...").toAnyView() : EmptyView().toAnyView())
+                            } else {
+                                
+                            }
+                        } label: {
+                            HStack {
+                                Image(systemName: "envelope")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 32, height: 32)
+                                    .padding(.trailing)
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text("Send feedback")
                                     
-                                Text("Want new features? Found a bug?")
-                                    .font(.caption)
+                                    Text("Want new features? Found a bug?")
+                                        .font(.caption)
+                                }
                             }
                         }
                         NavigationLink {
-                            
+                            DevView()
                         } label: {
                             HStack {
                                 Image(systemName: "info.circle")
@@ -150,6 +175,39 @@ struct SettingsView: View {
                             }
                         }
                         
+                    }
+                    
+                    Section {
+                        HStack {
+                            Image("poeticPic")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 50, height: 50)
+                                .cornerRadius(5)
+                               
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text("Poetic version 1.2")
+                                HStack(spacing: 3) {
+                                    Text("Made with love by")
+                                    NavigationLink {
+                                        if let url = URL(string: links.twitterURLString) {
+                                            WebView(url: url, showLoading: $showLoading)
+                                                .overlay(showLoading ? ProgressView("Loading...").toAnyView() : EmptyView().toAnyView())
+                                        } else {
+                                            
+                                        }
+                                    } label: {
+                                        Text("@DeanWThompson")
+                                            .foregroundColor(.blue)
+                                    }
+                                    .buttonStyle(FlatLinkStyle())
+                                }
+                                .font(.caption)
+                                
+                                
+                            }
+                            
+                        }
                     }
                     
                 }
@@ -171,11 +229,20 @@ struct SettingsView: View {
             
         }
     }
+    
+    
+    
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(viewModel: SearchViewModel())
             .preferredColorScheme(.light)
+    }
+}
+
+extension View {
+    func toAnyView() -> AnyView {
+        AnyView(self)
     }
 }
