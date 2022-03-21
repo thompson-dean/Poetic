@@ -107,24 +107,52 @@ struct PoemView: View {
     let index: Int
     let poemLines: [String]
     var body: some View {
-        Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
-            .font(.system(.subheadline, design: .serif))
-            .contextMenu {
-                Button {
-                    if !pcViewModel.quotes.contains(where: { $0.quote == poemLines[index]}) {
-                        pcViewModel.addQuote(id: UUID(), title: title, author: author, quote: poemLines[index])
-                        viewModel.simpleHapticSuccess()
+        
+        if pcViewModel.quotes.contains(where: { $0.quote == poemLines[index] }) {
+            Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
+                .font(.system(.subheadline, design: .serif))
+                .bold()
+                .contextMenu {
+                    Button {
+                        if !pcViewModel.quotes.contains(where: { $0.quote == poemLines[index]}) {
+                            pcViewModel.addQuote(id: UUID(), title: title, author: author, quote: poemLines[index])
+                            viewModel.simpleHapticSuccess()
+                        }
+                    } label: {
+                        Label("Add to Fav Quotes", systemImage: "quote.bubble.fill")
                     }
-                } label: {
-                    Label("Add to Fav Quotes", systemImage: "quote.bubble.fill")
-                }
-                Button {
-                    
-                } label: {
-                    Label("Cancel", systemImage: "delete.left")
+                    Button {
                         
+                    } label: {
+                        Label("Cancel", systemImage: "delete.left")
+                            
+                    }
                 }
-            }
+        } else {
+            Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
+                .font(.system(.subheadline, design: .serif))
+                .contextMenu {
+                    Button {
+                        if !pcViewModel.quotes.contains(where: { $0.quote == poemLines[index]}) {
+                            pcViewModel.addQuote(id: UUID(), title: title, author: author, quote: poemLines[index])
+                            viewModel.simpleHapticSuccess()
+                        }
+                    } label: {
+                        Label("Add to Fav Quotes", systemImage: "quote.bubble.fill")
+                    }
+                    Button {
+                        
+                    } label: {
+                        Label("Cancel", systemImage: "delete.left")
+                            
+                    }
+                }
+        }
+        
+        
+        
+        
+            
         
     }
 }

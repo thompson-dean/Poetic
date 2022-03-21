@@ -59,22 +59,24 @@ struct SettingsView: View {
                     }
                     
                     Section {
-                        HStack(spacing: 10) {
-                            Image("poeticIcon")
+                        HStack(spacing: 30) {
+                            Image("poeticPic")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 50, height: 50)
                                 .cornerRadius(5)
+                               
                             VStack(spacing: 5) {
                                 Text("Poetic version 1.2")
                                 HStack(spacing: 0) {
                                     Text("Made with love by ")
                                     Button {
-                                        
+                                        print("tapped")
                                     } label: {
                                         Text("@DeanWThompson")
                                             .foregroundColor(.blue)
                                     }
+                                    .buttonStyle(FlatLinkStyle())
                                 }
                                 .font(.caption)
                                 
@@ -93,7 +95,7 @@ struct SettingsView: View {
                                 .padding(.trailing)
                             VStack(alignment: .leading, spacing: 3) {
                                 Text("Leave a rating")
-                                    .font(.headline)
+                                    
                                 Text("Support this app, support poetry!")
                                     .font(.caption)
                             }
@@ -109,7 +111,7 @@ struct SettingsView: View {
                                     .padding(.trailing)
                                 VStack(alignment: .leading, spacing: 3) {
                                     Text("Share")
-                                        .font(.headline)
+                                        
                                     Text("Send to your friend's who love poetry.")
                                         .font(.caption)
                                 }
@@ -125,7 +127,7 @@ struct SettingsView: View {
                                 .padding(.trailing)
                             VStack(alignment: .leading, spacing: 3) {
                                 Text("Send feedback")
-                                    .font(.headline)
+                                    
                                 Text("Want new features? Found a bug?")
                                     .font(.caption)
                             }
@@ -141,7 +143,7 @@ struct SettingsView: View {
                                     .padding(.trailing)
                                 VStack(alignment: .leading, spacing: 3) {
                                     Text("About the app")
-                                        .font(.headline)
+                                        
                                     Text("App and developer information")
                                         .font(.caption)
                                 }
@@ -164,7 +166,7 @@ struct SettingsView: View {
                 }
         
             }
-            .navigationTitle("Settings")
+            .navigationTitle("Menu")
             .navigationBarTitleDisplayMode(.inline)
             
         }
