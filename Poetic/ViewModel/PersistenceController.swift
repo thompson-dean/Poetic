@@ -116,4 +116,9 @@ class PersistenceController: ObservableObject {
         container.viewContext.delete(entity)
         saveData()
     }
+    
+    func removeQuoteFromQuotes(_ quote: Quote) {
+        quotes.removeAll(where: { $0.quote == quote.title })
+        saveData()
+    }
 }
