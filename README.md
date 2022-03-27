@@ -2,7 +2,7 @@
 
 Poetic is a classic poetry reader. Enjoy thousands of poems from the greatest English poets. 
 
-This app was built so that I would be able to read poetry more iften, but also to aid my learning iOS development. 
+This app was built so that I would be able to read poetry more often, but also to aid my learning iOS development. 
 See below for what was learned through creating this app.
 
 **Features:**
