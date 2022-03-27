@@ -16,6 +16,9 @@ class PersistenceController: ObservableObject {
     @Published var favoritedPoems: [PoemEntity] = []
     @Published var quotes: [QuoteEntity] = []
     
+    @Published var poemsFilter = true
+    @Published var quotesFilter = true
+    
     init() {
         
         container = NSPersistentContainer(name: "Poetic")
@@ -33,7 +36,7 @@ class PersistenceController: ObservableObject {
     
     func fetchFavoritedPoems() {
         let request = NSFetchRequest<PoemEntity>(entityName: "PoemEntity")
-        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: poemsFilter ? "title" : "author", ascending: true)
         request.sortDescriptors = [sortDescriptor]
         
         do {
@@ -64,7 +67,7 @@ class PersistenceController: ObservableObject {
     
     func fetchQuotes() {
         let request = NSFetchRequest<QuoteEntity>(entityName: "QuoteEntity")
-        let sortDescriptor = NSSortDescriptor(key: "quote", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: quotesFilter ? "quote" : "title", ascending: true)
         request.sortDescriptors = [sortDescriptor]
         
         do {
