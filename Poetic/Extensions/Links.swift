@@ -10,6 +10,7 @@ import SwiftUI
 
 class Links {
     let twitterURLString = "https://twitter.com/DeanWThompson"
+    let twitterPoeticURLString = "https://twitter.com/PoeticApp"
     let poetryDBURLSTring = "https://github.com/thundercomb/poetrydb"
     let PoeticURLString = "https://github.com/thompson-dean/Poetic"
     let appStoreDeepLink = "itms-apps://apple.com/app/id1614416936"

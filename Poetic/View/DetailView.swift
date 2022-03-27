@@ -10,6 +10,8 @@ import SwiftUI
 struct DetailView: View {
     @Environment(\.colorScheme) var colorScheme
     
+    let links = Links()
+    
     @ObservedObject var viewModel: SearchViewModel
     @ObservedObject var pcViewModel: PersistenceController
     
@@ -90,6 +92,13 @@ struct DetailView: View {
                 }
             
             }
+            ToolbarItem {
+                Button {
+//                    links.shareQuote(quote: <#T##String#>, title: title, author: author)
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                }
+            }
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {}
             }
@@ -98,6 +107,8 @@ struct DetailView: View {
 }
 
 struct PoemView: View {
+    
+    @Environment(\.colorScheme) var colorScheme
     
     let links = Links()
     
@@ -113,8 +124,9 @@ struct PoemView: View {
         if pcViewModel.quotes.contains(where: { $0.quote == poemLines[index] }) {
             Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
                 .font(.system(.subheadline, design: .serif))
+                .foregroundColor(Color.black)
                 .background(Color.yellow)
-                
+        
                 .contextMenu {
                     Button {
                         links.shareQuote(quote: poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines), title: title, author: author)
@@ -148,11 +160,5 @@ struct PoemView: View {
                     }
                 }
         }
-        
-        
-        
-        
-            
-        
     }
 }

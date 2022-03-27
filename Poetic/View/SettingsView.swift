@@ -19,7 +19,7 @@ struct SettingsView: View {
     @State private var showLoading: Bool = false
     @State private var lightOrDark = false
    
-    @State private var exampleText = "The quick brown fox jumps over the lazy dog"
+    
     
     var body: some View {
         NavigationView {
@@ -42,26 +42,6 @@ struct SettingsView: View {
                             .onChange(of: viewModel.darkModeEnabled) { _ in
                                 SystemThemeManager.shared.handleTheme(darkMode: viewModel.darkModeEnabled, system: viewModel.systemThemeEnabled)
                             }
-                        }
-                        
-                        
-                        
-                        
-                        
-                        Text("The quick brown fox jumps over the lazy dog")
-                            .font(.system(size: viewModel.floatedFontSize, design: .serif))
-                            .frame(maxWidth: .infinity)
-                        
-                            .padding()
-                            .background(colorScheme == .light ? Color.black.opacity(0.8) : Color.white)
-                            .foregroundColor(colorScheme == .light ? Color.white : Color.black)
-                            .cornerRadius(5)
-                        
-                        
-                        HStack {
-                            Text("Font size:  ")
-                                .font(.caption)
-                            Slider(value: $viewModel.fontSize, in: 12...26, step: 2)
                         }
                         
                         
@@ -101,42 +81,57 @@ struct SettingsView: View {
                                         print("error with app store URL")
                                     }
                         } label: {
-                            HStack {
-                                Image(systemName: "hand.thumbsup")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 32, height: 32)
-                                    .padding(.trailing)
-                                VStack(alignment: .leading, spacing: 3) {
-                                    Text("Leave a rating")
+                            
+                            
+                            ZStack {
+                                NavigationLink(destination: EmptyView()) {
                                     
-                                    Text("Support this app, support poetry!")
-                                        .font(.caption)
                                 }
+                                HStack {
+                                    Image(systemName: "hand.thumbsup")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 32, height: 32)
+                                        .padding(.trailing)
+                                    VStack(alignment: .leading, spacing: 3) {
+                                        Text("Leave a rating")
+                                        
+                                        Text("Support this app, support poetry!")
+                                            .font(.caption)
+                                    }
+                                    Spacer()
+                                }
+                                .foregroundColor(.primary)
                             }
-                            .foregroundColor(.primary)
                         }
                         Button {
                             links.shareApp()
                         } label: {
-                            HStack {
-                                Image(systemName: "square.and.arrow.up")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 32, height: 32)
-                                    .padding(.trailing)
-                                VStack(alignment: .leading, spacing: 3) {
-                                    Text("Share")
+                            ZStack {
+                                NavigationLink(destination: EmptyView()) {
                                     
-                                    Text("Send to your friend's who love poetry.")
-                                        .font(.caption)
                                 }
+                                HStack {
+                                    Image(systemName: "square.and.arrow.up")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 32, height: 32)
+                                        .padding(.trailing)
+                                    VStack(alignment: .leading, spacing: 3) {
+                                        Text("Share")
+                                        
+                                        Text("Send to your friend's who love poetry.")
+                                            .font(.caption)
+                                    }
+                                    Spacer()
+                                }
+                                .foregroundColor(.primary)
                             }
-                            .foregroundColor(.primary)
+                            
                         }
                         
                         NavigationLink {
-                            if let url = URL(string: links.twitterURLString) {
+                            if let url = URL(string: links.twitterPoeticURLString) {
                                 WebView(url: url, showLoading: $showLoading)
                                     .overlay(showLoading ? ProgressView("Loading...").toAnyView() : EmptyView().toAnyView())
                             } else {
@@ -178,36 +173,38 @@ struct SettingsView: View {
                     }
                     
                     Section {
-                        HStack {
-                            Image("poeticPic")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 50, height: 50)
-                                .cornerRadius(5)
-                               
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text("Poetic version 1.2")
-                                HStack(spacing: 3) {
-                                    Text("Made with love by")
-                                    NavigationLink {
-                                        if let url = URL(string: links.twitterURLString) {
-                                            WebView(url: url, showLoading: $showLoading)
-                                                .overlay(showLoading ? ProgressView("Loading...").toAnyView() : EmptyView().toAnyView())
-                                        } else {
-                                            
-                                        }
-                                    } label: {
-                                        Text("@DeanWThompson")
-                                            .foregroundColor(.blue)
-                                    }
-                                    .buttonStyle(FlatLinkStyle())
-                                }
-                                .font(.caption)
-                                
+                        NavigationLink {
+                            if let url = URL(string: links.twitterURLString) {
+                                WebView(url: url, showLoading: $showLoading)
+                                    .overlay(showLoading ? ProgressView("Loading...").toAnyView() : EmptyView().toAnyView())
+                            } else {
                                 
                             }
-                            
+                        } label: {
+                            HStack {
+                                Image("poeticPic")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 50, height: 50)
+                                    .cornerRadius(5)
+                                
+                                VStack(alignment: .leading, spacing: 5) {
+                                    Text("Poetic version 1.2")
+                                    HStack(spacing: 3) {
+                                        Text("Made with love by")
+                                        
+                                        Text("@DeanWThompson")
+                                            .foregroundColor(.blue)
+                                        
+                                    }
+                                    .font(.caption)
+                                    
+                                    
+                                }
+                                
+                            }
                         }
+                        .buttonStyle(PlainButtonStyle())
                     }
                     
                 }
