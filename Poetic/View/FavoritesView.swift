@@ -62,7 +62,17 @@ struct FavoritesView: View {
             }
             
             .toolbar {
-                EditButton()
+                ToolbarItem {
+                    EditButton()
+                }
+                
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "shuffle")
+                    }
+                }
             }
         }
     }

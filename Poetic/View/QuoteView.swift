@@ -89,7 +89,18 @@ struct QuoteView: View {
                 
             }
             .toolbar {
-                EditButton()
+                ToolbarItem {
+                    EditButton()
+                }
+               
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        pcViewModel.quotesFilter.toggle()
+                        pcViewModel.fetchQuotes()
+                    } label: {
+                        Image(systemName: "shuffle")
+                    }
+                }
             }
         }
         
