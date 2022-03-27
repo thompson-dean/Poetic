@@ -26,6 +26,16 @@ class Links {
         
     }
     
+    func sharePoem(poem: [String], title: String, author: String) {
+        let sharedString = """
+\(title) by \(author) \n \(poem.joined(separator: "\n")) \n
+Found on Poetic, your favorite classical poetry app. Available here:  https://apps.apple.com/us/app/poetic/id1614416936
+"""
+        let av = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
+        
+    }
+    
     func shareApp() {
         let sharedString = "https://apps.apple.com/us/app/poetic/id1614416936"
 

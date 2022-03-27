@@ -73,6 +73,9 @@ struct DetailView: View {
                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                     .ignoresSafeArea()
             )
+            .onAppear {
+                pcViewModel.fetchQuotes()
+            }
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -94,7 +97,7 @@ struct DetailView: View {
             }
             ToolbarItem {
                 Button {
-//                    links.shareQuote(quote: <#T##String#>, title: title, author: author)
+                    links.sharePoem(poem: lines, title: title, author: author)
                 } label: {
                     Image(systemName: "square.and.arrow.up")
                 }
@@ -129,12 +132,16 @@ struct PoemView: View {
         
                 .contextMenu {
                     Button {
+                    
                         links.shareQuote(quote: poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines), title: title, author: author)
                     } label: {
-                        Label("Share this quote", systemImage: "chevron.right")
+                        Label("Share this quote", systemImage: "square.and.arrow.up")
                     }
                     Button {
-                        //ADD DELETE FOR QUOTE
+                        if let entity = pcViewModel.quotes.first(where: { $0.quote == poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines)}) {
+                            pcViewModel.removeQuoteFromQuotes(entity: entity)
+                            pcViewModel.fetchQuotes()
+                        }
                     } label: {
                         Label("Delete quote", systemImage: "delete.left")
                             
@@ -150,7 +157,12 @@ struct PoemView: View {
                             viewModel.simpleHapticSuccess()
                         }
                     } label: {
-                        Label("Add to Fav Quotes", systemImage: "quote.bubble.fill")
+                        Label("Highlight and add to favorites", systemImage: "quote.bubble.fill")
+                    }
+                    Button {
+                        links.shareQuote(quote: poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines), title: title, author: author)
+                    } label: {
+                        Label("Share this quote", systemImage: "square.and.arrow.up")
                     }
                     Button {
                         

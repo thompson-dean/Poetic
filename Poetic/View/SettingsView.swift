@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import StoreKit
-
 
 struct SettingsView: View {
     
@@ -44,6 +42,10 @@ struct SettingsView: View {
                             }
                         }
                         
+                        
+                    }
+                    
+                    Section(header: Text("Notifications")) {
                         
                     }
                     
