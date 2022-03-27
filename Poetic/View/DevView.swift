@@ -27,7 +27,7 @@ struct DevView: View {
                             .padding()
                         Spacer()
                     }
-                    Text("This app is made for those who want to read poetry on the go. During university, I was able to read so many poems, but now that I am working full-time, I am having trouble finding the time to read poetry. This is way I built this app. 1. as a way to read more poetry, but also 2. as a way to give back to the art that gave me so much love when I was younger.")
+                    Text("This app is made for those who want to read poetry on the go. When I was a university student I would dedicate hours to reading poetry, but now, as I have gotten older, I have found myself reading less and less. That's why I built this app! So that I and others like me could read more poetry! I hope, with this app, I am able to give my love back to the art form that gave me so, so much. ")
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                         .padding(.bottom)
@@ -60,6 +60,7 @@ struct DevView: View {
             }
             
             Section(header: Text("Support")) {
+                
                 Button {
                     if let url = URL(string: "itms-apps://apple.com/app/id1614416936") {
                                 UIApplication.shared.open(url)
@@ -67,8 +68,22 @@ struct DevView: View {
                                 print("error with app store URL")
                             }
                 } label: {
-                        Text("Leave a review")
-                        .foregroundColor(.primary)
+                    
+                        ZStack {
+                            NavigationLink(destination: EmptyView()) {
+                                
+                            }
+                            HStack {
+                                Text("Leave a review")
+                                    .foregroundColor(.primary)
+                                Spacer()
+                            }
+                            
+                        }
+                    
+                    
+                    
+                    
                 }
                 NavigationLink {
                     if let url = URL(string: links.PoeticURLString) {
@@ -103,5 +118,6 @@ struct DevView_Previews: PreviewProvider {
     static var previews: some View {
         DevView()
             .preferredColorScheme(.dark)
+            
     }
 }

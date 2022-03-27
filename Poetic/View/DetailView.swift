@@ -10,6 +10,8 @@ import SwiftUI
 struct DetailView: View {
     @Environment(\.colorScheme) var colorScheme
     
+    let links = Links()
+    
     @ObservedObject var viewModel: SearchViewModel
     @ObservedObject var pcViewModel: PersistenceController
     
@@ -71,6 +73,9 @@ struct DetailView: View {
                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                     .ignoresSafeArea()
             )
+            .onAppear {
+                pcViewModel.fetchQuotes()
+            }
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -90,6 +95,13 @@ struct DetailView: View {
                 }
             
             }
+            ToolbarItem {
+                Button {
+                    links.sharePoem(poem: lines, title: title, author: author)
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                }
+            }
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {}
             }
@@ -98,6 +110,8 @@ struct DetailView: View {
 }
 
 struct PoemView: View {
+    
+    @Environment(\.colorScheme) var colorScheme
     
     let links = Links()
     
@@ -113,16 +127,21 @@ struct PoemView: View {
         if pcViewModel.quotes.contains(where: { $0.quote == poemLines[index] }) {
             Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
                 .font(.system(.subheadline, design: .serif))
+                .foregroundColor(Color.black)
                 .background(Color.yellow)
-                
+        
                 .contextMenu {
                     Button {
+                    
                         links.shareQuote(quote: poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines), title: title, author: author)
                     } label: {
-                        Label("Share this quote", systemImage: "chevron.right")
+                        Label("Share this quote", systemImage: "square.and.arrow.up")
                     }
                     Button {
-                        //ADD DELETE FOR QUOTE
+                        if let entity = pcViewModel.quotes.first(where: { $0.quote == poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines)}) {
+                            pcViewModel.removeQuoteFromQuotes(entity: entity)
+                            pcViewModel.fetchQuotes()
+                        }
                     } label: {
                         Label("Delete quote", systemImage: "delete.left")
                             
@@ -138,7 +157,12 @@ struct PoemView: View {
                             viewModel.simpleHapticSuccess()
                         }
                     } label: {
-                        Label("Add to Fav Quotes", systemImage: "quote.bubble.fill")
+                        Label("Highlight and add to favorites", systemImage: "quote.bubble.fill")
+                    }
+                    Button {
+                        links.shareQuote(quote: poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines), title: title, author: author)
+                    } label: {
+                        Label("Share this quote", systemImage: "square.and.arrow.up")
                     }
                     Button {
                         
@@ -148,11 +172,5 @@ struct PoemView: View {
                     }
                 }
         }
-        
-        
-        
-        
-            
-        
     }
 }

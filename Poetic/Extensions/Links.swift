@@ -10,6 +10,7 @@ import SwiftUI
 
 class Links {
     let twitterURLString = "https://twitter.com/DeanWThompson"
+    let twitterPoeticURLString = "https://twitter.com/PoeticApp"
     let poetryDBURLSTring = "https://github.com/thundercomb/poetrydb"
     let PoeticURLString = "https://github.com/thompson-dean/Poetic"
     let appStoreDeepLink = "itms-apps://apple.com/app/id1614416936"
@@ -19,6 +20,16 @@ class Links {
     func shareQuote(quote: String, title: String, author: String) {
         let sharedString = """
 "\(quote)" A quote from \(title) by \(author), found on Poetic, your favorite classical poetry app. Available here:  https://apps.apple.com/us/app/poetic/id1614416936
+"""
+        let av = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
+        
+    }
+    
+    func sharePoem(poem: [String], title: String, author: String) {
+        let sharedString = """
+\(title) by \(author) \n \(poem.joined(separator: "\n")) \n
+Found on Poetic, your favorite classical poetry app. Available here:  https://apps.apple.com/us/app/poetic/id1614416936
 """
         let av = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
         UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)

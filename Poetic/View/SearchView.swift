@@ -22,8 +22,7 @@ struct SearchView: View {
     var body: some View {
         NavigationView {
             ZStack {
-//                colors.lightPink
-//                    .ignoresSafeArea(.all)
+
                 Image(colorScheme == .light ? "background" : "background-dark")
                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                     .ignoresSafeArea()
@@ -32,11 +31,10 @@ struct SearchView: View {
                     Picker("", selection: $authorSearch) {
                         Text("Title").tag(false)
                         Text("Author").tag(true)
-                        
                     }
                     .pickerStyle(SegmentedPickerStyle())
-                    
                     .padding()
+                    
                     if authorSearch {
                         SearchBar(searchTerm: $authorSearchTerm)
                             .padding(.horizontal, 8)
@@ -50,7 +48,7 @@ struct SearchView: View {
                     case true:
                         List {
                             ForEach(authors.authors.filter { author in
-                                authorSearchTerm.isEmpty || author.contains(authorSearchTerm)
+                                authorSearchTerm.isEmpty || author.lowercased().contains(authorSearchTerm.lowercased())
                             }, id: \.self) { author in
                                 NavigationLink {
                                     AuthorView(viewModel: viewModel, pcViewModel: pcViewModel, author: author)
@@ -85,16 +83,13 @@ struct SearchView: View {
                             
                         case .loaded:
                             resultsListView
-                                
                         }
                     }
                     
                     Spacer()
                 }
                 .onChange(of: viewModel.searchTerm) { _ in
-                    if authorSearch {
-
-                    } else {
+                    if !authorSearch {
                         viewModel.loadPoem(searchTerm: viewModel.searchTerm, filter: .title)
                     }
                 }
@@ -103,14 +98,8 @@ struct SearchView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .foregroundColor(.primary)
             }
-            
-            
-            
         }
-       
-        
-    }
-        
+    }   
 }
 
 struct SearchView_Previews: PreviewProvider {
