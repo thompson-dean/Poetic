@@ -9,9 +9,9 @@ See below for what was learned through creating this app.
 
 - Search through thousands of classic English poems by author or by title.
 
-- Save favorite poems into favorites.
+- Save favorite poems and share them with friends.
 
-- Save favorite quotes by long pressing them. Also share your quotes with your friends on the quotes screen.
+- Long press your favorite quotes to highlight them or share them with friends. 
 
 - Every time you boot up the app you will be shown a random poem from the API. If you don't dig it, swipe and release to receive a new random one. 
 
@@ -30,7 +30,7 @@ This project is open source. Let's share fantastic poems with as many people as 
 
 **What I learned building this app**
 
-_Core Data, Result, @escaping, debouncing searches, Share Sheets, ContextMenu, MVVM, tracking app state using enums, tracking errors with enums, UIViewRepresentable_ <br>
+_Core Data, Result, @escaping, debouncing searches, Share Sheets, ContextMenu, MVVM, tracking app state using enums, tracking errors with enums, UIViewRepresentable, UserNotifications, filter _ <br>
 It was really fun to dive into the deep end and try out building an app by myself. I'd like to thank 100 Days of SwiftUI by Paul Hudson that fueled me with the necessary knowledge to complete this application. If you are learning Swift, be sure to check out his courses.
 
 
