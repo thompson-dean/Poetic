@@ -10,7 +10,7 @@ import UserNotifications
 
 class NotificationManager: ObservableObject {
     
-    var authors: Authors = Bundle.main.decode("Authors.json")
+    @Published var notificationOn = false
     
     func addNotification() {
         let center = UNUserNotificationCenter.current()
@@ -23,8 +23,9 @@ class NotificationManager: ObservableObject {
             
             var dateComponents = DateComponents()
             dateComponents.hour = 9
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-            
+//            dateComponents.minute =
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+//            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
             
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
             center.add(request)
