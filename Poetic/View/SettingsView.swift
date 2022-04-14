@@ -12,13 +12,12 @@ struct SettingsView: View {
     @Environment(\.colorScheme) var colorScheme
     
     let links = Links()
+    @StateObject var notificationManager = NotificationManager()
     @ObservedObject var viewModel: SearchViewModel
     
     @State private var showLoading: Bool = false
     @State private var lightOrDark = false
-   
-    
-    
+ 
     var body: some View {
         NavigationView {
             VStack(alignment: .center) {
@@ -46,7 +45,16 @@ struct SettingsView: View {
                     }
                     
                     Section(header: Text("Notifications")) {
-                        
+                        Toggle("Notifications On", isOn: $notificationManager.notificationOn)
+                            .onChange(of: notificationManager.notificationOn) { _ in
+                                if notificationManager.notificationOn {
+                                    notificationManager.addNotification()
+                                    print("notifications on")
+                                } else {
+                                    notificationManager.deleteNotification()
+                                    print("notifications off")
+                                }
+                            }
                     }
                     
                     Section(header: Text("Resources")) {

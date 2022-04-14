@@ -76,8 +76,12 @@ struct DetailView: View {
             .onAppear {
                 pcViewModel.fetchQuotes()
             }
+            
         }
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                HStack {}
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     if let entity = pcViewModel.favoritedPoems.first(where: { $0.title == title}) {
@@ -102,9 +106,8 @@ struct DetailView: View {
                     Image(systemName: "square.and.arrow.up")
                 }
             }
-            ToolbarItem(placement: .navigationBarLeading) {
-                HStack {}
-            }
+            
+
         }
     }
 }

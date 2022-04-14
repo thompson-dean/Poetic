@@ -68,7 +68,8 @@ struct FavoritesView: View {
                 
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        
+                        pcViewModel.poemsFilter.toggle()
+                        pcViewModel.fetchFavoritedPoems()
                     } label: {
                         Image(systemName: "shuffle")
                     }

@@ -10,37 +10,53 @@ import UserNotifications
 
 class NotificationManager: ObservableObject {
     
-    var authors: Authors = Bundle.main.decode("Authors.json")
+    private let authors = ["Edgar Allan Poe", "Emily Bronte", "Emily Dickinson", "Jane Austen", "Lewis Carroll", "William Blake", "William Shakespeare", "John Keats", "Oscar Wilde"]
     
-    func addNotification() {
-        let center = UNUserNotificationCenter.current()
+    @AppStorage("notificationOn") var notificationOn = false
+    
+    let center = UNUserNotificationCenter.current()
+    
+    func requestAuthorization() {
         
-        let addRequest = {
-            let content = UNMutableNotificationContent()
-            content.title = "Come read some poems!"
-            content.subtitle = "Thousands of poems at the tip of your fingers."
-            content.sound = UNNotificationSound.default
-            
-            var dateComponents = DateComponents()
-            dateComponents.hour = 9
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-            
-            
-            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-            center.add(request)
-        }
-        
-        center.getNotificationSettings { settings in
-            if settings.authorizationStatus == .authorized {
-                addRequest()
+        let options: UNAuthorizationOptions = [.alert, .badge, .sound]
+        center.requestAuthorization(options: options) { success, error in
+            if let error = error {
+                print("ERROR: \(error.localizedDescription)")
             } else {
-                center.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                    if success {
-                        addRequest()
-                    }
-                }
+                print("SUCCESS")
             }
         }
+    }
+    
+    
+    func addNotification() {
+        
+        
+        let content = UNMutableNotificationContent()
+        content.title = "\(authors.randomElement() ?? "Poetic") awaits your perusal"
+        content.subtitle = "Come and read some poems."
+        content.sound = .default
+        content.badge = 1
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+//        var dateComponents = DateComponents()
+//        dateComponents.hour = 9
+//
+//        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        
+        let request = UNNotificationRequest(
+            identifier: UUID().uuidString,
+            content: content,
+            trigger: trigger)
+        
+        center.add(request)
+        
+    }
+    
+    func deleteNotification() {
+        center.removeAllPendingNotificationRequests()
+        center.removeAllDeliveredNotifications()
     }
     
 }

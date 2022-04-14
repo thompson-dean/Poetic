@@ -43,6 +43,7 @@ struct ContentView: View {
         .accentColor(.primary)
         .onAppear {
             SystemThemeManager.shared.handleTheme(darkMode: viewModel.darkModeEnabled, system: viewModel.systemThemeEnabled)
+            UIApplication.shared.applicationIconBadgeNumber = 0
         }
     }
 }

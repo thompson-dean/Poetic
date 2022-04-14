@@ -14,7 +14,7 @@ struct HomeView: View {
     @ObservedObject var viewModel: SearchViewModel
     @ObservedObject var pcViewModel: PersistenceController
     
-    var notificantionManager = NotificationManager()
+    let notificationManager = NotificationManager()
     
     @State var refresh = Refresh(started: false, released: false)
     @State var count = 0
@@ -192,10 +192,8 @@ struct HomeView: View {
         }
         
         .onAppear {
-            
-            
+            notificationManager.requestAuthorization()
             if count == 0 {
-                notificantionManager.addNotification()
                 viewModel.loadRandomPoems(searchTerm: authors.authors[Int.random(in: 0..<authors.authors.count)].replacingOccurrences(of: " ", with: "%20"))
                 count += 1
             } 
