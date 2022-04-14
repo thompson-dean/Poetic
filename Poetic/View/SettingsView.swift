@@ -49,7 +49,10 @@ struct SettingsView: View {
                             .onChange(of: notificationManager.notificationOn) { _ in
                                 if notificationManager.notificationOn {
                                     notificationManager.addNotification()
-                                    print("did it")
+                                    print("notifications on")
+                                } else {
+                                    notificationManager.deleteNotification()
+                                    print("notifications off")
                                 }
                             }
                     }
