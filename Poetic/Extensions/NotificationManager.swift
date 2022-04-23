@@ -33,17 +33,18 @@ class NotificationManager: ObservableObject {
         
         
         let content = UNMutableNotificationContent()
-        content.title = "\(authors.randomElement() ?? "Poetic") awaits your perusal"
-        content.subtitle = "Come and read some poems."
+        content.title = "\(authors.randomElement() ?? "Poetic") awaits you"
+        content.subtitle = "Come read some poems."
         content.sound = .default
         content.badge = 1
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         
-//        var dateComponents = DateComponents()
-//        dateComponents.hour = 9
-//
-//        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        var dateComponents = DateComponents()
+        dateComponents.hour = 9
+//        dateComponents.minute = 6
+
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         
         let request = UNNotificationRequest(
             identifier: UUID().uuidString,

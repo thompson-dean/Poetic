@@ -192,6 +192,7 @@ struct HomeView: View {
         }
         
         .onAppear {
+            UIApplication.shared.applicationIconBadgeNumber = 0
             notificationManager.requestAuthorization()
             if count == 0 {
                 viewModel.loadRandomPoems(searchTerm: authors.authors[Int.random(in: 0..<authors.authors.count)].replacingOccurrences(of: " ", with: "%20"))
