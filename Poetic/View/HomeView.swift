@@ -64,19 +64,61 @@ struct HomeView: View {
                                 .frame(maxWidth: . infinity)
                                 .padding()
                             case .failed:
-                                VStack(alignment: .center) {
-                                    Image(systemName: "exclamationmark.triangle")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 44, height: 44)
-                                        .padding(.top, 5)
-                                    
-                                    Text("Please connect to the internet")
-                                        .font(.system(.body, design: .serif))
-                                        .padding(.top, 3)
+                                GeometryReader { reader -> AnyView in
+                                    { () -> AnyView in
+                                        DispatchQueue.main.async {
+                                            if refresh.startOffset == 0 {
+                                                refresh.startOffset = reader.frame(in: .global).minY
+                                            }
+                                            
+                                            refresh.offset = reader.frame(in: .global).minY
+                                            
+                                            if refresh.offset - refresh.startOffset > 80 && !refresh.started {
+                                                refresh.started = true
+                                                viewModel.mediumImpactHaptic()
+                                            }
+                                            
+                                            if refresh.startOffset == refresh.offset && refresh.started && !refresh.released {
+                                                
+                                                withAnimation(Animation.linear) {
+                                                    refresh.released = true
+                                                    
+                                                }
+                                                viewModel.simpleHapticSuccess()
+                                                viewModel.loadRandomPoems(searchTerm: authors.authors[Int.random(in: 0..<authors.authors.count)].replacingOccurrences(of: " ", with: "%20"))
+                                                refresh.started = false
+                                                refresh.released = false
+                                                
+                                            }
+                                        }
+                                        return AnyView(Color.black)
+                                    }()
                                 }
-                                .frame(maxWidth: . infinity)
-                                .padding()
+                                .frame(width: 0, height: 0)
+                                
+                                ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
+                                    
+                                    
+                                    Image(systemName: "arrow.down")
+                                        .font(.system(size: 16, weight: .heavy))
+                                        .foregroundColor(.gray)
+                                        .rotationEffect(.init(degrees: refresh.started ? 180 : 0))
+                                        .offset(y: refresh.released ? 40 : -30)
+                                        .animation(.easeIn)
+                                    VStack(alignment: .center) {
+                                        Image(systemName: "exclamationmark.triangle")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 44, height: 44)
+                                            .padding(.top, 5)
+                                        
+                                        Text("Please connect to the internet")
+                                            .font(.system(.body, design: .serif))
+                                            .padding(.top, 3)
+                                    }
+                                    .frame(maxWidth: . infinity)
+                                    .padding()
+                                }
                             case .loaded:
                                 NavigationLink {
                                     DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: viewModel.randomPoems[0].title, author: viewModel.randomPoems[0].author, lines: viewModel.randomPoems[0].lines, linecount: viewModel.randomPoems[0].linecount)
