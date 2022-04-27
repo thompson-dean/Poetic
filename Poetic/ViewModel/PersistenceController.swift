@@ -147,4 +147,9 @@ class PersistenceController: ObservableObject {
         container.viewContext.delete(quote)
         saveData()
     }
+    
+    func deleteQuotePoem(entity quotePoem: QuotePoemsEntity) {
+        container.viewContext.delete(quotePoem)
+        saveData()
+    }
 }
