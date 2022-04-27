@@ -156,7 +156,7 @@ struct PoemView: View {
                 .contextMenu {
                     Button {
                         if !pcViewModel.quotes.contains(where: { $0.quote == poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines)}) {
-                            pcViewModel.addQuote(id: UUID(), title: title, author: author, quote: poemLines[index])
+                            pcViewModel.addQuote(id: UUID(), title: title, author: author, quote: poemLines[index], lines: poemLines, linecount: "")
                             viewModel.simpleHapticSuccess()
                         }
                     } label: {

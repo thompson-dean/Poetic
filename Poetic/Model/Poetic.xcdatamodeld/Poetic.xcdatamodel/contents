@@ -13,8 +13,15 @@
         <attribute name="quote" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="QuotePoemsEntity" representedClassName="QuotePoemsEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="author" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="lines" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="PoemEntity" positionX="-45" positionY="0" width="128" height="104"/>
         <element name="QuoteEntity" positionX="-18" positionY="63" width="128" height="89"/>
+        <element name="QuotePoemsEntity" positionX="-27" positionY="63" width="128" height="89"/>
     </elements>
 </model>

@@ -29,7 +29,10 @@ struct ContentView: View {
             get: { self.tabSelection },
             set: {
                 if $0 == self.tabSelection {
-                    tappedTwice = true
+                    withAnimation {
+                        tappedTwice = true
+                    }
+                    
                 }
                 self.tabSelection = $0
             }
@@ -89,12 +92,22 @@ struct ContentView: View {
             SettingsView(viewModel: viewModel)
                 .id(menu)
                 .tabItem {
-                    Label("Menu", systemImage: "line.3.horizontal")
-                        .onChange(of: tappedTwice) { tappedTwice in
-                            guard tappedTwice else { return }
-                            menu = UUID()
-                            self.tappedTwice = false
-                        }
+                    if #available(iOS 15.0, *) {
+                        Label("Menu", systemImage: "line.3.horizontal")
+                            .onChange(of: tappedTwice) { tappedTwice in
+                                    guard tappedTwice else { return }
+                                    menu = UUID()
+                                    self.tappedTwice = false
+                                }
+                    } else {
+                        Label("Menu", systemImage: "gear")
+                            .onChange(of: tappedTwice) { tappedTwice in
+                                    guard tappedTwice else { return }
+                                    menu = UUID()
+                                    self.tappedTwice = false
+                                }
+                    }
+                    
                 }
                 .tag(5)
         }

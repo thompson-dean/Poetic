@@ -25,8 +25,8 @@ struct QuoteView: View {
                     ForEach(0..<pcViewModel.quotes.count, id: \.self) { index in
                         
                         NavigationLink {
-                            if let poem = pcViewModel.favoritedPoems.first(where: { $0.title == pcViewModel.quotes[index].title }) {
-                                DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title!, author: poem.author!, lines: poem.lines!, linecount: poem.linecount!)
+                            if let poem = pcViewModel.favoritedQuotesPoem.first(where: { $0.title == pcViewModel.quotes[index].title }) {
+                                DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title!, author: poem.author!, lines: poem.lines!, linecount: "")
                             }
                             
                         } label: {

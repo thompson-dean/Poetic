@@ -16,6 +16,10 @@ class PersistenceController: ObservableObject {
     @Published var favoritedPoems: [PoemEntity] = []
     @Published var quotes: [QuoteEntity] = []
     
+    //Implement this so user's can also access and see the poem from which their quotes came from. 
+    @Published var favoritedQuotesPoem: [QuotePoemsEntity] = []
+
+    
     @Published var poemsFilter = true
     @Published var quotesFilter = true
     
@@ -77,7 +81,25 @@ class PersistenceController: ObservableObject {
         }
     }
     
-    func addQuote(id: UUID, title: String, author: String, quote: String) {
+    func fetchQuotePoems() {
+        let request = NSFetchRequest<QuotePoemsEntity>(entityName: "QuotePoemsEntity")
+        
+        do {
+            favoritedQuotesPoem = try container.viewContext.fetch(request)
+        } catch {
+            print("Error fetching. \(error.localizedDescription)")
+        }
+    }
+    
+    func addQuote(id: UUID, title: String, author: String, quote: String, lines: [String], linecount: String) {
+        
+        let quotesPoemEntity = QuotePoemsEntity(context: container.viewContext)
+        quotesPoemEntity.id = id
+        quotesPoemEntity.title = title
+        quotesPoemEntity.author = author
+        quotesPoemEntity.lines = lines
+        
+        
         let newEntity = QuoteEntity(context: container.viewContext)
         newEntity.id = id
         newEntity.title = title
@@ -95,6 +117,7 @@ class PersistenceController: ObservableObject {
             try container.viewContext.save()
             fetchFavoritedPoems()
             fetchQuotes()
+            fetchQuotePoems()
             
         } catch {
             print(error.localizedDescription)
