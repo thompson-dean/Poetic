@@ -38,6 +38,7 @@ struct ContentView: View {
         
         return TabView(selection: handler) {
             HomeView(viewModel: viewModel, pcViewModel: pcViewModel)
+                .id(home)
                 .tabItem {
                     Label("Home", systemImage: "house")
                         .onChange(of: tappedTwice) { tappedTwice in
@@ -45,32 +46,57 @@ struct ContentView: View {
                             home = UUID()
                             self.tappedTwice = false
                         }
-                }.tag(1)
+                }
+                .tag(1)
                 
             SearchView(viewModel: viewModel, pcViewModel: pcViewModel)
+                .id(search)
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                         .onChange(of: tappedTwice) { tappedTwice in
                             guard tappedTwice else { return }
-                            home = UUID()
+                            search = UUID()
                             self.tappedTwice = false
                         }
-                }.tag(2)
+                }
+                .tag(2)
                
                 
             FavoritesView(viewModel: viewModel, pcViewModel: pcViewModel)
+                .id(favorites)
                 .tabItem {
                     Label("Favorites", systemImage: "star")
+                        .onChange(of: tappedTwice) { tappedTwice in
+                            guard tappedTwice else { return }
+                            favorites = UUID()
+                            self.tappedTwice = false
+                        }
                 }
+                .tag(3)
             
             QuoteView(viewModel: viewModel, pcViewModel: pcViewModel)
+                .id(quotes)
                 .tabItem {
                     Label("Quotes", systemImage: "quote.bubble.fill")
+                        .onChange(of: tappedTwice) { tappedTwice in
+                            guard tappedTwice else { return }
+                            quotes = UUID()
+                            self.tappedTwice = false
+                        }
                 }
+                .tag(4)
+            
             SettingsView(viewModel: viewModel)
+                .id(menu)
                 .tabItem {
                     Label("Menu", systemImage: "line.3.horizontal")
+                        .onChange(of: tappedTwice) { tappedTwice in
+                            guard tappedTwice else { return }
+                            menu = UUID()
+                            self.tappedTwice = false
+                        }
                 }
+                .tag(5)
         }
         .accentColor(.primary)
         .onAppear {
