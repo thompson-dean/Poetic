@@ -153,7 +153,7 @@ struct PoemView: View {
                 }
         } else {
             Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
-                .font(.system(.callout, design: .serif))
+                .font(.system(.body, design: .serif))
                 .contextMenu {
                     Button {
                         if !pcViewModel.quotes.contains(where: { $0.quote == poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines)}) {

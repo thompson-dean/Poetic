@@ -202,7 +202,7 @@ struct HomeView: View {
                                                         }
                                                         
                                                         Text(viewModel.randomPoems[0].lines[index].trimmingCharacters(in: .whitespacesAndNewlines))
-                                                            .font(.system(.callout, design: .serif))
+                                                            .font(.system(.body, design: .serif))
                                                     }
                                                     .padding(.trailing, 4)
                                                     .padding(.vertical, 1)
