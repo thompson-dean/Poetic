@@ -15,8 +15,6 @@ class PersistenceController: ObservableObject {
     
     @Published var favoritedPoems: [PoemEntity] = []
     @Published var quotes: [QuoteEntity] = []
-    
-    //Implement this so user's can also access and see the poem from which their quotes came from. 
     @Published var favoritedQuotesPoem: [QuotePoemsEntity] = []
 
     
@@ -39,6 +37,7 @@ class PersistenceController: ObservableObject {
     //Fetching Favorite Poems
     
     func fetchFavoritedPoems() {
+        
         let request = NSFetchRequest<PoemEntity>(entityName: "PoemEntity")
         let sortDescriptor = NSSortDescriptor(key: poemsFilter ? "title" : "author", ascending: true)
         request.sortDescriptors = [sortDescriptor]
@@ -52,7 +51,8 @@ class PersistenceController: ObservableObject {
     }
     
     func addFavoritePoem(id: UUID, title: String, author: String, lines: [String], linecount: String) {
-        let newEntity = PoemEntity(context: container.viewContext)
+        let description = NSEntityDescription.entity(forEntityName: "PoemEntity", in: container.viewContext)!
+        let newEntity = PoemEntity(entity: description, insertInto: container.viewContext)
         newEntity.id = id
         newEntity.title = title
         newEntity.author = author
@@ -92,15 +92,16 @@ class PersistenceController: ObservableObject {
     }
     
     func addQuote(id: UUID, title: String, author: String, quote: String, lines: [String], linecount: String) {
-        
-        let quotesPoemEntity = QuotePoemsEntity(context: container.viewContext)
+        let description = NSEntityDescription.entity(forEntityName: "QuotePoemsEntity", in: container.viewContext)!
+        let quotesPoemEntity = QuotePoemsEntity(entity: description, insertInto: container.viewContext)
         quotesPoemEntity.id = id
         quotesPoemEntity.title = title
         quotesPoemEntity.author = author
         quotesPoemEntity.lines = lines
         
         
-        let newEntity = QuoteEntity(context: container.viewContext)
+        let descriptionQuote = NSEntityDescription.entity(forEntityName: "QuoteEntity", in: container.viewContext)!
+        let newEntity = QuoteEntity(entity: descriptionQuote, insertInto: container.viewContext)
         newEntity.id = id
         newEntity.title = title
         newEntity.author = author

@@ -129,10 +129,10 @@
 				2A17BAA527D5D93700E0D755 /* HomeView.swift */,
 				2A17BAA727D5D94600E0D755 /* SearchView.swift */,
 				2A37937C27D8DC1700FA48ED /* AuthorView.swift */,
-				2A17BAB327D6507500E0D755 /* DetailView.swift */,
 				2A17BAA927D5D95400E0D755 /* FavoritesView.swift */,
 				2AF8600427DC5B2C00B3BC40 /* QuoteView.swift */,
 				2ACC8A3C27E86E3B002F5B6D /* SettingsView.swift */,
+				2A17BAB327D6507500E0D755 /* DetailView.swift */,
 				2ACC8A4227E8A441002F5B6D /* DevView.swift */,
 			);
 			path = View;
@@ -432,6 +432,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -464,6 +465,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

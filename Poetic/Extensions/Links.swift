@@ -22,7 +22,11 @@ class Links {
 "\(quote)" A quote from \(title) by \(author), found on Poetic, your favorite classical poetry app. Available here:  https://apps.apple.com/us/app/poetic/id1614416936
 """
         let av = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
-        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
+        
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        window?.rootViewController?.present(av, animated: true, completion: nil)
         
     }
     
@@ -32,7 +36,11 @@ class Links {
 Found on Poetic, your favorite classical poetry app. Available here:  https://apps.apple.com/us/app/poetic/id1614416936
 """
         let av = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
-        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
+        
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        window?.rootViewController?.present(av, animated: true, completion: nil)
         
     }
     
@@ -40,7 +48,11 @@ Found on Poetic, your favorite classical poetry app. Available here:  https://ap
         let sharedString = "https://apps.apple.com/us/app/poetic/id1614416936"
 
         let av = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
-        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
+        
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        window?.rootViewController?.present(av, animated: true, completion: nil)
         
     }
     

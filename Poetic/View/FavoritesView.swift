@@ -76,6 +76,7 @@ struct FavoritesView: View {
                 }
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     func removeRows(at offsets: IndexSet) {

@@ -113,6 +113,7 @@ struct QuoteView: View {
                 }
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         
     }
     func removeRows(at offsets: IndexSet) {

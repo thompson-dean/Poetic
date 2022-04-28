@@ -27,15 +27,17 @@ struct DetailView: View {
                 VStack {
                     
                     Text(title)
-                        .font(.system(.title2, design: .serif))
+                        .font(.system(.title, design: .serif))
                         .fontWeight(.semibold)
                         .padding(.vertical, 9)
                         .padding(.horizontal)
+                        .multilineTextAlignment(.center)
                 
                     Text(author)
-                        .font(.system(.headline, design: .serif))
+                        .font(.system(.title3, design: .serif))
                         .padding(.bottom, 10)
                         .padding(.horizontal)
+                        .multilineTextAlignment(.center)
                     
                     Divider()
                         .frame(width: geo.size.width / 2)
@@ -129,17 +131,11 @@ struct PoemView: View {
         
         if pcViewModel.quotes.contains(where: { $0.quote == poemLines[index] }) {
             Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
-                .font(.system(.subheadline, design: .serif))
+                .font(.system(.callout, design: .serif))
                 .foregroundColor(Color.black)
                 .background(Color.yellow)
         
                 .contextMenu {
-                    Button {
-                    
-                        links.shareQuote(quote: poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines), title: title, author: author)
-                    } label: {
-                        Label("Share this quote", systemImage: "square.and.arrow.up")
-                    }
                     Button {
                         if let entity = pcViewModel.quotes.first(where: { $0.quote == poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines)}) {
                             pcViewModel.removeQuoteFromQuotes(entity: entity)
@@ -149,10 +145,15 @@ struct PoemView: View {
                         Label("Delete quote", systemImage: "delete.left")
                             
                     }
+                    Button {
+                        links.shareQuote(quote: poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines), title: title, author: author)
+                    } label: {
+                        Label("Share this quote", systemImage: "square.and.arrow.up")
+                    }
                 }
         } else {
             Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
-                .font(.system(.subheadline, design: .serif))
+                .font(.system(.callout, design: .serif))
                 .contextMenu {
                     Button {
                         if !pcViewModel.quotes.contains(where: { $0.quote == poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines)}) {
@@ -160,7 +161,7 @@ struct PoemView: View {
                             viewModel.simpleHapticSuccess()
                         }
                     } label: {
-                        Label("Highlight and add to favorites", systemImage: "quote.bubble.fill")
+                        Label("Highlight and Add", systemImage: "quote.bubble.fill")
                     }
                     Button {
                         links.shareQuote(quote: poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines), title: title, author: author)

@@ -15,9 +15,16 @@ class SystemThemeManager {
     
     func handleTheme(darkMode: Bool, system: Bool) {
         guard !system else {
-            UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .unspecified
+            let scenes = UIApplication.shared.connectedScenes
+            let windowScene = scenes.first as? UIWindowScene
+            let window = windowScene?.windows.first
+            window?.overrideUserInterfaceStyle = .unspecified
             return
         }
-        UIApplication.shared.windows.first?.overrideUserInterfaceStyle = darkMode ? .dark : .light
+        
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        window?.overrideUserInterfaceStyle = darkMode ? .dark : .light
     }
 }

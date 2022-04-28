@@ -41,10 +41,10 @@ struct HomeView: View {
                         .fontWeight(.semibold)
                     
                     Text("Here is a random poem")
-                        .font(.system(.body, design: .serif))
+                        .font(.system(.title3, design: .serif))
                     
                     Text("for your perusal.")
-                        .font(.system(.body, design: .serif))
+                        .font(.system(.title3, design: .serif))
                     
                     GeometryReader { geo in
                         
@@ -104,7 +104,7 @@ struct HomeView: View {
                                         .foregroundColor(.gray)
                                         .rotationEffect(.init(degrees: refresh.started ? 180 : 0))
                                         .offset(y: refresh.released ? 40 : -30)
-                                        .animation(.easeIn)
+                                        .animation(Animation.easeIn, value: refresh.offset)
                                     VStack(alignment: .center) {
                                         Image(systemName: "exclamationmark.triangle")
                                             .resizable()
@@ -164,19 +164,19 @@ struct HomeView: View {
                                             .foregroundColor(.gray)
                                             .rotationEffect(.init(degrees: refresh.started ? 180 : 0))
                                             .offset(y: refresh.released ? 40 : -30)
-                                            .animation(.easeIn)
+                                            .animation(Animation.easeIn, value: refresh.offset)
                                         
                                         VStack {
                                             
                                             Text(viewModel.randomPoems[0].title.trimmingCharacters(in: .whitespacesAndNewlines))
-                                                .font(.system(.title3, design: .serif))
+                                                .font(.system(.title2, design: .serif))
                                                 .fontWeight(.semibold)
                                                 .padding(.top, 24)
                                                 .padding(.horizontal)
                                                 .multilineTextAlignment(.center)
                                             
                                             Text(viewModel.randomPoems[0].author.trimmingCharacters(in: .whitespacesAndNewlines))
-                                                .font(.system(.body, design: .serif))
+                                                .font(.system(.title3, design: .serif))
                                                 .padding(.top, 1)
                                                 .padding(.horizontal)
                                             
@@ -202,7 +202,7 @@ struct HomeView: View {
                                                         }
                                                         
                                                         Text(viewModel.randomPoems[0].lines[index].trimmingCharacters(in: .whitespacesAndNewlines))
-                                                            .font(.system(.subheadline, design: .serif))
+                                                            .font(.system(.callout, design: .serif))
                                                     }
                                                     .padding(.trailing, 4)
                                                     .padding(.vertical, 1)
@@ -232,6 +232,7 @@ struct HomeView: View {
             .frame(maxWidth: .infinity)
             
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         
         .onAppear {
             UIApplication.shared.applicationIconBadgeNumber = 0

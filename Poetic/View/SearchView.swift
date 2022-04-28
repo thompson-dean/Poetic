@@ -99,6 +99,7 @@ struct SearchView: View {
                 .foregroundColor(.primary)
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }   
 }
 
