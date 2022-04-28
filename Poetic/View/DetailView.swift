@@ -161,7 +161,7 @@ struct PoemView: View {
                             viewModel.simpleHapticSuccess()
                         }
                     } label: {
-                        Label("Highlight and Add", systemImage: "quote.bubble.fill")
+                        Label("Highlight and Save", systemImage: "quote.bubble.fill")
                     }
                     Button {
                         links.shareQuote(quote: poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines), title: title, author: author)

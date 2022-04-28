@@ -119,9 +119,7 @@ struct QuoteView: View {
     func removeRows(at offsets: IndexSet) {
         viewModel.quotes.remove(atOffsets: offsets)
     }
-    
-    
-    
+     
 }
 
 struct QuoteView_Previews: PreviewProvider {

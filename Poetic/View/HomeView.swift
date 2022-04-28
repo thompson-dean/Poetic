@@ -204,7 +204,7 @@ struct HomeView: View {
                                                         Text(viewModel.randomPoems[0].lines[index].trimmingCharacters(in: .whitespacesAndNewlines))
                                                             .font(.system(.body, design: .serif))
                                                     }
-                                                    .padding(.trailing, 4)
+                                                    .padding(.trailing, 15)
                                                     .padding(.vertical, 1)
                                                 }
                                             }

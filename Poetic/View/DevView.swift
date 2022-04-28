@@ -78,12 +78,7 @@ struct DevView: View {
                                     .foregroundColor(.primary)
                                 Spacer()
                             }
-                            
                         }
-                    
-                    
-                    
-                    
                 }
                 NavigationLink {
                     if let url = URL(string: links.PoeticURLString) {

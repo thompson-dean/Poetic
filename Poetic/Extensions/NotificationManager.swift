@@ -38,11 +38,8 @@ class NotificationManager: ObservableObject {
         content.sound = .default
         content.badge = 1
         
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        
         var dateComponents = DateComponents()
         dateComponents.hour = 9
-//        dateComponents.minute = 6
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         
