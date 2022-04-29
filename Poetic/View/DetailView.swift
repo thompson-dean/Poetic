@@ -137,18 +137,17 @@ struct PoemView: View {
         
                 .contextMenu {
                     Button {
-                        if let entity = pcViewModel.quotes.first(where: { $0.quote == poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines)}) {
-                            pcViewModel.removeQuoteFromQuotes(entity: entity)
-                            pcViewModel.fetchQuotes()
-                        }
-                    } label: {
-                        Label("Delete quote", systemImage: "delete.left")
-                            
-                    }
-                    Button {
                         links.shareQuote(quote: poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines), title: title, author: author)
                     } label: {
                         Label("Share this quote", systemImage: "square.and.arrow.up")
+                    }
+                    
+                    Button {
+                        // return
+                        
+                    } label: {
+                        Label("Cancel", systemImage: "delete.left")
+                            
                     }
                 }
         } else {
