@@ -67,6 +67,7 @@ struct DetailView: View {
                         }
                     }
                     .padding(5)
+                    .padding(.horizontal, 15)
                 }
                 .frame(width: geo.size.width)
             }

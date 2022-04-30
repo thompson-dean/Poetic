@@ -210,7 +210,6 @@ struct HomeView: View {
                                             }
                                             .padding(5)
                                         }
-                                        
                                         .foregroundColor(.primary)
                                         .frame(width: geo.size.width)
                                     }
@@ -221,7 +220,6 @@ struct HomeView: View {
                         }
                         .background(colorScheme == .light ? Color.white : Color("homeScreenDark"))
                         .cornerRadius(10)
-                        
                     }
                 }
                 .padding()
@@ -235,6 +233,7 @@ struct HomeView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         
         .onAppear {
+            UITableView.appearance().backgroundColor = .clear
             UIApplication.shared.applicationIconBadgeNumber = 0
             notificationManager.requestAuthorization()
             if count == 0 {

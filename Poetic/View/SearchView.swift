@@ -114,10 +114,10 @@ extension SearchView {
     var idleView: some View {
         VStack(alignment: .center) {
             
-            Image(systemName: "eyeglasses")
+            Image(systemName: "doc.text.magnifyingglass")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 250, height: 200)
+                .frame(width: 200, height: 150)
             
             Text("Start searching for poems!")
                 .font(.system(.title, design: .serif))

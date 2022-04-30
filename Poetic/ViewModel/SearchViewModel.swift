@@ -45,6 +45,8 @@ class SearchViewModel: ObservableObject {
     @Published var favoritePoems = [Poem]()
     
     
+    
+    
     @Published var searchTerm: String = ""
     
     var authorTitleCache: [String: [Poem]] = [:]
@@ -93,7 +95,6 @@ class SearchViewModel: ObservableObject {
     //AuthorView Handling - loads authors poems in AuthorView
     
     func loadAuthorPoem(searchTerm: String) {
-        
         //use cache to stop the API calling again.
         if let cache = authorTitleCache[searchTerm] {
             self.state = .loaded
