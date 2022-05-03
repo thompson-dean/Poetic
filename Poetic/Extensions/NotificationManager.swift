@@ -12,7 +12,7 @@ class NotificationManager: ObservableObject {
     
     private let authors = ["Edgar Allan Poe", "Emily Bronte", "Emily Dickinson", "Jane Austen", "Lewis Carroll", "William Blake", "William Shakespeare", "John Keats", "Oscar Wilde"]
     
-    @AppStorage("notificationOn") var notificationOn = false
+    @AppStorage("notificationOn") var notificationOn = true
     
     let center = UNUserNotificationCenter.current()
     
@@ -24,6 +24,8 @@ class NotificationManager: ObservableObject {
                 print("ERROR: \(error.localizedDescription)")
             } else {
                 print("SUCCESS")
+                self.deleteNotification()
+                self.addNotification()
             }
         }
     }
@@ -40,6 +42,8 @@ class NotificationManager: ObservableObject {
         
         var dateComponents = DateComponents()
         dateComponents.hour = 9
+        
+        
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         

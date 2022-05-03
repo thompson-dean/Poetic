@@ -22,7 +22,7 @@ struct ContentView: View {
     
     @StateObject var viewModel = SearchViewModel()
     @StateObject var pcViewModel = PersistenceController()
-    
+    let notificationManager = NotificationManager()
     
     var body: some View {
         var handler: Binding<Int> { Binding(
@@ -113,6 +113,7 @@ struct ContentView: View {
         }
         .accentColor(.primary)
         .onAppear {
+            notificationManager.requestAuthorization()
             SystemThemeManager.shared.handleTheme(darkMode: viewModel.darkModeEnabled, system: viewModel.systemThemeEnabled)
             UIApplication.shared.applicationIconBadgeNumber = 0
         }
