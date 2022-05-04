@@ -43,7 +43,8 @@ struct ContentView: View {
             HomeView(viewModel: viewModel, pcViewModel: pcViewModel)
                 .id(home)
                 .tabItem {
-                    Label("Home", systemImage: "house")
+                    //Add a different SFSymbol
+                    Label("Explore", systemImage: "house")
                         .onChange(of: tappedTwice) { tappedTwice in
                             guard tappedTwice else { return }
                             home = UUID()
