@@ -85,7 +85,6 @@ class SearchViewModel: ObservableObject {
                         }
                     }
                 }
-                
             }
         }
         
@@ -130,7 +129,7 @@ class SearchViewModel: ObservableObject {
         randomPoems = []
         state = .loading
         
-        dataManager.loadData(filter: DataManager.SearchFilter.author, searchTerm: searchTerm) { result in
+        dataManager.loadData(filter: DataManager.SearchFilter.random, searchTerm: searchTerm) { result in
             DispatchQueue.main.async {
                 switch result {
                     

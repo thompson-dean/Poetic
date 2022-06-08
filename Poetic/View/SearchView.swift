@@ -93,7 +93,7 @@ struct SearchView: View {
                         viewModel.loadPoem(searchTerm: viewModel.searchTerm, filter: .title)
                     }
                 }
-                
+
                 .navigationTitle("Search")
                 .navigationBarTitleDisplayMode(.inline)
                 .foregroundColor(.primary)

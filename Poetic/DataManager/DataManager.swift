@@ -14,6 +14,7 @@ class DataManager {
     enum SearchFilter: String {
         case author = "author"
         case title = "title"
+        case random = "random"
     }
     
     

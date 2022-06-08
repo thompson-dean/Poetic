@@ -33,7 +33,6 @@ class NotificationManager: ObservableObject {
     
     func addNotification() {
         
-        
         let content = UNMutableNotificationContent()
         content.title = "\(authors.randomElement() ?? "Poetic") awaits you"
         content.subtitle = "Come read some poems."
@@ -42,9 +41,7 @@ class NotificationManager: ObservableObject {
         
         var dateComponents = DateComponents()
         dateComponents.hour = 9
-        
-        
-
+ 
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         
         let request = UNNotificationRequest(
