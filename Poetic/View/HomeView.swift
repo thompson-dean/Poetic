@@ -31,22 +31,24 @@ struct HomeView: View {
                 GeometryReader { geo in
                     
                         
-                        VStack(alignment: .center, spacing: 10) {
+                        VStack(alignment: .leading, spacing: 10) {
                             
                             Text("Poetic.")
                                 .font(.system(.largeTitle, design: .serif))
                                 .bold()
-                                .padding(.top, 10)
+                                .padding(.top, 20)
+                                .padding(.horizontal, 20)
                                 
       
                             Text("Discover Classic Poetry!")
                                 .font(.system(.title, design: .serif))
-                                .padding(.top, 10)
+                                .fontWeight(.semibold)
+                                .padding(.horizontal, 20)
                                
                             
                             Text("Recommended")
                                 .font(.system(.title2, design: .serif))
-                                .padding(.top, 10)
+                                .padding(.horizontal, 20)
                                 
                             
                             switch viewModel.state {
@@ -80,10 +82,12 @@ struct HomeView: View {
                             case .loaded:
                                 RecommendedPoems(viewModel: viewModel, pcViewModel: pcViewModel)
                                     .padding(.leading, 10)
+                                    .padding(.top, 10)
                             }
                             Text("Recently Viewed Poems")
                                 .font(.system(.title2, design: .serif))
-                                .padding(.top, 15)
+                                .padding(.top, 10)
+                                .padding(.horizontal, 20)
                             
                             if viewModel.viewedPoems.count == 0 {
                                     
@@ -98,7 +102,8 @@ struct HomeView: View {
                                     .frame(width: UIScreen.main.bounds.width - 40, height: 100)
                                     .background(colorScheme == .light ? Color.white : Color("homeScreenDark"))
                                     .cornerRadius(15)
-                                    .padding(.horizontal, 10)
+                                    .padding(.horizontal, 20)
+                                    .padding(.top, 5)
                                 
                             } else {
                                 List(viewModel.viewedPoems, id: \.self) { poem in
@@ -114,12 +119,14 @@ struct HomeView: View {
                                         }
                                     }
                                 }
+                                .padding(.top, -20)
                             }
                             
                             
 
                                                         
                         }
+                        .padding(.horizontal, 10)
                         
                         
                     
@@ -155,7 +162,7 @@ struct RecommendedPoems: View {
     @Environment(\.colorScheme) var colorScheme
     @StateObject var viewModel: SearchViewModel
     @StateObject var pcViewModel: PersistenceController
-    
+
     var body: some View {
         
         ScrollView(.horizontal, showsIndicators: false) {
@@ -165,45 +172,40 @@ struct RecommendedPoems: View {
                     NavigationLink {
                         DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: randomPoem.title, author: randomPoem.author, lines: randomPoem.lines, linecount: randomPoem.linecount)
                     } label: {
-                        VStack(alignment: .center) {
+                        VStack(alignment: .leading) {
                             Text(randomPoem.title)
                                 .font(.system(.body, design: .serif))
                                 .fontWeight(.semibold)
                                 .padding(.vertical, 9)
                                 .padding(.horizontal)
-                                .multilineTextAlignment(.center)
+                                .multilineTextAlignment(.leading)
                             
                             Text(randomPoem.author)
                                 .font(.system(.headline, design: .serif))
                                 .italic()
                                 .padding(.bottom, 10)
                                 .padding(.horizontal)
-                                .multilineTextAlignment(.center)
+                                .multilineTextAlignment(.leading)
                             
                             Divider()
                             
                             VStack(alignment: .leading) {
-                                ForEach(0..<4, id: \.self) { index in
-                                    HStack {
-                                        Text(randomPoem.lines[index].trimmingCharacters(in: .whitespacesAndNewlines))
-                                            .font(.system(.caption, design: .serif))
-                                            .multilineTextAlignment(.leading)
-                                            .padding(.bottom, 5)
-                                        Spacer()
-                                    }
-                                    
-                                }
+                                Text(randomPoem.lines.joined(separator: "\n").trimmingCharacters(in: .whitespaces))
+                                    .font(.system(.caption, design: .serif))
+                                    .lineLimit(8)
+                                    .multilineTextAlignment(.leading)
+                                    .padding(.bottom, 5)
                                 
                                 Text("Read More...")
                                     .foregroundColor(.blue)
                                     .font(.system(.caption, design: .serif))
                                     .padding(.bottom, 10)
-                                 
+                                
                             }
                             .padding(.horizontal, 15)
                         }
                         .frame(width: UIScreen.main.bounds.width * 0.66)
-                        .frame(minHeight: 270)
+                        .frame(minHeight: 250)
                         .background(colorScheme == .light ? Color.white : Color("homeScreenDark"))
                         .cornerRadius(15)
                         .padding(.horizontal, 10)
