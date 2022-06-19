@@ -9,7 +9,7 @@ import SwiftUI
 
 class DataManager {
     
-    private var dataTask: URLSessionDataTask?
+    var dataTask: URLSessionDataTask?
     
     enum SearchFilter: String {
         case author = "author"

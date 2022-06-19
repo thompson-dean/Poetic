@@ -23,7 +23,7 @@ struct FavoritesView: View {
                             NavigationLink {
                                 DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title ?? "", author: poem.author ?? "", lines: poem.lines ?? [""], linecount: poem.linecount ?? "")
                             } label: {
-                                VStack(alignment: .leading, spacing: 4) {
+                                VStack(alignment: .leading, spacing: 7) {
                                     Text(poem.title ?? "")
                                         .font(.system(.headline, design: .serif))
                                         .multilineTextAlignment(.leading)
@@ -32,17 +32,13 @@ struct FavoritesView: View {
                                     
                                     
                                 }
+                                .padding(.bottom, 3)
                                 
                             }
                             
                         }
                         .onDelete(perform: pcViewModel.deleteFavoritedPoem)
                     }
-                    
-                    
-                    
-                    
-                    
                 }
                 .background(
                     Image(colorScheme == .light ? "background" : "background-dark")
@@ -71,7 +67,7 @@ struct FavoritesView: View {
                         pcViewModel.poemsFilter.toggle()
                         pcViewModel.fetchFavoritedPoems()
                     } label: {
-                        Image(systemName: "shuffle")
+                        Image(systemName: "arrow.up.arrow.down")
                     }
                 }
             }

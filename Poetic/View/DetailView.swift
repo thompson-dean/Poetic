@@ -78,6 +78,7 @@ struct DetailView: View {
             )
             .onAppear {
                 pcViewModel.fetchQuotes()
+                viewModel.addPoemtoViewed(poem: Poem(title: title, author: author, lines: lines, linecount: linecount))
             }
             
         }
