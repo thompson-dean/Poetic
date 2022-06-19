@@ -22,11 +22,12 @@ struct HomeView: View {
     var body: some View {
         
         NavigationView {
+            
+            
             ZStack {
                 Image(colorScheme == .light ? "background" : "background-dark")
                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                     .ignoresSafeArea(.all)
-                
                 GeometryReader { geo in
                     
                         
@@ -40,12 +41,12 @@ struct HomeView: View {
       
                             Text("Discover Classic Poetry!")
                                 .font(.system(.title, design: .serif))
-                                .fontWeight(.semibold)
+                                .padding(.top, 10)
                                
                             
                             Text("Recommended")
                                 .font(.system(.title2, design: .serif))
-                                .bold()
+                                .padding(.top, 10)
                                 
                             
                             switch viewModel.state {
@@ -77,81 +78,40 @@ struct HomeView: View {
                                 .padding()
                                 
                             case .loaded:
-                                
-                                
-                                NavigationLink(destination: EmptyView(), label: {})
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(alignment: .top) {
-                                        ForEach(viewModel.randomPoems, id: \.id) { randomPoem in
-                                            
-                                            NavigationLink {
-                                                DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: randomPoem.title, author: randomPoem.author, lines: randomPoem.lines, linecount: randomPoem.linecount)
-                                            } label: {
-                                                VStack(alignment: .center) {
-                                                    Text(randomPoem.title)
-                                                        .font(.system(.body, design: .serif))
-                                                        .fontWeight(.semibold)
-                                                        .padding(.vertical, 9)
-                                                        .padding(.horizontal)
-                                                        .multilineTextAlignment(.center)
-                                                    
-                                                    Text(randomPoem.author)
-                                                        .font(.system(.headline, design: .serif))
-                                                        .italic()
-                                                        .padding(.bottom, 10)
-                                                        .padding(.horizontal)
-                                                        .multilineTextAlignment(.center)
-                                                    
-                                                    Divider()
-                                                        .frame(width: geo.size.width / 2)
-                                                    VStack(alignment: .leading) {
-                                                        ForEach(0..<2, id: \.self) { index in
-                                                            HStack {
-                                                                Text(randomPoem.lines[index].trimmingCharacters(in: .whitespacesAndNewlines))
-                                                                    .font(.system(.caption, design: .serif))
-                                                                    .multilineTextAlignment(.leading)
-                                                                    .padding(.bottom, 5)
-                                                                Spacer()
-                                                            }
-                                                            
-                                                        }
-                                                        
-                                                        Text("Read More...")
-                                                            .foregroundColor(.blue)
-                                                            .font(.system(.caption, design: .serif))
-                                                            .padding(.bottom, 10)
-                                                         
-                                                    }
-                                                    .padding(.horizontal, 15)
-                                                }
-                                                .frame(width: geo.size.width * 0.66)
-                                                .background(colorScheme == .light ? Color.white : Color("homeScreenDark"))
-                                                .cornerRadius(15)
-                                                .padding(.horizontal, 10)
-                                                
-                                                
-                                            }
-                                            .buttonStyle(FlatLinkStyle())
-                                        }
-                                    }
-                                }
+                                RecommendedPoems(viewModel: viewModel, pcViewModel: pcViewModel)
+                                    .padding(.leading, 10)
                             }
                             Text("Recently Viewed Poems")
                                 .font(.system(.title2, design: .serif))
-                                .bold()
+                                .padding(.top, 15)
                             
                             if viewModel.viewedPoems.count == 0 {
-                                List {
-                                    Text("Start reading some poems!")
-                                }
+                                    
+                                    VStack {
+                                        Text("No results. Start Exploring!")
+                                            .font(.system(.body, design: .serif))
+                                        Image(systemName: "magnifyingglass")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 40, height: 40)
+                                    }
+                                    .frame(width: UIScreen.main.bounds.width - 40, height: 100)
+                                    .background(colorScheme == .light ? Color.white : Color("homeScreenDark"))
+                                    .cornerRadius(15)
+                                    .padding(.horizontal, 10)
+                                
                             } else {
                                 List(viewModel.viewedPoems, id: \.self) { poem in
-                                    VStack(alignment: .leading, spacing: 7) {
-                                        Text(poem.title)
-                                            .font(.system(.headline, design: .serif))
-                                            .multilineTextAlignment(.leading)
-                                        Text(poem.author)
-                                            .font(.system(.subheadline, design: .serif))
+                                    NavigationLink {
+                                        DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
+                                    } label: {
+                                        VStack(alignment: .leading, spacing: 7) {
+                                            Text(poem.title)
+                                                .font(.system(.headline, design: .serif))
+                                                .multilineTextAlignment(.leading)
+                                            Text(poem.author)
+                                                .font(.system(.subheadline, design: .serif))
+                                        }
                                     }
                                 }
                             }
@@ -160,27 +120,20 @@ struct HomeView: View {
 
                                                         
                         }
-                        .padding(.leading, 10)
+                        
                         
                     
-                }
+                
             }
             .navigationBarHidden(true)
             .onAppear {
                 UITableView.appearance().backgroundColor = .clear
                 
                 UIApplication.shared.applicationIconBadgeNumber = 0
-                if count == 0 {
-                    
-                    count += 1
-                } else {
-                    
-                }
-                
-                
             }
             
         }
+    }
         
     }
 }
@@ -198,7 +151,71 @@ struct FlatLinkStyle: ButtonStyle {
     }
 }
 
-
+struct RecommendedPoems: View {
+    @Environment(\.colorScheme) var colorScheme
+    @StateObject var viewModel: SearchViewModel
+    @StateObject var pcViewModel: PersistenceController
+    
+    var body: some View {
+        
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(alignment: .top) {
+                ForEach(viewModel.randomPoems, id: \.id) { randomPoem in
+                    
+                    NavigationLink {
+                        DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: randomPoem.title, author: randomPoem.author, lines: randomPoem.lines, linecount: randomPoem.linecount)
+                    } label: {
+                        VStack(alignment: .center) {
+                            Text(randomPoem.title)
+                                .font(.system(.body, design: .serif))
+                                .fontWeight(.semibold)
+                                .padding(.vertical, 9)
+                                .padding(.horizontal)
+                                .multilineTextAlignment(.center)
+                            
+                            Text(randomPoem.author)
+                                .font(.system(.headline, design: .serif))
+                                .italic()
+                                .padding(.bottom, 10)
+                                .padding(.horizontal)
+                                .multilineTextAlignment(.center)
+                            
+                            Divider()
+                            
+                            VStack(alignment: .leading) {
+                                ForEach(0..<4, id: \.self) { index in
+                                    HStack {
+                                        Text(randomPoem.lines[index].trimmingCharacters(in: .whitespacesAndNewlines))
+                                            .font(.system(.caption, design: .serif))
+                                            .multilineTextAlignment(.leading)
+                                            .padding(.bottom, 5)
+                                        Spacer()
+                                    }
+                                    
+                                }
+                                
+                                Text("Read More...")
+                                    .foregroundColor(.blue)
+                                    .font(.system(.caption, design: .serif))
+                                    .padding(.bottom, 10)
+                                 
+                            }
+                            .padding(.horizontal, 15)
+                        }
+                        .frame(width: UIScreen.main.bounds.width * 0.66)
+                        .frame(minHeight: 270)
+                        .background(colorScheme == .light ? Color.white : Color("homeScreenDark"))
+                        .cornerRadius(15)
+                        .padding(.horizontal, 10)
+                        
+                        
+                    }
+                    .buttonStyle(FlatLinkStyle())
+                }
+            }
+        }
+    }
+}
 
 
 
