@@ -101,36 +101,46 @@ struct HomeView: View {
                                     }
                                     .frame(width: UIScreen.main.bounds.width - 40, height: 100)
                                     .background(colorScheme == .light ? Color.white : Color("homeScreenDark"))
-                                    .cornerRadius(15)
+                                    .cornerRadius(5)
                                     .padding(.horizontal, 20)
                                     .padding(.top, 5)
                                 
                             } else {
-                                List(viewModel.viewedPoems, id: \.self) { poem in
+                                ForEach(viewModel.viewedPoems, id: \.self) { poem in
                                     NavigationLink {
                                         DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
                                     } label: {
                                         VStack(alignment: .leading, spacing: 7) {
-                                            Text(poem.title)
+                                            HStack {
+                                                Text(poem.title)
                                                 .font(.system(.headline, design: .serif))
                                                 .multilineTextAlignment(.leading)
-                                            Text(poem.author)
-                                                .font(.system(.subheadline, design: .serif))
+                                                
+                                                Spacer()
+                                            }
+                                            .padding(.horizontal, 15)
+                                            .padding(.top, 10)
+                                            HStack {
+                                                Text(poem.author)
+                                                    .font(.system(.subheadline, design: .serif))
+                                                
+                                                Spacer()
+                                            }
+                                            .padding(.horizontal, 15)
+                                            .padding(.bottom, 10)
+                                                
+                                            Divider()
                                         }
+                                        .frame(width: geo.size.width - 60)
+                                        .background(colorScheme == .light ? Color.white : Color("homeScreenDark"))
+                                        .cornerRadius(5)
+                                        .padding(.horizontal, 20)
+                                        .padding(.bottom, -5)
                                     }
                                 }
-                                .padding(.top, -20)
                             }
-                            
-                            
-
-                                                        
                         }
                         .padding(.horizontal, 10)
-                        
-                        
-                    
-                
             }
             .navigationBarHidden(true)
             .onAppear {
@@ -176,12 +186,13 @@ struct RecommendedPoems: View {
                             Text(randomPoem.title)
                                 .font(.system(.body, design: .serif))
                                 .fontWeight(.semibold)
-                                .padding(.vertical, 9)
+                                .padding(.top, 9)
+                                .padding(.top, 4)
                                 .padding(.horizontal)
                                 .multilineTextAlignment(.leading)
                             
                             Text(randomPoem.author)
-                                .font(.system(.headline, design: .serif))
+                                .font(.system(.subheadline, design: .serif))
                                 .italic()
                                 .padding(.bottom, 10)
                                 .padding(.horizontal)
@@ -207,10 +218,8 @@ struct RecommendedPoems: View {
                         .frame(width: UIScreen.main.bounds.width * 0.66)
                         .frame(minHeight: 250)
                         .background(colorScheme == .light ? Color.white : Color("homeScreenDark"))
-                        .cornerRadius(15)
+                        .cornerRadius(5)
                         .padding(.horizontal, 10)
-                        
-                        
                     }
                     .buttonStyle(FlatLinkStyle())
                 }
@@ -218,6 +227,5 @@ struct RecommendedPoems: View {
         }
     }
 }
-
 
 
