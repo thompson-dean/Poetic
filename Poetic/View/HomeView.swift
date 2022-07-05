@@ -23,13 +23,14 @@ struct HomeView: View {
         
         NavigationView {
             
-            
-            ZStack {
-                Image(colorScheme == .light ? "background" : "background-dark")
-                    .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
-                    .ignoresSafeArea(.all)
-                GeometryReader { geo in
+                ZStack {
+                    Image(colorScheme == .light ? "background" : "background-dark")
+                        .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+                        .ignoresSafeArea(.all)
                     
+                    ScrollView(.vertical, showsIndicators: false) {
+                    GeometryReader { geo in
+                        
                         
                         VStack(alignment: .leading, spacing: 10) {
                             
@@ -38,18 +39,18 @@ struct HomeView: View {
                                 .bold()
                                 .padding(.top, 20)
                                 .padding(.horizontal, 20)
-                                
-      
+                            
+                            
                             Text("Discover Classic Poetry!")
                                 .font(.system(.title, design: .serif))
                                 .fontWeight(.semibold)
                                 .padding(.horizontal, 20)
-                               
+                            
                             
                             Text("Recommended")
                                 .font(.system(.title2, design: .serif))
                                 .padding(.horizontal, 20)
-                                
+                            
                             
                             switch viewModel.state {
                             case .idle:
@@ -81,7 +82,7 @@ struct HomeView: View {
                                 
                             case .loaded:
                                 RecommendedPoems(viewModel: viewModel, pcViewModel: pcViewModel)
-                                    .padding(.leading, 10)
+                                //                                    .padding(.leading, 10)
                                     .padding(.top, 10)
                             }
                             Text("Recently Viewed Poems")
@@ -90,20 +91,20 @@ struct HomeView: View {
                                 .padding(.horizontal, 20)
                             
                             if viewModel.viewedPoems.count == 0 {
-                                    
-                                    VStack {
-                                        Text("No results. Start Exploring!")
-                                            .font(.system(.body, design: .serif))
-                                        Image(systemName: "magnifyingglass")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 40, height: 40)
-                                    }
-                                    .frame(width: UIScreen.main.bounds.width - 40, height: 100)
-                                    .background(colorScheme == .light ? Color.white : Color("homeScreenDark"))
-                                    .cornerRadius(5)
-                                    .padding(.horizontal, 20)
-                                    .padding(.top, 5)
+                                
+                                VStack {
+                                    Text("No results. Start Exploring!")
+                                        .font(.system(.body, design: .serif))
+                                    Image(systemName: "magnifyingglass")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 40, height: 40)
+                                }
+                                .frame(width: UIScreen.main.bounds.width - 40, height: 100)
+                                .background(colorScheme == .light ? Color.white : Color("homeScreenDark"))
+                                .cornerRadius(5)
+                                .padding(.horizontal, 20)
+                                .padding(.top, 5)
                                 
                             } else {
                                 ForEach(viewModel.viewedPoems, id: \.self) { poem in
@@ -113,8 +114,8 @@ struct HomeView: View {
                                         VStack(alignment: .leading, spacing: 7) {
                                             HStack {
                                                 Text(poem.title)
-                                                .font(.system(.headline, design: .serif))
-                                                .multilineTextAlignment(.leading)
+                                                    .font(.system(.headline, design: .serif))
+                                                    .multilineTextAlignment(.leading)
                                                 
                                                 Spacer()
                                             }
@@ -128,10 +129,10 @@ struct HomeView: View {
                                             }
                                             .padding(.horizontal, 15)
                                             .padding(.bottom, 10)
-                                                
+                                            
                                             Divider()
                                         }
-                                        .frame(width: geo.size.width - 60)
+                                        .frame(width: geo.size.width - 40)
                                         .background(colorScheme == .light ? Color.white : Color("homeScreenDark"))
                                         .cornerRadius(5)
                                         .padding(.horizontal, 20)
@@ -140,17 +141,18 @@ struct HomeView: View {
                                 }
                             }
                         }
-                        .padding(.horizontal, 10)
+                        
+                    }
+                    .navigationBarHidden(true)
+                    .onAppear {
+                        UITableView.appearance().backgroundColor = .clear
+                        
+                        UIApplication.shared.applicationIconBadgeNumber = 0
+                    }
+                    
+                }
             }
-            .navigationBarHidden(true)
-            .onAppear {
-                UITableView.appearance().backgroundColor = .clear
-                
-                UIApplication.shared.applicationIconBadgeNumber = 0
-            }
-            
         }
-    }
         
     }
 }
