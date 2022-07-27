@@ -40,7 +40,8 @@ struct ContentView: View {
         
         
         return TabView(selection: handler) {
-            HomeView(viewModel: viewModel, pcViewModel: pcViewModel)
+            PracticeView(viewModel: viewModel)
+//            HomeView(viewModel: viewModel, pcViewModel: pcViewModel)
                 .id(home)
                 .tabItem {
                     //Add a different SFSymbol
@@ -115,7 +116,7 @@ struct ContentView: View {
 }
 
 
-struct ContentView_Previews: PreviewProvider {
+struct PracticeView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
