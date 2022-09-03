@@ -10,6 +10,8 @@ import SwiftUI
 
 struct PracticeView: View {
     
+    @State var count = 0
+    
     @ObservedObject var viewModel: SearchViewModel
     
     @Environment(\.colorScheme) var colorScheme
@@ -24,7 +26,7 @@ struct PracticeView: View {
                         .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                         .ignoresSafeArea()
                     
-                    
+                    ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading) {
                         Text("Poetic")
                             .font(.system(size: 48, weight: .bold, design: .serif))
@@ -47,36 +49,45 @@ struct PracticeView: View {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
                                 ForEach(viewModel.randomPoems, id: \.self) { poem in
-                                    VStack(alignment: .leading, spacing: 12) {
-                                        
-                                        Text(poem.author)
-                                            .font(.system(size: 16, weight: .bold, design: .default))
-                                            .lineSpacing(24)
-                                            .padding(.top, 8)
-                                            .foregroundColor(.primary)
-                                        
-                                        VStack(alignment: .leading, spacing: 4) {
-                                            ForEach(0..<6, id: \.self) { index in
-                                                HStack {
-                                                    Text(poem.lines[index])
-                                                        .lineLimit(1)
-                                                        .foregroundColor(.primary)
-                                                        .font(.system(size: 16, weight: .medium, design: .default))
-                                                    Spacer()
+                                    
+                                    NavigationLink {
+                                        PracticePoemView(poem: poem)
+                                    } label: {
+                                        VStack(alignment: .leading, spacing: 12) {
+                                            
+                                            Text(poem.author)
+                                                .font(.system(size: 16, weight: .bold, design: .default))
+                                                .lineSpacing(24)
+                                                .padding(.top, 8)
+                                                .foregroundColor(.primary)
+                                            
+                                            
+                                            
+                                            VStack(alignment: .leading, spacing: 4) {
+                                                ForEach(0..<6, id: \.self) { index in
+                                                    HStack {
+                                                        Text(poem.lines[index].trimmingCharacters(in: .whitespaces))
+                                                            .lineLimit(0)
+                                                            .foregroundColor(.primary)
+                                                            .font(.system(size: 16, weight: .medium, design: .default))
+                                                        Spacer()
+                                                    }
+                                                    
                                                 }
-                                                
                                             }
+                                            
+                                            Text(poem.title)
+                                                .foregroundColor(colorScheme == .light ? Color(0x8030BF) : Color(0xDAAFFC))
+                                                .lineSpacing(24)
+                                                .padding(.bottom, 8)
                                         }
-                                        
-                                        Text(poem.title)
-                                            .foregroundColor(colorScheme == .light ? Color(0x8030BF) : Color(0xDAAFFC))
-                                            .lineSpacing(24)
-                                            .padding(.bottom, 8)
+                                        .padding(.horizontal, 8)
+                                        .frame(width: 240, height: 224)
+                                        .background(colorScheme == .light ? .white : .black)
+                                        .cornerRadius(8)
                                     }
-                                    .padding(.horizontal, 8)
-                                    .frame(width: 240, height: 224)
-                                    .background(colorScheme == .light ? .white : .black)
-                                    .cornerRadius(8)
+                                    .buttonStyle(FlatLinkStyle())
+                                    
                                 }
                             }
                         }
@@ -86,7 +97,6 @@ struct PracticeView: View {
                             .font(.system(size: 24, weight: .bold, design: .default))
                             .padding(.horizontal, 8)
                             .padding(.top, 16)
-                        ScrollView(.vertical, showsIndicators: false) {
                         ForEach(0...10, id: \.self) { index in
                             
                             NavigationLink {
@@ -119,18 +129,24 @@ struct PracticeView: View {
                                 .background(colorScheme == .light ? .white : .black)
                                 .cornerRadius(8)
                             }
+                            .buttonStyle(FlatLinkStyle())
+                            
                             
                         }
                         Spacer()
                     }
-                    }
                     .padding(.top, 48)
                     .padding(8)
+                }
                 }
                 .ignoresSafeArea()
                 .navigationBarHidden(true)
                 .onAppear {
-                    viewModel.loadRandomPoems(searchTerm: "5")
+                    count += 1
+                    if count == 0 {
+                        viewModel.loadRandomPoems(searchTerm: "5")
+                    }
+                    
                 }
         }
     }

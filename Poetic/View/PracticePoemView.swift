@@ -8,13 +8,22 @@
 import SwiftUI
 
 struct PracticePoemView: View {
+    
+    let poem: Poem
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text(poem.title)
+            Text(poem.author)
+            ForEach(poem.lines, id: \.self) { line in
+                Text(line)
+            }
+        }
     }
 }
 
 struct PracticePoemView_Previews: PreviewProvider {
     static var previews: some View {
-        PracticePoemView()
+        PracticePoemView(poem: Poem(title: "Sonnet", author: "William Shakespeare", lines: ["We", "are", "hungry"], linecount: "15"))
     }
 }
