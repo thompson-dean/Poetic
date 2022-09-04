@@ -16,6 +16,15 @@ struct PracticeView: View {
     
     @Environment(\.colorScheme) var colorScheme
     
+    var newYorkFont: UIFont {
+        let descriptor = UIFont.systemFont(ofSize: 48, weight: .bold).fontDescriptor
+        
+        if let serif = descriptor.withDesign(.serif) {
+            return UIFont(descriptor: serif, size: 0.0)
+        }
+        return UIFont(descriptor: descriptor, size: 0.0)
+    }
+    
     var body: some View {
         
         NavigationView {
@@ -28,22 +37,20 @@ struct PracticeView: View {
                     
                     ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading) {
-                        Text("Poetic")
-                            .font(.system(size: 48, weight: .bold, design: .serif))
-                            .lineSpacing(48)
+                        Text("Poetic.")
+                            .fontWithLineHeight(font: newYorkFont, lineHeight: 48)
                             .foregroundColor(.primary)
-                            .padding(.horizontal, 8)
+                            .padding(.horizontal, 16)
                         
                         Text("Discover Classic Poetry!")
-                            .font(.system(size: 16, weight: .medium, design: .default))
-                            .lineSpacing(24)
-                            .foregroundColor(colorScheme == .light ? Color(0x8030BF) : Color(0xDAAFFC))
-                            .padding(.horizontal, 8)
+                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 16)
+                            .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+                            .padding(.horizontal, 16)
                         
                         Text("Recommended")
                             .foregroundColor(.primary)
-                            .font(.system(size: 24, weight: .bold, design: .default))
-                            .padding(.horizontal, 8)
+                            .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
+                            .padding(.horizontal, 16)
                             .padding(.top, 16)
                         
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -56,36 +63,43 @@ struct PracticeView: View {
                                         VStack(alignment: .leading, spacing: 12) {
                                             
                                             Text(poem.author)
-                                                .font(.system(size: 16, weight: .bold, design: .default))
-                                                .lineSpacing(24)
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
                                                 .padding(.top, 8)
                                                 .foregroundColor(.primary)
                                             
                                             
                                             
                                             VStack(alignment: .leading, spacing: 4) {
-                                                ForEach(0..<6, id: \.self) { index in
+                                                ForEach(0..<3, id: \.self) { index in
                                                     HStack {
                                                         Text(poem.lines[index].trimmingCharacters(in: .whitespaces))
-                                                            .lineLimit(0)
+                                                            .fixedSize(horizontal: false, vertical: true)
+                                                            .lineLimit(2)
                                                             .foregroundColor(.primary)
-                                                            .font(.system(size: 16, weight: .medium, design: .default))
+                                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 24)
                                                         Spacer()
                                                     }
-                                                    
                                                 }
+                                                Text("...")
                                             }
                                             
-                                            Text(poem.title)
-                                                .foregroundColor(colorScheme == .light ? Color(0x8030BF) : Color(0xDAAFFC))
-                                                .lineSpacing(24)
-                                                .padding(.bottom, 8)
+                                            Spacer()
+                                            HStack(alignment: .top) {
+                                                Text(poem.title)
+                                                    .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+                                                    .fixedSize(horizontal: false, vertical: true)
+                                                    .lineLimit(3)
+                                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 24)
+                                            }
+                                            .frame(width: 264, height: 80, alignment: .leading)
+                                            .padding(.bottom, 8)
                                         }
                                         .padding(.horizontal, 8)
-                                        .frame(width: 240, height: 224)
+                                        .frame(width: 280)
                                         .background(colorScheme == .light ? .white : .black)
                                         .cornerRadius(8)
                                     }
+                                    .padding(.horizontal, 8)
                                     .buttonStyle(FlatLinkStyle())
                                     
                                 }
@@ -94,29 +108,27 @@ struct PracticeView: View {
                         
                         Text("Recent")
                             .foregroundColor(.primary)
-                            .font(.system(size: 24, weight: .bold, design: .default))
-                            .padding(.horizontal, 8)
+                            .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
+                            .padding(.horizontal, 16)
                             .padding(.top, 16)
-                        ForEach(0...10, id: \.self) { index in
+                        ForEach(0...50, id: \.self) { index in
                             
                             NavigationLink {
                                 Text("Hello!")
                             } label: {
-                                VStack {
+                                LazyVStack {
                                     HStack {
                                         VStack(alignment: .leading, spacing: 2) {
                                             
                                             Text("Algeron Charles Swinebourne")
-                                                .font(.system(size: 16, weight: .bold, design: .default))
-                                                .lineSpacing(24)
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
                                                 .foregroundColor(.primary)
                                             
                                             Text("The Eve of Revolution")
-                                                .font(.system(size: 16, weight: .semibold, design: .default))
-                                                .lineSpacing(24)
-                                                .foregroundColor(colorScheme == .light ? Color(0x8030BF) : Color(0xDAAFFC))
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                                                .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
                                         }
-                                        .padding(.vertical, 12)
+                                        .padding(.vertical, 8)
                                         .padding(.horizontal, 8)
                                         
                                         Spacer()
@@ -128,6 +140,7 @@ struct PracticeView: View {
                                 }
                                 .background(colorScheme == .light ? .white : .black)
                                 .cornerRadius(8)
+                                .padding(.horizontal, 8)
                             }
                             .buttonStyle(FlatLinkStyle())
                             
@@ -135,8 +148,8 @@ struct PracticeView: View {
                         }
                         Spacer()
                     }
+                    .background(.clear)
                     .padding(.top, 48)
-                    .padding(8)
                 }
                 }
                 .ignoresSafeArea()
