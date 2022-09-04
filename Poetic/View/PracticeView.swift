@@ -60,46 +60,9 @@ struct PracticeView: View {
                                     NavigationLink {
                                         PracticePoemView(poem: poem)
                                     } label: {
-                                        VStack(alignment: .leading, spacing: 12) {
-                                            
-                                            Text(poem.author)
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
-                                                .padding(.top, 8)
-                                                .foregroundColor(.primary)
-                                            
-                                            
-                                            
-                                            VStack(alignment: .leading, spacing: 4) {
-                                                ForEach(0..<3, id: \.self) { index in
-                                                    HStack {
-                                                        Text(poem.lines[index].trimmingCharacters(in: .whitespaces))
-                                                            .fixedSize(horizontal: false, vertical: true)
-                                                            .lineLimit(2)
-                                                            .foregroundColor(.primary)
-                                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 24)
-                                                        Spacer()
-                                                    }
-                                                }
-                                                Text("...")
-                                            }
-                                            
-                                            Spacer()
-                                            HStack(alignment: .top) {
-                                                Text(poem.title)
-                                                    .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
-                                                    .fixedSize(horizontal: false, vertical: true)
-                                                    .lineLimit(3)
-                                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 24)
-                                            }
-                                            .frame(width: 264, height: 80, alignment: .leading)
-                                            .padding(.bottom, 8)
-                                        }
-                                        .padding(.horizontal, 8)
-                                        .frame(width: 280)
-                                        .background(colorScheme == .light ? .white : .black)
-                                        .cornerRadius(8)
+                                        PoemCard(poem: poem)
                                     }
-                                    .padding(.horizontal, 8)
+                                    .padding(.leading, 8)
                                     .buttonStyle(FlatLinkStyle())
                                     
                                 }
@@ -116,7 +79,7 @@ struct PracticeView: View {
                             NavigationLink {
                                 Text("Hello!")
                             } label: {
-                                LazyVStack {
+                                VStack {
                                     HStack {
                                         VStack(alignment: .leading, spacing: 2) {
                                             
@@ -155,10 +118,9 @@ struct PracticeView: View {
                 .ignoresSafeArea()
                 .navigationBarHidden(true)
                 .onAppear {
-                    count += 1
-                    if count == 0 {
-                        viewModel.loadRandomPoems(searchTerm: "5")
-                    }
+                    
+                    viewModel.loadRandomPoems(searchTerm: "5")
+                    
                     
                 }
         }
@@ -166,11 +128,11 @@ struct PracticeView: View {
 }
 
 
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ForEach(ColorScheme.allCases, id: \.self) {
-            ContentView().preferredColorScheme($0)
-        }
-    }
-}
+//
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ForEach(ColorScheme.allCases, id: \.self) {
+//            ContentView().preferredColorScheme($0)
+//        }
+//    }
+//}
