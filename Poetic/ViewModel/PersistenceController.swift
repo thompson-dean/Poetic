@@ -31,6 +31,8 @@ class PersistenceController: ObservableObject {
             }
         }
         fetchFavoritedPoems()
+        fetchQuotes()
+        fetchQuotePoems()
     }
     
     

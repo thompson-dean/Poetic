@@ -44,7 +44,7 @@ class SearchViewModel: ObservableObject {
     @Published private(set) var randomPoems = [Poem]()
     @Published var favoritePoems = [Poem]()
     
-    
+    @Published var viewedPoems: [Poem] = []
     
     
     @Published var searchTerm: String = ""
@@ -85,7 +85,6 @@ class SearchViewModel: ObservableObject {
                         }
                     }
                 }
-                
             }
         }
         
@@ -130,7 +129,7 @@ class SearchViewModel: ObservableObject {
         randomPoems = []
         state = .loading
         
-        dataManager.loadData(filter: DataManager.SearchFilter.author, searchTerm: searchTerm) { result in
+        dataManager.loadData(filter: DataManager.SearchFilter.random, searchTerm: searchTerm) { result in
             DispatchQueue.main.async {
                 switch result {
                     
@@ -200,7 +199,23 @@ class SearchViewModel: ObservableObject {
     }
     
     
+    func addPoemtoViewed(poem: Poem) {
+        
+        if viewedPoems.contains(where: { $0.title == poem.title }) {
+            //do nothing
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.viewedPoems.append(poem)
+            }
+            
+        }
+        
+    }
+    
+    
 }
+
+
 
 
 

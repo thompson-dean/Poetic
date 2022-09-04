@@ -40,7 +40,8 @@ struct ContentView: View {
         
         
         return TabView(selection: handler) {
-            HomeView(viewModel: viewModel, pcViewModel: pcViewModel)
+            PracticeView(viewModel: viewModel)
+//            HomeView(viewModel: viewModel, pcViewModel: pcViewModel)
                 .id(home)
                 .tabItem {
                     //Add a different SFSymbol
@@ -93,22 +94,13 @@ struct ContentView: View {
             SettingsView(viewModel: viewModel)
                 .id(menu)
                 .tabItem {
-                    if #available(iOS 15.0, *) {
-                        Label("Menu", systemImage: "line.3.horizontal")
-                            .onChange(of: tappedTwice) { tappedTwice in
-                                    guard tappedTwice else { return }
-                                    menu = UUID()
-                                    self.tappedTwice = false
-                                }
-                    } else {
-                        Label("Menu", systemImage: "gear")
-                            .onChange(of: tappedTwice) { tappedTwice in
-                                    guard tappedTwice else { return }
-                                    menu = UUID()
-                                    self.tappedTwice = false
-                                }
-                    }
                     
+                    Label("Menu", systemImage: "line.3.horizontal")
+                        .onChange(of: tappedTwice) { tappedTwice in
+                            guard tappedTwice else { return }
+                            menu = UUID()
+                            self.tappedTwice = false
+                        }
                 }
                 .tag(5)
         }
@@ -117,12 +109,14 @@ struct ContentView: View {
             notificationManager.requestAuthorization()
             SystemThemeManager.shared.handleTheme(darkMode: viewModel.darkModeEnabled, system: viewModel.systemThemeEnabled)
             UIApplication.shared.applicationIconBadgeNumber = 0
+            viewModel.loadRandomPoems(searchTerm: "5")
         }
+        
     }
 }
 
 
-struct ContentView_Previews: PreviewProvider {
+struct PracticeView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }

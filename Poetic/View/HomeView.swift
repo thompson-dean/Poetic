@@ -8,47 +8,49 @@
 import SwiftUI
 
 struct HomeView: View {
-    
     @Environment(\.colorScheme) var colorScheme
     
+    let links = Links()
+    
+    @State private var isShowingPoem: Bool = false
     @ObservedObject var viewModel: SearchViewModel
     @ObservedObject var pcViewModel: PersistenceController
     
-    let notificationManager = NotificationManager()
     
-    @State var refresh = Refresh(started: false, released: false)
     @State var count = 0
     
-    var colors = Colors()
-    
-    var authors: Authors = Bundle.main.decode("Authors.json")
-    
     var body: some View {
+        
         NavigationView {
-            ZStack {
-                
-                
-                //                colors.lightPink
-                //                    .ignoresSafeArea(.all)
-                Image(colorScheme == .light ? "background" : "background-dark")
-                    .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
-                    .ignoresSafeArea()
-                
-                VStack(alignment: .center, spacing: 10) {
+            
+                ZStack {
+                    Image(colorScheme == .light ? "background" : "background-dark")
+                        .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+                        .ignoresSafeArea(.all)
                     
-                    Text("Hello, there.")
-                        .font(.system(.largeTitle, design: .serif))
-                        .fontWeight(.semibold)
-                    
-                    Text("Here is a random poem")
-                        .font(.system(.title3, design: .serif))
-                    
-                    Text("for your perusal.")
-                        .font(.system(.title3, design: .serif))
-                    
+                    ScrollView(.vertical, showsIndicators: false) {
                     GeometryReader { geo in
                         
-                        ScrollView {
+                        
+                        VStack(alignment: .leading, spacing: 10) {
+                            
+                            Text("Poetic.")
+                                .font(.system(.largeTitle, design: .serif))
+                                .bold()
+                                .padding(.top, 20)
+                                .padding(.horizontal, 20)
+                            
+                            
+                            Text("Discover Classic Poetry!")
+                                .font(.system(.title, design: .serif))
+                                .fontWeight(.semibold)
+                                .padding(.horizontal, 20)
+                            
+                            
+                            Text("Recommended")
+                                .font(.system(.title2, design: .serif))
+                                .padding(.horizontal, 20)
+                            
                             
                             switch viewModel.state {
                             case .idle:
@@ -64,184 +66,95 @@ struct HomeView: View {
                                 .frame(maxWidth: . infinity)
                                 .padding()
                             case .failed:
-                                GeometryReader { reader -> AnyView in
-                                    { () -> AnyView in
-                                        DispatchQueue.main.async {
-                                            if refresh.startOffset == 0 {
-                                                refresh.startOffset = reader.frame(in: .global).minY
-                                            }
-                                            
-                                            refresh.offset = reader.frame(in: .global).minY
-                                            
-                                            if refresh.offset - refresh.startOffset > 80 && !refresh.started {
-                                                refresh.started = true
-                                                viewModel.mediumImpactHaptic()
-                                            }
-                                            
-                                            if refresh.startOffset == refresh.offset && refresh.started && !refresh.released {
-                                                
-                                                withAnimation(Animation.linear) {
-                                                    refresh.released = true
-                                                    
-                                                }
-                                                viewModel.simpleHapticSuccess()
-                                                viewModel.loadRandomPoems(searchTerm: authors.authors[Int.random(in: 0..<authors.authors.count)].replacingOccurrences(of: " ", with: "%20"))
-                                                refresh.started = false
-                                                refresh.released = false
-                                                
-                                            }
-                                        }
-                                        return AnyView(Color.black)
-                                    }()
+                                VStack() {
+                                    Image(systemName: "exclamationmark.triangle")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 44, height: 44)
+                                        .padding(.top, 5)
+                                    
+                                    Text("Please connect to the internet")
+                                        .font(.system(.body, design: .serif))
+                                        .padding(.top, 3)
                                 }
-                                .frame(width: 0, height: 0)
+                                .frame(maxWidth: . infinity)
+                                .padding()
                                 
-                                ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
-                                    
-                                    
-                                    Image(systemName: "arrow.down")
-                                        .font(.system(size: 16, weight: .heavy))
-                                        .foregroundColor(.gray)
-                                        .rotationEffect(.init(degrees: refresh.started ? 180 : 0))
-                                        .offset(y: refresh.released ? 40 : -30)
-                                        .animation(Animation.easeIn, value: refresh.offset)
-                                    VStack(alignment: .center) {
-                                        Image(systemName: "exclamationmark.triangle")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 44, height: 44)
-                                            .padding(.top, 5)
-                                        
-                                        Text("Please connect to the internet")
-                                            .font(.system(.body, design: .serif))
-                                            .padding(.top, 3)
-                                    }
-                                    .frame(maxWidth: . infinity)
-                                    .padding()
-                                }
                             case .loaded:
-                                NavigationLink {
-                                    DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: viewModel.randomPoems[0].title, author: viewModel.randomPoems[0].author, lines: viewModel.randomPoems[0].lines, linecount: viewModel.randomPoems[0].linecount)
-                                } label: {
-                                    
-                                    GeometryReader { reader -> AnyView in
-                                        { () -> AnyView in
-                                            DispatchQueue.main.async {
-                                                if refresh.startOffset == 0 {
-                                                    refresh.startOffset = reader.frame(in: .global).minY
-                                                }
+                                RecommendedPoems(viewModel: viewModel, pcViewModel: pcViewModel)
+                                //                                    .padding(.leading, 10)
+                                    .padding(.top, 10)
+                            }
+                            Text("Recently Viewed Poems")
+                                .font(.system(.title2, design: .serif))
+                                .padding(.top, 10)
+                                .padding(.horizontal, 20)
+                            
+                            if viewModel.viewedPoems.count == 0 {
+                                
+                                VStack {
+                                    Text("No results. Start Exploring!")
+                                        .font(.system(.body, design: .serif))
+                                    Image(systemName: "magnifyingglass")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 40, height: 40)
+                                }
+                                .frame(width: UIScreen.main.bounds.width - 40, height: 100)
+                                .background(colorScheme == .light ? Color.white : Color("homeScreenDark"))
+                                .cornerRadius(5)
+                                .padding(.horizontal, 20)
+                                .padding(.top, 5)
+                                
+                            } else {
+                                ForEach(viewModel.viewedPoems, id: \.self) { poem in
+                                    NavigationLink {
+                                        DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
+                                    } label: {
+                                        VStack(alignment: .leading, spacing: 7) {
+                                            HStack {
+                                                Text(poem.title)
+                                                    .font(.system(.headline, design: .serif))
+                                                    .multilineTextAlignment(.leading)
                                                 
-                                                refresh.offset = reader.frame(in: .global).minY
-                                                
-                                                if refresh.offset - refresh.startOffset > 80 && !refresh.started {
-                                                    refresh.started = true
-                                                    viewModel.mediumImpactHaptic()
-                                                }
-                                                
-                                                if refresh.startOffset == refresh.offset && refresh.started && !refresh.released {
-                                                    
-                                                    withAnimation(Animation.linear) {
-                                                        refresh.released = true
-                                                        
-                                                    }
-                                                    viewModel.simpleHapticSuccess()
-                                                    viewModel.loadRandomPoems(searchTerm: authors.authors[Int.random(in: 0..<authors.authors.count)].replacingOccurrences(of: " ", with: "%20"))
-                                                    refresh.started = false
-                                                    refresh.released = false
-                                                    
-                                                }
+                                                Spacer()
                                             }
-                                            return AnyView(Color.black)
-                                        }()
-                                    }
-                                    .frame(width: 0, height: 0)
-                                    
-                                    ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
-                                        
-                                        
-                                        Image(systemName: "arrow.down")
-                                            .font(.system(size: 16, weight: .heavy))
-                                            .foregroundColor(.gray)
-                                            .rotationEffect(.init(degrees: refresh.started ? 180 : 0))
-                                            .offset(y: refresh.released ? 40 : -30)
-                                            .animation(Animation.easeIn, value: refresh.offset)
-                                        
-                                        VStack {
-                                            
-                                            Text(viewModel.randomPoems[0].title.trimmingCharacters(in: .whitespacesAndNewlines))
-                                                .font(.system(.title2, design: .serif))
-                                                .fontWeight(.semibold)
-                                                .padding(.top, 24)
-                                                .padding(.horizontal)
-                                                .multilineTextAlignment(.center)
-                                            
-                                            Text(viewModel.randomPoems[0].author.trimmingCharacters(in: .whitespacesAndNewlines))
-                                                .font(.system(.title3, design: .serif))
-                                                .padding(.top, 1)
-                                                .padding(.horizontal)
+                                            .padding(.horizontal, 15)
+                                            .padding(.top, 10)
+                                            HStack {
+                                                Text(poem.author)
+                                                    .font(.system(.subheadline, design: .serif))
+                                                
+                                                Spacer()
+                                            }
+                                            .padding(.horizontal, 15)
+                                            .padding(.bottom, 10)
                                             
                                             Divider()
-                                                .frame(width: geo.size.width / 2)
-                                                .padding(10)
-                                            
-                                            VStack(alignment: .leading) {
-                                                ForEach(0..<viewModel.randomPoems[0].lines.count, id: \.self) { index in
-                                                    HStack {
-                                                        
-                                                        if viewModel.randomPoems[0].lines.count < 9 {
-                                                            Text("\(index + 1)")
-                                                                .font(.system(.caption2, design: .serif))
-                                                                .frame(width: 22, height: 10)
-                                                                .padding(.trailing, 5)
-                                                            
-                                                        } else {
-                                                            Text((index + 1) % 5 == 0 ? "\(index + 1)" : "")
-                                                                .font(.system(.caption2, design: .serif))
-                                                                .frame(width: 22, height: 10)
-                                                                .padding(.trailing, 5)
-                                                        }
-                                                        
-                                                        Text(viewModel.randomPoems[0].lines[index].trimmingCharacters(in: .whitespacesAndNewlines))
-                                                            .font(.system(.body, design: .serif))
-                                                    }
-                                                    .padding(.trailing, 15)
-                                                    .padding(.vertical, 1)
-                                                }
-                                            }
-                                            .padding(5)
                                         }
-                                        .foregroundColor(.primary)
-                                        .frame(width: geo.size.width)
+                                        .frame(width: geo.size.width - 40)
+                                        .background(colorScheme == .light ? Color.white : Color("homeScreenDark"))
+                                        .cornerRadius(5)
+                                        .padding(.horizontal, 20)
+                                        .padding(.bottom, -5)
                                     }
-                                    .offset(y: -10)
                                 }
-                                .buttonStyle(FlatLinkStyle())
                             }
                         }
-                        .background(colorScheme == .light ? Color.white : Color("homeScreenDark"))
-                        .cornerRadius(10)
+                        
                     }
+                    .navigationBarHidden(true)
+                    .onAppear {
+                        UITableView.appearance().backgroundColor = .clear
+                        
+                        UIApplication.shared.applicationIconBadgeNumber = 0
+                    }
+                    
                 }
-                .padding()
-                
-                Spacer()
             }
-            .navigationBarHidden(true)
-            .frame(maxWidth: .infinity)
-            
         }
-        .navigationViewStyle(StackNavigationViewStyle())
         
-        .onAppear {
-            UITableView.appearance().backgroundColor = .clear
-            UIApplication.shared.applicationIconBadgeNumber = 0
-            if count == 0 {
-                viewModel.loadRandomPoems(searchTerm: authors.authors[Int.random(in: 0..<authors.authors.count)].replacingOccurrences(of: " ", with: "%20"))
-                count += 1
-            } 
-        }
     }
-    
 }
 
 struct HomeView_Previews: PreviewProvider {
@@ -257,10 +170,64 @@ struct FlatLinkStyle: ButtonStyle {
     }
 }
 
-//Model used for "swipe to refresh"
-struct Refresh {
-    var startOffset: CGFloat = 0
-    var offset: CGFloat = 0
-    var started: Bool
-    var released: Bool
+struct RecommendedPoems: View {
+    @Environment(\.colorScheme) var colorScheme
+    @StateObject var viewModel: SearchViewModel
+    @StateObject var pcViewModel: PersistenceController
+
+    var body: some View {
+        
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(alignment: .top) {
+                ForEach(viewModel.randomPoems, id: \.id) { randomPoem in
+                    
+                    NavigationLink {
+                        DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: randomPoem.title, author: randomPoem.author, lines: randomPoem.lines, linecount: randomPoem.linecount)
+                    } label: {
+                        VStack(alignment: .leading) {
+                            Text(randomPoem.title)
+                                .font(.system(.body, design: .serif))
+                                .fontWeight(.semibold)
+                                .padding(.top, 9)
+                                .padding(.top, 4)
+                                .padding(.horizontal)
+                                .multilineTextAlignment(.leading)
+                            
+                            Text(randomPoem.author)
+                                .font(.system(.subheadline, design: .serif))
+                                .italic()
+                                .padding(.bottom, 10)
+                                .padding(.horizontal)
+                                .multilineTextAlignment(.leading)
+                            
+                            Divider()
+                            
+                            VStack(alignment: .leading) {
+                                Text(randomPoem.lines.joined(separator: "\n").trimmingCharacters(in: .whitespaces))
+                                    .font(.system(.caption, design: .serif))
+                                    .lineLimit(8)
+                                    .multilineTextAlignment(.leading)
+                                    .padding(.bottom, 5)
+                                
+                                Text("Read More...")
+                                    .foregroundColor(.blue)
+                                    .font(.system(.caption, design: .serif))
+                                    .padding(.bottom, 10)
+                                
+                            }
+                            .padding(.horizontal, 15)
+                        }
+                        .frame(width: UIScreen.main.bounds.width * 0.66)
+                        .frame(minHeight: 250)
+                        .background(colorScheme == .light ? Color.white : Color("homeScreenDark"))
+                        .cornerRadius(5)
+                        .padding(.horizontal, 10)
+                    }
+                    .buttonStyle(FlatLinkStyle())
+                }
+            }
+        }
+    }
 }
+
+

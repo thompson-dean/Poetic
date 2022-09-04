@@ -30,7 +30,7 @@ struct QuoteView: View {
                             }
                             
                         } label: {
-                            VStack(alignment: .center, spacing: 4) {
+                            VStack(alignment: .center, spacing: 7) {
                                 
                                 Text(("""
                                             "\(pcViewModel.quotes[index].quote ?? "Unknown Line")"
@@ -108,7 +108,7 @@ struct QuoteView: View {
                         pcViewModel.quotesFilter.toggle()
                         pcViewModel.fetchQuotes()
                     } label: {
-                        Image(systemName: "shuffle")
+                        Image(systemName: "arrow.up.arrow.down")
                     }
                 }
             }
