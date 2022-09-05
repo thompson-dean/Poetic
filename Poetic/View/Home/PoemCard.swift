@@ -61,8 +61,8 @@ struct PoemCard: View {
                 .padding(.bottom, 8)
         }
         .padding(.horizontal, 8)
-        .frame(width: 260, alignment: .leading)
-        .frame(maxHeight: 350)
+        .frame(width: 300, alignment: .leading)
+        .frame(maxHeight: 300)
         .background(colorScheme == .light ? .white : .black)
         .cornerRadius(8)
     }
