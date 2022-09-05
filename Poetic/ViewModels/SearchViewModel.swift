@@ -26,6 +26,18 @@ class SearchViewModel: ObservableObject {
         case loaded
     }
     
+    enum RandomPoemState: Equatable  {
+    
+        case idle
+        case loading
+        case failed(Error)
+        case loaded
+        
+        static func == (lhs: SearchViewModel.RandomPoemState, rhs: SearchViewModel.RandomPoemState) -> Bool {
+            return true
+        }
+    }
+    
     
     let dataManager = DataManager()
     
@@ -56,6 +68,7 @@ class SearchViewModel: ObservableObject {
     //State change variables
     @Published private(set) var state = State.idle
     @Published private(set) var searchState = SearchTitleState.idle
+    @Published private(set) var randomPoemState = RandomPoemState.idle
     
     
     //SearchView Handling - fetchs data for title search.
@@ -126,22 +139,64 @@ class SearchViewModel: ObservableObject {
     //HomeView Handling - fetchs random poem for Home Screen.
     
     func loadRandomPoems(searchTerm: String) {
-        randomPoems = []
-        state = .loading
+        self.randomPoems = [Poem(
+            title: "Sonnet 1: From fairest creatures we desire increase",
+            author: "William Shakespeare",
+            lines: [
+                "From fairest creatures we desire increase,",
+                "That thereby beauty's rose might never die,",
+                "But as the riper should by time decease, ",
+                "His tender heir might bear his memory",
+                "But thou contracted to thine own bright eyes,",
+                "Feed'st thy light's flame with self-substantial fuel,",
+                "Making a famine where abundance lies,",
+                "Thy self thy foe, to thy sweet self too cruel:",
+                "Thou that art now the world's fresh ornament,",
+                "And only herald to the gaudy spring,",
+                "Within thine own bud buriest thy content,",
+                "And tender churl mak'st waste in niggarding:",
+                " Pity the world, or else this glutton be,",
+                " To eat the world's due, by the grave and thee."
+            ],
+            linecount: "14"),
+                                                   Poem(
+                                                       title: "Sonnet 1: From fairest creatures we desire increase",
+                                                       author: "William Shakespeare",
+                                                       lines: [
+                                                           "From fairest creatures we desire increase,",
+                                                           "That thereby beauty's rose might never die,",
+                                                           "But as the riper should by time decease, ",
+                                                           "His tender heir might bear his memory",
+                                                           "But thou contracted to thine own bright eyes,",
+                                                           "Feed'st thy light's flame with self-substantial fuel,",
+                                                           "Making a famine where abundance lies,",
+                                                           "Thy self thy foe, to thy sweet self too cruel:",
+                                                           "Thou that art now the world's fresh ornament,",
+                                                           "And only herald to the gaudy spring,",
+                                                           "Within thine own bud buriest thy content,",
+                                                           "And tender churl mak'st waste in niggarding:",
+                                                           " Pity the world, or else this glutton be,",
+                                                           " To eat the world's due, by the grave and thee."
+                                                       ],
+                                                       linecount: "14")]
+        randomPoemState = .idle
         
-        dataManager.loadData(filter: DataManager.SearchFilter.random, searchTerm: searchTerm) { result in
+        
+        self.randomPoemState = .loading
+        self.dataManager.loadData(filter: DataManager.SearchFilter.random, searchTerm: searchTerm) { result in
             DispatchQueue.main.async {
                 switch result {
                     
                 case .failure(let error):
-                    self.state = .failed(error)
+                    self.randomPoemState = .failed(error)
                     print(error.localizedDescription)
                     self.simpleHapticError()
                 case .success(let searchedPoems):
-                    self.state = .loaded
                     self.randomPoems = searchedPoems
+                    self.randomPoemState = .loaded
+                    
                 }
-            }
+            } 
         }
     }
     

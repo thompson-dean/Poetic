@@ -21,8 +21,6 @@ struct PoemCard: View {
                 .padding(.top, 8)
                 .foregroundColor(.primary)
             
-            
-            
             VStack(alignment: .leading, spacing: 2) {
                 let lineCountInt = Int(poem.linecount) ?? 0
                 if lineCountInt < 4 {
@@ -61,7 +59,7 @@ struct PoemCard: View {
                 .padding(.bottom, 8)
         }
         .padding(.horizontal, 8)
-        .frame(width: 300, alignment: .leading)
+        .frame(width: 280, alignment: .leading)
         .frame(maxHeight: 300)
         .background(colorScheme == .light ? .white : .black)
         .cornerRadius(8)

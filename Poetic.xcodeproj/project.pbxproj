@@ -203,8 +203,8 @@
 		2A77337328C6211200C115E9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				2A304723288FB01500E43820 /* PracticeView.swift */,
 				2A17BAA527D5D93700E0D755 /* HomeView.swift */,
+				2A304723288FB01500E43820 /* PracticeView.swift */,
 				2A81C48728C4D25C00437EC3 /* PoemCard.swift */,
 			);
 			path = Home;
