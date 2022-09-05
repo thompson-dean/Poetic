@@ -204,7 +204,7 @@ class SearchViewModel: ObservableObject {
         if viewedPoems.contains(where: { $0.title == poem.title }) {
             //do nothing
         } else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 self.viewedPoems.append(poem)
             }
             

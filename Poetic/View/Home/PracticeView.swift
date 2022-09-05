@@ -13,6 +13,7 @@ struct PracticeView: View {
     @State var count = 0
     
     @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var pcViewModel: PersistenceController
     
     @Environment(\.colorScheme) var colorScheme
     
@@ -58,7 +59,7 @@ struct PracticeView: View {
                                 ForEach(viewModel.randomPoems, id: \.self) { poem in
                                     
                                     NavigationLink {
-                                        PracticePoemView(poem: poem)
+                                        DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
                                     } label: {
                                         PoemCard(poem: poem)
                                     }
@@ -74,7 +75,7 @@ struct PracticeView: View {
                             .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
                             .padding(.horizontal, 16)
                             .padding(.top, 16)
-                        ForEach(0...50, id: \.self) { index in
+                        ForEach(viewModel.viewedPoems, id: \.self) { poem in
                             
                             NavigationLink {
                                 Text("Hello!")
@@ -83,11 +84,11 @@ struct PracticeView: View {
                                     HStack {
                                         VStack(alignment: .leading, spacing: 2) {
                                             
-                                            Text("Algeron Charles Swinebourne")
+                                            Text(poem.author)
                                                 .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
                                                 .foregroundColor(.primary)
                                             
-                                            Text("The Eve of Revolution")
+                                            Text(poem.title)
                                                 .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
                                                 .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
                                         }
@@ -110,6 +111,7 @@ struct PracticeView: View {
                             
                         }
                         Spacer()
+                            .padding(40)
                     }
                     .background(.clear)
                     .padding(.top, 48)
@@ -118,10 +120,7 @@ struct PracticeView: View {
                 .ignoresSafeArea()
                 .navigationBarHidden(true)
                 .onAppear {
-                    
                     viewModel.loadRandomPoems(searchTerm: "5")
-                    
-                    
                 }
         }
     }

@@ -40,7 +40,7 @@ struct ContentView: View {
         
         
         return TabView(selection: handler) {
-            PracticeView(viewModel: viewModel)
+            PracticeView(viewModel: viewModel, pcViewModel: pcViewModel)
 //            HomeView(viewModel: viewModel, pcViewModel: pcViewModel)
                 .id(home)
                 .tabItem {

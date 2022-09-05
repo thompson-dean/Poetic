@@ -116,7 +116,7 @@
 				2A17BAA427D5D91600E0D755 /* Extensions */,
 				2A17BAA327D5D91200E0D755 /* DataManager */,
 				2A17BAA227D5D90800E0D755 /* Model */,
-				2A17BAA127D5D8FF00E0D755 /* ViewModel */,
+				2A17BAA127D5D8FF00E0D755 /* ViewModels */,
 				2A17BAA027D5D8F900E0D755 /* View */,
 				2A37936D27D8A50900FA48ED /* ViewComponents */,
 				2A17BA9627D5D8E000E0D755 /* Assets.xcassets */,
@@ -136,29 +136,23 @@
 		2A17BAA027D5D8F900E0D755 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2A17BAA527D5D93700E0D755 /* HomeView.swift */,
-				2A17BAA727D5D94600E0D755 /* SearchView.swift */,
-				2A37937C27D8DC1700FA48ED /* AuthorView.swift */,
-				2A17BAA927D5D95400E0D755 /* FavoritesView.swift */,
-				2A304723288FB01500E43820 /* PracticeView.swift */,
-				2A81C48728C4D25C00437EC3 /* PoemCard.swift */,
-				2A13BE0028B9B42800E79A0E /* PracticePoemView.swift */,
-				2AF8600427DC5B2C00B3BC40 /* QuoteView.swift */,
-				2ACC8A3C27E86E3B002F5B6D /* SettingsView.swift */,
-				2ABCC206285095A900CA0FB3 /* PoemView.swift */,
-				2A17BAB327D6507500E0D755 /* DetailView.swift */,
-				2ACC8A4227E8A441002F5B6D /* DevView.swift */,
+				2A77337328C6211200C115E9 /* Home */,
+				2A77337428C6211C00C115E9 /* Search */,
+				2A77337528C6212300C115E9 /* Favorites */,
+				2A77337628C6212A00C115E9 /* Quotes */,
+				2A77337728C6213300C115E9 /* Menu */,
+				2A77337828C6216100C115E9 /* Detail */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		2A17BAA127D5D8FF00E0D755 /* ViewModel */ = {
+		2A17BAA127D5D8FF00E0D755 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				2A38CF7A27DF74CC00A44268 /* PersistenceController.swift */,
 				2A17BAAF27D641D200E0D755 /* SearchViewModel.swift */,
 			);
-			path = ViewModel;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		2A17BAA227D5D90800E0D755 /* Model */ = {
@@ -198,11 +192,65 @@
 		2A37936D27D8A50900FA48ED /* ViewComponents */ = {
 			isa = PBXGroup;
 			children = (
+				2ABCC206285095A900CA0FB3 /* PoemView.swift */,
 				2A37936B27D8A4B800FA48ED /* LineBreak.swift */,
 				2A37936E27D8A57500FA48ED /* SearchBar.swift */,
 				2ACC8A4027E89ECC002F5B6D /* WebView.swift */,
 			);
 			path = ViewComponents;
+			sourceTree = "<group>";
+		};
+		2A77337328C6211200C115E9 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2A304723288FB01500E43820 /* PracticeView.swift */,
+				2A17BAA527D5D93700E0D755 /* HomeView.swift */,
+				2A81C48728C4D25C00437EC3 /* PoemCard.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		2A77337428C6211C00C115E9 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				2A37937C27D8DC1700FA48ED /* AuthorView.swift */,
+				2A17BAA727D5D94600E0D755 /* SearchView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		2A77337528C6212300C115E9 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				2A17BAA927D5D95400E0D755 /* FavoritesView.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		2A77337628C6212A00C115E9 /* Quotes */ = {
+			isa = PBXGroup;
+			children = (
+				2AF8600427DC5B2C00B3BC40 /* QuoteView.swift */,
+			);
+			path = Quotes;
+			sourceTree = "<group>";
+		};
+		2A77337728C6213300C115E9 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				2ACC8A3C27E86E3B002F5B6D /* SettingsView.swift */,
+				2ACC8A4227E8A441002F5B6D /* DevView.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		2A77337828C6216100C115E9 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				2A17BAB327D6507500E0D755 /* DetailView.swift */,
+				2A13BE0028B9B42800E79A0E /* PracticePoemView.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
