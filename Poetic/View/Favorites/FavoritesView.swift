@@ -10,7 +10,7 @@ import SwiftUI
 struct FavoritesView: View {
     @Environment(\.colorScheme) var colorScheme
     
-    @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
     
     var body: some View {
@@ -74,15 +74,11 @@ struct FavoritesView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
-    
-    func removeRows(at offsets: IndexSet) {
-        viewModel.favoritePoems.remove(atOffsets: offsets)
-    }
 }
 
 struct FavoritesView_Previews: PreviewProvider {
     
     static var previews: some View {
-        FavoritesView(viewModel: SearchViewModel(), pcViewModel: PersistenceController())
+        FavoritesView(viewModel: PoemViewModel(), pcViewModel: PersistenceController())
     }
 }

@@ -13,7 +13,7 @@ struct PoemView: View {
     
     let links = Links()
     
-    @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
     
     let author: String

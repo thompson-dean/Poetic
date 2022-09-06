@@ -20,7 +20,7 @@ struct ContentView: View {
     @State private var menu = UUID()
     
     
-    @StateObject var viewModel = SearchViewModel()
+    @StateObject var viewModel = PoemViewModel()
     @StateObject var pcViewModel = PersistenceController()
     let notificationManager = NotificationManager()
     
@@ -40,7 +40,7 @@ struct ContentView: View {
         
         
         return TabView(selection: handler) {
-            PracticeView(viewModel: viewModel, pcViewModel: pcViewModel)
+            NewHomeView(viewModel: viewModel, pcViewModel: pcViewModel)
 //            HomeView(viewModel: viewModel, pcViewModel: pcViewModel)
                 .id(home)
                 .tabItem {

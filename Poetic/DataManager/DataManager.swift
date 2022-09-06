@@ -40,14 +40,12 @@ class DataManager {
     
     
     func loadData(filter: SearchFilter, searchTerm: String, completion: @escaping(Result<[Poem], ErrorType>) -> Void) {
+        
         guard !searchTerm.isEmpty else { return }
+        
         let api = "https://poetrydb.org/\(filter)/"
-        guard let url = URL(string: "\(api)\(searchTerm)") else {
-            print(api)
-            print(searchTerm)
-            return
-        }
-        print(url)
+        guard let url = URL(string: "\(api)\(searchTerm)") else { return }
+        
         dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
             
             if let _ = error {

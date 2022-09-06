@@ -13,7 +13,7 @@ struct SettingsView: View {
     
     let links = Links()
     @StateObject var notificationManager = NotificationManager()
-    @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var viewModel: PoemViewModel
     
     @State private var showLoading: Bool = false
     @State private var lightOrDark = false
@@ -79,8 +79,6 @@ struct SettingsView: View {
                             Text("Poetic open source repository")
                         }
                     }
-                    
-                    
                     
                     Section {
                         
@@ -244,7 +242,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(viewModel: SearchViewModel())
+        SettingsView(viewModel: PoemViewModel())
             .preferredColorScheme(.light)
     }
 }

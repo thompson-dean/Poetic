@@ -10,7 +10,7 @@ import SwiftUI
 struct AuthorView: View {
     @Environment(\.colorScheme) var colorScheme
     
-    @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
     @State var count = 0
     let author: String
@@ -112,8 +112,6 @@ struct AuthorView: View {
         
         .onAppear {
             viewModel.loadAuthorPoem(searchTerm: author.replacingOccurrences(of: " ", with: "%20"))
-            print(viewModel.searchTerm)
-            
         }
         
     }
@@ -122,6 +120,6 @@ struct AuthorView: View {
 
 struct AuthorView_Previews: PreviewProvider {
     static var previews: some View {
-        AuthorView(viewModel: SearchViewModel(), pcViewModel: PersistenceController(), author: "Anne Bronte")
+        AuthorView(viewModel: PoemViewModel(), pcViewModel: PersistenceController(), author: "Anne Bronte")
     }
 }
