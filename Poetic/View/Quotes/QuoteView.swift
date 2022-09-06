@@ -10,7 +10,7 @@ import SwiftUI
 struct QuoteView: View {
     @Environment(\.colorScheme) var colorScheme
    
-    @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
     
     @State private var showShareSheet = false
@@ -116,14 +116,10 @@ struct QuoteView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         
     }
-    func removeRows(at offsets: IndexSet) {
-        viewModel.quotes.remove(atOffsets: offsets)
-    }
-     
 }
 
 struct QuoteView_Previews: PreviewProvider {
     static var previews: some View {
-        QuoteView(viewModel: SearchViewModel(), pcViewModel: PersistenceController())
+        QuoteView(viewModel: PoemViewModel(), pcViewModel: PersistenceController())
     }
 }

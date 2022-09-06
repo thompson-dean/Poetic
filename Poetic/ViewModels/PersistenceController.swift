@@ -16,13 +16,12 @@ class PersistenceController: ObservableObject {
     @Published var favoritedPoems: [PoemEntity] = []
     @Published var quotes: [QuoteEntity] = []
     @Published var favoritedQuotesPoem: [QuotePoemsEntity] = []
+    @Published var viewedPoems: [ViewedPoemEntity] = []
 
-    
     @Published var poemsFilter = true
     @Published var quotesFilter = true
     
     init() {
-        
         container = NSPersistentContainer(name: "Poetic")
         
         container.loadPersistentStores { storeDescription, error in
@@ -33,13 +32,12 @@ class PersistenceController: ObservableObject {
         fetchFavoritedPoems()
         fetchQuotes()
         fetchQuotePoems()
+        fetchViewedPoems()
     }
     
     
-    //Fetching Favorite Poems
-    
+    //Fetching Entities
     func fetchFavoritedPoems() {
-        
         let request = NSFetchRequest<PoemEntity>(entityName: "PoemEntity")
         let sortDescriptor = NSSortDescriptor(key: poemsFilter ? "title" : "author", ascending: true)
         request.sortDescriptors = [sortDescriptor]
@@ -49,27 +47,7 @@ class PersistenceController: ObservableObject {
         } catch {
             print("Error fetching. \(error.localizedDescription)")
         }
-        
     }
-    
-    func addFavoritePoem(id: UUID, title: String, author: String, lines: [String], linecount: String) {
-        let description = NSEntityDescription.entity(forEntityName: "PoemEntity", in: container.viewContext)!
-        let newEntity = PoemEntity(entity: description, insertInto: container.viewContext)
-        newEntity.id = id
-        newEntity.title = title
-        newEntity.author = author
-        newEntity.lines = lines
-        newEntity.linecount = linecount
-        
-        if favoritedPoems.contains(where: { $0.title == newEntity.title }) {
-            container.viewContext.delete(newEntity)
-            saveData()
-        } else {
-            saveData()
-        }
-    }
-    
-    //Fetching Favorite Quotes
     
     func fetchQuotes() {
         let request = NSFetchRequest<QuoteEntity>(entityName: "QuoteEntity")
@@ -93,8 +71,36 @@ class PersistenceController: ObservableObject {
         }
     }
     
+    func fetchViewedPoems() {
+        let request = NSFetchRequest<ViewedPoemEntity>(entityName: "ViewedPoemEntity")
+        
+        do {
+            viewedPoems = try container.viewContext.fetch(request)
+        } catch {
+            print("Error fetching. \(error.localizedDescription)")
+        }
+    }
+    
+    // Adding
+    func addFavoritePoem(id: UUID, title: String, author: String, lines: [String], linecount: String) {
+        guard let description = NSEntityDescription.entity(forEntityName: "PoemEntity", in: container.viewContext) else { return }
+        let newEntity = PoemEntity(entity: description, insertInto: container.viewContext)
+        newEntity.id = id
+        newEntity.title = title
+        newEntity.author = author
+        newEntity.lines = lines
+        newEntity.linecount = linecount
+        
+        if favoritedPoems.contains(where: { $0.title == newEntity.title }) {
+            container.viewContext.delete(newEntity)
+            saveData()
+        } else {
+            saveData()
+        }
+    }
+    
     func addQuote(id: UUID, title: String, author: String, quote: String, lines: [String], linecount: String) {
-        let description = NSEntityDescription.entity(forEntityName: "QuotePoemsEntity", in: container.viewContext)!
+        guard let description = NSEntityDescription.entity(forEntityName: "QuotePoemsEntity", in: container.viewContext) else { return }
         let quotesPoemEntity = QuotePoemsEntity(entity: description, insertInto: container.viewContext)
         quotesPoemEntity.id = id
         quotesPoemEntity.title = title
@@ -102,12 +108,23 @@ class PersistenceController: ObservableObject {
         quotesPoemEntity.lines = lines
         
         
-        let descriptionQuote = NSEntityDescription.entity(forEntityName: "QuoteEntity", in: container.viewContext)!
+        guard let descriptionQuote = NSEntityDescription.entity(forEntityName: "QuoteEntity", in: container.viewContext) else { return }
         let newEntity = QuoteEntity(entity: descriptionQuote, insertInto: container.viewContext)
         newEntity.id = id
         newEntity.title = title
         newEntity.author = author
         newEntity.quote = quote
+        
+        saveData()
+    }
+    
+    func addViewedPoem(id: UUID, title: String, author: String, lines: [String]) {
+        guard let description = NSEntityDescription.entity(forEntityName: "ViewedPoemEntity", in: container.viewContext) else { return }
+        let viewedPoemEntity = ViewedPoemEntity(entity: description, insertInto: container.viewContext)
+        viewedPoemEntity.id = id
+        viewedPoemEntity.title = title
+        viewedPoemEntity.author = author
+        viewedPoemEntity.lines = lines
         
         saveData()
     }
@@ -121,7 +138,7 @@ class PersistenceController: ObservableObject {
             fetchFavoritedPoems()
             fetchQuotes()
             fetchQuotePoems()
-            
+            fetchViewedPoems()
         } catch {
             print(error.localizedDescription)
         }
@@ -153,6 +170,11 @@ class PersistenceController: ObservableObject {
     
     func deleteQuotePoem(entity quotePoem: QuotePoemsEntity) {
         container.viewContext.delete(quotePoem)
+        saveData()
+    }
+    
+    func deleteViewedPoem(entity viewedPoem: ViewedPoemEntity) {
+        container.viewContext.delete(viewedPoem)
         saveData()
     }
 }

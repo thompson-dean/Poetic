@@ -21,7 +21,7 @@ struct PoemCard: View {
                 .padding(.top, 8)
                 .foregroundColor(.primary)
             
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 4) {
                 let lineCountInt = Int(poem.linecount) ?? 0
                 if lineCountInt < 4 {
                     ForEach(0..<poem.lines.count, id: \.self) { index in
@@ -31,7 +31,7 @@ struct PoemCard: View {
                                     .fixedSize(horizontal: false, vertical: true)
                                     .lineLimit(2)
                                     .foregroundColor(.primary)
-                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 20)
+                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 22)
                             }
                         }
                     }
@@ -43,7 +43,7 @@ struct PoemCard: View {
                                     .fixedSize(horizontal: false, vertical: true)
                                     .lineLimit(3)
                                     .foregroundColor(.primary)
-                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 20)
+                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 22)
                             }
                         }
                     }
@@ -60,7 +60,7 @@ struct PoemCard: View {
         }
         .padding(.horizontal, 8)
         .frame(width: 280, alignment: .leading)
-        .frame(maxHeight: 300)
+        .frame(maxHeight: 320)
         .background(colorScheme == .light ? .white : .black)
         .cornerRadius(8)
     }

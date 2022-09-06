@@ -12,7 +12,7 @@ struct DetailView: View {
     
     let links = Links()
     
-    @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
     
     let title: String
@@ -78,7 +78,12 @@ struct DetailView: View {
             )
             .onAppear {
                 pcViewModel.fetchQuotes()
-                viewModel.addPoemtoViewed(poem: Poem(title: title, author: author, lines: lines, linecount: linecount))
+                if (pcViewModel.viewedPoems.first(where: { $0.title == title}) == nil) {
+                    pcViewModel.addViewedPoem(id: UUID(), title: title, author: author, lines: lines)
+                } else {
+                    
+                }
+                
             }
             
         }

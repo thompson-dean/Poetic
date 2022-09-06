@@ -1,16 +1,15 @@
 //
-//  ContentView.swift
-//  PoeticHomeViewPractice
+//  NewHomeView.swift
+//  Poetic
 //
 //  Created by Dean Thompson on 2022/07/09.
 //
 
 import SwiftUI
 
-
-struct PracticeView: View {
+struct NewHomeView: View {
     
-    @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
     
     let dataManager = DataManager()
@@ -29,7 +28,7 @@ struct PracticeView: View {
     var body: some View {
         
         NavigationView {
-            
+
             ZStack(alignment: .leading) {
                 
                 Image(colorScheme == .light ? "background" : "background-dark")
@@ -72,13 +71,13 @@ struct PracticeView: View {
                                             PoemCard(poem: poem)
                                                 .redacted(reason: .placeholder)
                                         case .failed:
-
+                                            
                                             PoemCard(poem: poem)
                                                 .redacted(reason: .placeholder)
-
+                                            
                                         case .loaded:
                                             PoemCard(poem: poem)
-
+                                            
                                         }
                                     }
                                 }
@@ -88,71 +87,63 @@ struct PracticeView: View {
                         }
                         
                         Text("Recent")
-                                .foregroundColor(.primary)
-                                .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
-                                .padding(.horizontal, 16)
-                                .padding(.top, 16)
-                            ForEach(viewModel.viewedPoems, id: \.self) { poem in
-                                
-                                NavigationLink {
-                                    Text("Hello!")
-                                } label: {
-                                    VStack {
-                                        HStack {
-                                            VStack(alignment: .leading, spacing: 2) {
-                                                
-                                                Text(poem.author)
-                                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
-                                                    .foregroundColor(.primary)
-                                                
-                                                Text(poem.title)
-                                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                                                    .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
-                                            }
-                                            .padding(.vertical, 8)
-                                            .padding(.horizontal, 8)
+                            .foregroundColor(.primary)
+                            .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
+                            .padding(.horizontal, 16)
+                            .padding(.top, 16)
+                        ForEach(pcViewModel.viewedPoems, id: \.self) { poem in
+                            NavigationLink {
+                                Text("Hello!")
+                            } label: {
+                                VStack {
+                                    HStack {
+                                        VStack(alignment: .leading, spacing: 2) {
                                             
-                                            Spacer()
-                                            
-                                            Image(systemName: "chevron.right")
+                                            Text(poem.author ?? "")
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
                                                 .foregroundColor(.primary)
-                                                .padding(8)
+                                            
+                                            Text(poem.title ?? "")
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                                                .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
                                         }
+                                        .padding(.vertical, 8)
+                                        .padding(.horizontal, 8)
+                                        
+                                        Spacer()
+                                        
+                                        Image(systemName: "chevron.right")
+                                            .foregroundColor(.primary)
+                                            .padding(8)
                                     }
-                                    .background(colorScheme == .light ? .white : .black)
-                                    .cornerRadius(8)
-                                    .padding(.horizontal, 8)
                                 }
-                                .buttonStyle(FlatLinkStyle())
-                                
-                                
+                                .background(colorScheme == .light ? .white : .black)
+                                .cornerRadius(8)
+                                .padding(.horizontal, 8)
                             }
-                            Spacer()
-                                .padding(40)
+                            .buttonStyle(FlatLinkStyle())
                         }
-                        .background(.clear)
-                        .padding(.top, 48)
+                        Spacer()
+                            .padding(40)
                     }
+                    .background(.clear)
+                    .padding(.top, 48)
                 }
-                .ignoresSafeArea()
-                .navigationBarHidden(true)
-                
+            }
+            .ignoresSafeArea()
+            .navigationBarHidden(true)
+            .onAppear {
+                pcViewModel.fetchViewedPoems()
             }
         }
-    
+    }
 }
 
-//
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ForEach(ColorScheme.allCases, id: \.self) {
-//            ContentView().preferredColorScheme($0)
-//        }
-//    }
-//}
 
-struct Previews_PracticeView_Previews: PreviewProvider {
+struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+        
+        NewHomeView(viewModel: PoemViewModel(), pcViewModel: PersistenceController()).preferredColorScheme(.dark)
+        
     }
 }

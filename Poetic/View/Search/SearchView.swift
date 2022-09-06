@@ -12,7 +12,7 @@ struct SearchView: View {
     
     var authors: Authors = Bundle.main.decode("Authors.json")
     
-    @ObservedObject var viewModel: SearchViewModel
+    @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
     
     @State private var authorSearch = false
@@ -105,7 +105,7 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(viewModel: SearchViewModel(), pcViewModel: PersistenceController())
+        SearchView(viewModel: PoemViewModel(), pcViewModel: PersistenceController())
     }
 }
 
