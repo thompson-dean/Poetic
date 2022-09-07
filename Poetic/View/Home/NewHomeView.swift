@@ -28,7 +28,7 @@ struct NewHomeView: View {
     var body: some View {
         
         NavigationView {
-
+            
             ZStack(alignment: .leading) {
                 
                 Image(colorScheme == .light ? "background" : "background-dark")
@@ -51,35 +51,51 @@ struct NewHomeView: View {
                             .foregroundColor(.primary)
                             .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
                             .padding(.horizontal, 16)
-                            .padding(.top, 16)
+                            .padding(.top, 12)
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
                                 ForEach(viewModel.randomPoems, id: \.self) { poem in
                                     
-                                    NavigationLink {
-                                        DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
-                                    } label: {
-                                        
-                                        switch viewModel.randomPoemState {
-                                        case .idle:
+                                    
+                                    
+                                    switch viewModel.randomPoemState {
+                                    case .idle:
+                                        NavigationLink {
+                                            DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
+                                        } label: {
+                                            
                                             PoemCard(poem: poem)
                                                 .onAppear {
                                                     viewModel.loadRandomPoems(searchTerm: "5")
                                                 }
-                                        case .loading:
-                                            PoemCard(poem: poem)
-                                                .redacted(reason: .placeholder)
-                                        case .failed:
-                                            
-                                            PoemCard(poem: poem)
-                                                .redacted(reason: .placeholder)
-                                            
-                                        case .loaded:
-                                            PoemCard(poem: poem)
-                                            
                                         }
+                                        .disabled(true)
+                                    case .loading:
+                                        NavigationLink {
+                                            DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
+                                        } label: {
+                                            PoemCard(poem: poem)
+                                                .redacted(reason: .placeholder)
+                                        }
+                                        .disabled(true)
+                                    case .failed:
+                                        NavigationLink {
+                                            DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
+                                        } label: {
+                                            FailedPoemCard()
+                                        }
+                                        .disabled(true)
+                                    case .loaded:
+                                        NavigationLink {
+                                            DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
+                                        } label: {
+                                            PoemCard(poem: poem)
+                                        }
+                                        .disabled(false)
                                     }
+                                    
+                                    
                                 }
                                 .padding(.leading, 8)
                                 .buttonStyle(FlatLinkStyle())
