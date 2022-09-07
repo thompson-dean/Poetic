@@ -18,21 +18,30 @@ struct ScrollRefreshable<Content: View>: View {
         self.content = content()
         self.onRefresh = onRefresh
         
+        UIRefreshControl.appearance().tintColor = UIColor(Color.primary)
         UITableView.appearance().showsVerticalScrollIndicator = false
         UITableView.appearance().backgroundColor = .clear
     }
     
     var body: some View {
+        
         List {
             content
                 .listRowSeparatorTint(.clear)
                 .listRowBackground(Color.clear)
                 .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 .menuIndicator(.hidden)
+                .background(.clear)
         }
         .listStyle(.plain)
         .refreshable {
             onRefresh()
         }
+    }
+}
+
+struct Previews_ScrollRefreshable_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }

@@ -28,109 +28,128 @@ struct NewHomeView: View {
     var body: some View {
         
         NavigationView {
-
+            
             ZStack(alignment: .leading) {
                 
                 Image(colorScheme == .light ? "background" : "background-dark")
                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                     .ignoresSafeArea()
                 
-                ScrollView(.vertical, showsIndicators: false) {
-                    VStack(alignment: .leading) {
-                        Text("Poetic.")
-                            .fontWithLineHeight(font: newYorkFont, lineHeight: 48)
-                            .foregroundColor(.primary)
-                            .padding(.horizontal, 16)
-                        
-                        Text("Discover Classic Poetry!")
-                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 16)
-                            .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
-                            .padding(.horizontal, 16)
-                        
-                        Text("Recommended")
-                            .foregroundColor(.primary)
-                            .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
-                            .padding(.horizontal, 16)
-                            .padding(.top, 16)
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                ForEach(viewModel.randomPoems, id: \.self) { poem in
-                                    
-                                    NavigationLink {
-                                        DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
-                                    } label: {
+                ScrollRefreshable {
+                    
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack(alignment: .leading) {
+                            Text("Poetic.")
+                                .fontWithLineHeight(font: newYorkFont, lineHeight: 48)
+                                .foregroundColor(.primary)
+                                .padding(.horizontal, 16)
+                            
+                            Text("Discover Classic Poetry!")
+                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 16)
+                                .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+                                .padding(.horizontal, 16)
+                            
+                            Text("Recommended")
+                                .foregroundColor(.primary)
+                                .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
+                                .padding(.horizontal, 16)
+                                .padding(.top, 12)
+                            
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack {
+                                    ForEach(viewModel.randomPoems, id: \.self) { poem in
+                                        
+                                        
                                         
                                         switch viewModel.randomPoemState {
                                         case .idle:
-                                            PoemCard(poem: poem)
-                                                .onAppear {
-                                                    viewModel.loadRandomPoems(searchTerm: "5")
-                                                }
+                                            NavigationLink {
+                                                DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
+                                            } label: {
+                                                
+                                                PoemCard(poem: poem)
+                                                    .onAppear {
+                                                        viewModel.loadRandomPoems(searchTerm: "5")
+                                                    }
+                                            }
+                                            .disabled(true)
                                         case .loading:
-                                            PoemCard(poem: poem)
-                                                .redacted(reason: .placeholder)
+                                            NavigationLink {
+                                                DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
+                                            } label: {
+                                                PoemCard(poem: poem)
+                                                    .redacted(reason: .placeholder)
+                                            }
+                                            .disabled(true)
                                         case .failed:
-                                            
-                                            PoemCard(poem: poem)
-                                                .redacted(reason: .placeholder)
-                                            
+                                            NavigationLink {
+                                                DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
+                                            } label: {
+                                                FailedPoemCard()
+                                            }
+                                            .disabled(true)
                                         case .loaded:
-                                            PoemCard(poem: poem)
+                                            NavigationLink {
+                                                DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
+                                            } label: {
+                                                PoemCard(poem: poem)
+                                            }
+                                            .disabled(false)
+                                        }
+                                        
+                                        
+                                    }
+                                    .padding(.leading, 8)
+                                    .buttonStyle(FlatLinkStyle())
+                                }
+                            }
+                            
+                            Text("Recent")
+                                .foregroundColor(.primary)
+                                .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
+                                .padding(.horizontal, 16)
+                                .padding(.top, 16)
+                            ForEach(pcViewModel.viewedPoems, id: \.self) { poem in
+                                NavigationLink {
+                                    Text("Hello!")
+                                } label: {
+                                    VStack {
+                                        HStack {
+                                            VStack(alignment: .leading, spacing: 2) {
+                                                
+                                                Text(poem.author ?? "")
+                                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
+                                                    .foregroundColor(.primary)
+                                                
+                                                Text(poem.title ?? "")
+                                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                                                    .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+                                            }
+                                            .padding(.vertical, 8)
+                                            .padding(.horizontal, 8)
                                             
+                                            Spacer()
+                                            
+                                            Image(systemName: "chevron.right")
+                                                .foregroundColor(.primary)
+                                                .padding(8)
                                         }
                                     }
+                                    .background(colorScheme == .light ? .white : .black)
+                                    .cornerRadius(8)
+                                    .padding(.horizontal, 8)
                                 }
-                                .padding(.leading, 8)
                                 .buttonStyle(FlatLinkStyle())
                             }
+                            Spacer()
+                                .padding(40)
                         }
-                        
-                        Text("Recent")
-                            .foregroundColor(.primary)
-                            .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
-                            .padding(.horizontal, 16)
-                            .padding(.top, 16)
-                        ForEach(pcViewModel.viewedPoems, id: \.self) { poem in
-                            NavigationLink {
-                                Text("Hello!")
-                            } label: {
-                                VStack {
-                                    HStack {
-                                        VStack(alignment: .leading, spacing: 2) {
-                                            
-                                            Text(poem.author ?? "")
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
-                                                .foregroundColor(.primary)
-                                            
-                                            Text(poem.title ?? "")
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                                                .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
-                                        }
-                                        .padding(.vertical, 8)
-                                        .padding(.horizontal, 8)
-                                        
-                                        Spacer()
-                                        
-                                        Image(systemName: "chevron.right")
-                                            .foregroundColor(.primary)
-                                            .padding(8)
-                                    }
-                                }
-                                .background(colorScheme == .light ? .white : .black)
-                                .cornerRadius(8)
-                                .padding(.horizontal, 8)
-                            }
-                            .buttonStyle(FlatLinkStyle())
-                        }
-                        Spacer()
-                            .padding(40)
+                        .padding(.top, 48)
                     }
-                    .background(.clear)
-                    .padding(.top, 48)
+                } onRefresh: {
+                    viewModel.loadRandomPoems(searchTerm: "5")
                 }
             }
-            .ignoresSafeArea()
             .navigationBarHidden(true)
             .onAppear {
                 pcViewModel.fetchViewedPoems()
