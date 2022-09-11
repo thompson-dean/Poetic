@@ -76,6 +76,7 @@ class PersistenceController: ObservableObject {
         
         do {
             viewedPoems = try container.viewContext.fetch(request)
+            
         } catch {
             print("Error fetching. \(error.localizedDescription)")
         }

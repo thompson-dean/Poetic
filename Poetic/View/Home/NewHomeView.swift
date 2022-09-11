@@ -34,14 +34,13 @@ struct NewHomeView: View {
                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                     .ignoresSafeArea(.all)
                 
-                RefreshableScrollView {
+                ScrollView(.vertical, showsIndicators: false) {
+                    PullToRefresh(viewModel: viewModel, coordinateSpaceName: "jazz") {
+                        viewModel.loadRandomPoems(searchTerm: "5")
+                    }
                     NewHomeContent(viewModel: viewModel, pcViewModel: pcViewModel)
                         
-                } onRefresh: {
-                    viewModel.loadRandomPoems(searchTerm: "5")
                 }
-                
-                
             }
             .navigationBarHidden(true)
             
@@ -197,7 +196,7 @@ public struct RefreshableScrollView<Content: View>: View {
         self.content = content()
         self.onRefresh = onRefresh
         
-        UITableView.appearance().backgroundColor = .clear
+        UITableView.appearance().showsVerticalScrollIndicator = false
     }
 
     public var body: some View {
@@ -209,6 +208,7 @@ public struct RefreshableScrollView<Content: View>: View {
                 .background(.clear)
         }
         .listStyle(.plain)
+        
         .refreshable {
             onRefresh()
         }
