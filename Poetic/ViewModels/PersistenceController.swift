@@ -73,6 +73,8 @@ class PersistenceController: ObservableObject {
     
     func fetchViewedPoems() {
         let request = NSFetchRequest<ViewedPoemEntity>(entityName: "ViewedPoemEntity")
+        let sortDescriptor = NSSortDescriptor(key: "title", ascending: false)
+        request.sortDescriptors = [sortDescriptor]
         
         do {
             viewedPoems = try container.viewContext.fetch(request)
