@@ -73,7 +73,7 @@ class PersistenceController: ObservableObject {
     
     func fetchViewedPoems() {
         let request = NSFetchRequest<ViewedPoemEntity>(entityName: "ViewedPoemEntity")
-        let sortDescriptor = NSSortDescriptor(key: "title", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
         request.sortDescriptors = [sortDescriptor]
         
         do {
@@ -128,6 +128,7 @@ class PersistenceController: ObservableObject {
         viewedPoemEntity.title = title
         viewedPoemEntity.author = author
         viewedPoemEntity.lines = lines
+        viewedPoemEntity.date = Date()
         
         saveData()
     }
