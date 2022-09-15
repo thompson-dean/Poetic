@@ -35,7 +35,6 @@ class PersistenceController: ObservableObject {
         fetchViewedPoems()
     }
     
-    
     //Fetching Entities
     func fetchFavoritedPoems() {
         let request = NSFetchRequest<PoemEntity>(entityName: "PoemEntity")
