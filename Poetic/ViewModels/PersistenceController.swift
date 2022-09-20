@@ -35,7 +35,6 @@ class PersistenceController: ObservableObject {
         fetchViewedPoems()
     }
     
-    
     //Fetching Entities
     func fetchFavoritedPoems() {
         let request = NSFetchRequest<PoemEntity>(entityName: "PoemEntity")
@@ -73,6 +72,8 @@ class PersistenceController: ObservableObject {
     
     func fetchViewedPoems() {
         let request = NSFetchRequest<ViewedPoemEntity>(entityName: "ViewedPoemEntity")
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+        request.sortDescriptors = [sortDescriptor]
         
         do {
             viewedPoems = try container.viewContext.fetch(request)
@@ -126,6 +127,7 @@ class PersistenceController: ObservableObject {
         viewedPoemEntity.title = title
         viewedPoemEntity.author = author
         viewedPoemEntity.lines = lines
+        viewedPoemEntity.date = Date()
         
         saveData()
     }
@@ -177,5 +179,26 @@ class PersistenceController: ObservableObject {
     func deleteViewedPoem(entity viewedPoem: ViewedPoemEntity) {
         container.viewContext.delete(viewedPoem)
         saveData()
+    }
+    
+    func removeNotificationsOlderThan(days: Int) {
+        let privateContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        privateContext.persistentStoreCoordinator = container.persistentStoreCoordinator
+        let limitDate = Calendar.current.date(byAdding: .day, value: -days, to: Date())
+        let predicate = NSPredicate(format: "date < %@", limitDate! as NSDate)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ViewedPoemEntity")
+        fetchRequest.predicate = predicate
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        privateContext.perform {
+            do {
+                try privateContext.execute(batchDeleteRequest)
+                if privateContext.hasChanges {
+                    try privateContext.save()
+                }
+            }
+            catch let error {
+                print(error)
+            }
+        }
     }
 }

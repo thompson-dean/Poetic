@@ -9,7 +9,6 @@ import SwiftUI
 import CoreHaptics
 
 class PoemViewModel: ObservableObject {
-    
     enum State {
         case idle
         case loading
@@ -57,7 +56,6 @@ class PoemViewModel: ObservableObject {
     @Published private(set) var state = State.idle
     @Published private(set) var searchState = SearchTitleState.idle
     @Published private(set) var randomPoemState = RandomPoemState.idle
-    
     
     //SearchView Handling - fetchs data for title search.
     
@@ -119,7 +117,6 @@ class PoemViewModel: ObservableObject {
             }
         }
     }
-    
     
     //HomeView Handling - fetchs random poem for Home Screen.
     func loadRandomPoems(searchTerm: String) {
