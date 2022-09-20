@@ -180,4 +180,25 @@ class PersistenceController: ObservableObject {
         container.viewContext.delete(viewedPoem)
         saveData()
     }
+    
+    func removeNotificationsOlderThan(days: Int) {
+        let privateContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        privateContext.persistentStoreCoordinator = container.persistentStoreCoordinator
+        let limitDate = Calendar.current.date(byAdding: .day, value: -days, to: Date())
+        let predicate = NSPredicate(format: "date < %@", limitDate! as NSDate)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ViewedPoemEntity")
+        fetchRequest.predicate = predicate
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        privateContext.perform {
+            do {
+                try privateContext.execute(batchDeleteRequest)
+                if privateContext.hasChanges {
+                    try privateContext.save()
+                }
+            }
+            catch let error {
+                print(error)
+            }
+        }
+    }
 }

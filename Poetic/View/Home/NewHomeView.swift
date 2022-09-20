@@ -46,7 +46,9 @@ struct NewHomeView: View {
             
         }
         .onAppear {
+            pcViewModel.removeNotificationsOlderThan(days: 14)
             pcViewModel.fetchViewedPoems()
+            
         }
         
     }
