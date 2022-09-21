@@ -96,7 +96,7 @@ struct NewHomeContent: View {
                             switch viewModel.randomPoemState {
                             case .idle:
                                 NavigationLink {
-                                    DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
+                                    NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: poem)
                                 } label: {
                                     
                                     PoemCard(poem: poem)
@@ -107,7 +107,7 @@ struct NewHomeContent: View {
                                 .disabled(true)
                             case .loading:
                                 NavigationLink {
-                                    DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
+                                    NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: poem)
                                 } label: {
                                     PoemCard(poem: poem)
                                         .redacted(reason: .placeholder)
@@ -115,14 +115,14 @@ struct NewHomeContent: View {
                                 .disabled(true)
                             case .failed:
                                 NavigationLink {
-                                    DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
+                                    NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: poem)
                                 } label: {
                                     FailedPoemCard()
                                 }
                                 .disabled(true)
                             case .loaded:
                                 NavigationLink {
-                                    DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
+                                    NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: poem)
                                 } label: {
                                     PoemCard(poem: poem)
                                 }

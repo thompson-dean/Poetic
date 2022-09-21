@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A13BE0128B9B42800E79A0E /* PracticePoemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A13BE0028B9B42800E79A0E /* PracticePoemView.swift */; };
+		2A13BE0128B9B42800E79A0E /* NewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A13BE0028B9B42800E79A0E /* NewDetailView.swift */; };
 		2A17BA9327D5D8E000E0D755 /* PoeticApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17BA9227D5D8E000E0D755 /* PoeticApp.swift */; };
 		2A17BA9527D5D8E000E0D755 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17BA9427D5D8E000E0D755 /* ContentView.swift */; };
 		2A17BA9727D5D8E000E0D755 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A17BA9627D5D8E000E0D755 /* Assets.xcassets */; };
@@ -46,7 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2A13BE0028B9B42800E79A0E /* PracticePoemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticePoemView.swift; sourceTree = "<group>"; };
+		2A13BE0028B9B42800E79A0E /* NewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDetailView.swift; sourceTree = "<group>"; };
 		2A17BA8F27D5D8E000E0D755 /* Poetic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poetic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A17BA9227D5D8E000E0D755 /* PoeticApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoeticApp.swift; sourceTree = "<group>"; };
 		2A17BA9427D5D8E000E0D755 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -254,7 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				2A17BAB327D6507500E0D755 /* DetailView.swift */,
-				2A13BE0028B9B42800E79A0E /* PracticePoemView.swift */,
+				2A13BE0028B9B42800E79A0E /* NewDetailView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -348,7 +348,7 @@
 				2ACC8A4727E8AFC9002F5B6D /* Links.swift in Sources */,
 				2A37937327D8C9CC00FA48ED /* Errors.swift in Sources */,
 				2A77337A28C777C700C115E9 /* FlatLinkStyle.swift in Sources */,
-				2A13BE0128B9B42800E79A0E /* PracticePoemView.swift in Sources */,
+				2A13BE0128B9B42800E79A0E /* NewDetailView.swift in Sources */,
 				2A38CF7927DF74BB00A44268 /* Poetic.xcdatamodeld in Sources */,
 				2A17BAB027D641D200E0D755 /* PoemViewModel.swift in Sources */,
 				2ACC8A4327E8A441002F5B6D /* DevView.swift in Sources */,
