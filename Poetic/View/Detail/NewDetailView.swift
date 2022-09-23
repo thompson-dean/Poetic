@@ -41,7 +41,6 @@ struct NewDetailView: View {
                         Image(systemName: "star")
                     }
                 }
-            
             }
             ToolbarItem {
                 Button {
@@ -50,8 +49,6 @@ struct NewDetailView: View {
                     Image(systemName: "square.and.arrow.up")
                 }
             }
-            
-
         }
     }
 }

@@ -26,9 +26,7 @@ struct NewHomeView: View {
     }
     
     var body: some View {
-        
         NavigationView {
-            
             ZStack(alignment: .leading) {
                 Image(colorScheme == .light ? "background" : "background-dark")
                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
@@ -39,24 +37,19 @@ struct NewHomeView: View {
                         viewModel.loadRandomPoems(searchTerm: "5")
                     }
                     NewHomeContent(viewModel: viewModel, pcViewModel: pcViewModel)
-                        
                 }
             }
             .navigationBarHidden(true)
-            
         }
         .onAppear {
             pcViewModel.removeNotificationsOlderThan(days: 14)
             pcViewModel.fetchViewedPoems()
-            
         }
-        
     }
 }
 
 
 struct NewHomeContent: View {
-    
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
     
@@ -72,67 +65,50 @@ struct NewHomeContent: View {
     }
     
     var body: some View {
-            VStack(alignment: .leading) {
-                Text("Poetic.")
-                    .fontWithLineHeight(font: newYorkFont, lineHeight: 48)
-                    .foregroundColor(.primary)
-                    .padding(.horizontal, 16)
-                
-                Text("Discover Classic Poetry!")
-                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 16)
-                    .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
-                    .padding(.horizontal, 16)
-                
-                Text("Recommended")
-                    .foregroundColor(.primary)
-                    .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
-                    .padding(.horizontal, 16)
-                    .padding(.top, 12)
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        ForEach(viewModel.randomPoems, id: \.self) { poem in
-                            
-                            switch viewModel.randomPoemState {
-                            case .idle:
-                                NavigationLink {
-                                    NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: poem)
-                                } label: {
-                                    
-                                    PoemCard(poem: poem)
-                                        .onAppear {
-                                            viewModel.loadRandomPoems(searchTerm: "5")
-                                        }
+        VStack(alignment: .leading) {
+            Text("Poetic.")
+                .fontWithLineHeight(font: newYorkFont, lineHeight: 48)
+                .foregroundColor(.primary)
+                .padding(.horizontal, 16)
+            
+            Text("Discover Classic Poetry!")
+                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 16)
+                .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+                .padding(.horizontal, 16)
+            
+            Text("Recommended")
+                .foregroundColor(.primary)
+                .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
+                .padding(.horizontal, 16)
+                .padding(.top, 12)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(viewModel.randomPoems, id: \.self) { poem in
+                        
+                        switch viewModel.randomPoemState {
+                        case .idle:
+                            PoemCard(poem: poem)
+                                .redacted(reason: .placeholder)
+                                .onAppear {
+                                    viewModel.loadRandomPoems(searchTerm: "5")
                                 }
-                                .disabled(true)
-                            case .loading:
-                                NavigationLink {
-                                    NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: poem)
-                                } label: {
-                                    PoemCard(poem: poem)
-                                        .redacted(reason: .placeholder)
-                                }
-                                .disabled(true)
-                            case .failed:
-                                NavigationLink {
-                                    NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: poem)
-                                } label: {
-                                    FailedPoemCard()
-                                }
-                                .disabled(true)
-                            case .loaded:
-                                NavigationLink {
-                                    NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: poem)
-                                } label: {
-                                    PoemCard(poem: poem)
-                                }
-                                .disabled(false)
+                        case .loading:
+                            PoemCard(poem: poem)
+                                .redacted(reason: .placeholder)
+                        case .failed:
+                            FailedPoemCard()
+                        case .loaded:
+                            NavigationLink {
+                                NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: poem)
+                            } label: {
+                                PoemCard(poem: poem)
                             }
-                            
-                            
+                            .disabled(false)
                         }
-                        .padding(.leading, 8)
-                        .buttonStyle(FlatLinkStyle())
+                    }
+                    .padding(.leading, 8)
+                            .buttonStyle(FlatLinkStyle())
                     }
                 }
                 
@@ -174,8 +150,7 @@ struct NewHomeContent: View {
                     .buttonStyle(FlatLinkStyle())
                 }
             }
-            .padding(.top, 48)
-        
+            .padding(.top, 24)
     }
 }
 
@@ -185,34 +160,5 @@ struct ContentView_Previews: PreviewProvider {
         
         NewHomeView(viewModel: PoemViewModel(), pcViewModel: PersistenceController()).preferredColorScheme(.dark)
         
-    }
-}
-
-
-public struct RefreshableScrollView<Content: View>: View {
-    
-    var content: Content
-    var onRefresh: () -> Void
-
-    public init(content: @escaping () -> Content, onRefresh: @escaping () -> Void) {
-        self.content = content()
-        self.onRefresh = onRefresh
-        
-        UITableView.appearance().showsVerticalScrollIndicator = false
-    }
-
-    public var body: some View {
-        List {
-            content
-                .listRowSeparatorTint(.clear)
-                .listRowBackground(Color.clear)
-                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                .background(.clear)
-        }
-        .listStyle(.plain)
-        
-        .refreshable {
-            onRefresh()
-        }
     }
 }
