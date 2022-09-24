@@ -13,17 +13,7 @@ struct NewHomeView: View {
     @ObservedObject var pcViewModel: PersistenceController
     
     let dataManager = DataManager()
-    
     @Environment(\.colorScheme) var colorScheme
-    
-    var newYorkFont: UIFont {
-        let descriptor = UIFont.systemFont(ofSize: 48, weight: .bold).fontDescriptor
-        
-        if let serif = descriptor.withDesign(.serif) {
-            return UIFont(descriptor: serif, size: 0.0)
-        }
-        return UIFont(descriptor: descriptor, size: 0.0)
-    }
     
     var body: some View {
         NavigationView {
@@ -52,22 +42,13 @@ struct NewHomeView: View {
 struct NewHomeContent: View {
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
-    
+    let fonts = Fonts()
     @Environment(\.colorScheme) var colorScheme
-    
-    var newYorkFont: UIFont {
-        let descriptor = UIFont.systemFont(ofSize: 48, weight: .bold).fontDescriptor
-        
-        if let serif = descriptor.withDesign(.serif) {
-            return UIFont(descriptor: serif, size: 0.0)
-        }
-        return UIFont(descriptor: descriptor, size: 0.0)
-    }
     
     var body: some View {
         VStack(alignment: .leading) {
             Text("Poetic.")
-                .fontWithLineHeight(font: newYorkFont, lineHeight: 48)
+                .fontWithLineHeight(font: fonts.newYorkFont, lineHeight: 48)
                 .foregroundColor(.primary)
                 .padding(.horizontal, 16)
             
