@@ -26,29 +26,33 @@ struct NewDetailView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .leading) {
                     
-                    Text("Poetic.")
-                        .fontWithLineHeight(font: fonts.smallNewYorkFont, lineHeight: 24)
-                        .foregroundColor(.primary)
-                    
-                    Text("Discover Classic Poetry!")
-                        .fontWithLineHeight(font: .systemFont(ofSize: 8, weight: .medium), lineHeight: 8)
-                        .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+//                    Text("Poetic.")
+//                        .fontWithLineHeight(font: fonts.smallNewYorkFont, lineHeight: 24)
+//                        .foregroundColor(.primary)
+//
+//                    Text("Discover Classic Poetry!")
+//                        .fontWithLineHeight(font: .systemFont(ofSize: 8, weight: .medium), lineHeight: 8)
+//                        .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
                     
                     Text(poem.author)
                         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 18)
-                        .foregroundColor(.primary)
+//                        .foregroundColor(.primary)
+                        .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
                         .padding(.top, 16)
                     
                     Text(poem.title)
                         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 14.32)
-                        .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+                        .foregroundColor(.primary)
+//                        .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
                         .padding(.bottom, 16)
-                    ZStack {
+                    ZStack(alignment: .leading) {
                         HStack {
                             Rectangle()
+                                .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
                                 .frame(width: 2, alignment: .leading)
                                 .padding(.leading, 6)
                                 .padding(.top, 4)
+                                
                             Spacer()
                         }
                         .frame(alignment: .leading)
@@ -61,10 +65,15 @@ struct NewDetailView: View {
                                         if (index + 1) % 5 == 0 {
                                             Text("\(index + 1)")
                                                 .fontWithLineHeight(font: .systemFont(ofSize: 8, weight: .light), lineHeight: 8)
+                                                
+                                                .background(
+                                                    Image(colorScheme == .light ? "background" : "background-dark")
+                                                    .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+                                                )
+                                                .padding(.vertical, 4)
                                                 .frame(width: 24, height: 8, alignment: .bottomLeading)
-                                                .background(Image(colorScheme == .light ? "background" : "background-dark")
-                                                    .resizable(capInsets: EdgeInsets(), resizingMode: .tile))
-                                                .padding(2)
+                                                
+                        
                                                 
                                         } else {
                                             Text("")
@@ -73,7 +82,7 @@ struct NewDetailView: View {
                                                 
                                         }
                                         Text(poem.lines[index])
-                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 20)
+                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 24)
                                     }
                             }
                         }
@@ -123,10 +132,10 @@ struct PracticePoemView_Previews: PreviewProvider {
             title: "Sonnet 1: From fairest creatures we desire increase",
             author: "William Shakespeare",
             lines: [
-                "From fairest creatures we desire increase, afgafgafgafgafgadfgafdga",
-                "That thereby beauty's rose might never die, ahdfadfadfkjsafg;jasf;g",
-                "But as the riper should by time decease, fadafgafsgafafgafgafgadfg",
-                "His tender heir might bear his memory: afafdgafgafgafgadfgadfg",
+                "From fairest creatures we desire increase, ",
+                "That thereby beauty's rose might never die, ",
+                "But as the riper should by time decease, ",
+                "His tender heir might bear his memory: ",
                 "But thou contracted to thine own bright eyes,",
                 "Feed'st thy light's flame with self-substantial fuel,",
                 "Making a famine where abundance lies,",
@@ -135,8 +144,8 @@ struct PracticePoemView_Previews: PreviewProvider {
                 "And only herald to the gaudy spring,",
                 "Within thine own bud buriest thy content,",
                 "And tender churl mak'st waste in niggarding:",
-                " Pity the world, or else this glutton be,",
-                " To eat the world's due, by the grave and thee."
+                "Pity the world, or else this glutton be,",
+                "To eat the world's due, by the grave and thee."
             ],
             linecount: "14"))
     }
