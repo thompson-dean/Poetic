@@ -18,7 +18,7 @@ struct Fonts {
     }
     
     var smallNewYorkFont: UIFont {
-        let descriptor = UIFont.systemFont(ofSize: 24, weight: .bold).fontDescriptor
+        let descriptor = UIFont.systemFont(ofSize: 16, weight: .bold).fontDescriptor
         
         if let serif = descriptor.withDesign(.serif) {
             return UIFont(descriptor: serif, size: 0.0)

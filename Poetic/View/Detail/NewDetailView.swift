@@ -26,33 +26,30 @@ struct NewDetailView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .leading) {
                     
-//                    Text("Poetic.")
-//                        .fontWithLineHeight(font: fonts.smallNewYorkFont, lineHeight: 24)
-//                        .foregroundColor(.primary)
-//
-//                    Text("Discover Classic Poetry!")
-//                        .fontWithLineHeight(font: .systemFont(ofSize: 8, weight: .medium), lineHeight: 8)
-//                        .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+                    Text("Poetic.")
+                        .fontWithLineHeight(font: fonts.smallNewYorkFont, lineHeight: 16)
+                        .foregroundColor(.primary)
+                    
+                    Text("Discover Classic Poetry!")
+                        .fontWithLineHeight(font: .systemFont(ofSize: 8, weight: .medium), lineHeight: 8)
+                        .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
                     
                     Text(poem.author)
                         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 18)
-//                        .foregroundColor(.primary)
-                        .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+                        .foregroundColor(.primary)
                         .padding(.top, 16)
                     
                     Text(poem.title)
                         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 14.32)
-                        .foregroundColor(.primary)
-//                        .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+                        .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
                         .padding(.bottom, 16)
                     ZStack(alignment: .leading) {
                         HStack {
-                            Rectangle()
+                            RoundedRectangle(cornerRadius: 1)
                                 .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
                                 .frame(width: 2, alignment: .leading)
-                                .padding(.leading, 6)
-                                .padding(.top, 4)
-                                
+                                .padding(.top, 2)
+                            
                             Spacer()
                         }
                         .frame(alignment: .leading)
@@ -60,38 +57,15 @@ struct NewDetailView: View {
                         
                         VStack(alignment: .leading) {
                             ForEach(0..<poem.lines.count, id: \.self) { index in
+                                Text(poem.lines[index].trimmingCharacters(in: .whitespacesAndNewlines))
+                                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 18)
                                 
-                                    HStack {
-                                        if (index + 1) % 5 == 0 {
-                                            Text("\(index + 1)")
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 8, weight: .light), lineHeight: 8)
-                                                
-                                                .background(
-                                                    Image(colorScheme == .light ? "background" : "background-dark")
-                                                    .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
-                                                )
-                                                .padding(.vertical, 4)
-                                                .frame(width: 24, height: 8, alignment: .bottomLeading)
-                                                
-                        
-                                                
-                                        } else {
-                                            Text("")
-                                                .foregroundColor(.clear)
-                                                .frame(width: 24, alignment: .bottomLeading)
-                                                
-                                        }
-                                        Text(poem.lines[index])
-                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 24)
-                                    }
                             }
                         }
-                        
+                        .padding(.leading, 16)
                     }
-                    
-                    
                 }
-                .padding(8)
+                .padding(16)
                 
             }
             .toolbar {
