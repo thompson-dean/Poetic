@@ -21,18 +21,19 @@ struct FavoritesView: View {
                     List {
                         ForEach(pcViewModel.favoritedPoems) { poem in
                             NavigationLink {
-                                DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title ?? "", author: poem.author ?? "", lines: poem.lines ?? [""], linecount: poem.linecount ?? "")
+                                let sentPoem = Poem(title: poem.title ?? "", author: poem.author ?? "", lines: poem.lines ?? [], linecount: poem.linecount ?? "")
+                                NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
                             } label: {
-                                VStack(alignment: .leading, spacing: 7) {
-                                    Text(poem.title ?? "")
-                                        .font(.system(.headline, design: .serif))
-                                        .multilineTextAlignment(.leading)
+                                VStack(alignment: .leading, spacing: 2) {
+                                    
                                     Text(poem.author ?? "")
-                                        .font(.system(.subheadline, design: .serif))
+                                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
+                                        .foregroundColor(.primary)
                                     
-                                    
+                                    Text(poem.title ?? "")
+                                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                                        .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
                                 }
-                                .padding(.bottom, 3)
                                 
                             }
                             

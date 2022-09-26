@@ -100,7 +100,8 @@ struct NewHomeContent: View {
                     .padding(.top, 16)
                 ForEach(pcViewModel.viewedPoems, id: \.self) { poem in
                     NavigationLink {
-                        Text("Hello!")
+                        let sentPoem = Poem(title: poem.title ?? "", author: poem.author ?? "", lines: poem.lines ?? [], linecount: poem.title ?? "")
+                        NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
                     } label: {
                         VStack {
                             HStack {

@@ -97,6 +97,13 @@ struct NewDetailView: View {
                 }
             }
         }
+        .onAppear {
+            if (pcViewModel.viewedPoems.first(where: { $0.title == poem.title}) == nil) {
+                pcViewModel.addViewedPoem(id: UUID(), title: poem.title, author: poem.author, lines: poem.lines)
+            } else {
+                
+            }
+        }
     }
 }
 
