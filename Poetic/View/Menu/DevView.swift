@@ -16,19 +16,21 @@ struct DevView: View {
         
         Form {
             Section {
-                VStack(alignment: .center, spacing: 10) {
+                VStack(alignment: .center, spacing: 8) {
+                    Text("Developer: Dean Thompson")
+                        .fontWeight(.bold)
                     HStack {
                         Spacer()
                         Image("Dean-KeyStone")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 150, height: 150)
-                            .cornerRadius(12)
-                            .padding()
+                            .cornerRadius(8)
+                            .padding(.vertical, 4)
                         Spacer()
                     }
-                    Text("This app is made for those who want to read poetry on the go. When I was a university student I would dedicate hours to reading poetry, but now, as I have gotten older, I have found myself reading less and less. That's why I built this app! So that I and others like me could read more poetry! I hope, with this app, I am able to give my love back to the art form that gave me so, so much. ")
-                        .multilineTextAlignment(.center)
+                    Text("This app is made for those who want to read poetry on the go. When I was a university student, I would dedicate hours to reading poetry, but now, as I have gotten older, I have found myself reading less and less... That's why I built this app! So that I and others like me could read more poetry! I hope, with this app, I am able to give my love back to the art form that gave me so, so much. ")
+                        .multilineTextAlignment(.leading)
                         .padding(.horizontal)
                         .padding(.bottom)
                     

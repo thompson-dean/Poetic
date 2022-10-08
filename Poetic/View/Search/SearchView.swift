@@ -18,7 +18,6 @@ struct SearchView: View {
     @State private var authorSearch = false
     @State var authorSearchTerm = ""
     
-    var colors = Colors()
     var body: some View {
         NavigationView {
             ZStack {

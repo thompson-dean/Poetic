@@ -53,7 +53,7 @@ struct PoemCard: View {
             Spacer()
             
             Text(poem.title)
-                .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                 .lineLimit(2)
                 .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 24)
                 .padding(.bottom, 8)

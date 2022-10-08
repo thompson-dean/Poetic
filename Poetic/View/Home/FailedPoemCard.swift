@@ -44,7 +44,7 @@ struct FailedPoemCard: View {
                 Text("Please connect to the internet.")
                     .fontWeight(.semibold)
             }
-            .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+            .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
         }
     }
 }

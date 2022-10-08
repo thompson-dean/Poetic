@@ -54,7 +54,7 @@ struct NewHomeContent: View {
             
             Text("Discover Classic Poetry!")
                 .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 16)
-                .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                 .padding(.horizontal, 16)
             
             Text("Recommended")
@@ -89,12 +89,12 @@ struct NewHomeContent: View {
                         }
                     }
                     .padding(.leading, 8)
-                            .buttonStyle(FlatLinkStyle())
-                    }
+                    .buttonStyle(FlatLinkStyle())
                 }
-                
-                Text("Recent")
-                    .foregroundColor(.primary)
+            }
+            
+            Text("Recent")
+                .foregroundColor(.primary)
                     .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
                     .padding(.horizontal, 16)
                     .padding(.top, 16)
@@ -113,7 +113,7 @@ struct NewHomeContent: View {
                                     
                                     Text(poem.title ?? "")
                                         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                                        .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+                                        .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                                 }
                                 .padding(.vertical, 8)
                                 .padding(.horizontal, 8)

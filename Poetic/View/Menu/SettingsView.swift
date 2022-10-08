@@ -197,7 +197,7 @@ struct SettingsView: View {
                                     .cornerRadius(5)
                                 
                                 VStack(alignment: .leading, spacing: 5) {
-                                    Text("Poetic version 1.2")
+                                    Text("Poetic version 2.0")
                                     HStack(spacing: 3) {
                                         Text("Made with love by")
                                         

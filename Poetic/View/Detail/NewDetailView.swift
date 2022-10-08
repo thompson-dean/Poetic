@@ -32,7 +32,7 @@ struct NewDetailView: View {
                     
                     Text("Discover Classic Poetry!")
                         .fontWithLineHeight(font: .systemFont(ofSize: 8, weight: .medium), lineHeight: 8)
-                        .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+                        .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                     
                     Text(poem.author)
                         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 18)
@@ -41,12 +41,12 @@ struct NewDetailView: View {
                     
                     Text(poem.title)
                         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 14.32)
-                        .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+                        .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                         .padding(.bottom, 16)
                     ZStack(alignment: .leading) {
                         HStack {
                             RoundedRectangle(cornerRadius: 1)
-                                .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+                                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                                 .frame(width: 2, alignment: .leading)
                                 .padding(.top, 2)
                             

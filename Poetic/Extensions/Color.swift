@@ -22,9 +22,12 @@ extension Color {
       opacity: alpha
     )
   }
-}
-
-struct Colors {
-    let lightPink = Color(0xFFF7FD)
     
+    static var lightThemeColor: Color {
+        return Color(0x645CAA)
+    }
+    
+    static var darkThemeColor: Color {
+        return Color(0xDAAFFC)
+    }
 }
