@@ -18,28 +18,43 @@ struct FavoritesView: View {
             
             ZStack {
                 GeometryReader { geo in
-                    List {
+                    VStack(alignment: .leading) {
                         ForEach(pcViewModel.favoritedPoems) { poem in
+                            
                             NavigationLink {
                                 let sentPoem = Poem(title: poem.title ?? "", author: poem.author ?? "", lines: poem.lines ?? [], linecount: poem.linecount ?? "")
                                 NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
                             } label: {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    
-                                    Text(poem.author ?? "")
-                                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
-                                        .foregroundColor(.primary)
-                                    
-                                    Text(poem.title ?? "")
-                                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                                        .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+                                VStack(alignment: .leading) {
+                                    HStack {
+                                        VStack(alignment: .leading, spacing: 2) {
+                                            
+                                            Text(poem.author ?? "")
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
+                                                .foregroundColor(.primary)
+                                            
+                                            Text(poem.title ?? "")
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                                                .foregroundColor(colorScheme == .light ? Color(0x570861) : Color(0xDAAFFC))
+                                        }
+                                        .padding(.vertical, 8)
+                                        .padding(.horizontal, 8)
+                                        
+                                        Spacer()
+                                        
+                                        Image(systemName: "chevron.right")
+                                            .foregroundColor(.primary)
+                                            .padding(8)
+                                    }
                                 }
-                                
+                                .background(colorScheme == .light ? .white : .black)
+                                .cornerRadius(8)
+                                .padding(.horizontal, 8)
                             }
-                            
                         }
                         .onDelete(perform: pcViewModel.deleteFavoritedPoem)
                     }
+                    
                 }
                 .background(
                     Image(colorScheme == .light ? "background" : "background-dark")
@@ -57,7 +72,6 @@ struct FavoritesView: View {
                 .foregroundColor(.primary)
                 
             }
-            
             .toolbar {
                 ToolbarItem {
                     EditButton()
@@ -78,7 +92,6 @@ struct FavoritesView: View {
 }
 
 struct FavoritesView_Previews: PreviewProvider {
-    
     static var previews: some View {
         FavoritesView(viewModel: PoemViewModel(), pcViewModel: PersistenceController())
     }
