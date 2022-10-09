@@ -38,7 +38,6 @@ struct NewHomeView: View {
     }
 }
 
-
 struct NewHomeContent: View {
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController

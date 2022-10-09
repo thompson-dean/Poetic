@@ -38,10 +38,8 @@ struct ContentView: View {
             }
         )}
         
-        
         return TabView(selection: handler) {
             NewHomeView(viewModel: viewModel, pcViewModel: pcViewModel)
-//            HomeView(viewModel: viewModel, pcViewModel: pcViewModel)
                 .id(home)
                 .tabItem {
                     //Add a different SFSymbol
@@ -54,7 +52,7 @@ struct ContentView: View {
                 }
                 .tag(1)
                 
-            SearchView(viewModel: viewModel, pcViewModel: pcViewModel)
+            IntegratedSearchView(viewModel: viewModel, pcViewModel: pcViewModel)
                 .id(search)
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")

@@ -23,7 +23,9 @@ class DataManager {
         guard !searchTerm.isEmpty else { return }
         
         let api = "https://poetrydb.org/\(filter)/"
-        guard let url = URL(string: "\(api)\(searchTerm)") else { return }
+        let urlString: String = "\(api)\(searchTerm)"
+        guard let url = URL(string: urlString) else { return }
+        print("DEBUG: \(url)")
         
         dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
             

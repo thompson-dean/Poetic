@@ -57,67 +57,6 @@ class PoemViewModel: ObservableObject {
     @Published private(set) var searchState = SearchTitleState.idle
     @Published private(set) var randomPoemState = RandomPoemState.idle
     
-    //SearchView Handling - fetchs data for title search.
-    
-    func loadPoem(searchTerm: String, filter: DataManager.SearchFilter) {
-        
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) { _ in
-            self.poems = []
-            
-            if searchTerm == "" {
-                self.searchState = .idle
-                return
-            } else {
-                self.searchState = .loading
-                
-                self.dataManager.loadData(filter: DataManager.SearchFilter.title, searchTerm: searchTerm) { result in
-                    DispatchQueue.main.async {
-                        switch result {
-                        case .failure(let error):
-                            self.searchState = .failed(error)
-                            self.simpleHapticError()
-                            print(error.localizedDescription)
-                        case .success(let searchedPoems):
-                            self.searchState = .loaded
-                            self.poems = searchedPoems
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    //AuthorView Handling - loads authors poems in AuthorView
-    func loadAuthorPoem(searchTerm: String) {
-        //use cache to stop the API calling again.
-        if let cache = authorTitleCache[searchTerm] {
-            self.state = .loaded
-            self.authorPoems = cache
-            return
-        }
-        
-        authorPoems = []
-        state = .loading
-        
-        dataManager.loadData(filter: DataManager.SearchFilter.author, searchTerm: searchTerm) { result in
-            DispatchQueue.main.async {
-                switch result {
-                    
-                case .failure(let error):
-                    self.state = .failed(error)
-                    print(error.localizedDescription)
-                    self.simpleHapticError()
-                case .success(let searchedPoems):
-                    self.state = .loaded
-                    self.authorPoems = searchedPoems
-                    self.authorTitleCache[searchTerm] = searchedPoems
-
-                }
-            }
-        }
-    }
-    
     //HomeView Handling - fetchs random poem for Home Screen.
     func loadRandomPoems(searchTerm: String) {
         randomPoems = [
@@ -177,6 +116,59 @@ class PoemViewModel: ObservableObject {
                     
                 }
             } 
+        }
+    }
+    
+    func fetchTitlesAndAuthors(searchTerm: String) {
+        
+        
+        if searchTerm.isEmpty {
+            self.searchState = .idle
+        } else {
+            let dispatchGroup = DispatchGroup()
+            timer?.invalidate()
+            timer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) { _ in
+                self.searchState = .loading
+                dispatchGroup.enter()
+                
+                self.dataManager.loadData(filter: .title, searchTerm: searchTerm) { result in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .failure(let error):
+                            self.searchState = .failed(error)
+                            print(error.localizedDescription)
+                            self.simpleHapticError()
+                            self.poems = []
+                        case .success(let searchedPoems):
+                            self.poems = []
+                            self.poems = searchedPoems
+                            dispatchGroup.leave()
+                        }
+                    }
+                }
+                
+                dispatchGroup.enter()
+                self.dataManager.loadData(filter: .author, searchTerm: searchTerm) { result in
+                    
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .failure(let error):
+                            self.searchState = .failed(error)
+                            print(error.localizedDescription)
+                            self.simpleHapticError()
+                            self.authorPoems = []
+                        case .success(let searchedPoems):
+                            self.authorPoems = []
+                            self.authorPoems = searchedPoems
+                            dispatchGroup.leave()
+                        }
+                    }
+                }
+                
+                dispatchGroup.notify(queue: .main) {
+                    self.searchState = .loaded
+                }
+            }
         }
     }
     

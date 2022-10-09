@@ -50,7 +50,7 @@ struct SearchView: View {
                                 authorSearchTerm.isEmpty || author.lowercased().contains(authorSearchTerm.lowercased())
                             }, id: \.self) { author in
                                 NavigationLink {
-                                    AuthorView(viewModel: viewModel, pcViewModel: pcViewModel, author: author)
+                                    
                                 } label: {
                                     VStack(alignment: .leading) {
                                         HStack {
@@ -89,7 +89,7 @@ struct SearchView: View {
                 }
                 .onChange(of: viewModel.searchTerm) { _ in
                     if !authorSearch {
-                        viewModel.loadPoem(searchTerm: viewModel.searchTerm, filter: .title)
+//                        viewModel.loadPoem(searchTerm: viewModel.searchTerm, filter: .title)
                     }
                 }
 
