@@ -17,51 +17,55 @@ struct QuoteView: View {
     
     let links = Links()
     
+    init(viewModel: PoemViewModel, pcViewModel: PersistenceController) {
+        UITableView.appearance().separatorStyle = .none
+        UITableView.appearance().backgroundColor = .clear
+        self.viewModel = viewModel
+        self.pcViewModel = pcViewModel
+    }
+    
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading) {
-                
+            if #available(iOS 16.0, *) {
                 List {
                     ForEach(0..<pcViewModel.quotes.count, id: \.self) { index in
-                        
-                        NavigationLink {
-                            if let poem = pcViewModel.favoritedQuotesPoem.first(where: { $0.title == pcViewModel.quotes[index].title }) {
-                                DetailView(viewModel: viewModel, pcViewModel: pcViewModel, title: poem.title!, author: poem.author!, lines: poem.lines!, linecount: "")
-                            }
-                            
-                        } label: {
-                            VStack(alignment: .center, spacing: 7) {
-                                
-                                Text(("""
-                                            "\(pcViewModel.quotes[index].quote ?? "Unknown Line")"
-                                        """).trimmingCharacters(in: .whitespacesAndNewlines))
-                                .font(.system(.headline, design: .serif))
-                                .multilineTextAlignment(.center)
-                                .padding(.bottom, 5)
-                                
-                                
-                                HStack {
-                                    Spacer()
-                                    
-                                    Text(pcViewModel.quotes[index].title ?? "Unknown Title")
-                                        .font(.system(.caption, design: .serif))
-                                        .multilineTextAlignment(.center)
-                                    
-                                    Text("-")
-                                        .font(.system(.caption, design: .serif))
-                                    
-                                    Text(pcViewModel.quotes[index].author ?? "Unknown Title")
-                                        .italic()
-                                        .font(.system(.caption, design: .serif))
-                                        .multilineTextAlignment(.center)
-                                    Spacer()
-                                    
+                        ZStack {
+                            NavigationLink {
+                                if let poem = pcViewModel.favoritedQuotesPoem.first(where: { $0.title == pcViewModel.quotes[index].title }) {
+                                    NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: Poem(title: poem.title ?? "Unknown", author: poem.author ?? "Unknown", lines: poem.lines ?? ["Unknown"], linecount: "0"))
                                 }
-                                .padding(.bottom, 5)
-                                
+                            } label: {
+                                EmptyView().opacity(0)
                             }
-                            
-                            .padding(.horizontal, 5)
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        
+                                        Text(("""
+                                                            "\(pcViewModel.quotes[index].quote ?? "Unknown Line")"
+                                                        """).trimmingCharacters(in: .whitespacesAndNewlines))
+                                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                                        
+                                        Text(pcViewModel.quotes[index].title ?? "Unknown Title")
+                                            .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .bold), lineHeight: 14)
+                                            .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                                        
+                                        Text(pcViewModel.quotes[index].author ?? "Unknown Title")
+                                            .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .regular), lineHeight: 14)
+                                            .foregroundColor(.primary)
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.primary)
+                                }
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 8)
+                            }
+                            .background(colorScheme == .light ? .white : .black)
+                            .cornerRadius(8)
+                            .padding(.vertical, 4)
                             
                         }
                         .contextMenu {
@@ -77,44 +81,141 @@ struct QuoteView: View {
                                 Label("Cancel", systemImage: "delete.left")
                             }
                         }
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(.init(top: 0,
+                                             leading: 0,
+                                             bottom: 0,
+                                             trailing: 0))
+                        
+                        
                     }
                     .onDelete(perform: pcViewModel.deleteQuotes)
                 }
+                .cornerRadius(8)
+                .padding(8)
+                .listStyle(.plain)
+                .scrollContentBackground(.hidden)
                 .background(
                     Image(colorScheme == .light ? "background" : "background-dark")
-                            .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
-                            .ignoresSafeArea()
-                        
-                    )
-                    .onAppear {
-                        // Set the default to clear
-                        UITableView.appearance().backgroundColor = .clear
-                        pcViewModel.fetchQuotes()
-                    }
-                    .navigationTitle("Quotes")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .foregroundColor(.primary)
-                
-                
-                
-            }
-            .toolbar {
-                ToolbarItem {
-                    EditButton()
+                        .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+                        .ignoresSafeArea()
+                )
+                .onAppear {
+                    pcViewModel.fetchQuotes()
                 }
-               
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        pcViewModel.quotesFilter.toggle()
-                        pcViewModel.fetchQuotes()
-                    } label: {
-                        Image(systemName: "arrow.up.arrow.down")
+                .navigationTitle("Quotes")
+                .navigationBarTitleDisplayMode(.inline)
+                .foregroundColor(.primary)
+                .toolbar {
+                    ToolbarItem {
+                        EditButton()
+                    }
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            pcViewModel.quotesFilter.toggle()
+                            pcViewModel.fetchQuotes()
+                        } label: {
+                            Image(systemName: "arrow.up.arrow.down")
+                        }
+                    }
+                }
+            } else {
+                List {
+                    ForEach(0..<pcViewModel.quotes.count, id: \.self) { index in
+                        ZStack {
+                            NavigationLink {
+                                if let poem = pcViewModel.favoritedQuotesPoem.first(where: { $0.title == pcViewModel.quotes[index].title }) {
+                                    NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: Poem(title: poem.title ?? "Unknown", author: poem.author ?? "Unknown", lines: poem.lines ?? ["Unknown"], linecount: "0"))
+                                }
+                            } label: {
+                                EmptyView().opacity(0)
+                            }
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(("""
+                                                            "\(pcViewModel.quotes[index].quote ?? "Unknown Line")"
+                                                        """).trimmingCharacters(in: .whitespacesAndNewlines))
+                                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                                        
+                                        Text(pcViewModel.quotes[index].title ?? "Unknown Title")
+                                            .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .bold), lineHeight: 14)
+                                            .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                                        
+                                        Text(pcViewModel.quotes[index].author ?? "Unknown Title")
+                                            .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .regular), lineHeight: 14)
+                                            .foregroundColor(.primary)
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.primary)
+                                }
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 8)
+                            }
+                            .background(colorScheme == .light ? .white : .black)
+                            .cornerRadius(8)
+                            .padding(.vertical, 0)
+                            .contextMenu {
+                                Button {
+                                    links.shareQuote(quote: pcViewModel.quotes[index].quote!, title: pcViewModel.quotes[index].title ?? "", author: pcViewModel.quotes[index].author ?? "")
+                                } label: {
+                                    Label("Share", systemImage: "square.and.arrow.up")
+                                }
+                                
+                                Button {
+                                    
+                                } label: {
+                                    Label("Cancel", systemImage: "delete.left")
+                                }
+                            }
+                            
+                        }
+                        
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(.init(top: 0,
+                                             leading: 0,
+                                             bottom: 0,
+                                             trailing: 0))
+                        
+                        
+                    }
+                    .onDelete(perform: pcViewModel.deleteQuotes)
+                }
+                .cornerRadius(8)
+                .padding(8)
+                .listStyle(.plain)
+                .background(
+                    Image(colorScheme == .light ? "background" : "background-dark")
+                        .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+                        .ignoresSafeArea()
+                )
+                .onAppear {
+                    pcViewModel.fetchQuotes()
+                }
+                .navigationTitle("Quotes")
+                .navigationBarTitleDisplayMode(.inline)
+                .foregroundColor(.primary)
+                .toolbar {
+                    ToolbarItem {
+                        EditButton()
+                    }
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            pcViewModel.quotesFilter.toggle()
+                            pcViewModel.fetchQuotes()
+                        } label: {
+                            Image(systemName: "arrow.up.arrow.down")
+                        }
                     }
                 }
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        
     }
 }
 

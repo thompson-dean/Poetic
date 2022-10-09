@@ -30,4 +30,13 @@ extension Color {
     static var darkThemeColor: Color {
         return Color(0xDAAFFC)
     }
+    
+    static var lightHighlightThemeColor: Color {
+        return Color(0x645CAA, alpha: 0.5)
+    }
+    
+    static var darkHighlightThemeColor: Color {
+        return Color(0xDAAFFC, alpha: 0.5)
+    }
+    
 }

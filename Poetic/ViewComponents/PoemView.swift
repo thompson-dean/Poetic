@@ -24,10 +24,9 @@ struct PoemView: View {
         
         if pcViewModel.quotes.contains(where: { $0.quote == poemLines[index] }) {
             Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
-                .font(.system(.callout, design: .serif))
-                .foregroundColor(Color.black)
-                .background(Color.yellow)
-        
+                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 18)
+                .background(colorScheme == . light ? Color.lightHighlightThemeColor : Color.darkHighlightThemeColor)
+                .foregroundColor(colorScheme == . light ? Color.white : Color.black)
                 .contextMenu {
                     Button {
                         links.shareQuote(quote: poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines), title: title, author: author)
@@ -40,12 +39,12 @@ struct PoemView: View {
                         
                     } label: {
                         Label("Cancel", systemImage: "delete.left")
-                            
+                        
                     }
                 }
         } else {
             Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
-                .font(.system(.body, design: .serif))
+                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 18)
                 .contextMenu {
                     Button {
                         if !pcViewModel.quotes.contains(where: { $0.quote == poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines)}) {
@@ -64,7 +63,7 @@ struct PoemView: View {
                         
                     } label: {
                         Label("Cancel", systemImage: "delete.left")
-                            
+                        
                     }
                 }
         }

@@ -57,8 +57,7 @@ struct NewDetailView: View {
                         
                         VStack(alignment: .leading) {
                             ForEach(0..<poem.lines.count, id: \.self) { index in
-                                Text(poem.lines[index].trimmingCharacters(in: .whitespacesAndNewlines))
-                                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 18)
+                                PoemView(viewModel: viewModel, pcViewModel: pcViewModel, author: poem.author, title: poem.title, index: index, poemLines: poem.lines)
                                 
                             }
                         }

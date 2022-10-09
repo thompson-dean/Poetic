@@ -17,7 +17,6 @@ struct FavoritesView: View {
     
     init(viewModel: PoemViewModel, pcViewModel: PersistenceController) {
         UITableView.appearance().separatorStyle = .none
-//        UITableViewCell.appearance().backgroundColor = .clear
         UITableView.appearance().backgroundColor = .clear
         self.viewModel = viewModel
         self.pcViewModel = pcViewModel
