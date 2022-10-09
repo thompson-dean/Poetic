@@ -10,8 +10,6 @@ import SwiftUI
 struct SearchView: View {
     @Environment(\.colorScheme) var colorScheme
     
-    var authors: Authors = Bundle.main.decode("Authors.json")
-    
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
     
@@ -45,25 +43,26 @@ struct SearchView: View {
                     
                     switch authorSearch {
                     case true:
-                        List {
-                            ForEach(authors.authors.filter { author in
-                                authorSearchTerm.isEmpty || author.lowercased().contains(authorSearchTerm.lowercased())
-                            }, id: \.self) { author in
-                                NavigationLink {
-                                    
-                                } label: {
-                                    VStack(alignment: .leading) {
-                                        HStack {
-                                            Text(author)
-                                                .font(.system(.headline, design: .serif))
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        .onAppear {
-                            UITableView.appearance().backgroundColor = .clear
-                        }
+                        Text("")
+//                        List {
+//                            ForEach(viewModel.authors.authors.filter { author in
+//                                authorSearchTerm.isEmpty || author.lowercased().contains(authorSearchTerm.lowercased())
+//                            }, id: \.self) { author in
+//                                NavigationLink {
+//
+//                                } label: {
+//                                    VStack(alignment: .leading) {
+//                                        HStack {
+//                                            Text(author)
+//                                                .font(.system(.headline, design: .serif))
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        .onAppear {
+//                            UITableView.appearance().backgroundColor = .clear
+//                        }
                             
                     case false:
                         

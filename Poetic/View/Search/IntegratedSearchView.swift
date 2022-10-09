@@ -16,6 +16,8 @@ struct IntegratedSearchView: View {
     
     @State private var isTitle: Bool = true
     
+    var authors: Authors = Bundle.main.decode("Authors.json")
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -25,29 +27,6 @@ struct IntegratedSearchView: View {
                     .ignoresSafeArea()
                 VStack(alignment: .leading) {
                     SearchBar(searchTerm: $viewModel.searchTerm)
-                    if viewModel.searchTerm.isEmpty {
-                        VStack {
-                            HStack {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    
-                                    Text("Start Searching!")
-                                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
-                                        .foregroundColor(.primary)
-                                    
-                                    Text("Search through thousands of peoms and authors.")
-                                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                                        .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
-                                }
-                                .padding(.vertical, 8)
-                                .padding(.horizontal, 8)
-                                Spacer()
-                            }
-                            
-                        }
-                        .background(colorScheme == .light ? .white : .black)
-                        .cornerRadius(8)
-                        .padding(.horizontal, 8)
-                    } else {
                         HStack(spacing: 16) {
                             Button {
                                 isTitle.toggle()
@@ -82,20 +61,19 @@ struct IntegratedSearchView: View {
                         }
                         .padding(.vertical, 4)
                         .padding(.horizontal, 8)
-                    }
                     
-                    switch viewModel.searchState {
-                        
-                    case .idle:
-                       Text("IDLE BRO")
-                    case .loading:
-                        Text("LOADING BRO")
-                    case .failed:
-                        Text("FAILED BRO")
-                    case .loaded:
-                        ScrollView(showsIndicators: false) {
-                            if isTitle {
-                                
+                    ScrollView(showsIndicators: false) {
+                        if isTitle {
+                            switch viewModel.searchState {
+                            case .preView:
+                                Text("YOU HAVEN'T SEARCHED YET!")
+                            case .idle:
+                                Text("IDLE BRO")
+                            case .loading:
+                                Text("LOADING BRO")
+                            case .failed:
+                                Text("FAILED BRO")
+                            case .loaded:
                                 ForEach(viewModel.poems, id: \.self) { poem in
                                     NavigationLink {
                                         let sentPoem = Poem(title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.title)
@@ -127,18 +105,21 @@ struct IntegratedSearchView: View {
                                     }
                                     .buttonStyle(FlatLinkStyle())
                                 }
+                            }
                                 
                             } else {
-                                ForEach(viewModel.authorPoems, id: \.self) { poem in
+                                ForEach(authors.authors.filter { author in
+                                    viewModel.searchTerm.isEmpty || author.lowercased().contains(viewModel.searchTerm.lowercased())
+                                }, id: \.self) { author in
                                     NavigationLink {
-                                        Text("Author View: \(poem.author)")
+                                        Text("Author View: \(author)")
                                     } label: {
                                         LazyVStack {
                                             HStack {
                                                 VStack(alignment: .leading, spacing: 2) {
-                                                    Text(poem.author)
+                                                    Text(author)
                                                         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                                                        .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                                                        .foregroundColor(.primary)
                                                 }
                                                 .padding(.vertical, 8)
                                                 .padding(.horizontal, 8)
@@ -157,13 +138,13 @@ struct IntegratedSearchView: View {
                                     .buttonStyle(FlatLinkStyle())
                                 }
                             }
-                        }
+                        
                         
                     }
                     Spacer()
                 }
                 .onChange(of: viewModel.searchTerm) { _ in
-                    viewModel.fetchTitlesAndAuthors(searchTerm: viewModel.searchTerm)
+                    viewModel.fetchTitles(searchTerm: viewModel.searchTerm)
                 }
             }
             .navigationTitle("Search")

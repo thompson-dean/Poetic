@@ -17,6 +17,7 @@ class PoemViewModel: ObservableObject {
     }
     
     enum SearchTitleState {
+        case preView
         case idle
         case loading
         case failed(Error)
@@ -43,7 +44,7 @@ class PoemViewModel: ObservableObject {
     
     //Arrays
     @Published private(set) var poems = [Poem]()
-    @Published private(set) var authorPoems = [Poem]()
+//    @Published private(set) var authors = Bundle.main.decode("Authors.json")
     @Published private(set) var randomPoems = [Poem]()
 
     @Published var searchTerm: String = ""
@@ -54,7 +55,7 @@ class PoemViewModel: ObservableObject {
     
     //State change variables
     @Published private(set) var state = State.idle
-    @Published private(set) var searchState = SearchTitleState.idle
+    @Published private(set) var searchState = SearchTitleState.preView
     @Published private(set) var randomPoemState = RandomPoemState.idle
     
     //HomeView Handling - fetchs random poem for Home Screen.
@@ -115,58 +116,31 @@ class PoemViewModel: ObservableObject {
                     self.randomPoemState = .loaded
                     
                 }
-            } 
+            }
         }
     }
     
-    func fetchTitlesAndAuthors(searchTerm: String) {
-        
-        
-        if searchTerm.isEmpty {
-            self.searchState = .idle
-        } else {
+    func fetchTitles(searchTerm: String) {
+        self.searchState = .idle
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) { _ in
             let dispatchGroup = DispatchGroup()
-            timer?.invalidate()
-            timer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) { _ in
-                self.searchState = .loading
-                dispatchGroup.enter()
-                
-                self.dataManager.loadData(filter: .title, searchTerm: searchTerm) { result in
-                    DispatchQueue.main.async {
-                        switch result {
-                        case .failure(let error):
-                            self.searchState = .failed(error)
-                            print(error.localizedDescription)
-                            self.simpleHapticError()
-                            self.poems = []
-                        case .success(let searchedPoems):
-                            self.poems = []
-                            self.poems = searchedPoems
-                            dispatchGroup.leave()
-                        }
+            self.searchState = .loading
+            dispatchGroup.enter()
+            self.dataManager.loadData(filter: .title, searchTerm: searchTerm) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .failure(let error):
+                        self.searchState = .failed(error)
+                        print(error.localizedDescription)
+                        self.simpleHapticError()
+                        self.poems = []
+                    case .success(let searchedPoems):
+                        self.poems = []
+                        self.poems = searchedPoems
+                        self.searchState = .loaded
+                        dispatchGroup.leave()
                     }
-                }
-                
-                dispatchGroup.enter()
-                self.dataManager.loadData(filter: .author, searchTerm: searchTerm) { result in
-                    
-                    DispatchQueue.main.async {
-                        switch result {
-                        case .failure(let error):
-                            self.searchState = .failed(error)
-                            print(error.localizedDescription)
-                            self.simpleHapticError()
-                            self.authorPoems = []
-                        case .success(let searchedPoems):
-                            self.authorPoems = []
-                            self.authorPoems = searchedPoems
-                            dispatchGroup.leave()
-                        }
-                    }
-                }
-                
-                dispatchGroup.notify(queue: .main) {
-                    self.searchState = .loaded
                 }
             }
         }

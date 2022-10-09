@@ -23,7 +23,7 @@ class DataManager {
         guard !searchTerm.isEmpty else { return }
         
         let api = "https://poetrydb.org/\(filter)/"
-        let urlString: String = "\(api)\(searchTerm)"
+        var urlString: String = "\(api)\(searchTerm)"
         guard let url = URL(string: urlString) else { return }
         print("DEBUG: \(url)")
         
@@ -46,8 +46,8 @@ class DataManager {
             
             do {
                 let decoder = JSONDecoder()
-                let poems = try decoder.decode([Poem].self, from: data)
-                completion(.success(poems))
+                let data = try decoder.decode([Poem].self, from: data)
+                completion(.success(data))
                 self.dataTask?.cancel()
             } catch {
                 completion(.failure(.invalidData))
