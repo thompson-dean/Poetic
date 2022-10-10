@@ -224,7 +224,7 @@ struct IntegratedSearchView: View {
                     }
                     Spacer()
                 }
-                .onChange(of: viewModel.searchTerm) { _ in
+                .onAppear {
                     viewModel.listenToSearch()
                 }
                 .onChange(of: viewModel.searchState) { _ in

@@ -42,11 +42,11 @@ class PoemViewModel: ObservableObject {
     private let apiService: APIServiceProtocol
     private var cancellables: Set<AnyCancellable> = []
     
-    @Published var chatListLoadingError: String = ""
+    @Published var searchListLoadingError: String = ""
     @Published var showAlert: Bool = false
     
     var authorTitleCache: [String: [Poem]] = [:]
-    
+   
     @Published private(set) var state = State.idle
     @Published private(set) var searchState = SearchTitleState.idle
     @Published private(set) var randomPoemState = RandomPoemState.idle
@@ -87,23 +87,23 @@ class PoemViewModel: ObservableObject {
     
     func listenToSearch() {
         $searchTerm
+            .debounce(for: .milliseconds(350), scheduler: RunLoop.main, options: .none)
             .removeDuplicates()
-            .debounce(for: 0.3, scheduler: DispatchQueue.main)
             .sink { [weak self] delayQuery in
                 guard let self = self else { return }
                 if !delayQuery.isEmpty {
                     if self.isTitle {
-                        self.fetchTitles(searchTerm: self.searchTerm)
-                    } 
+                        self.fetchTitles(searchTerm: delayQuery)
+                    }
                 } else {
                     self.searchState = .idle
                 }
-            }.store(in: &cancellables)
-        
+            }
+            .store(in: &self.cancellables)
     }
     
     func createAlert( with error: NetworkError ) {
-        chatListLoadingError = error.backendError == nil ? error.initialError.localizedDescription : error.backendError!.message
+        searchListLoadingError = error.backendError == nil ? error.initialError.localizedDescription : error.backendError!.message
         self.showAlert = true
     }
     

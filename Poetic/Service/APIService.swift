@@ -26,8 +26,6 @@ extension APIService: APIServiceProtocol {
         let urlString: String = APIConst.api + "\(filter)/\(searchTerm)"
         let url = URL(string: urlString)!
         print("DEBUG: \(urlString)")
-        count += 1
-        print("DEBUG: \(count)")
         
         return AF.request(url, method: .get)
             .validate()
