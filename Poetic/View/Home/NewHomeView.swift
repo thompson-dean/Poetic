@@ -12,7 +12,6 @@ struct NewHomeView: View {
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
     
-    let dataManager = DataManager()
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {

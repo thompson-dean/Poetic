@@ -6,61 +6,125 @@
 //
 
 import SwiftUI
+import Combine
 import CoreHaptics
 
 class PoemViewModel: ObservableObject {
     enum State {
         case idle
         case loading
-        case failed(Error)
+        case failed
         case loaded
     }
     
     enum SearchTitleState {
-        case preView
         case idle
         case loading
-        case failed(Error)
+        case failed
         case loaded
     }
     
     enum RandomPoemState  {
         case idle
         case loading
-        case failed(Error)
+        case failed
         case loaded
     }
-    
-    
-    let dataManager = DataManager()
-    
-    @Published var fontSize: CGFloat = 14
+
     @AppStorage("darkModeEnabled") var darkModeEnabled = false
     @AppStorage("systemThemeEnabled") var systemThemeEnabled = true
-    
-    var floatedFontSize: CGFloat {
-        CGFloat(fontSize)
-    }
-    
-    //Arrays
+   
     @Published private(set) var poems = [Poem]()
-//    @Published private(set) var authors = Bundle.main.decode("Authors.json")
     @Published private(set) var randomPoems = [Poem]()
-
     @Published var searchTerm: String = ""
+    @Published var isTitle: Bool = true
+    
+    private let apiService: APIServiceProtocol
+    private var cancellables: Set<AnyCancellable> = []
+    
+    @Published var chatListLoadingError: String = ""
+    @Published var showAlert: Bool = false
     
     var authorTitleCache: [String: [Poem]] = [:]
     
-    var timer: Timer?
-    
-    //State change variables
     @Published private(set) var state = State.idle
-    @Published private(set) var searchState = SearchTitleState.preView
+    @Published private(set) var searchState = SearchTitleState.idle
     @Published private(set) var randomPoemState = RandomPoemState.idle
     
-    //HomeView Handling - fetchs random poem for Home Screen.
+    init(apiService: APIServiceProtocol = APIService.shared) {
+        self.apiService = apiService
+    }
+    
     func loadRandomPoems(searchTerm: String) {
-        randomPoems = [
+        randomPoemState = .loading
+        randomPoems = exampleData()
+        apiService.fetchPoems(searchTerm: searchTerm, filter: .random)
+            .sink { [weak self] (dataResponse) in
+                if dataResponse.error != nil {
+                    self?.createAlert(with: dataResponse.error!)
+                    self?.randomPoemState = .failed
+                } else {
+                    self?.randomPoems = dataResponse.value!
+                    self?.randomPoemState = .loaded
+                }
+            }.store(in: &cancellables)
+    }
+    
+    func fetchTitles(searchTerm: String) {
+        searchState = .loading
+        randomPoems = exampleData()
+        apiService.fetchPoems(searchTerm: searchTerm, filter: .title)
+            .sink { [weak self] (dataResponse) in
+                if dataResponse.error != nil {
+                    self?.createAlert(with: dataResponse.error!)
+                    self?.searchState = .failed
+                } else {
+                    self?.poems = dataResponse.value!
+                    self?.searchState = .loaded
+                }
+            }.store(in: &cancellables)
+    }
+    
+    func listenToSearch() {
+        $searchTerm
+            .removeDuplicates()
+            .debounce(for: 0.3, scheduler: DispatchQueue.main)
+            .sink { [weak self] delayQuery in
+                guard let self = self else { return }
+                if !delayQuery.isEmpty {
+                    if self.isTitle {
+                        self.fetchTitles(searchTerm: self.searchTerm)
+                    } 
+                } else {
+                    self.searchState = .idle
+                }
+            }.store(in: &cancellables)
+        
+    }
+    
+    func createAlert( with error: NetworkError ) {
+        chatListLoadingError = error.backendError == nil ? error.initialError.localizedDescription : error.backendError!.message
+        self.showAlert = true
+    }
+    
+    //Handle Haptics
+    func simpleHapticSuccess() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
+    
+    func simpleHapticError() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.error)
+    }
+    
+    func mediumImpactHaptic() {
+        let generator = UIImpactFeedbackGenerator()
+        generator.impactOccurred(intensity: 1.0)
+    }
+    
+    func exampleData() -> [Poem] {
+        let poems = [
             Poem(
                 title: "Sonnet 1: From fairest creatures we desire increase",
                 author: "William Shakespeare",
@@ -102,64 +166,7 @@ class PoemViewModel: ObservableObject {
                 ],
                 linecount: "14")
         ]
-        randomPoemState = .idle
-        randomPoemState = .loading
-        dataManager.loadData(filter: DataManager.SearchFilter.random, searchTerm: searchTerm) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .failure(let error):
-                    self.randomPoemState = .failed(error)
-                    print(error.localizedDescription)
-                    self.simpleHapticError()
-                case .success(let searchedPoems):
-                    self.randomPoems = searchedPoems
-                    self.randomPoemState = .loaded
-                    
-                }
-            }
-        }
-    }
-    
-    func fetchTitles(searchTerm: String) {
-        self.searchState = .idle
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) { _ in
-            let dispatchGroup = DispatchGroup()
-            self.searchState = .loading
-            dispatchGroup.enter()
-            self.dataManager.loadData(filter: .title, searchTerm: searchTerm) { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .failure(let error):
-                        self.searchState = .failed(error)
-                        print(error.localizedDescription)
-                        self.simpleHapticError()
-                        self.poems = []
-                    case .success(let searchedPoems):
-                        self.poems = []
-                        self.poems = searchedPoems
-                        self.searchState = .loaded
-                        dispatchGroup.leave()
-                    }
-                }
-            }
-        }
-    }
-    
-    //Handle Haptics
-    func simpleHapticSuccess() {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.success)
-    }
-    
-    func simpleHapticError() {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.error)
-    }
-    
-    func mediumImpactHaptic() {
-        let generator = UIImpactFeedbackGenerator()
-        generator.impactOccurred(intensity: 1.0)
+        return poems
     }
 }
 
