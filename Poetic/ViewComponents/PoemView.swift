@@ -26,7 +26,6 @@ struct PoemView: View {
             Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
                 .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 18)
                 .background(colorScheme == . light ? Color.lightHighlightThemeColor : Color.darkHighlightThemeColor)
-                .foregroundColor(colorScheme == . light ? Color.white : Color.black)
                 .contextMenu {
                     Button {
                         links.shareQuote(quote: poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines), title: title, author: author)
