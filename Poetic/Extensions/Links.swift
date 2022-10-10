@@ -46,7 +46,7 @@ Found on Poetic, your favorite classical poetry app. Available here:  https://ap
     
     func shareApp() {
         let sharedString = "https://apps.apple.com/us/app/poetic/id1614416936"
-
+        
         let av = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
         
         let scenes = UIApplication.shared.connectedScenes

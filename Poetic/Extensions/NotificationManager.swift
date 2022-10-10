@@ -9,15 +9,13 @@ import UserNotifications
 
 
 class NotificationManager: ObservableObject {
-    
-    private let authors = ["Edgar Allan Poe", "Emily Bronte", "Emily Dickinson", "Jane Austen", "Lewis Carroll", "William Blake", "William Shakespeare", "John Keats", "Oscar Wilde"]
+    private let authors: Authors = Bundle.main.decode("Authors.json")
     
     @AppStorage("notificationOn") var notificationOn = true
     
     let center = UNUserNotificationCenter.current()
     
     func requestAuthorization() {
-        
         let options: UNAuthorizationOptions = [.alert, .badge, .sound]
         center.requestAuthorization(options: options) { success, error in
             if let error = error {
@@ -32,9 +30,8 @@ class NotificationManager: ObservableObject {
     
     
     func addNotification() {
-        
         let content = UNMutableNotificationContent()
-        content.title = "\(authors.randomElement() ?? "Poetic") awaits you"
+        content.title = "\(authors.authors.randomElement() ?? "Poetic") awaits you"
         content.subtitle = "Come read some poems."
         content.sound = .default
         content.badge = 1
