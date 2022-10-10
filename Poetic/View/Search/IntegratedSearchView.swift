@@ -29,43 +29,42 @@ struct IntegratedSearchView: View {
                     .ignoresSafeArea()
                 VStack(alignment: .leading) {
                     SearchBar(searchTerm: $viewModel.searchTerm)
-                    if !viewModel.searchTerm.isEmpty {
-                        HStack(spacing: 16) {
-                            Button {
-                                viewModel.isTitle = true
-                            } label: {
-                                Text("title")
-                                    .fontWeight(viewModel.isTitle ? .semibold : .regular)
-                                    .fontWithLineHeight(font: .systemFont(ofSize: 18), lineHeight: 18)
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 8)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .stroke(lineWidth: 2)
-                                    )
-                            }
-                            .disabled(viewModel.isTitle)
-                            .foregroundColor(viewModel.isTitle ? colorScheme == .light ? .lightThemeColor : .darkThemeColor : .primary)
-                            Button {
-                                viewModel.isTitle = false
-                            } label: {
-                                Text("author")
-                                    .fontWeight(viewModel.isTitle ? .regular : .semibold)
-                                    .fontWithLineHeight(font: .systemFont(ofSize: 18), lineHeight: 18)
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 8)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .stroke(lineWidth: 2)
-                                    )
-                            }
-                            .disabled(!viewModel.isTitle)
-                            .foregroundColor(viewModel.isTitle ? .primary : colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                    HStack(spacing: 16) {
+                        Button {
+                            viewModel.isTitle = true
+                        } label: {
+                            Text("title")
+                                .fontWeight(viewModel.isTitle ? .semibold : .regular)
+                                .fontWithLineHeight(font: .systemFont(ofSize: 18), lineHeight: 18)
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 8)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(lineWidth: 2)
+                                )
                         }
-                        .padding(.vertical, 4)
-                        .padding(.horizontal, 8)
+                        .disabled(viewModel.isTitle)
+                        .foregroundColor(viewModel.isTitle ? colorScheme == .light ? .lightThemeColor : .darkThemeColor : .primary)
+                        Button {
+                            viewModel.isTitle = false
+                        } label: {
+                            Text("author")
+                                .fontWeight(viewModel.isTitle ? .regular : .semibold)
+                                .fontWithLineHeight(font: .systemFont(ofSize: 18), lineHeight: 18)
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 8)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(lineWidth: 2)
+                                )
+                        }
+                        .disabled(!viewModel.isTitle)
+                        .foregroundColor(viewModel.isTitle ? .primary : colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                     }
-                        
+                    .padding(.vertical, 4)
+                    .padding(.horizontal, 8)
+                    
+                    
                     ScrollView(showsIndicators: false) {
                         if viewModel.isTitle {
                             switch viewModel.searchState {
@@ -74,7 +73,7 @@ struct IntegratedSearchView: View {
                                     HStack {
                                         Image(systemName: "magnifyingglass")
                                             .foregroundColor(.primary)
-                                            .font(.largeTitle)
+                                            .font(.title)
                                             .padding(.vertical, 8)
                                             .padding(.leading, 8)
                                         

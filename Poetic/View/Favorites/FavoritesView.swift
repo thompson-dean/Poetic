@@ -28,13 +28,19 @@ struct FavoritesView: View {
                 VStack {
                     VStack {
                         HStack {
+                            Image(systemName: "star")
+                                .foregroundColor(.primary)
+                                .font(.title)
+                                .padding(.vertical, 8)
+                                .padding(.leading, 8)
+                            
                             VStack(alignment: .leading, spacing: 2) {
                                 
                                 Text("No favorited poems...")
                                     .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
                                     .foregroundColor(.primary)
                                 
-                                Text("Star poems to save them in your favorites.")
+                                Text("Star your favorite poems.")
                                     .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
                                     .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                             }

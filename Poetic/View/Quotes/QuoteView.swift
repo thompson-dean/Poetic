@@ -30,6 +30,11 @@ struct QuoteView: View {
                 VStack {
                     VStack {
                         HStack {
+                            Image(systemName: "quote.bubble")
+                                .foregroundColor(.primary)
+                                .font(.title)
+                                .padding(.vertical, 8)
+                                .padding(.leading, 8)
                             VStack(alignment: .leading, spacing: 2) {
                                 
                                 Text("No favorited quotes...")
@@ -90,13 +95,16 @@ struct QuoteView: View {
                                             Text(("""
                                                             "\(pcViewModel.quotes[index].quote ?? "Unknown Line")"
                                                         """).trimmingCharacters(in: .whitespacesAndNewlines))
+                                            .fixedSize(horizontal: false, vertical: true)
                                             .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
                                             
                                             Text(pcViewModel.quotes[index].title ?? "Unknown Title")
+                                                .fixedSize(horizontal: false, vertical: true)
                                                 .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .semibold), lineHeight: 16)
                                                 .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                                             
                                             Text(pcViewModel.quotes[index].author ?? "Unknown Title")
+                                                .fixedSize(horizontal: false, vertical: true)
                                                 .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .regular), lineHeight: 16)
                                                 .foregroundColor(.primary)
                                         }
@@ -180,21 +188,22 @@ struct QuoteView: View {
                                 VStack(alignment: .leading) {
                                     HStack {
                                         VStack(alignment: .leading, spacing: 2) {
+                                            
                                             Text(("""
                                                             "\(pcViewModel.quotes[index].quote ?? "Unknown Line")"
                                                         """).trimmingCharacters(in: .whitespacesAndNewlines))
-                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                                            .fixedSize(horizontal: false, vertical: true)
+                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
                                             
                                             Text(pcViewModel.quotes[index].title ?? "Unknown Title")
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .bold), lineHeight: 14)
+                                                .fixedSize(horizontal: false, vertical: true)
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .semibold), lineHeight: 16)
                                                 .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
-                                                .lineLimit(1)
-                                                .padding(.top, 8)
                                             
                                             Text(pcViewModel.quotes[index].author ?? "Unknown Title")
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .regular), lineHeight: 14)
+                                                .fixedSize(horizontal: false, vertical: true)
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .regular), lineHeight: 16)
                                                 .foregroundColor(.primary)
-                                                .lineLimit(1)
                                         }
                                         
                                         Spacer()
@@ -207,33 +216,32 @@ struct QuoteView: View {
                                 }
                                 .background(colorScheme == .light ? .white : .black)
                                 .cornerRadius(8)
-                                .padding(.vertical, 0)
-                                .contextMenu {
-                                    Button {
-                                        links.shareQuote(quote: pcViewModel.quotes[index].quote!, title: pcViewModel.quotes[index].title ?? "", author: pcViewModel.quotes[index].author ?? "")
-                                    } label: {
-                                        Label("Share", systemImage: "square.and.arrow.up")
-                                    }
-                                    
-                                    Button {
-                                        
-                                    } label: {
-                                        Label("Cancel", systemImage: "delete.left")
-                                    }
-                                }
+                                .padding(.vertical, 4)
                                 
                             }
-                            
+                            .contextMenu {
+                                Button {
+                                    links.shareQuote(quote: pcViewModel.quotes[index].quote!, title: pcViewModel.quotes[index].title ?? "", author: pcViewModel.quotes[index].author ?? "")
+                                } label: {
+                                    Label("Share", systemImage: "square.and.arrow.up")
+                                }
+                                
+                                Button {
+                                    
+                                } label: {
+                                    Label("Cancel", systemImage: "delete.left")
+                                }
+                            }
                             .listRowBackground(Color.clear)
                             .listRowSeparator(.hidden)
                             .listRowInsets(.init(top: 0,
                                                  leading: 0,
                                                  bottom: 0,
                                                  trailing: 0))
-                            
-                            
                         }
-                        .onDelete(perform: pcViewModel.deleteQuotes)
+                        .onDelete { indexSet in
+                            pcViewModel.deleteFavoritedPoem(indexSet: indexSet)
+                        }
                     }
                     .cornerRadius(8)
                     .padding(8)
@@ -241,14 +249,14 @@ struct QuoteView: View {
                     .background(
                         Image(colorScheme == .light ? "background" : "background-dark")
                             .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
-                            .ignoresSafeArea()
+                            .ignoresSafeArea(.all)
                     )
-                    .onAppear {
-                        pcViewModel.fetchQuotes()
-                    }
                     .navigationTitle("Quotes")
                     .navigationBarTitleDisplayMode(.inline)
                     .foregroundColor(.primary)
+                    .onAppear {
+                        pcViewModel.fetchQuotes()
+                    }
                     .toolbar {
                         ToolbarItem {
                             EditButton()
