@@ -188,10 +188,13 @@ struct QuoteView: View {
                                             Text(pcViewModel.quotes[index].title ?? "Unknown Title")
                                                 .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .bold), lineHeight: 14)
                                                 .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                                                .lineLimit(1)
+                                                .padding(.top, 8)
                                             
                                             Text(pcViewModel.quotes[index].author ?? "Unknown Title")
                                                 .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .regular), lineHeight: 14)
                                                 .foregroundColor(.primary)
+                                                .lineLimit(1)
                                         }
                                         
                                         Spacer()
