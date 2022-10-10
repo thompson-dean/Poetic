@@ -32,11 +32,11 @@ extension Color {
     }
     
     static var lightHighlightThemeColor: Color {
-        return Color(0x645CAA, alpha: 0.5)
+        return Color(0x645CAA, alpha: 0.3)
     }
     
     static var darkHighlightThemeColor: Color {
-        return Color(0xDAAFFC, alpha: 0.5)
+        return Color(0xDAAFFC, alpha: 0.3)
     }
     
 }

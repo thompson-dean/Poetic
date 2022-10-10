@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PKHUD
 
 struct IntegratedSearchView: View {
     
@@ -14,8 +15,9 @@ struct IntegratedSearchView: View {
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
     
-    @State private var isTitle: Bool = true
-    
+    @State private var isLoading: Bool = false
+    @State private var didFail: Bool = false
+    @State private var authorSearchTerm: String = ""
     var authors: Authors = Bundle.main.decode("Authors.json")
     
     var body: some View {
@@ -27,12 +29,13 @@ struct IntegratedSearchView: View {
                     .ignoresSafeArea()
                 VStack(alignment: .leading) {
                     SearchBar(searchTerm: $viewModel.searchTerm)
+                    if !viewModel.searchTerm.isEmpty {
                         HStack(spacing: 16) {
                             Button {
-                                isTitle.toggle()
+                                viewModel.isTitle = true
                             } label: {
                                 Text("title")
-                                    .fontWeight(isTitle ? .semibold : .regular)
+                                    .fontWeight(viewModel.isTitle ? .semibold : .regular)
                                     .fontWithLineHeight(font: .systemFont(ofSize: 18), lineHeight: 18)
                                     .padding(.horizontal, 8)
                                     .padding(.vertical, 8)
@@ -41,13 +44,13 @@ struct IntegratedSearchView: View {
                                             .stroke(lineWidth: 2)
                                     )
                             }
-                            .disabled(isTitle)
-                            .foregroundColor(isTitle ? colorScheme == .light ? .lightThemeColor : .darkThemeColor : .primary)
+                            .disabled(viewModel.isTitle)
+                            .foregroundColor(viewModel.isTitle ? colorScheme == .light ? .lightThemeColor : .darkThemeColor : .primary)
                             Button {
-                                isTitle.toggle()
+                                viewModel.isTitle = false
                             } label: {
                                 Text("author")
-                                    .fontWeight(isTitle ? .regular : .semibold)
+                                    .fontWeight(viewModel.isTitle ? .regular : .semibold)
                                     .fontWithLineHeight(font: .systemFont(ofSize: 18), lineHeight: 18)
                                     .padding(.horizontal, 8)
                                     .padding(.vertical, 8)
@@ -56,23 +59,101 @@ struct IntegratedSearchView: View {
                                             .stroke(lineWidth: 2)
                                     )
                             }
-                            .disabled(!isTitle)
-                            .foregroundColor(isTitle ? .primary : colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                            .disabled(!viewModel.isTitle)
+                            .foregroundColor(viewModel.isTitle ? .primary : colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                         }
                         .padding(.vertical, 4)
                         .padding(.horizontal, 8)
-                    
+                    }
+                        
                     ScrollView(showsIndicators: false) {
-                        if isTitle {
+                        if viewModel.isTitle {
                             switch viewModel.searchState {
-                            case .preView:
-                                Text("YOU HAVEN'T SEARCHED YET!")
                             case .idle:
-                                Text("IDLE BRO")
+                                VStack {
+                                    HStack {
+                                        Image(systemName: "magnifyingglass")
+                                            .foregroundColor(.primary)
+                                            .font(.largeTitle)
+                                            .padding(.vertical, 8)
+                                            .padding(.leading, 8)
+                                        
+                                        VStack(alignment: .leading, spacing: 2) {
+                                            Text("Search for poems or authors.")
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                                                .foregroundColor(.primary)
+                                            Text("Thousands of poems to discover!")
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
+                                                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                                        }
+                                        .padding(.vertical, 8)
+                                        .padding(.horizontal, 8)
+                                        
+                                        Spacer()
+                                    }
+                                }
+                                .background(colorScheme == .light ? .white : .black)
+                                .cornerRadius(8)
+                                .padding(.horizontal, 8)
                             case .loading:
-                                Text("LOADING BRO")
+                                VStack {
+                                    ProgressView()
+                                        .padding()
+                                    VStack {
+                                        HStack {
+                                            Image(systemName: "magnifyingglass")
+                                                .foregroundColor(.primary)
+                                                .font(.largeTitle)
+                                                .padding(.vertical, 8)
+                                                .padding(.leading, 8)
+                                            
+                                            VStack(alignment: .leading, spacing: 2) {
+                                                Text("Search for poems or authors.")
+                                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                                                    .foregroundColor(.primary)
+                                                Text("Thousands of poems to discover!")
+                                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
+                                                    .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                                            }
+                                            .padding(.vertical, 8)
+                                            .padding(.horizontal, 8)
+                                            
+                                            Spacer()
+                                        }
+                                    }
+                                    .background(colorScheme == .light ? .white : .black)
+                                    .cornerRadius(8)
+                                    .padding(.horizontal, 8)
+                                    .redacted(reason: .placeholder)
+                                }
+                                
                             case .failed:
-                                Text("FAILED BRO")
+                                VStack {
+                                    HStack {
+                                        Image(systemName: "magnifyingglass")
+                                            .foregroundColor(.primary)
+                                            .font(.largeTitle)
+                                            .padding(.vertical, 8)
+                                            .padding(.leading, 8)
+                                        
+                                        VStack(alignment: .leading, spacing: 2) {
+                                            Text("Search for poems or authors.")
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                                                .foregroundColor(.primary)
+                                            Text("Thousands of poems to discover!")
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
+                                                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                                        }
+                                        .padding(.vertical, 8)
+                                        .padding(.horizontal, 8)
+                                        
+                                        Spacer()
+                                    }
+                                }
+                                .background(colorScheme == .light ? .white : .black)
+                                .cornerRadius(8)
+                                .padding(.horizontal, 8)
+                                .redacted(reason: .placeholder)
                             case .loaded:
                                 ForEach(viewModel.poems, id: \.self) { poem in
                                     NavigationLink {
@@ -143,12 +224,25 @@ struct IntegratedSearchView: View {
                     }
                     Spacer()
                 }
-                .onChange(of: viewModel.searchTerm) { _ in
-                    viewModel.fetchTitles(searchTerm: viewModel.searchTerm)
+                .onAppear {
+                    viewModel.listenToSearch()
+                }
+                .onChange(of: viewModel.searchState) { _ in
+                    switch viewModel.searchState {
+                    case .idle:
+                        didFail = false
+                    case .loading:
+                        didFail = false
+                    case .failed:
+                        didFail = true
+                    case .loaded:
+                        didFail = false
+                    }
                 }
             }
             .navigationTitle("Search")
             .navigationBarTitleDisplayMode(.inline)
+            .PKHUD(isPresented: $didFail, HUDContent: .labeledError(title: "No Result or Error.", subtitle: "Try again."), delay: 1)
         }
     }
 }

@@ -90,14 +90,14 @@ struct QuoteView: View {
                                             Text(("""
                                                             "\(pcViewModel.quotes[index].quote ?? "Unknown Line")"
                                                         """).trimmingCharacters(in: .whitespacesAndNewlines))
-                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
                                             
                                             Text(pcViewModel.quotes[index].title ?? "Unknown Title")
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .bold), lineHeight: 14)
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .semibold), lineHeight: 16)
                                                 .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                                             
                                             Text(pcViewModel.quotes[index].author ?? "Unknown Title")
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .regular), lineHeight: 14)
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .regular), lineHeight: 16)
                                                 .foregroundColor(.primary)
                                         }
                                         
