@@ -96,16 +96,16 @@ struct QuoteView: View {
                                                             "\(pcViewModel.quotes[index].quote ?? "Unknown Line")"
                                                         """).trimmingCharacters(in: .whitespacesAndNewlines))
                                             .fixedSize(horizontal: false, vertical: true)
-                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
+                                            .fontWithLineHeight(font: .systemFont(ofSize: 14, weight: .bold), lineHeight: 20)
                                             
                                             Text(pcViewModel.quotes[index].title ?? "Unknown Title")
                                                 .fixedSize(horizontal: false, vertical: true)
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .semibold), lineHeight: 16)
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 10, weight: .semibold), lineHeight: 14)
                                                 .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                                             
                                             Text(pcViewModel.quotes[index].author ?? "Unknown Title")
                                                 .fixedSize(horizontal: false, vertical: true)
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .regular), lineHeight: 16)
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 10, weight: .regular), lineHeight: 14)
                                                 .foregroundColor(.primary)
                                         }
                                         
@@ -193,16 +193,16 @@ struct QuoteView: View {
                                                             "\(pcViewModel.quotes[index].quote ?? "Unknown Line")"
                                                         """).trimmingCharacters(in: .whitespacesAndNewlines))
                                             .fixedSize(horizontal: false, vertical: true)
-                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
+                                            .fontWithLineHeight(font: .systemFont(ofSize: 14, weight: .bold), lineHeight: 20)
                                             
                                             Text(pcViewModel.quotes[index].title ?? "Unknown Title")
                                                 .fixedSize(horizontal: false, vertical: true)
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .semibold), lineHeight: 16)
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 10, weight: .semibold), lineHeight: 14)
                                                 .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                                             
                                             Text(pcViewModel.quotes[index].author ?? "Unknown Title")
                                                 .fixedSize(horizontal: false, vertical: true)
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .regular), lineHeight: 16)
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 10, weight: .regular), lineHeight: 14)
                                                 .foregroundColor(.primary)
                                         }
                                         

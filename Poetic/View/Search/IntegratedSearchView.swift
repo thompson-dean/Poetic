@@ -17,25 +17,26 @@ struct IntegratedSearchView: View {
     
     @State private var isLoading: Bool = false
     @State private var didFail: Bool = false
-    @State private var authorSearchTerm: String = ""
+    @FocusState private var isFocused: Bool
     var authors: Authors = Bundle.main.decode("Authors.json")
     
     var body: some View {
         NavigationView {
             ZStack {
-                
                 Image(colorScheme == .light ? "background" : "background-dark")
                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                     .ignoresSafeArea()
                 VStack(alignment: .leading) {
                     SearchBar(searchTerm: $viewModel.searchTerm)
+                        .padding(.bottom, -4)
+                        .focused($isFocused)
                     HStack(spacing: 16) {
                         Button {
                             viewModel.isTitle = true
                         } label: {
                             Text("title")
                                 .fontWeight(viewModel.isTitle ? .semibold : .regular)
-                                .fontWithLineHeight(font: .systemFont(ofSize: 18), lineHeight: 18)
+                                .fontWithLineHeight(font: .systemFont(ofSize: 16), lineHeight: 16)
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 8)
                                 .overlay(
@@ -50,7 +51,7 @@ struct IntegratedSearchView: View {
                         } label: {
                             Text("author")
                                 .fontWeight(viewModel.isTitle ? .regular : .semibold)
-                                .fontWithLineHeight(font: .systemFont(ofSize: 18), lineHeight: 18)
+                                .fontWithLineHeight(font: .systemFont(ofSize: 16), lineHeight: 16)
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 8)
                                 .overlay(
@@ -61,7 +62,7 @@ struct IntegratedSearchView: View {
                         .disabled(!viewModel.isTitle)
                         .foregroundColor(viewModel.isTitle ? .primary : colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                     }
-                    .padding(.vertical, 4)
+                    .padding(.bottom, 4)
                     .padding(.horizontal, 8)
                     
                     
@@ -95,9 +96,6 @@ struct IntegratedSearchView: View {
                                 .cornerRadius(8)
                                 .padding(.horizontal, 8)
                             case .loading:
-                                VStack {
-                                    ProgressView()
-                                        .padding()
                                     VStack {
                                         HStack {
                                             Image(systemName: "magnifyingglass")
@@ -124,7 +122,7 @@ struct IntegratedSearchView: View {
                                     .cornerRadius(8)
                                     .padding(.horizontal, 8)
                                     .redacted(reason: .placeholder)
-                                }
+                                
                                 
                             case .failed:
                                 VStack {
@@ -220,6 +218,9 @@ struct IntegratedSearchView: View {
                             }
                         
                         
+                    }
+                    .onTapGesture {
+                        isFocused = false
                     }
                     Spacer()
                 }

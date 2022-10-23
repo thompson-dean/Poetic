@@ -13,16 +13,14 @@ struct SearchBar: UIViewRepresentable {
 
     @Binding var searchTerm: String
 
-
     func makeUIView(context: Context) -> UISearchBar {
         let searchBar = UISearchBar(frame: .zero)
         searchBar.delegate = context.coordinator
         searchBar.searchBarStyle = .minimal
-        //Repeat the context
         searchBar.placeholder = "Search..."
         return searchBar
-
     }
+    
     func updateUIView(_ uiView: UISearchBar, context: Context) {
         uiView.text = searchTerm
 
@@ -48,13 +46,8 @@ struct SearchBar: UIViewRepresentable {
             windowScene.windows.first { $0.isKeyWindow }?.endEditing(true)
         }
         
-        // Research how to implement dynamic search.
-        
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
             searchTerm = searchText
         }
-
     }
-
-
 }
