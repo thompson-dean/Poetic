@@ -24,7 +24,7 @@ class PoemViewModel: ObservableObject {
         case loaded
     }
     
-    enum RandomPoemState  {
+    enum AuthorPoemState  {
         case idle
         case loading
         case failed
@@ -39,6 +39,7 @@ class PoemViewModel: ObservableObject {
    
     @Published private(set) var poems = [Poem]()
     @Published private(set) var randomPoems = [Poem]()
+    @Published private(set) var authorPoems = [Poem]()
     @Published var searchTerm: String = ""
     @Published var isTitle: Bool = true
     
@@ -52,22 +53,22 @@ class PoemViewModel: ObservableObject {
    
     @Published private(set) var state = State.idle
     @Published private(set) var searchState = SearchTitleState.idle
-    @Published private(set) var randomPoemState = RandomPoemState.idle
+    @Published private(set) var authorPoemState = AuthorPoemState.idle
     
     init(apiService: APIServiceProtocol = APIService.shared) {
         self.apiService = apiService
     }
     
     func loadRandomPoems(searchTerm: String) {
-        randomPoemState = .loading
+        state = .loading
         apiService.fetchPoems(searchTerm: searchTerm, filter: .random)
             .sink { [weak self] (dataResponse) in
                 if dataResponse.error != nil {
                     self?.createAlert(with: dataResponse.error!)
-                    self?.randomPoemState = .failed
+                    self?.state = .failed
                 } else {
                     self?.randomPoems = dataResponse.value!
-                    self?.randomPoemState = .loaded
+                    self?.state = .loaded
                 }
             }.store(in: &cancellables)
     }
@@ -103,12 +104,34 @@ class PoemViewModel: ObservableObject {
             .store(in: &self.cancellables)
     }
     
+    func loadAuthorPoem(searchTerm: String) {
+        if let cache = authorTitleCache[searchTerm] {
+            self.authorPoemState = .loaded
+            self.authorPoems = cache
+            return
+        }
+        
+        authorPoems = []
+        authorPoemState = .loading
+        
+        apiService.fetchPoems(searchTerm: searchTerm, filter: .author)
+            .sink { [weak self] (dataResponse) in
+                if dataResponse.error != nil {
+                    self?.createAlert(with: dataResponse.error!)
+                    self?.authorPoemState = .failed
+                } else {
+                    self?.authorPoems = dataResponse.value!
+                    self?.authorTitleCache[searchTerm] = self?.authorPoems
+                    self?.authorPoemState = .loaded
+                }
+            }.store(in: &cancellables)
+    }
+    
     func createAlert( with error: NetworkError ) {
         searchListLoadingError = error.backendError == nil ? error.initialError.localizedDescription : error.backendError!.message
         self.showAlert = true
     }
     
-    //Handle Haptics
     func simpleHapticSuccess() {
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)

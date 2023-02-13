@@ -66,7 +66,7 @@ struct NewHomeContent: View {
                     viewModel.loadRandomPoems(searchTerm: "5")
                 } label: {
                     
-                    switch viewModel.randomPoemState {
+                    switch viewModel.state {
                     case .loading:
                         Image(systemName: "arrow.clockwise")
                             .resizable()
@@ -102,7 +102,7 @@ struct NewHomeContent: View {
                 HStack {
                     ForEach(viewModel.randomPoems, id: \.self) { poem in
                         
-                        switch viewModel.randomPoemState {
+                        switch viewModel.state {
                         case .idle:
                             PoemCard(poem: poem)
                                 .redacted(reason: .placeholder)

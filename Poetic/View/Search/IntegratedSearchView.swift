@@ -79,21 +79,21 @@ struct IntegratedSearchView: View {
                                                 .padding(.top, 16)
                                         
                                         NavigationLink {
-                                            // author view
+                                            AuthorView(viewModel: viewModel, pcViewModel: pcViewModel, author: viewModel.featuredAuthor1)
                                         } label: {
                                             AuthorCell(author: viewModel.featuredAuthor1)
                                         }
                                         .buttonStyle(FlatLinkStyle())
                                         
                                         NavigationLink {
-                                            // author view
+                                            AuthorView(viewModel: viewModel, pcViewModel: pcViewModel, author: viewModel.featuredAuthor2)
                                         } label: {
                                             AuthorCell(author: viewModel.featuredAuthor2)
                                         }
                                         .buttonStyle(FlatLinkStyle())
                                         
                                         NavigationLink {
-                                            // author view
+                                            AuthorView(viewModel: viewModel, pcViewModel: pcViewModel, author: viewModel.featuredAuthor3)
                                         } label: {
                                             AuthorCell(author: viewModel.featuredAuthor3)
                                         }
@@ -205,7 +205,7 @@ struct IntegratedSearchView: View {
                                     viewModel.searchTerm.isEmpty || author.lowercased().contains(viewModel.searchTerm.lowercased())
                                 }, id: \.self) { author in
                                     NavigationLink {
-                                        Text("Author View: \(author)")
+                                        AuthorView(viewModel: viewModel, pcViewModel: pcViewModel, author: author)
                                     } label: {
                                         AuthorCell(author: author)
                                     }
@@ -240,6 +240,7 @@ struct IntegratedSearchView: View {
             .navigationBarTitleDisplayMode(.inline)
             .PKHUD(isPresented: $didFail, HUDContent: .labeledError(title: "No Result or Error.", subtitle: "Try again."), delay: 1)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
