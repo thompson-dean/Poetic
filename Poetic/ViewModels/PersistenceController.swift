@@ -201,4 +201,11 @@ class PersistenceController: ObservableObject {
             }
         }
     }
+    
+    func convertDateToString(date: Date?) -> String {
+        guard let unwrappedDate = date else { return "" }
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        return formatter.string(from: unwrappedDate)
+    }
 }

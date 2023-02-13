@@ -24,6 +24,8 @@ struct ContentView: View {
     @StateObject var pcViewModel = PersistenceController()
     let notificationManager = NotificationManager()
     
+    var authors: Authors = Bundle.main.decode("Authors.json")
+    
     var body: some View {
         var handler: Binding<Int> { Binding(
             get: { self.tabSelection },
@@ -108,6 +110,9 @@ struct ContentView: View {
             SystemThemeManager.shared.handleTheme(darkMode: viewModel.darkModeEnabled, system: viewModel.systemThemeEnabled)
             UIApplication.shared.applicationIconBadgeNumber = 0
             viewModel.loadRandomPoems(searchTerm: "5")
+            viewModel.featuredAuthor1 = authors.authors.randomElement() ?? ""
+            viewModel.featuredAuthor2 = authors.authors.randomElement() ?? ""
+            viewModel.featuredAuthor3 = authors.authors.randomElement() ?? ""
         }
         
     }

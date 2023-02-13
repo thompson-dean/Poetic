@@ -35,12 +35,12 @@ struct IntegratedSearchView: View {
                             viewModel.isTitle = true
                         } label: {
                             Text("title")
-                                .fontWeight(viewModel.isTitle ? .semibold : .regular)
+                                .fontWeight(viewModel.isTitle ? .bold : .regular)
                                 .fontWithLineHeight(font: .systemFont(ofSize: 16), lineHeight: 16)
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 8)
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 12)
+                                    RoundedRectangle(cornerRadius: 8)
                                         .stroke(lineWidth: 2)
                                 )
                         }
@@ -50,12 +50,12 @@ struct IntegratedSearchView: View {
                             viewModel.isTitle = false
                         } label: {
                             Text("author")
-                                .fontWeight(viewModel.isTitle ? .regular : .semibold)
+                                .fontWeight(viewModel.isTitle ? .regular : .bold)
                                 .fontWithLineHeight(font: .systemFont(ofSize: 16), lineHeight: 16)
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 8)
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 12)
+                                    RoundedRectangle(cornerRadius: 8)
                                         .stroke(lineWidth: 2)
                                 )
                         }
@@ -69,88 +69,103 @@ struct IntegratedSearchView: View {
                     ScrollView(showsIndicators: false) {
                         if viewModel.isTitle {
                             switch viewModel.searchState {
-                            case .idle:
-                                VStack {
-                                    HStack {
-                                        Image(systemName: "magnifyingglass")
+                            case .idle, .failed:
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    VStack(alignment: .leading) {
+                                        Text("Featured Authors")
                                             .foregroundColor(.primary)
-                                            .font(.title)
-                                            .padding(.vertical, 8)
-                                            .padding(.leading, 8)
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
+                                                .padding(.horizontal, 8)
+                                                .padding(.top, 16)
                                         
-                                        VStack(alignment: .leading, spacing: 2) {
-                                            Text("Search for poems or authors.")
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                                                .foregroundColor(.primary)
-                                            Text("Thousands of poems to discover!")
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
-                                                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                                        NavigationLink {
+                                            // author view
+                                        } label: {
+                                            AuthorCell(author: viewModel.featuredAuthor1)
                                         }
-                                        .padding(.vertical, 8)
-                                        .padding(.horizontal, 8)
+                                        .buttonStyle(FlatLinkStyle())
                                         
-                                        Spacer()
+                                        NavigationLink {
+                                            // author view
+                                        } label: {
+                                            AuthorCell(author: viewModel.featuredAuthor2)
+                                        }
+                                        .buttonStyle(FlatLinkStyle())
+                                        
+                                        NavigationLink {
+                                            // author view
+                                        } label: {
+                                            AuthorCell(author: viewModel.featuredAuthor3)
+                                        }
+                                        .buttonStyle(FlatLinkStyle())
+                                        
+                                        
+                                        Text("Recommended")
+                                            .foregroundColor(.primary)
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
+                                                .padding(.horizontal, 8)
+                                                .padding(.top, 16)
+                                        
+                                        ForEach(viewModel.randomPoems, id: \.self) { poem in
+                                            NavigationLink {
+                                                let sentPoem = Poem(title: poem.title , author: poem.author , lines: poem.lines , linecount: poem.title)
+                                                NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
+                                            } label: {
+                                                VStack {
+                                                    HStack {
+                                                        VStack(alignment: .leading, spacing: 2) {
+                                                            
+                                                            Text(poem.author)
+                                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
+                                                                .foregroundColor(.primary)
+                                                            
+                                                            Text(poem.title)
+                                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                                                                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                                                        }
+                                                        .padding(.vertical, 8)
+                                                        .padding(.horizontal, 8)
+                                                        
+                                                        Spacer()
+                                                        
+                                                        Image(systemName: "chevron.right")
+                                                            .foregroundColor(.primary)
+                                                            .padding(8)
+                                                    }
+                                                }
+                                                .frame(width: UIScreen.main.bounds.width - 16)
+                                                .background(colorScheme == .light ? .white : .black)
+                                                .cornerRadius(8)
+                                                .padding(.horizontal, 8)
+                                            }
+                                            .buttonStyle(FlatLinkStyle())
+                                        }
                                     }
                                 }
-                                .background(colorScheme == .light ? .white : .black)
-                                .cornerRadius(8)
-                                .padding(.horizontal, 8)
-                            case .loading:
-                                    VStack {
-                                        HStack {
-                                            Image(systemName: "magnifyingglass")
-                                                .foregroundColor(.primary)
-                                                .font(.largeTitle)
-                                                .padding(.vertical, 8)
-                                                .padding(.leading, 8)
-                                            
+                                
+                            case  .loading:
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    VStack(alignment: .leading) {
+                                        ForEach(viewModel.randomPoems, id: \.self) { poem in
                                             VStack(alignment: .leading, spacing: 2) {
-                                                Text("Search for poems or authors.")
-                                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                                                    .foregroundColor(.primary)
-                                                Text("Thousands of poems to discover!")
+                                                
+                                                Text(poem.author)
                                                     .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
+                                                    .foregroundColor(.primary)
+                                                    .lineLimit(3)
+                                                
+                                                Text(poem.title)
+                                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
                                                     .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                                                    .lineLimit(3)
                                             }
                                             .padding(.vertical, 8)
                                             .padding(.horizontal, 8)
-                                            
-                                            Spacer()
                                         }
                                     }
-                                    .background(colorScheme == .light ? .white : .black)
-                                    .cornerRadius(8)
-                                    .padding(.horizontal, 8)
                                     .redacted(reason: .placeholder)
-                                
-                                
-                            case .failed:
-                                VStack {
-                                    HStack {
-                                        Image(systemName: "magnifyingglass")
-                                            .foregroundColor(.primary)
-                                            .font(.largeTitle)
-                                            .padding(.vertical, 8)
-                                            .padding(.leading, 8)
-                                        
-                                        VStack(alignment: .leading, spacing: 2) {
-                                            Text("Search for poems or authors.")
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                                                .foregroundColor(.primary)
-                                            Text("Thousands of poems to discover!")
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
-                                                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
-                                        }
-                                        .padding(.vertical, 8)
-                                        .padding(.horizontal, 8)
-                                        
-                                        Spacer()
-                                    }
                                 }
-                                .background(colorScheme == .light ? .white : .black)
-                                .cornerRadius(8)
-                                .padding(.horizontal, 8)
-                                .redacted(reason: .placeholder)
+                            
                             case .loaded:
                                 ForEach(viewModel.poems, id: \.self) { poem in
                                     NavigationLink {
@@ -192,26 +207,7 @@ struct IntegratedSearchView: View {
                                     NavigationLink {
                                         Text("Author View: \(author)")
                                     } label: {
-                                        LazyVStack {
-                                            HStack {
-                                                VStack(alignment: .leading, spacing: 2) {
-                                                    Text(author)
-                                                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                                                        .foregroundColor(.primary)
-                                                }
-                                                .padding(.vertical, 8)
-                                                .padding(.horizontal, 8)
-                                                
-                                                Spacer()
-                                                
-                                                Image(systemName: "chevron.right")
-                                                    .foregroundColor(.primary)
-                                                    .padding(8)
-                                            }
-                                        }
-                                        .background(colorScheme == .light ? .white : .black)
-                                        .cornerRadius(8)
-                                        .padding(.horizontal, 8)
+                                        AuthorCell(author: author)
                                     }
                                     .buttonStyle(FlatLinkStyle())
                                 }
@@ -244,5 +240,39 @@ struct IntegratedSearchView: View {
             .navigationBarTitleDisplayMode(.inline)
             .PKHUD(isPresented: $didFail, HUDContent: .labeledError(title: "No Result or Error.", subtitle: "Try again."), delay: 1)
         }
+    }
+}
+
+
+struct AuthorCell: View {
+    
+    @Environment(\.colorScheme) var colorScheme
+    
+    let author: String
+    
+    var body: some View {
+        VStack {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    
+                    Text(author)
+                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
+                        .foregroundColor(.primary)
+                }
+                .padding(.vertical, 8)
+                .padding(.horizontal, 8)
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.primary)
+                    .padding(8)
+            }
+        }
+        .frame(width: UIScreen.main.bounds.width - 16)
+        .background(colorScheme == .light ? .white : .black)
+        .cornerRadius(8)
+        .padding(.horizontal, 8)
+        
     }
 }

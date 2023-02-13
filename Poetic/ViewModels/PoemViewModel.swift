@@ -33,6 +33,9 @@ class PoemViewModel: ObservableObject {
 
     @AppStorage("darkModeEnabled") var darkModeEnabled = false
     @AppStorage("systemThemeEnabled") var systemThemeEnabled = true
+    @AppStorage("featuredAuthors") var featuredAuthor1: String = ""
+    @AppStorage("featuredAuthors") var featuredAuthor2: String = ""
+    @AppStorage("featuredAuthors") var featuredAuthor3: String = ""
    
     @Published private(set) var poems = [Poem]()
     @Published private(set) var randomPoems = [Poem]()
@@ -57,7 +60,6 @@ class PoemViewModel: ObservableObject {
     
     func loadRandomPoems(searchTerm: String) {
         randomPoemState = .loading
-        randomPoems = exampleData()
         apiService.fetchPoems(searchTerm: searchTerm, filter: .random)
             .sink { [weak self] (dataResponse) in
                 if dataResponse.error != nil {
@@ -72,7 +74,6 @@ class PoemViewModel: ObservableObject {
     
     func fetchTitles(searchTerm: String) {
         searchState = .loading
-        randomPoems = exampleData()
         apiService.fetchPoems(searchTerm: searchTerm, filter: .title)
             .sink { [weak self] (dataResponse) in
                 if dataResponse.error != nil {

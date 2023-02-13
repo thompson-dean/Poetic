@@ -14,7 +14,7 @@ struct PoemCard: View {
     let poem: Poem
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 4) {
             
             Text(poem.author)
                 .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 20)
@@ -22,33 +22,34 @@ struct PoemCard: View {
                 .foregroundColor(.primary)
             
             VStack(alignment: .leading, spacing: 4) {
-                let lineCountInt = Int(poem.linecount) ?? 0
-                if lineCountInt < 4 {
-                    ForEach(0..<poem.lines.count, id: \.self) { index in
-                        HStack {
-                            if poem.lines[index].trimmingCharacters(in: .whitespaces) != "" {
-                                Text(poem.lines[index].trimmingCharacters(in: .whitespaces))
-                                    .fixedSize(horizontal: false, vertical: true)
-                                    .lineLimit(2)
-                                    .foregroundColor(.primary)
-                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 22)
-                            }
-                        }
+                
+                if poem.lines[0].trimmingCharacters(in: .whitespacesAndNewlines) == "" || poem.lines[0].count < 8 {
+                    if poem.lines[1].trimmingCharacters(in: .whitespacesAndNewlines) == "" || poem.lines[1].count < 8 {
+                        Text(poem.lines[2].trimmingCharacters(in: .whitespaces))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .lineLimit(2)
+                            .foregroundColor(.primary)
+                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 22)
+                    } else {
+                        Text(poem.lines[1].trimmingCharacters(in: .whitespaces))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .lineLimit(2)
+                            .foregroundColor(.primary)
+                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 22)
                     }
                 } else {
-                    ForEach(0..<4, id: \.self) { index in
-                        HStack {
-                            if poem.lines[index].trimmingCharacters(in: .whitespaces) != "" {
-                                Text(poem.lines[index].trimmingCharacters(in: .whitespaces))
-                                    .fixedSize(horizontal: false, vertical: true)
-                                    .lineLimit(3)
-                                    .foregroundColor(.primary)
-                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 22)
-                            }
-                        }
-                    }
+                    Text(poem.lines[0].trimmingCharacters(in: .whitespaces))
+                        .fixedSize(horizontal: false, vertical: true)
+                        .lineLimit(2)
+                        .foregroundColor(.primary)
+                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 22)
                 }
             }
+            .onAppear {
+                print("DEBUG: \(poem.lines[0].count)")
+            }
+            
+            Text("...")
             
             Spacer()
             
@@ -59,8 +60,8 @@ struct PoemCard: View {
                 .padding(.bottom, 8)
         }
         .padding(.horizontal, 8)
-        .frame(width: 288, alignment: .leading)
-        .frame(maxHeight: 334)
+        .frame(width: 254, alignment: .leading)
+        .frame(maxHeight: 176)
         .background(colorScheme == .light ? .white : .black)
         .cornerRadius(8)
     }
@@ -72,8 +73,8 @@ struct PoemCard_Previews: PreviewProvider {
             title: "Sonnet 1: From fairest creatures we desire increase",
             author: "William Shakespeare",
             lines: [
-                "From fairest creatures we desire increase, afgafgafgafgafgadfgafdga",
-                "That thereby beauty's rose might never die, ahdfadfadfkjsafg;jasf;g",
+                "he",
+                "Th",
                 "But as the riper should by time decease, fadafgafsgafafgafgafgadfg",
                 "His tender heir might bear his memory: afafdgafgafgafgadfgadfg",
                 "But thou contracted to thine own bright eyes,",

@@ -22,9 +22,6 @@ struct NewHomeView: View {
                     .ignoresSafeArea(.all)
                 
                 ScrollView(.vertical, showsIndicators: false) {
-                    PullToRefresh(viewModel: viewModel, coordinateSpaceName: "jazz") {
-                        viewModel.loadRandomPoems(searchTerm: "5")
-                    }
                     NewHomeContent(viewModel: viewModel, pcViewModel: pcViewModel)
                 }
             }
@@ -42,6 +39,7 @@ struct NewHomeContent: View {
     @ObservedObject var pcViewModel: PersistenceController
     let fonts = Fonts()
     @Environment(\.colorScheme) var colorScheme
+    @State private var isRotating: CGFloat = 0.0
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -55,11 +53,50 @@ struct NewHomeContent: View {
                 .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                 .padding(.horizontal, 16)
             
-            Text("Recommended")
-                .foregroundColor(.primary)
-                .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
-                .padding(.horizontal, 16)
-                .padding(.top, 12)
+            HStack {
+                Text("Recommended")
+                    .foregroundColor(.primary)
+                    .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
+                    .padding(.horizontal, 16)
+                    .padding(.top, 12)
+                
+                Spacer()
+                
+                Button {
+                    viewModel.loadRandomPoems(searchTerm: "5")
+                } label: {
+                    
+                    switch viewModel.randomPoemState {
+                    case .loading:
+                        Image(systemName: "arrow.clockwise")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundColor(.primary.opacity(0.5))
+                            .rotationEffect(.degrees(isRotating))
+                            .animation(.linear(duration: 0.5).speed(0.4).repeatForever(autoreverses: false))
+                            .frame(width: 24, height: 24)
+                            .onAppear {
+                                withAnimation {
+                                    isRotating = 360.0
+                                }
+                            }
+                            .disabled(true)
+                    case .failed, .idle, .loaded:
+                        Image(systemName: "arrow.clockwise")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundColor(.primary)
+                            .frame(width: 24, height: 24)
+                            .onAppear {
+                                isRotating = 0.0
+                            }
+                            .disabled(false)
+                    }
+                    
+                }
+                .padding(.horizontal, 8)
+            }
+            
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
@@ -98,57 +135,14 @@ struct NewHomeContent: View {
                     .padding(.top, 16)
             
             if pcViewModel.viewedPoems.isEmpty {
-                VStack {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 2) {
-                            
-                            Text("No Recents.")
-                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
-                                .foregroundColor(.primary)
-                            
-                            Text("Read some poems!")
-                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
-                        }
-                        .padding(.vertical, 8)
-                        .padding(.horizontal, 8)
-                        Spacer()
-                    }
-                }
-                .background(colorScheme == .light ? .white : .black)
-                .cornerRadius(8)
-                .padding(.horizontal, 8)
+                noViewedPoemsView
             } else {
                 ForEach(pcViewModel.viewedPoems, id: \.self) { poem in
                     NavigationLink {
                         let sentPoem = Poem(title: poem.title ?? "", author: poem.author ?? "", lines: poem.lines ?? [], linecount: poem.title ?? "")
                         NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
                     } label: {
-                        VStack {
-                            HStack {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    
-                                    Text(poem.author ?? "")
-                                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
-                                        .foregroundColor(.primary)
-                                    
-                                    Text(poem.title ?? "")
-                                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                                        .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
-                                }
-                                .padding(.vertical, 8)
-                                .padding(.horizontal, 8)
-                                
-                                Spacer()
-                                
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.primary)
-                                    .padding(8)
-                            }
-                        }
-                        .background(colorScheme == .light ? .white : .black)
-                        .cornerRadius(8)
-                        .padding(.horizontal, 8)
+                        TitleAuthorDateHomeCell(pcViewModel: pcViewModel, poem: poem)
                     }
                     .buttonStyle(FlatLinkStyle())
                 }
@@ -165,5 +159,31 @@ struct ContentView_Previews: PreviewProvider {
         
         NewHomeView(viewModel: PoemViewModel(), pcViewModel: PersistenceController()).preferredColorScheme(.dark)
         
+    }
+}
+
+
+extension NewHomeContent {
+    var noViewedPoemsView: some View {
+        VStack {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    
+                    Text("No Recents.")
+                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
+                        .foregroundColor(.primary)
+                    
+                    Text("Read some poems!")
+                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                        .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                }
+                .padding(.vertical, 8)
+                .padding(.horizontal, 8)
+                Spacer()
+            }
+        }
+        .background(colorScheme == .light ? .white : .black)
+        .cornerRadius(8)
+        .padding(.horizontal, 8)
     }
 }

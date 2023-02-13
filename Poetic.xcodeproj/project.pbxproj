@@ -26,13 +26,14 @@
 		2A1ABA5A28F4090000D48AA1 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1ABA5928F4090000D48AA1 /* NetworkError.swift */; };
 		2A1ABA5C28F41DD100D48AA1 /* PKHUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1ABA5B28F41DD100D48AA1 /* PKHUDView.swift */; };
 		2A1ABA5E28F41E1C00D48AA1 /* View+PKHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1ABA5D28F41E1C00D48AA1 /* View+PKHUD.swift */; };
-		2A2C7D2928CE0A4800758EF3 /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C7D2828CE0A4800758EF3 /* PullToRefresh.swift */; };
 		2A304724288FB01500E43820 /* NewHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A304723288FB01500E43820 /* NewHomeView.swift */; };
 		2A37936C27D8A4B800FA48ED /* LineBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A37936B27D8A4B800FA48ED /* LineBreak.swift */; };
 		2A37936F27D8A57500FA48ED /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A37936E27D8A57500FA48ED /* SearchBar.swift */; };
 		2A37937B27D8D48A00FA48ED /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A37937A27D8D48A00FA48ED /* Bundle-Decodable.swift */; };
 		2A38CF7927DF74BB00A44268 /* Poetic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2A38CF7727DF74BB00A44268 /* Poetic.xcdatamodeld */; };
 		2A38CF7B27DF74CC00A44268 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A38CF7A27DF74CC00A44268 /* PersistenceController.swift */; };
+		2A42F5E0299A623200122847 /* TitleAuthorFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42F5DF299A623200122847 /* TitleAuthorFavoriteCell.swift */; };
+		2A42F5E2299A62B500122847 /* TitleAuthorDateHomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42F5E1299A62B500122847 /* TitleAuthorDateHomeCell.swift */; };
 		2A67DA4828DF2CBD00F1A5C0 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A67DA4728DF2CBD00F1A5C0 /* Fonts.swift */; };
 		2A77337A28C777C700C115E9 /* FlatLinkStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A77337928C777C700C115E9 /* FlatLinkStyle.swift */; };
 		2A77337E28C8C6B000C115E9 /* FailedPoemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A77337D28C8C6B000C115E9 /* FailedPoemCard.swift */; };
@@ -69,13 +70,14 @@
 		2A1ABA5928F4090000D48AA1 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		2A1ABA5B28F41DD100D48AA1 /* PKHUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKHUDView.swift; sourceTree = "<group>"; };
 		2A1ABA5D28F41E1C00D48AA1 /* View+PKHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+PKHUD.swift"; sourceTree = "<group>"; };
-		2A2C7D2828CE0A4800758EF3 /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 		2A304723288FB01500E43820 /* NewHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewHomeView.swift; sourceTree = "<group>"; };
 		2A37936B27D8A4B800FA48ED /* LineBreak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineBreak.swift; sourceTree = "<group>"; };
 		2A37936E27D8A57500FA48ED /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		2A37937A27D8D48A00FA48ED /* Bundle-Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
 		2A38CF7827DF74BB00A44268 /* Poetic.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Poetic.xcdatamodel; sourceTree = "<group>"; };
 		2A38CF7A27DF74CC00A44268 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		2A42F5DF299A623200122847 /* TitleAuthorFavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAuthorFavoriteCell.swift; sourceTree = "<group>"; };
+		2A42F5E1299A62B500122847 /* TitleAuthorDateHomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAuthorDateHomeCell.swift; sourceTree = "<group>"; };
 		2A67DA4728DF2CBD00F1A5C0 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		2A77337928C777C700C115E9 /* FlatLinkStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatLinkStyle.swift; sourceTree = "<group>"; };
 		2A77337D28C8C6B000C115E9 /* FailedPoemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailedPoemCard.swift; sourceTree = "<group>"; };
@@ -216,7 +218,6 @@
 				2ABCC206285095A900CA0FB3 /* PoemView.swift */,
 				2A1ABA5B28F41DD100D48AA1 /* PKHUDView.swift */,
 				2A37936B27D8A4B800FA48ED /* LineBreak.swift */,
-				2A2C7D2828CE0A4800758EF3 /* PullToRefresh.swift */,
 				2A37936E27D8A57500FA48ED /* SearchBar.swift */,
 				2ACC8A4027E89ECC002F5B6D /* WebView.swift */,
 			);
@@ -227,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				2A304723288FB01500E43820 /* NewHomeView.swift */,
+				2A42F5E1299A62B500122847 /* TitleAuthorDateHomeCell.swift */,
 				2A81C48728C4D25C00437EC3 /* PoemCard.swift */,
 				2A77337D28C8C6B000C115E9 /* FailedPoemCard.swift */,
 			);
@@ -245,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				2A17BAA927D5D95400E0D755 /* FavoritesView.swift */,
+				2A42F5DF299A623200122847 /* TitleAuthorFavoriteCell.swift */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -366,12 +369,14 @@
 				2A37936C27D8A4B800FA48ED /* LineBreak.swift in Sources */,
 				2AB4CE1727DDBBBF007937CC /* Quote.swift in Sources */,
 				2A19EA9B27F09E1C00022EFE /* NotificationManager.swift in Sources */,
+				2A42F5E2299A62B500122847 /* TitleAuthorDateHomeCell.swift in Sources */,
 				2A37937B27D8D48A00FA48ED /* Bundle-Decodable.swift in Sources */,
 				2ACC8A4927E8C39E002F5B6D /* SystemThemeManager.swift in Sources */,
 				2ACC8A4727E8AFC9002F5B6D /* Links.swift in Sources */,
 				2A77337A28C777C700C115E9 /* FlatLinkStyle.swift in Sources */,
 				2A1ABA5A28F4090000D48AA1 /* NetworkError.swift in Sources */,
 				2A13BE0128B9B42800E79A0E /* NewDetailView.swift in Sources */,
+				2A42F5E0299A623200122847 /* TitleAuthorFavoriteCell.swift in Sources */,
 				2A38CF7927DF74BB00A44268 /* Poetic.xcdatamodeld in Sources */,
 				2A17BAB027D641D200E0D755 /* PoemViewModel.swift in Sources */,
 				2ACC8A4327E8A441002F5B6D /* DevView.swift in Sources */,
@@ -386,7 +391,6 @@
 				2AF98E3B27DE2E00004D21DA /* Authors.swift in Sources */,
 				2A17BA9527D5D8E000E0D755 /* ContentView.swift in Sources */,
 				2A37936F27D8A57500FA48ED /* SearchBar.swift in Sources */,
-				2A2C7D2928CE0A4800758EF3 /* PullToRefresh.swift in Sources */,
 				2A81C48628C45B4300437EC3 /* View+FontWithLineHeight.swift in Sources */,
 				2A17BA9327D5D8E000E0D755 /* PoeticApp.swift in Sources */,
 				2ACC8A4127E89ECC002F5B6D /* WebView.swift in Sources */,
