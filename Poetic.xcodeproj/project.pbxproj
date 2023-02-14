@@ -35,6 +35,8 @@
 		2A42F5E0299A623200122847 /* TitleAuthorFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42F5DF299A623200122847 /* TitleAuthorFavoriteCell.swift */; };
 		2A42F5E2299A62B500122847 /* TitleAuthorDateHomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42F5E1299A62B500122847 /* TitleAuthorDateHomeCell.swift */; };
 		2A42F5E5299A691A00122847 /* AuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42F5E4299A691A00122847 /* AuthorView.swift */; };
+		2A42F5E7299BBF9A00122847 /* AuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42F5E6299BBF9900122847 /* AuthorCell.swift */; };
+		2A42F5E9299BBFBC00122847 /* AuthorPoemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42F5E8299BBFBC00122847 /* AuthorPoemCell.swift */; };
 		2A67DA4828DF2CBD00F1A5C0 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A67DA4728DF2CBD00F1A5C0 /* Fonts.swift */; };
 		2A77337A28C777C700C115E9 /* FlatLinkStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A77337928C777C700C115E9 /* FlatLinkStyle.swift */; };
 		2A77337E28C8C6B000C115E9 /* FailedPoemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A77337D28C8C6B000C115E9 /* FailedPoemCard.swift */; };
@@ -80,6 +82,8 @@
 		2A42F5DF299A623200122847 /* TitleAuthorFavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAuthorFavoriteCell.swift; sourceTree = "<group>"; };
 		2A42F5E1299A62B500122847 /* TitleAuthorDateHomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAuthorDateHomeCell.swift; sourceTree = "<group>"; };
 		2A42F5E4299A691A00122847 /* AuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorView.swift; sourceTree = "<group>"; };
+		2A42F5E6299BBF9900122847 /* AuthorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorCell.swift; sourceTree = "<group>"; };
+		2A42F5E8299BBFBC00122847 /* AuthorPoemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorPoemCell.swift; sourceTree = "<group>"; };
 		2A67DA4728DF2CBD00F1A5C0 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		2A77337928C777C700C115E9 /* FlatLinkStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatLinkStyle.swift; sourceTree = "<group>"; };
 		2A77337D28C8C6B000C115E9 /* FailedPoemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailedPoemCard.swift; sourceTree = "<group>"; };
@@ -231,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				2A42F5E4299A691A00122847 /* AuthorView.swift */,
+				2A42F5E8299BBFBC00122847 /* AuthorPoemCell.swift */,
 			);
 			path = Author;
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				2A1ABA4828F2CEAA00D48AA1 /* IntegratedSearchView.swift */,
+				2A42F5E6299BBF9900122847 /* AuthorCell.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -378,7 +384,9 @@
 				2A1ABA5828F4016900D48AA1 /* APIConst.swift in Sources */,
 				2A17BAAC27D5D96E00E0D755 /* APIService.swift in Sources */,
 				2A37936C27D8A4B800FA48ED /* LineBreak.swift in Sources */,
+				2A42F5E7299BBF9A00122847 /* AuthorCell.swift in Sources */,
 				2AB4CE1727DDBBBF007937CC /* Quote.swift in Sources */,
+				2A42F5E9299BBFBC00122847 /* AuthorPoemCell.swift in Sources */,
 				2A19EA9B27F09E1C00022EFE /* NotificationManager.swift in Sources */,
 				2A42F5E2299A62B500122847 /* TitleAuthorDateHomeCell.swift in Sources */,
 				2A37937B27D8D48A00FA48ED /* Bundle-Decodable.swift in Sources */,

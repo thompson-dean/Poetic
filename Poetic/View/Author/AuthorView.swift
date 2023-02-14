@@ -75,24 +75,13 @@ struct AuthorView: View {
                     
                     
                 case .loaded:
-                    List(0..<viewModel.authorPoems.count, id: \.self) { index in
-                        NavigationLink {
-                            NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: viewModel.authorPoems[index])
-                        } label: {
-                            VStack(alignment: .leading) {
-                                HStack {
-                                    Text("\(index + 1)")
-                                        .font(.system(.caption2, design: .serif))
-                                        .frame(width: 20, height: 10)
-                                        .padding(.trailing, 5)
-                                    Text(viewModel.authorPoems[index].title)
-                                        .multilineTextAlignment(.leading)
-                                        .font(.system(.headline, design: .serif))
-                                    Spacer()
-                                    
-                                }
+                    ScrollView {
+                        ForEach(0..<viewModel.authorPoems.count, id: \.self) { index in
+                            NavigationLink {
+                                NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: viewModel.authorPoems[index])
+                            } label: {
+                                AuthorPoemCell(poem: viewModel.authorPoems[index], indexString: String(index + 1))
                             }
-                            .foregroundColor(.primary)
                         }
                     }
                     .background(
