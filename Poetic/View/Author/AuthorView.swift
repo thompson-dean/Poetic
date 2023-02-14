@@ -91,7 +91,6 @@ struct AuthorView: View {
                         
                     )
                     .onAppear {
-                        // Set the default to clear
                         UITableView.appearance().backgroundColor = .clear
                     }
                 }
@@ -101,8 +100,6 @@ struct AuthorView: View {
             
             .onAppear {
                 viewModel.loadAuthorPoem(searchTerm: author.replacingOccurrences(of: " ", with: "%20"))
-                print(viewModel.searchTerm)
-                
             }
         
         

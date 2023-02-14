@@ -44,8 +44,7 @@ struct ContentView: View {
             NewHomeView(viewModel: viewModel, pcViewModel: pcViewModel)
                 .id(home)
                 .tabItem {
-                    //Add a different SFSymbol
-                    Label("Explore", systemImage: "house")
+                    Label("Home", systemImage: "house")
                         .onChange(of: tappedTwice) { tappedTwice in
                             guard tappedTwice else { return }
                             home = UUID()
@@ -57,7 +56,7 @@ struct ContentView: View {
             IntegratedSearchView(viewModel: viewModel, pcViewModel: pcViewModel)
                 .id(search)
                 .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
+                    Label("Explore", systemImage: "magnifyingglass")
                         .onChange(of: tappedTwice) { tappedTwice in
                             guard tappedTwice else { return }
                             search = UUID()

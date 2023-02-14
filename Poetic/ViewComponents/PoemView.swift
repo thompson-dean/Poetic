@@ -33,10 +33,7 @@ struct PoemView: View {
                         Label("Share this quote", systemImage: "square.and.arrow.up")
                     }
                     
-                    Button {
-                        // return
-                        
-                    } label: {
+                    Button { } label: {
                         Label("Cancel", systemImage: "delete.left")
                         
                     }

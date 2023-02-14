@@ -57,12 +57,10 @@ struct DevView: View {
                     }
                 } label: {
                     Text("Twitter @DeanWThompson")
-                        
                 }
             }
             
             Section(header: Text("Support")) {
-                
                 Button {
                     if let url = URL(string: "itms-apps://apple.com/app/id1614416936") {
                                 UIApplication.shared.open(url)
@@ -70,7 +68,6 @@ struct DevView: View {
                                 print("error with app store URL")
                             }
                 } label: {
-                    
                         ZStack {
                             NavigationLink(destination: EmptyView()) {
                                 
@@ -102,7 +99,6 @@ struct DevView: View {
             
         )
         .onAppear {
-            // Set the default to clear
             UITableView.appearance().backgroundColor = .clear
             
         }

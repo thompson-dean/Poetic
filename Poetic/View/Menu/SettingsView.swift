@@ -49,10 +49,8 @@ struct SettingsView: View {
                             .onChange(of: notificationManager.notificationOn) { _ in
                                 if notificationManager.notificationOn {
                                     notificationManager.addNotification()
-                                    print("notifications on")
                                 } else {
                                     notificationManager.deleteNotification()
-                                    print("notifications off")
                                 }
                             }
                     }
@@ -81,7 +79,6 @@ struct SettingsView: View {
                     }
                     
                     Section {
-                        
                         Button {
                             if let url = URL(string: "itms-apps://apple.com/app/id1614416936") {
                                         UIApplication.shared.open(url)
@@ -89,8 +86,6 @@ struct SettingsView: View {
                                         print("error with app store URL")
                                     }
                         } label: {
-                            
-                            
                             ZStack {
                                 NavigationLink(destination: EmptyView()) {
                                     
@@ -223,9 +218,7 @@ struct SettingsView: View {
                     
                 )
                 .onAppear {
-                    // Set the default to clear
                     UITableView.appearance().backgroundColor = .clear
-                    
                 }
         
             }

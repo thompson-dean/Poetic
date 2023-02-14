@@ -35,7 +35,7 @@ class PersistenceController: ObservableObject {
         fetchViewedPoems()
     }
     
-    //Fetching Entities
+    // Fetching Entities
     func fetchFavoritedPoems() {
         let request = NSFetchRequest<PoemEntity>(entityName: "PoemEntity")
         let sortDescriptor = NSSortDescriptor(key: poemsFilter ? "title" : "author", ascending: true)

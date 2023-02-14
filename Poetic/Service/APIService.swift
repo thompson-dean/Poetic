@@ -14,8 +14,6 @@ protocol APIServiceProtocol {
 }
 
 final class APIService {
-    var count = 0
-    
     static let shared: APIServiceProtocol = APIService()
     private init() { }
 }
@@ -25,7 +23,6 @@ extension APIService: APIServiceProtocol {
         
         let urlString: String = APIConst.api + "\(filter)/\(searchTerm)"
         let url = URL(string: urlString)!
-        print("DEBUG: \(urlString)")
         
         return AF.request(url, method: .get)
             .validate()

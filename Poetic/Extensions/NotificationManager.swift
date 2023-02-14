@@ -21,7 +21,6 @@ class NotificationManager: ObservableObject {
             if let error = error {
                 print("ERROR: \(error.localizedDescription)")
             } else {
-                print("SUCCESS")
                 self.deleteNotification()
                 self.addNotification()
             }

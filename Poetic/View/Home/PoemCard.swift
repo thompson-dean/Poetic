@@ -45,9 +45,6 @@ struct PoemCard: View {
                         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 22)
                 }
             }
-            .onAppear {
-                print("DEBUG: \(poem.lines[0].count)")
-            }
             
             Text("...")
             
