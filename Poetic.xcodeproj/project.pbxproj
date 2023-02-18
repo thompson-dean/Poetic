@@ -37,6 +37,7 @@
 		2A42F5E5299A691A00122847 /* AuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42F5E4299A691A00122847 /* AuthorView.swift */; };
 		2A42F5E7299BBF9A00122847 /* AuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42F5E6299BBF9900122847 /* AuthorCell.swift */; };
 		2A42F5E9299BBFBC00122847 /* AuthorPoemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42F5E8299BBFBC00122847 /* AuthorPoemCell.swift */; };
+		2A42F5EB29A05C6E00122847 /* QuoteCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42F5EA29A05C6E00122847 /* QuoteCellView.swift */; };
 		2A67DA4828DF2CBD00F1A5C0 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A67DA4728DF2CBD00F1A5C0 /* Fonts.swift */; };
 		2A77337A28C777C700C115E9 /* FlatLinkStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A77337928C777C700C115E9 /* FlatLinkStyle.swift */; };
 		2A77337E28C8C6B000C115E9 /* FailedPoemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A77337D28C8C6B000C115E9 /* FailedPoemCard.swift */; };
@@ -84,6 +85,7 @@
 		2A42F5E4299A691A00122847 /* AuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorView.swift; sourceTree = "<group>"; };
 		2A42F5E6299BBF9900122847 /* AuthorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorCell.swift; sourceTree = "<group>"; };
 		2A42F5E8299BBFBC00122847 /* AuthorPoemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorPoemCell.swift; sourceTree = "<group>"; };
+		2A42F5EA29A05C6E00122847 /* QuoteCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCellView.swift; sourceTree = "<group>"; };
 		2A67DA4728DF2CBD00F1A5C0 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		2A77337928C777C700C115E9 /* FlatLinkStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatLinkStyle.swift; sourceTree = "<group>"; };
 		2A77337D28C8C6B000C115E9 /* FailedPoemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailedPoemCard.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				2AF8600427DC5B2C00B3BC40 /* QuoteView.swift */,
+				2A42F5EA29A05C6E00122847 /* QuoteCellView.swift */,
 			);
 			path = Quotes;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A42F5EB29A05C6E00122847 /* QuoteCellView.swift in Sources */,
 				2ACC8A3D27E86E3B002F5B6D /* SettingsView.swift in Sources */,
 				2A1ABA5C28F41DD100D48AA1 /* PKHUDView.swift in Sources */,
 				2A1ABA5428F3FBA400D48AA1 /* SearchFIlter.swift in Sources */,

@@ -88,38 +88,7 @@ struct QuoteView: View {
                                 } label: {
                                     EmptyView().opacity(0)
                                 }
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        VStack(alignment: .leading, spacing: 2) {
-                                            
-                                            Text(("""
-                                                            "\(pcViewModel.quotes[index].quote ?? "Unknown Line")"
-                                                        """).trimmingCharacters(in: .whitespacesAndNewlines))
-                                            .fixedSize(horizontal: false, vertical: true)
-                                            .fontWithLineHeight(font: .systemFont(ofSize: 14, weight: .bold), lineHeight: 20)
-                                            
-                                            Text(pcViewModel.quotes[index].title ?? "Unknown Title")
-                                                .fixedSize(horizontal: false, vertical: true)
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 10, weight: .semibold), lineHeight: 14)
-                                                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
-                                            
-                                            Text(pcViewModel.quotes[index].author ?? "Unknown Title")
-                                                .fixedSize(horizontal: false, vertical: true)
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 10, weight: .regular), lineHeight: 14)
-                                                .foregroundColor(.primary)
-                                        }
-                                        
-                                        Spacer()
-                                        
-                                        Image(systemName: "chevron.right")
-                                            .foregroundColor(.primary)
-                                    }
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 8)
-                                }
-                                .background(colorScheme == .light ? .white : .black)
-                                .cornerRadius(8)
-                                .padding(.vertical, 4)
+                                QuoteCellView(pcViewModel: pcViewModel, index: index)
                                 
                             }
                             .contextMenu {
@@ -185,38 +154,7 @@ struct QuoteView: View {
                                 } label: {
                                     EmptyView().opacity(0)
                                 }
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        VStack(alignment: .leading, spacing: 2) {
-                                            
-                                            Text(("""
-                                                            "\(pcViewModel.quotes[index].quote ?? "Unknown Line")"
-                                                        """).trimmingCharacters(in: .whitespacesAndNewlines))
-                                            .fixedSize(horizontal: false, vertical: true)
-                                            .fontWithLineHeight(font: .systemFont(ofSize: 14, weight: .bold), lineHeight: 20)
-                                            
-                                            Text(pcViewModel.quotes[index].title ?? "Unknown Title")
-                                                .fixedSize(horizontal: false, vertical: true)
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 10, weight: .semibold), lineHeight: 14)
-                                                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
-                                            
-                                            Text(pcViewModel.quotes[index].author ?? "Unknown Title")
-                                                .fixedSize(horizontal: false, vertical: true)
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 10, weight: .regular), lineHeight: 14)
-                                                .foregroundColor(.primary)
-                                        }
-                                        
-                                        Spacer()
-                                        
-                                        Image(systemName: "chevron.right")
-                                            .foregroundColor(.primary)
-                                    }
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 8)
-                                }
-                                .background(colorScheme == .light ? .white : .black)
-                                .cornerRadius(8)
-                                .padding(.vertical, 4)
+                                QuoteCellView(pcViewModel: pcViewModel, index: index)
                                 
                             }
                             .contextMenu {
@@ -239,9 +177,7 @@ struct QuoteView: View {
                                                  bottom: 0,
                                                  trailing: 0))
                         }
-                        .onDelete { indexSet in
-                            pcViewModel.deleteFavoritedPoem(indexSet: indexSet)
-                        }
+                        .onDelete(perform: pcViewModel.deleteQuotes)
                     }
                     .cornerRadius(8)
                     .padding(8)
@@ -282,3 +218,7 @@ struct QuoteView_Previews: PreviewProvider {
         QuoteView(viewModel: PoemViewModel(), pcViewModel: PersistenceController())
     }
 }
+
+
+
+

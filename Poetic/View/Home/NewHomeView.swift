@@ -73,7 +73,7 @@ struct NewHomeContent: View {
                             .aspectRatio(contentMode: .fit)
                             .foregroundColor(.primary.opacity(0.5))
                             .rotationEffect(.degrees(isRotating))
-                            .animation(.linear(duration: 0.5).speed(0.4).repeatForever(autoreverses: false))
+                            .animation(.linear(duration: 0.5).speed(0.4).repeatForever(autoreverses: false), value: UUID())
                             .frame(width: 24, height: 24)
                             .onAppear {
                                 withAnimation {
