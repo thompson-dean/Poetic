@@ -239,9 +239,7 @@ struct QuoteView: View {
                                                  bottom: 0,
                                                  trailing: 0))
                         }
-                        .onDelete { indexSet in
-                            pcViewModel.deleteFavoritedPoem(indexSet: indexSet)
-                        }
+                        .onDelete(perform: pcViewModel.deleteQuotes)
                     }
                     .cornerRadius(8)
                     .padding(8)
@@ -282,3 +280,4 @@ struct QuoteView_Previews: PreviewProvider {
         QuoteView(viewModel: PoemViewModel(), pcViewModel: PersistenceController())
     }
 }
+
