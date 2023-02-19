@@ -13,11 +13,9 @@ See below for what was learned through creating this app.
 
 - Long press your favorite quotes to highlight them or share them with friends. 
 
-- Every time you boot up the app you will be shown a random poem from the API. If you don't dig it, swipe and release to receive a new random one. 
+- Every time you boot up the app you will be shown recommended poems from dbPoetry API. 
 
 - Notifications
-
-- If you are in a child view, tap the tab bar to pop back to the parent view. 
 
 - Dark Mode
 
@@ -36,7 +34,7 @@ This project is open source. Let's share fantastic poems with as many people as 
 
 **What I learned building this app**
 
-_Core Data, Result, @escaping, debouncing searches, Share Sheets, ContextMenu, MVVM, tracking app state using enums, tracking errors with enums, UIViewRepresentable, UserNotifications, filter, Tab Bars, NavigationViews _ <br>
+_Core Data, Result, @escaping, debouncing searches, Share Sheets, ContextMenu, MVVM(with Combine), tracking app state using enums, tracking errors with enums, UIViewRepresentable, UserNotifications, filter, Tab Bars, NavigationViews _ <br>
 It was really fun to dive into the deep end and try out building an app by myself. I'd like to thank 100 Days of SwiftUI by Paul Hudson that fueled me with the necessary knowledge to complete this application. If you are learning Swift, be sure to check out his courses.
 
 
