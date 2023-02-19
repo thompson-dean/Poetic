@@ -90,22 +90,22 @@ struct QuoteView: View {
                                 }
                                 VStack(alignment: .leading) {
                                     HStack {
-                                        VStack(alignment: .leading, spacing: 2) {
+                                        VStack(alignment: .leading, spacing: 4) {
                                             
                                             Text(("""
                                                             "\(pcViewModel.quotes[index].quote ?? "Unknown Line")"
                                                         """).trimmingCharacters(in: .whitespacesAndNewlines))
                                             .fixedSize(horizontal: false, vertical: true)
-                                            .fontWithLineHeight(font: .systemFont(ofSize: 14, weight: .bold), lineHeight: 20)
+                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 20)
                                             
                                             Text(pcViewModel.quotes[index].title ?? "Unknown Title")
                                                 .fixedSize(horizontal: false, vertical: true)
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 10, weight: .semibold), lineHeight: 14)
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 14, weight: .regular), lineHeight: 16)
                                                 .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                                             
                                             Text(pcViewModel.quotes[index].author ?? "Unknown Title")
                                                 .fixedSize(horizontal: false, vertical: true)
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 10, weight: .regular), lineHeight: 14)
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 14, weight: .semibold), lineHeight: 16)
                                                 .foregroundColor(.primary)
                                         }
                                         
@@ -187,22 +187,22 @@ struct QuoteView: View {
                                 }
                                 VStack(alignment: .leading) {
                                     HStack {
-                                        VStack(alignment: .leading, spacing: 2) {
+                                        VStack(alignment: .leading, spacing: 4) {
                                             
                                             Text(("""
                                                             "\(pcViewModel.quotes[index].quote ?? "Unknown Line")"
                                                         """).trimmingCharacters(in: .whitespacesAndNewlines))
                                             .fixedSize(horizontal: false, vertical: true)
-                                            .fontWithLineHeight(font: .systemFont(ofSize: 14, weight: .bold), lineHeight: 20)
+                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 20)
                                             
                                             Text(pcViewModel.quotes[index].title ?? "Unknown Title")
                                                 .fixedSize(horizontal: false, vertical: true)
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 10, weight: .semibold), lineHeight: 14)
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 14, weight: .regular), lineHeight: 16)
                                                 .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                                             
                                             Text(pcViewModel.quotes[index].author ?? "Unknown Title")
                                                 .fixedSize(horizontal: false, vertical: true)
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 10, weight: .regular), lineHeight: 14)
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 14, weight: .semibold), lineHeight: 16)
                                                 .foregroundColor(.primary)
                                         }
                                         

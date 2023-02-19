@@ -62,7 +62,7 @@ struct IntegratedSearchView: View {
                         .disabled(!viewModel.isTitle)
                         .foregroundColor(viewModel.isTitle ? .primary : colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                     }
-                    .padding(.bottom, 4)
+                    .padding(.top, 4)
                     .padding(.horizontal, 8)
                     
                     
@@ -76,7 +76,7 @@ struct IntegratedSearchView: View {
                                             .foregroundColor(.primary)
                                                 .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
                                                 .padding(.horizontal, 8)
-                                                .padding(.top, 16)
+                                                .padding(.top, 4)
                                         
                                         NavigationLink {
                                             AuthorView(viewModel: viewModel, pcViewModel: pcViewModel, author: viewModel.featuredAuthor1)
@@ -98,6 +98,7 @@ struct IntegratedSearchView: View {
                                             AuthorCell(author: viewModel.featuredAuthor3)
                                         }
                                         .buttonStyle(FlatLinkStyle())
+                                        .padding(.bottom, 8)
                                         
                                         
                                         Text("Recommended")
@@ -141,10 +142,10 @@ struct IntegratedSearchView: View {
                                             .buttonStyle(FlatLinkStyle())
                                         }
                                     }
+                                    .padding(.top, 8)
                                 }
                                 
                             case  .loading:
-                                ScrollView(.horizontal, showsIndicators: false) {
                                     VStack(alignment: .leading) {
                                         ForEach(viewModel.randomPoems, id: \.self) { poem in
                                             VStack(alignment: .leading, spacing: 2) {
@@ -164,7 +165,6 @@ struct IntegratedSearchView: View {
                                         }
                                     }
                                     .redacted(reason: .placeholder)
-                                }
                             
                             case .loaded:
                                 ForEach(viewModel.poems, id: \.self) { poem in
@@ -197,6 +197,7 @@ struct IntegratedSearchView: View {
                                         .padding(.horizontal, 8)
                                     }
                                     .buttonStyle(FlatLinkStyle())
+                                    .disabled(isFocused)
                                 }
                             }
                                 
@@ -210,14 +211,14 @@ struct IntegratedSearchView: View {
                                         AuthorCell(author: author)
                                     }
                                     .buttonStyle(FlatLinkStyle())
+                                    .disabled(isFocused)
                                 }
                             }
                         
                         
                     }
-                    .onTapGesture {
-                        isFocused = false
-                    }
+                    .padding(.top, 8)
+                    
                     Spacer()
                 }
                 .onAppear {
@@ -235,6 +236,9 @@ struct IntegratedSearchView: View {
                         didFail = false
                     }
                 }
+            }
+            .onTapGesture {
+                isFocused = false
             }
             .navigationTitle("Search")
             .navigationBarTitleDisplayMode(.inline)

@@ -50,6 +50,7 @@ class PoemViewModel: ObservableObject {
     @Published var showAlert: Bool = false
     
     var authorTitleCache: [String: [Poem]] = [:]
+    var poemTitleSearchCache: [String: [Poem]] = [:]
    
     @Published private(set) var state = State.idle
     @Published private(set) var searchState = SearchTitleState.idle
@@ -74,17 +75,29 @@ class PoemViewModel: ObservableObject {
     }
     
     func fetchTitles(searchTerm: String) {
-        searchState = .loading
-        apiService.fetchPoems(searchTerm: searchTerm, filter: .title)
-            .sink { [weak self] (dataResponse) in
-                if dataResponse.error != nil {
-                    self?.createAlert(with: dataResponse.error!)
-                    self?.searchState = .failed
-                } else {
-                    self?.poems = dataResponse.value!
-                    self?.searchState = .loaded
-                }
-            }.store(in: &cancellables)
+        if let cache = poemTitleSearchCache[searchTerm] {
+            self.authorPoemState = .loaded
+            self.authorPoems = cache
+            return
+        }
+        let trimmedString = searchTerm.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmedString != "" {
+            searchState = .loading
+            apiService.fetchPoems(searchTerm: trimmedString, filter: .title)
+                .sink { [weak self] (dataResponse) in
+                    if dataResponse.error != nil {
+                        self?.createAlert(with: dataResponse.error!)
+                        self?.searchState = .failed
+                    } else {
+                        self?.poems = dataResponse.value!
+                        self?.poemTitleSearchCache[searchTerm] = self?.poems
+                        self?.searchState = .loaded
+                    }
+                }.store(in: &cancellables)
+        } else {
+            return
+        }
+        
     }
     
     func listenToSearch() {
