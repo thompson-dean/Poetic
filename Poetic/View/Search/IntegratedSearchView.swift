@@ -215,9 +215,9 @@ struct IntegratedSearchView: View {
                         
                         Spacer()
                     }
-                }
-                .onTapGesture {
-                    isFocused = false
+                    .onTapGesture {
+                        isFocused = false
+                    }
                 }
                 .onAppear {
                     viewModel.listenToSearch()
