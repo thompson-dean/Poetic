@@ -18,6 +18,7 @@ struct FavoritesView: View {
     init(viewModel: PoemViewModel, pcViewModel: PersistenceController) {
         UITableView.appearance().separatorStyle = .none
         UITableView.appearance().backgroundColor = .clear
+        UITableView.appearance().showsVerticalScrollIndicator = false
         self.viewModel = viewModel
         self.pcViewModel = pcViewModel
     }
@@ -80,7 +81,6 @@ struct FavoritesView: View {
                     List {
                         ForEach(pcViewModel.favoritedPoems) { poem in
                             ZStack {
-                                
                                 NavigationLink {
                                     let sentPoem = Poem(title: poem.title ?? "", author: poem.author ?? "", lines: poem.lines ?? [], linecount: poem.linecount ?? "")
                                     NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
@@ -100,6 +100,7 @@ struct FavoritesView: View {
                             pcViewModel.deleteFavoritedPoem(indexSet: indexSet)
                         }
                     }
+                    .scrollIndicators(ScrollIndicatorVisibility.hidden)
                     .cornerRadius(8)
                     .padding(8)
                     .listStyle(.plain)

@@ -20,6 +20,7 @@ struct QuoteView: View {
     init(viewModel: PoemViewModel, pcViewModel: PersistenceController) {
         UITableView.appearance().separatorStyle = .none
         UITableView.appearance().backgroundColor = .clear
+        UITableView.appearance().showsVerticalScrollIndicator = false
         self.viewModel = viewModel
         self.pcViewModel = pcViewModel
     }
@@ -91,22 +92,16 @@ struct QuoteView: View {
                                 VStack(alignment: .leading) {
                                     HStack {
                                         VStack(alignment: .leading, spacing: 4) {
-                                            
                                             Text(("""
                                                             "\(pcViewModel.quotes[index].quote ?? "Unknown Line")"
                                                         """).trimmingCharacters(in: .whitespacesAndNewlines))
                                             .fixedSize(horizontal: false, vertical: true)
-                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 20)
-                                            
-                                            Text(pcViewModel.quotes[index].title ?? "Unknown Title")
-                                                .fixedSize(horizontal: false, vertical: true)
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 14, weight: .regular), lineHeight: 16)
-                                                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
                                             
                                             Text(pcViewModel.quotes[index].author ?? "Unknown Title")
                                                 .fixedSize(horizontal: false, vertical: true)
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 14, weight: .semibold), lineHeight: 16)
-                                                .foregroundColor(.primary)
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                                                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                                         }
                                         
                                         Spacer()
@@ -146,6 +141,7 @@ struct QuoteView: View {
                         }
                         .onDelete(perform: pcViewModel.deleteQuotes)
                     }
+                    .scrollIndicators(ScrollIndicatorVisibility.hidden)
                     .cornerRadius(8)
                     .padding(8)
                     .listStyle(.plain)
@@ -188,22 +184,16 @@ struct QuoteView: View {
                                 VStack(alignment: .leading) {
                                     HStack {
                                         VStack(alignment: .leading, spacing: 4) {
-                                            
                                             Text(("""
                                                             "\(pcViewModel.quotes[index].quote ?? "Unknown Line")"
                                                         """).trimmingCharacters(in: .whitespacesAndNewlines))
                                             .fixedSize(horizontal: false, vertical: true)
-                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 20)
-                                            
-                                            Text(pcViewModel.quotes[index].title ?? "Unknown Title")
-                                                .fixedSize(horizontal: false, vertical: true)
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 14, weight: .regular), lineHeight: 16)
-                                                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
-                                            
+                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
+
                                             Text(pcViewModel.quotes[index].author ?? "Unknown Title")
                                                 .fixedSize(horizontal: false, vertical: true)
-                                                .fontWithLineHeight(font: .systemFont(ofSize: 14, weight: .semibold), lineHeight: 16)
-                                                .foregroundColor(.primary)
+                                                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                                                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                                         }
                                         
                                         Spacer()

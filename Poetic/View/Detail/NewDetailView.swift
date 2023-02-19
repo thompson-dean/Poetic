@@ -23,7 +23,7 @@ struct NewDetailView: View {
                 .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                 .ignoresSafeArea(.all)
             
-            ScrollView(.vertical, showsIndicators: false) {
+            ScrollView(.vertical, showsIndicators: true) {
                 VStack(alignment: .leading) {
                     
                     Text("Poetic.")
