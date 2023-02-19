@@ -23,8 +23,7 @@ See below for what was learned through creating this app.
 
 **App Screenshots**
 
-<img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen01.png" width=18% height=18%>  <img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen02.png" width=18% height=18%>  <br> 
-<img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen03.png" width=18% height=18%> <img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen04.png" width=18% height=18%>  <img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen05.png" width=18% height=18%> <img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen06.png" width=18% height=18%>   
+<img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen01.png" width=18% height=18%>  <img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen02.png" width=18% height=18%>  <img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen03.png" width=18% height=18%> <br> <img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen04.png" width=18% height=18%>  <img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen05.png" width=18% height=18%> <img src="https://github.com/thompson-dean/Poetic/blob/main/Poetic/screenshots/screen06.png" width=18% height=18%>   
 
 
 **Links:**
