@@ -146,19 +146,27 @@ struct IntegratedSearchView: View {
                                 case  .loading:
                                     VStack(alignment: .leading) {
                                         ForEach(viewModel.randomPoems, id: \.self) { poem in
-                                            VStack(alignment: .leading, spacing: 2) {
-                                                
-                                                Text(poem.author)
-                                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
-                                                    .foregroundColor(.primary)
-                                                    .lineLimit(3)
-                                                
-                                                Text(poem.title)
-                                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                                                    .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
-                                                    .lineLimit(3)
+                                            VStack {
+                                                HStack {
+                                                    VStack(alignment: .leading, spacing: 2) {
+                                                        
+                                                        Text(poem.author)
+                                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
+                                                            .foregroundColor(.primary)
+                                                        
+                                                        Text(poem.title)
+                                                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                                                            .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                                                    }
+                                                    .padding(.vertical, 8)
+                                                    .padding(.horizontal, 8)
+                                                    
+                                                    Spacer()
+                                                }
                                             }
-                                            .padding(.vertical, 8)
+                                            .frame(width: UIScreen.main.bounds.width - 16)
+                                            .background(colorScheme == .light ? .white : .black)
+                                            .cornerRadius(8)
                                             .padding(.horizontal, 8)
                                         }
                                     }
