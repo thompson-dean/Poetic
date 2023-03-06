@@ -28,7 +28,7 @@ struct NewHomeView: View {
             .navigationBarHidden(true)
         }
         .onAppear {
-            pcViewModel.removeNotificationsOlderThan(days: 14)
+            pcViewModel.removeNotificationsOlderThan(days: 7)
             pcViewModel.fetchViewedPoems()
         }
     }
