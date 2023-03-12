@@ -30,42 +30,14 @@ struct IntegratedSearchView: View {
                     SearchBar(searchTerm: $viewModel.searchTerm)
                         .padding(.bottom, -4)
                         .focused($isFocused)
-                    VStack(alignment: .leading) {
-                        HStack(spacing: 16) {
-                            Button {
-                                viewModel.isTitle = true
-                            } label: {
-                                Text("title")
-                                    .fontWeight(viewModel.isTitle ? .bold : .regular)
-                                    .fontWithLineHeight(font: .systemFont(ofSize: 16), lineHeight: 16)
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 8)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .stroke(lineWidth: 2)
-                                    )
-                            }
-                            .disabled(viewModel.isTitle)
-                            .foregroundColor(viewModel.isTitle ? colorScheme == .light ? .lightThemeColor : .darkThemeColor : .primary)
-                            Button {
-                                viewModel.isTitle = false
-                            } label: {
-                                Text("author")
-                                    .fontWeight(viewModel.isTitle ? .regular : .bold)
-                                    .fontWithLineHeight(font: .systemFont(ofSize: 16), lineHeight: 16)
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 8)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .stroke(lineWidth: 2)
-                                    )
-                            }
-                            .disabled(!viewModel.isTitle)
-                            .foregroundColor(viewModel.isTitle ? .primary : colorScheme == .light ? .lightThemeColor : .darkThemeColor)
-                        }
-                        .padding(.top, 4)
-                        .padding(.horizontal, 10)
+                    Picker("", selection: $viewModel.isTitle) {
+                        Text("Title").tag(true)
+                        Text("Author").tag(false)
                         
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding(.horizontal, 8)
+                    VStack(alignment: .leading) {
                         
                         ScrollView(showsIndicators: false) {
                             if viewModel.isTitle {
