@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import CoreHaptics
+import AVFoundation
 
 class PoemViewModel: ObservableObject {
     enum State {

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct NewDetailView: View {
     @Environment(\.colorScheme) var colorScheme
@@ -13,6 +14,7 @@ struct NewDetailView: View {
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
     @State private var isPlayingTextToSpeech: Bool = false
+    @State var synthesizer = AVSpeechSynthesizer()
     
     let fonts = Fonts()
     let links = Links()
@@ -90,7 +92,9 @@ struct NewDetailView: View {
                 }
                 ToolbarItem {
                     Button {
+                        text2speech(poem.lines, isPlaying: true)
                         isPlayingTextToSpeech.toggle()
+                        
                     } label: {
                         Image(systemName: isPlayingTextToSpeech ? "pause.fill" : "play.fill")
                     }
@@ -111,6 +115,20 @@ struct NewDetailView: View {
                 
             }
         }
+    }
+    
+    func text2speech(_ lines: [String], isPlaying: Bool) {
+        let joinedLines = lines.joined(separator: ". ")
+        let utterance = AVSpeechUtterance(string: joinedLines)
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-AU")
+        utterance.pitchMultiplier = 0.8
+        utterance.rate = 0.43
+        if synthesizer.isSpeaking {
+            self.synthesizer.stopSpeaking(at: .immediate)
+        } else {
+            self.synthesizer.speak(utterance)
+        }
+        
     }
 }
 
