@@ -10,15 +10,6 @@
       }
     },
     {
-      "identity" : "kingfisher",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/onevcat/Kingfisher.git",
-      "state" : {
-        "branch" : "master",
-        "revision" : "6c6d77b43cdf032417be925eaa4a583907d9bb32"
-      }
-    },
-    {
       "identity" : "pkhud",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pkluz/PKHUD",
