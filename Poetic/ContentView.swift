@@ -20,7 +20,7 @@ struct ContentView: View {
     @State private var menu = UUID()
     
     
-    @StateObject var viewModel = PoemViewModel()
+    @StateObject var viewModel = PoemViewModel(apiService: APIService())
     @StateObject var pcViewModel = PersistenceController()
     let notificationManager = NotificationManager()
     
@@ -108,7 +108,7 @@ struct ContentView: View {
             notificationManager.requestAuthorization()
             SystemThemeManager.shared.handleTheme(darkMode: viewModel.darkModeEnabled, system: viewModel.systemThemeEnabled)
             UIApplication.shared.applicationIconBadgeNumber = 0
-            viewModel.loadRandomPoems(searchTerm: "5")
+            viewModel.loadRandomPoems(number: "5")
             viewModel.featuredAuthor1 = authors.authors.randomElement() ?? ""
             viewModel.featuredAuthor2 = authors.authors.randomElement() ?? ""
             viewModel.featuredAuthor3 = authors.authors.randomElement() ?? ""

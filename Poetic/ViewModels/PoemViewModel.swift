@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Combine
-import CoreHaptics
 
 class PoemViewModel: ObservableObject {
     enum State {
@@ -56,19 +55,20 @@ class PoemViewModel: ObservableObject {
     @Published private(set) var searchState = SearchTitleState.idle
     @Published private(set) var authorPoemState = AuthorPoemState.idle
     
-    init(apiService: APIServiceProtocol = APIService.shared) {
+    init(apiService: APIServiceProtocol) {
         self.apiService = apiService
     }
     
-    func loadRandomPoems(searchTerm: String) {
+    func loadRandomPoems(number: String) {
         state = .loading
-        apiService.fetchPoems(searchTerm: searchTerm, filter: .random)
+        apiService.fetchPoems(searchTerm: number, filter: .random)
             .sink { [weak self] (dataResponse) in
                 if dataResponse.error != nil {
                     self?.createAlert(with: dataResponse.error!)
                     self?.state = .failed
                 } else {
                     self?.randomPoems = dataResponse.value!
+                    print("DEBUG: IN VIEW MODEL \(dataResponse.value!.count)")
                     self?.state = .loaded
                 }
             }.store(in: &cancellables)
@@ -97,7 +97,6 @@ class PoemViewModel: ObservableObject {
         } else {
             return
         }
-        
     }
     
     func listenToSearch() {
@@ -143,21 +142,6 @@ class PoemViewModel: ObservableObject {
     func createAlert( with error: NetworkError ) {
         searchListLoadingError = error.backendError == nil ? error.initialError.localizedDescription : error.backendError!.message
         self.showAlert = true
-    }
-    
-    func simpleHapticSuccess() {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.success)
-    }
-    
-    func simpleHapticError() {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.error)
-    }
-    
-    func mediumImpactHaptic() {
-        let generator = UIImpactFeedbackGenerator()
-        generator.impactOccurred(intensity: 1.0)
     }
     
     func exampleData() -> [Poem] {

@@ -13,14 +13,8 @@ protocol APIServiceProtocol {
     func fetchPoems(searchTerm: String, filter: SearchFilter) -> AnyPublisher<DataResponse<[Poem], NetworkError>, Never>
 }
 
-final class APIService {
-    static let shared: APIServiceProtocol = APIService()
-    private init() { }
-}
-
-extension APIService: APIServiceProtocol {
+final class APIService: APIServiceProtocol {
     func fetchPoems(searchTerm: String, filter: SearchFilter) -> AnyPublisher<DataResponse<[Poem], NetworkError>, Never> {
-        
         let urlString: String = APIConst.api + "\(filter)/\(searchTerm)"
         let url = URL(string: urlString)!
         

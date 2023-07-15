@@ -108,7 +108,7 @@ struct NewDetailView: View {
 
 struct PracticePoemView_Previews: PreviewProvider {
     static var previews: some View {
-        NewDetailView(viewModel: PoemViewModel(), pcViewModel: PersistenceController(), poem: Poem(
+        NewDetailView(viewModel: PoemViewModel(apiService: APIService()), pcViewModel: PersistenceController(), poem: Poem(
             title: "Sonnet 1: From fairest creatures we desire increase",
             author: "William Shakespeare",
             lines: [

@@ -38,6 +38,11 @@
 		2A67DA4828DF2CBD00F1A5C0 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A67DA4728DF2CBD00F1A5C0 /* Fonts.swift */; };
 		2A77337A28C777C700C115E9 /* FlatLinkStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A77337928C777C700C115E9 /* FlatLinkStyle.swift */; };
 		2A77337E28C8C6B000C115E9 /* FailedPoemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A77337D28C8C6B000C115E9 /* FailedPoemCard.swift */; };
+		2A7FD5E22A626E8200E924EE /* HapticFeedBackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7FD5E12A626E8200E924EE /* HapticFeedBackGenerator.swift */; };
+		2A7FD5F12A627D7600E924EE /* MockAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7FD5F02A627D7600E924EE /* MockAPIService.swift */; };
+		2A7FD5F32A627F0600E924EE /* mockResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A7FD5F22A627F0600E924EE /* mockResponse.json */; };
+		2A7FD5F52A627F8500E924EE /* Mockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7FD5F42A627F8500E924EE /* Mockable.swift */; };
+		2A7FD5F72A62862D00E924EE /* PoemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7FD5F62A62862D00E924EE /* PoemViewModelTests.swift */; };
 		2A81C48628C45B4300437EC3 /* View+FontWithLineHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A81C48528C45B4300437EC3 /* View+FontWithLineHeight.swift */; };
 		2A81C48828C4D25C00437EC3 /* PoemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A81C48728C4D25C00437EC3 /* PoemCard.swift */; };
 		2AB4B9A827E05F1C008FB84B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4B9A727E05F1C008FB84B /* Color.swift */; };
@@ -52,6 +57,16 @@
 		2AF8600527DC5B2C00B3BC40 /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8600427DC5B2C00B3BC40 /* QuoteView.swift */; };
 		2AF98E3B27DE2E00004D21DA /* Authors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF98E3A27DE2E00004D21DA /* Authors.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2A7FD5EB2A62710700E924EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A17BA8727D5D8E000E0D755 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A17BA8E27D5D8E000E0D755;
+			remoteInfo = Poetic;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		2A13BE0028B9B42800E79A0E /* NewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDetailView.swift; sourceTree = "<group>"; };
@@ -84,6 +99,12 @@
 		2A67DA4728DF2CBD00F1A5C0 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		2A77337928C777C700C115E9 /* FlatLinkStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatLinkStyle.swift; sourceTree = "<group>"; };
 		2A77337D28C8C6B000C115E9 /* FailedPoemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailedPoemCard.swift; sourceTree = "<group>"; };
+		2A7FD5E12A626E8200E924EE /* HapticFeedBackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedBackGenerator.swift; sourceTree = "<group>"; };
+		2A7FD5E72A62710700E924EE /* PoeticTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PoeticTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A7FD5F02A627D7600E924EE /* MockAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIService.swift; sourceTree = "<group>"; };
+		2A7FD5F22A627F0600E924EE /* mockResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mockResponse.json; sourceTree = "<group>"; };
+		2A7FD5F42A627F8500E924EE /* Mockable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mockable.swift; sourceTree = "<group>"; };
+		2A7FD5F62A62862D00E924EE /* PoemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoemViewModelTests.swift; sourceTree = "<group>"; };
 		2A81C48528C45B4300437EC3 /* View+FontWithLineHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+FontWithLineHeight.swift"; sourceTree = "<group>"; };
 		2A81C48728C4D25C00437EC3 /* PoemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoemCard.swift; sourceTree = "<group>"; };
 		2AB4B9A727E05F1C008FB84B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -109,6 +130,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2A7FD5E42A62710700E924EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -116,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				2A17BA9127D5D8E000E0D755 /* Poetic */,
+				2A7FD5E82A62710700E924EE /* PoeticTests */,
 				2A17BA9027D5D8E000E0D755 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -124,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				2A17BA8F27D5D8E000E0D755 /* Poetic.app */,
+				2A7FD5E72A62710700E924EE /* PoeticTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -204,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				2A67DA4728DF2CBD00F1A5C0 /* Fonts.swift */,
+				2A7FD5E12A626E8200E924EE /* HapticFeedBackGenerator.swift */,
 				2AB4B9A727E05F1C008FB84B /* Color.swift */,
 				2ACC8A4827E8C39E002F5B6D /* SystemThemeManager.swift */,
 				2A19EA9A27F09E1C00022EFE /* NotificationManager.swift */,
@@ -289,6 +320,17 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
+		2A7FD5E82A62710700E924EE /* PoeticTests */ = {
+			isa = PBXGroup;
+			children = (
+				2A7FD5F02A627D7600E924EE /* MockAPIService.swift */,
+				2A7FD5F62A62862D00E924EE /* PoemViewModelTests.swift */,
+				2A7FD5F42A627F8500E924EE /* Mockable.swift */,
+				2A7FD5F22A627F0600E924EE /* mockResponse.json */,
+			);
+			path = PoeticTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -313,6 +355,24 @@
 			productReference = 2A17BA8F27D5D8E000E0D755 /* Poetic.app */;
 			productType = "com.apple.product-type.application";
 		};
+		2A7FD5E62A62710700E924EE /* PoeticTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A7FD5ED2A62710700E924EE /* Build configuration list for PBXNativeTarget "PoeticTests" */;
+			buildPhases = (
+				2A7FD5E32A62710700E924EE /* Sources */,
+				2A7FD5E42A62710700E924EE /* Frameworks */,
+				2A7FD5E52A62710700E924EE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2A7FD5EC2A62710700E924EE /* PBXTargetDependency */,
+			);
+			name = PoeticTests;
+			productName = PoeticTests;
+			productReference = 2A7FD5E72A62710700E924EE /* PoeticTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -320,11 +380,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
 					2A17BA8E27D5D8E000E0D755 = {
 						CreatedOnToolsVersion = 13.2.1;
+					};
+					2A7FD5E62A62710700E924EE = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 2A17BA8E27D5D8E000E0D755;
 					};
 				};
 			};
@@ -346,6 +410,7 @@
 			projectRoot = "";
 			targets = (
 				2A17BA8E27D5D8E000E0D755 /* Poetic */,
+				2A7FD5E62A62710700E924EE /* PoeticTests */,
 			);
 		};
 /* End PBXProject section */
@@ -361,6 +426,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2A7FD5E52A62710700E924EE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A7FD5F32A627F0600E924EE /* mockResponse.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -373,6 +446,7 @@
 				2A1ABA5428F3FBA400D48AA1 /* SearchFIlter.swift in Sources */,
 				2A17BAAA27D5D95400E0D755 /* FavoritesView.swift in Sources */,
 				2A81C48828C4D25C00437EC3 /* PoemCard.swift in Sources */,
+				2A7FD5E22A626E8200E924EE /* HapticFeedBackGenerator.swift in Sources */,
 				2A304724288FB01500E43820 /* NewHomeView.swift in Sources */,
 				2A1ABA5828F4016900D48AA1 /* APIConst.swift in Sources */,
 				2A17BAAC27D5D96E00E0D755 /* APIService.swift in Sources */,
@@ -410,7 +484,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2A7FD5E32A62710700E924EE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A7FD5F12A627D7600E924EE /* MockAPIService.swift in Sources */,
+				2A7FD5F52A627F8500E924EE /* Mockable.swift in Sources */,
+				2A7FD5F72A62862D00E924EE /* PoemViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2A7FD5EC2A62710700E924EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2A17BA8E27D5D8E000E0D755 /* Poetic */;
+			targetProxy = 2A7FD5EB2A62710700E924EE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		2A17BA9B27D5D8E000E0D755 /* Debug */ = {
@@ -595,6 +687,46 @@
 			};
 			name = Release;
 		};
+		2A7FD5EE2A62710700E924EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YT4PWFD9G5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Dean.Thompson.PoeticTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Poetic.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Poetic";
+			};
+			name = Debug;
+		};
+		2A7FD5EF2A62710700E924EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YT4PWFD9G5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Dean.Thompson.PoeticTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Poetic.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Poetic";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -612,6 +744,15 @@
 			buildConfigurations = (
 				2A17BA9E27D5D8E000E0D755 /* Debug */,
 				2A17BA9F27D5D8E000E0D755 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2A7FD5ED2A62710700E924EE /* Build configuration list for PBXNativeTarget "PoeticTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A7FD5EE2A62710700E924EE /* Debug */,
+				2A7FD5EF2A62710700E924EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -25,7 +25,7 @@ struct NewHomeView: View {
                     NewHomeContent(viewModel: viewModel, pcViewModel: pcViewModel)
                 }
                 .refreshable {
-                    viewModel.loadRandomPoems(searchTerm: "5")
+                    viewModel.loadRandomPoems(number: "5")
                 }
             }
             .navigationBarHidden(true)
@@ -74,7 +74,7 @@ struct NewHomeContent: View {
                             PoemCard(poem: poem)
                                 .redacted(reason: .placeholder)
                                 .onAppear {
-                                    viewModel.loadRandomPoems(searchTerm: "5")
+                                    viewModel.loadRandomPoems(number: "5")
                                 }
                         case .loading:
                             PoemCard(poem: poem)
@@ -122,7 +122,7 @@ struct NewHomeContent: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        NewHomeView(viewModel: PoemViewModel(), pcViewModel: PersistenceController()).preferredColorScheme(.dark)
+        NewHomeView(viewModel: PoemViewModel(apiService: APIService()), pcViewModel: PersistenceController()).preferredColorScheme(.dark)
     }
 }
 

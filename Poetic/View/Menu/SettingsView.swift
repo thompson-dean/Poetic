@@ -225,7 +225,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(viewModel: PoemViewModel(), pcViewModel: PersistenceController())
+        SettingsView(viewModel: PoemViewModel(apiService: APIService()), pcViewModel: PersistenceController())
             .preferredColorScheme(.light)
     }
 }
