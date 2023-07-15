@@ -24,6 +24,9 @@ struct NewHomeView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     NewHomeContent(viewModel: viewModel, pcViewModel: pcViewModel)
                 }
+                .refreshable {
+                    viewModel.loadRandomPoems(searchTerm: "5")
+                }
             }
             .navigationBarHidden(true)
         }
@@ -61,47 +64,11 @@ struct NewHomeContent: View {
                     .padding(.top, 12)
                 
                 Spacer()
-                
-                Button {
-                    viewModel.loadRandomPoems(searchTerm: "5")
-                } label: {
-                    
-                    switch viewModel.state {
-                    case .loading:
-                        Image(systemName: "arrow.clockwise")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .foregroundColor(.primary.opacity(0.5))
-                            .rotationEffect(.degrees(isRotating))
-                            .animation(.linear(duration: 0.5).speed(0.4).repeatForever(autoreverses: false), value: UUID())
-                            .frame(width: 24, height: 24)
-                            .onAppear {
-                                withAnimation {
-                                    isRotating = 360.0
-                                }
-                            }
-                            .disabled(true)
-                    case .failed, .idle, .loaded:
-                        Image(systemName: "arrow.clockwise")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .foregroundColor(.primary)
-                            .frame(width: 24, height: 24)
-                            .onAppear {
-                                isRotating = 0.0
-                            }
-                            .disabled(false)
-                    }
-                    
-                }
-                .padding(.horizontal, 8)
             }
-            
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(viewModel.randomPoems, id: \.self) { poem in
-                        
                         switch viewModel.state {
                         case .idle:
                             PoemCard(poem: poem)
@@ -147,18 +114,15 @@ struct NewHomeContent: View {
                     .buttonStyle(FlatLinkStyle())
                 }
             }
-                
-            }
-            .padding(.top, 24)
+        }
+        .padding(.top, 24)
     }
 }
 
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        
         NewHomeView(viewModel: PoemViewModel(), pcViewModel: PersistenceController()).preferredColorScheme(.dark)
-        
     }
 }
 

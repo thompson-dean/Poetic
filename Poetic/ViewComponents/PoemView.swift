@@ -32,10 +32,10 @@ struct PoemView: View {
                     } label: {
                         Label("Share this quote", systemImage: "square.and.arrow.up")
                     }
-                    
+
                     Button { } label: {
                         Label("Cancel", systemImage: "delete.left")
-                        
+
                     }
                 }
         } else {
@@ -56,10 +56,10 @@ struct PoemView: View {
                         Label("Share this quote", systemImage: "square.and.arrow.up")
                     }
                     Button {
-                        
+
                     } label: {
                         Label("Cancel", systemImage: "delete.left")
-                        
+
                     }
                 }
         }

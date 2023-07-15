@@ -12,7 +12,6 @@ struct NewDetailView: View {
     
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
-    @State private var isPlayingTextToSpeech: Bool = false
     
     let fonts = Fonts()
     let links = Links()
@@ -86,13 +85,6 @@ struct NewDetailView: View {
                         } else {
                             Image(systemName: "star")
                         }
-                    }
-                }
-                ToolbarItem {
-                    Button {
-                        isPlayingTextToSpeech.toggle()
-                    } label: {
-                        Image(systemName: isPlayingTextToSpeech ? "pause.fill" : "play.fill")
                     }
                 }
                 ToolbarItem {

@@ -14,6 +14,7 @@ struct SettingsView: View {
     let links = Links()
     @StateObject var notificationManager = NotificationManager()
     @ObservedObject var viewModel: PoemViewModel
+    @ObservedObject var pcViewModel: PersistenceController
     
     @State private var showLoading: Bool = false
     @State private var lightOrDark = false
@@ -23,7 +24,6 @@ struct SettingsView: View {
             VStack(alignment: .center) {
                 Form {
                     Section(header: Text("Appearance")) {
-                        
                         Toggle("Adaptive background", isOn: $viewModel.systemThemeEnabled)
                             .onChange(of: viewModel.systemThemeEnabled) { _ in
                                 SystemThemeManager.shared.handleTheme(darkMode: viewModel.darkModeEnabled, system: viewModel.systemThemeEnabled)
@@ -33,15 +33,20 @@ struct SettingsView: View {
                             Picker("", selection: $viewModel.darkModeEnabled) {
                                 Text("Light").tag(false)
                                 Text("Dark").tag(true)
-                                
                             }
                             .pickerStyle(SegmentedPickerStyle())
                             .onChange(of: viewModel.darkModeEnabled) { _ in
                                 SystemThemeManager.shared.handleTheme(darkMode: viewModel.darkModeEnabled, system: viewModel.systemThemeEnabled)
                             }
                         }
-                        
-                        
+                    }
+                    
+                    Section(header: Text("Viewed Poems")) {
+                        HStack {
+                            Text("Viewed poems")
+                            Spacer()
+                            Text(String(pcViewModel.viewedPoems.count))
+                        }
                     }
                     
                     Section(header: Text("Notifications")) {
@@ -60,8 +65,6 @@ struct SettingsView: View {
                             if let url = URL(string: links.poetryDBURLSTring) {
                                 WebView(url: url, showLoading: $showLoading)
                                     .overlay(showLoading ? ProgressView("Loading...").toAnyView() : EmptyView().toAnyView())
-                            } else {
-                                
                             }
                         } label: {
                             Text("PoetryDB's fantastic poetry API")
@@ -172,9 +175,7 @@ struct SettingsView: View {
                                 }
                             }
                         }
-                        
                     }
-                    
                     Section {
                         NavigationLink {
                             if let url = URL(string: links.twitterURLString) {
@@ -192,50 +193,39 @@ struct SettingsView: View {
                                     .cornerRadius(5)
                                 
                                 VStack(alignment: .leading, spacing: 5) {
-                                    Text("Poetic version 2.0")
+                                    Text("Poetic version 2.1")
                                     HStack(spacing: 3) {
                                         Text("Made with love by")
                                         
                                         Text("@DeanWThompson")
                                             .foregroundColor(.blue)
-                                        
                                     }
                                     .font(.caption)
-                                    
-                                    
                                 }
-                                
                             }
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
-                    
                 }
                 .background(
                     Image(colorScheme == .light ? "background" : "background-dark")
                         .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                         .ignoresSafeArea()
-                    
                 )
                 .onAppear {
                     UITableView.appearance().backgroundColor = .clear
                 }
-        
             }
             .navigationTitle("Menu")
             .navigationBarTitleDisplayMode(.inline)
-            
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
-    
-    
-    
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(viewModel: PoemViewModel())
+        SettingsView(viewModel: PoemViewModel(), pcViewModel: PersistenceController())
             .preferredColorScheme(.light)
     }
 }
