@@ -90,7 +90,7 @@ struct ContentView: View {
                 }
                 .tag(4)
             
-            SettingsView(viewModel: viewModel)
+            SettingsView(viewModel: viewModel, pcViewModel: pcViewModel)
                 .id(menu)
                 .tabItem {
                     

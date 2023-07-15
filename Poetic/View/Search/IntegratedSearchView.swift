@@ -21,22 +21,20 @@ struct IntegratedSearchView: View {
     var authors: Authors = Bundle.main.decode("Authors.json")
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Image(colorScheme == .light ? "background" : "background-dark")
                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                     .ignoresSafeArea()
                 VStack(alignment: .leading) {
-                    SearchBar(searchTerm: $viewModel.searchTerm)
-                        .padding(.bottom, -4)
-                        .focused($isFocused)
                     Picker("", selection: $viewModel.isTitle) {
                         Text("Title").tag(true)
                         Text("Author").tag(false)
-                        
                     }
                     .pickerStyle(SegmentedPickerStyle())
-                    .padding(.horizontal, 8)
+                    .padding(.horizontal, 16)
+                    .padding(.top, 4)
+                    .padding(.bottom, viewModel.isTitle ? 0 : 8)
                     VStack(alignment: .leading) {
                         
                         ScrollView(showsIndicators: false) {
@@ -48,7 +46,7 @@ struct IntegratedSearchView: View {
                                             Text("Featured Authors")
                                                 .foregroundColor(.primary)
                                                 .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
-                                                .padding(.horizontal, 8)
+                                                .padding(.horizontal, 16)
                                             
                                             NavigationLink {
                                                 AuthorView(viewModel: viewModel, pcViewModel: pcViewModel, author: viewModel.featuredAuthor1)
@@ -74,7 +72,7 @@ struct IntegratedSearchView: View {
                                             Text("Recommended")
                                                 .foregroundColor(.primary)
                                                 .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
-                                                .padding(.horizontal, 8)
+                                                .padding(.horizontal, 16)
                                                 .padding(.top, 8)
                                             
                                             ForEach(viewModel.randomPoems, id: \.self) { poem in
@@ -175,7 +173,6 @@ struct IntegratedSearchView: View {
                                             .padding(.horizontal, 8)
                                         }
                                         .buttonStyle(FlatLinkStyle())
-                                        .disabled(isFocused)
                                     }
                                 }
                             } else {
@@ -188,15 +185,12 @@ struct IntegratedSearchView: View {
                                         AuthorCell(author: author)
                                     }
                                     .buttonStyle(FlatLinkStyle())
-                                    .disabled(isFocused)
                                 }
                             }
                         }
                         
+                        
                         Spacer()
-                    }
-                    .onTapGesture {
-                        isFocused = false
                     }
                 }
                 .onAppear {
@@ -218,7 +212,15 @@ struct IntegratedSearchView: View {
             .navigationTitle("Search")
             .navigationBarTitleDisplayMode(.inline)
             .PKHUD(isPresented: $didFail, HUDContent: .labeledError(title: "No Result or Error.", subtitle: "Try again."), delay: 1)
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Button("Done") {
+                        isFocused = false
+                    }
+                }
+            }
         }
+        .searchable(text: $viewModel.searchTerm)
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }
