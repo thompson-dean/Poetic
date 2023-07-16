@@ -45,7 +45,7 @@ struct PoemView: View {
                     Button {
                         if !pcViewModel.quotes.contains(where: { $0.quote == poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines)}) {
                             pcViewModel.addQuote(id: UUID(), title: title, author: author, quote: poemLines[index], lines: poemLines, linecount: "")
-                            viewModel.simpleHapticSuccess()
+                            HapticFeedbackGenerator.shared.simpleHapticSuccess()
                         }
                     } label: {
                         Label("Highlight and Save", systemImage: "quote.bubble.fill")
