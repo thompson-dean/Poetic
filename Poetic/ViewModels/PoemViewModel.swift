@@ -139,7 +139,7 @@ class PoemViewModel: ObservableObject {
             }.store(in: &cancellables)
     }
     
-    func createAlert( with error: NetworkError ) {
+    func createAlert(with error: NetworkError) {
         searchListLoadingError = error.backendError == nil ? error.initialError.localizedDescription : error.backendError!.message
         self.showAlert = true
     }
