@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "97634E17-12C3-41E1-A1F1-5AE923CC1F65",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:Poetic.xcodeproj",
+          "identifier" : "2A17BA8E27D5D8E000E0D755",
+          "name" : "Poetic"
+        }
+      ]
+    },
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Poetic.xcodeproj",
+      "identifier" : "2A17BA8E27D5D8E000E0D755",
+      "name" : "Poetic"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Poetic.xcodeproj",
+        "identifier" : "2A7FD5E62A62710700E924EE",
+        "name" : "PoeticTests"
+      }
+    }
+  ],
+  "version" : 1
+}

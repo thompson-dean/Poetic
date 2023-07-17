@@ -117,6 +117,7 @@
 		2ACC8A4627E8AFC9002F5B6D /* Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
 		2ACC8A4827E8C39E002F5B6D /* SystemThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemThemeManager.swift; sourceTree = "<group>"; };
 		2AF5D9392A63EE5E006725A8 /* PersistenceControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceControllerTests.swift; sourceTree = "<group>"; };
+		2AF5D93B2A656983006725A8 /* Poetic.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Poetic.xctestplan; sourceTree = "<group>"; };
 		2AF8600227DB16EA00B3BC40 /* Authors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Authors.json; sourceTree = "<group>"; };
 		2AF8600427DC5B2C00B3BC40 /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
 		2AF98E3A27DE2E00004D21DA /* Authors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authors.swift; sourceTree = "<group>"; };
@@ -145,6 +146,7 @@
 		2A17BA8627D5D8E000E0D755 = {
 			isa = PBXGroup;
 			children = (
+				2AF5D93B2A656983006725A8 /* Poetic.xctestplan */,
 				2A17BA9127D5D8E000E0D755 /* Poetic */,
 				2A7FD5E82A62710700E924EE /* PoeticTests */,
 				2A17BA9027D5D8E000E0D755 /* Products */,
