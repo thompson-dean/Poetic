@@ -17,22 +17,26 @@ class PersistenceController: ObservableObject {
     @Published var quotes: [QuoteEntity] = []
     @Published var favoritedQuotesPoem: [QuotePoemsEntity] = []
     @Published var viewedPoems: [ViewedPoemEntity] = []
-
+    @Published var initializationError: NSError?
+    
     @Published var poemsFilter = true
     @Published var quotesFilter = true
     
-    init() {
-        container = NSPersistentContainer(name: "Poetic")
+    init(container: NSPersistentContainer = NSPersistentContainer(name: "Poetic")) {
+        self.container = container
         
         container.loadPersistentStores { storeDescription, error in
             if let error = error as NSError? {
-                fatalError(error.localizedDescription)
+                DispatchQueue.main.async {
+                    self.initializationError = error
+                }
+            } else {
+                self.fetchFavoritedPoems()
+                self.fetchQuotes()
+                self.fetchQuotePoems()
+                self.fetchViewedPoems()
             }
         }
-        fetchFavoritedPoems()
-        fetchQuotes()
-        fetchQuotePoems()
-        fetchViewedPoems()
     }
     
     // Fetching Entities
@@ -132,9 +136,7 @@ class PersistenceController: ObservableObject {
         saveData()
     }
     
-    
     //Saving and Deleting from Core Data
-    
     func saveData() {
         do {
             try container.viewContext.save()
