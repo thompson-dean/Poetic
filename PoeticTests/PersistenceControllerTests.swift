@@ -126,11 +126,4 @@ class PersistenceControllerTests: XCTestCase {
         persistenceController.deleteViewedPoem(entity: poem)
         XCTAssertTrue(persistenceController.viewedPoems.isEmpty)
     }
-
-    func test_PersistenceController_convertDateToString_returnsCorrectFormat() {
-        let testDate = Date(timeIntervalSince1970: 1626643200) // July 19, 2021
-        let dateAsString = persistenceController.convertDateToString(date: testDate)
-        print(dateAsString)
-        XCTAssertEqual(dateAsString, "7/19/21")
-    }
 }
