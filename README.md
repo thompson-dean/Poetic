@@ -1,3 +1,5 @@
+[![Build Status](https://app.bitrise.io/app/e99fded6-87bd-4590-82bd-bbe377b8db99/status.svg?token=BscKkqczQxAiKO6w1Kfucw&branch=main)](https://app.bitrise.io/app/e99fded6-87bd-4590-82bd-bbe377b8db99)
+
 # Poetic
 
 Poetic is a classic poetry reader. Enjoy thousands of poems from the greatest English poets. 
