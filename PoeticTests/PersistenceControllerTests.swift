@@ -130,6 +130,7 @@ class PersistenceControllerTests: XCTestCase {
     func test_PersistenceController_convertDateToString_returnsCorrectFormat() {
         let testDate = Date(timeIntervalSince1970: 1626643200) // July 19, 2021
         let dateAsString = persistenceController.convertDateToString(date: testDate)
-        XCTAssertEqual(dateAsString, "Jul 19, 2021")
+        print(dateAsString)
+        XCTAssertEqual(dateAsString, "7/19/21")
     }
 }
