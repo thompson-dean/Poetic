@@ -67,6 +67,9 @@
             ReferencedContainer = "container:Poetic.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <StoreKitConfigurationFileReference
+         identifier = "../../Poetic/StoreKit/TipsStoreConfiguration.storekit">
+      </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

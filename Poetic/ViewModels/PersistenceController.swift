@@ -22,7 +22,7 @@ class PersistenceController: ObservableObject {
     @Published var poemsFilter = true
     @Published var quotesFilter = true
     
-    init(container: NSPersistentContainer = NSPersistentContainer(name: "Poetic")) {
+    init(container: NSPersistentContainer = NSPersistentContainer(name: Constants.appName)) {
         self.container = container
         
         container.loadPersistentStores { storeDescription, error in

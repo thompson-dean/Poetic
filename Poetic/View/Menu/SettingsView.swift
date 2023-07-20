@@ -15,6 +15,7 @@ struct SettingsView: View {
     @StateObject var notificationManager = NotificationManager()
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
+    @StateObject private var storeKitManager = StoreKitManager()
     
     @State private var showLoading: Bool = false
     @State private var lightOrDark = false
@@ -109,6 +110,25 @@ struct SettingsView: View {
                                 }
                                 .foregroundColor(.primary)
                             }
+                        }
+                        NavigationLink {
+                            TipView(storeKitManager: storeKitManager)
+                        } label: {
+                            HStack {
+                                Image(systemName: "cup.and.saucer")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 32, height: 32)
+                                    .padding(.trailing)
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text("Tip Jar")
+                                    
+                                    Text("Support the dev. Buy them a coffee.")
+                                        .font(.caption)
+                                }
+                                Spacer()
+                            }
+                            .foregroundColor(.primary)
                         }
                         Button {
                             links.shareApp()
