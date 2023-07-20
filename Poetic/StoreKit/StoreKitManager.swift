@@ -8,24 +8,76 @@
 import Foundation
 import StoreKit
 
-enum PaymentError: Error {
+enum PaymentError: LocalizedError {
     case failedVerification
+    case system(Error)
+    
+    var errorDescription: String? {
+        switch self {
+        case .failedVerification:
+            return "User transaction verification failed"
+        case .system(let error):
+            return error.localizedDescription
+        }
+    }
 }
 
-enum PaymentState {
+enum PaymentState: Equatable {
     case successful
+    case failed(PaymentError)
+    
+    static func == (lhs: PaymentState, rhs: PaymentState) -> Bool {
+        switch(lhs, rhs) {
+        case (.successful, .successful):
+            return true
+        case (let .failed(lhsError), let .failed(rhsError)):
+            return lhsError.localizedDescription == rhsError.localizedDescription
+        default:
+            return false
+        }
+    }
 }
 
 typealias PurchaseResult = Product.PurchaseResult
+typealias TransactionListener = Task<Void, Error>
 
+@MainActor
 final class StoreKitManager: ObservableObject {
     @Published private(set) var items: [Product] = []
-    @Published private(set) var paymentState: PaymentState?
+    @Published private(set) var paymentState: PaymentState? {
+        didSet {
+            switch paymentState {
+            case .failed:
+                hasError = true
+            default:
+                hasError = false
+            }
+        }
+    }
+    
+    @Published var hasError: Bool = false
+    
+    var error: PaymentError? {
+        switch paymentState {
+        case .failed(let error):
+            return error
+        default:
+            return nil
+        }
+    }
+    
+    private var transactionListener: TransactionListener?
     
     init() {
+        transactionListener = confiureTransactionListener()
+        
         Task { [weak self] in
             await self?.retrieveProducts()
         }
+    }
+    
+    deinit {
+        transactionListener?.cancel()
     }
     
     func purchase(_ item: Product) async {
@@ -34,6 +86,7 @@ final class StoreKitManager: ObservableObject {
             
             try await handlePurchase(from: result)
         } catch {
+            paymentState = .failed(.system(error))
             print("DEBUG: \(error.localizedDescription)")
         }
     }
@@ -44,12 +97,28 @@ final class StoreKitManager: ObservableObject {
 }
 
 private extension StoreKitManager {
-    @MainActor
+    
+    func confiureTransactionListener() -> TransactionListener {
+        Task.detached(priority: .background) { @MainActor [weak self] in
+            do {
+                for await result in Transaction.updates {
+                    let transaction = try self?.checkVerified(result)
+                    self?.paymentState = .successful
+                    await transaction?.finish()
+                }
+            } catch {
+                self?.paymentState = .failed(.system(error))
+                print(error)
+            }
+        }
+    }
+    
     func retrieveProducts() async {
         do {
             let products = try await Product.products(for: Constants.storeKitIdentifiers).sorted(by: { $0.price < $1.price})
             items = products
         } catch {
+            paymentState = .failed(.system(error))
             print("DEBUG: \(error.localizedDescription)")
         }
     }

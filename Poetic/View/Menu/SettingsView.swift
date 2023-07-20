@@ -15,7 +15,7 @@ struct SettingsView: View {
     @StateObject var notificationManager = NotificationManager()
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
-    @StateObject private var storeKitManager = StoreKitManager()
+    @ObservedObject var storeKitManager: StoreKitManager
     
     @State private var showLoading: Bool = false
     @State private var lightOrDark = false
@@ -240,18 +240,5 @@ struct SettingsView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .navigationViewStyle(StackNavigationViewStyle())
-    }
-}
-
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView(viewModel: PoemViewModel(apiService: APIService()), pcViewModel: PersistenceController())
-            .preferredColorScheme(.light)
-    }
-}
-
-extension View {
-    func toAnyView() -> AnyView {
-        AnyView(self)
     }
 }

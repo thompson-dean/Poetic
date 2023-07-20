@@ -45,6 +45,7 @@ struct TipView: View {
                 }
             }
         }
+        .alert(isPresented: $storeKitManager.hasError, error: storeKitManager.error) { }
         .sheet(isPresented: $showThankYou) {
             thankYouView
         }

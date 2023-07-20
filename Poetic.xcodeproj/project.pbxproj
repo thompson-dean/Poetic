@@ -49,6 +49,7 @@
 		2A7FD5F72A62862D00E924EE /* PoemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7FD5F62A62862D00E924EE /* PoemViewModelTests.swift */; };
 		2A81C48628C45B4300437EC3 /* View+FontWithLineHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A81C48528C45B4300437EC3 /* View+FontWithLineHeight.swift */; };
 		2A81C48828C4D25C00437EC3 /* PoemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A81C48728C4D25C00437EC3 /* PoemCard.swift */; };
+		2A8ADBC62A69019F001630B1 /* View+ToAnyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8ADBC52A69019F001630B1 /* View+ToAnyView.swift */; };
 		2AB4B9A827E05F1C008FB84B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4B9A727E05F1C008FB84B /* Color.swift */; };
 		2AB4CE1727DDBBBF007937CC /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4CE1627DDBBBF007937CC /* Quote.swift */; };
 		2ABCC207285095A900CA0FB3 /* PoemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABCC206285095A900CA0FB3 /* PoemView.swift */; };
@@ -117,6 +118,7 @@
 		2A7FD5F62A62862D00E924EE /* PoemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoemViewModelTests.swift; sourceTree = "<group>"; };
 		2A81C48528C45B4300437EC3 /* View+FontWithLineHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+FontWithLineHeight.swift"; sourceTree = "<group>"; };
 		2A81C48728C4D25C00437EC3 /* PoemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoemCard.swift; sourceTree = "<group>"; };
+		2A8ADBC52A69019F001630B1 /* View+ToAnyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ToAnyView.swift"; sourceTree = "<group>"; };
 		2AB4B9A727E05F1C008FB84B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		2AB4CE1627DDBBBF007937CC /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		2ABCC206285095A900CA0FB3 /* PoemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoemView.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 			children = (
 				2AB4B9A727E05F1C008FB84B /* Color.swift */,
 				2A1ABA5D28F41E1C00D48AA1 /* View+PKHUD.swift */,
+				2A8ADBC52A69019F001630B1 /* View+ToAnyView.swift */,
 				2A81C48528C45B4300437EC3 /* View+FontWithLineHeight.swift */,
 			);
 			path = Extensions;
@@ -488,6 +491,7 @@
 				2ACC8A3D27E86E3B002F5B6D /* SettingsView.swift in Sources */,
 				2A1ABA5C28F41DD100D48AA1 /* PKHUDView.swift in Sources */,
 				2A1ABA5428F3FBA400D48AA1 /* SearchFIlter.swift in Sources */,
+				2A8ADBC62A69019F001630B1 /* View+ToAnyView.swift in Sources */,
 				2A17BAAA27D5D95400E0D755 /* FavoritesView.swift in Sources */,
 				2A81C48828C4D25C00437EC3 /* PoemCard.swift in Sources */,
 				2A7FD5E22A626E8200E924EE /* HapticFeedBackGenerator.swift in Sources */,

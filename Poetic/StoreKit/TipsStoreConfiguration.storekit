@@ -51,8 +51,11 @@
     }
   ],
   "settings" : {
+    "_billingIssuesEnabled" : false,
+    "_failTransactionsEnabled" : true,
     "_locale" : "en_AU",
-    "_storefront" : "AUS"
+    "_storefront" : "AUS",
+    "_storeKitError" : 0
   },
   "subscriptionGroups" : [
 
