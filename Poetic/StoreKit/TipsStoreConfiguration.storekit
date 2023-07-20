@@ -1,0 +1,64 @@
+{
+  "identifier" : "9C48A51B",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "B00CC257",
+      "localizations" : [
+        {
+          "description" : "Buy me a chocolate!",
+          "displayName" : "Chocolate",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Dean.Thompson.Poetic.smallTip",
+      "referenceName" : "Small Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "D4D4BAFC",
+      "localizations" : [
+        {
+          "description" : "Buy me a coffee",
+          "displayName" : "One Coffee",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Dean.Thompson.Poetic.mediumTip",
+      "referenceName" : "Medium Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "3.99",
+      "familyShareable" : false,
+      "internalID" : "F6082485",
+      "localizations" : [
+        {
+          "description" : "Buy me coffee and a chocolate",
+          "displayName" : "Coffee and Chocolate",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Dean.Thompson.Poetic.largeTip",
+      "referenceName" : "Large Tip",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_locale" : "en_AU",
+    "_storefront" : "AUS"
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}
