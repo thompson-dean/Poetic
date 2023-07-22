@@ -127,7 +127,7 @@ struct SettingsView: View {
                                 VStack(alignment: .leading, spacing: 3) {
                                     Text("Tip Jar")
                                     
-                                    Text("Support the dev. Buy them a coffee.")
+                                    Text("Support the dev. Support the app.")
                                         .font(.caption)
                                 }
                                 Spacer()

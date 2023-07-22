@@ -53,7 +53,7 @@
   "settings" : {
     "_billingGracePeriodEnabled" : false,
     "_billingIssuesEnabled" : false,
-    "_failTransactionsEnabled" : true,
+    "_failTransactionsEnabled" : false,
     "_locale" : "en_AU",
     "_storefront" : "AUS",
     "_storeKitError" : 0
