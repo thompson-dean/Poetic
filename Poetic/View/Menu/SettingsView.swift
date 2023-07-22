@@ -15,9 +15,12 @@ struct SettingsView: View {
     @StateObject var notificationManager = NotificationManager()
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
+    @ObservedObject var storeKitManager: StoreKitManager
     
     @State private var showLoading: Bool = false
     @State private var lightOrDark = false
+    @State private var isShowingTipsView = false
+    @State private var showThankYou: Bool = false
  
     var body: some View {
         NavigationView {
@@ -109,6 +112,25 @@ struct SettingsView: View {
                                 }
                                 .foregroundColor(.primary)
                             }
+                        }
+                        Button {
+                            isShowingTipsView.toggle()
+                        } label: {
+                            HStack {
+                                Image(systemName: "cup.and.saucer")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 32, height: 32)
+                                    .padding(.trailing)
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text("Tip Jar")
+                                    
+                                    Text("Support the dev. Buy them a coffee.")
+                                        .font(.caption)
+                                }
+                                Spacer()
+                            }
+                            .foregroundColor(.primary)
                         }
                         Button {
                             links.shareApp()
@@ -207,14 +229,26 @@ struct SettingsView: View {
                         .buttonStyle(PlainButtonStyle())
                     }
                 }
-                .background(
-                    Image(colorScheme == .light ? "background" : "background-dark")
-                        .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
-                        .ignoresSafeArea()
-                )
-                .onAppear {
-                    UITableView.appearance().backgroundColor = .clear
+                .overlay(alignment: .bottom) {
+                    if showThankYou {
+                        thankYouView
+                    }
                 }
+                .overlay {
+                    
+                    if isShowingTipsView {
+                        Color.black.opacity(0.8)
+                            .ignoresSafeArea()
+                            .transition(.opacity)
+                            .onTapGesture {
+                                isShowingTipsView.toggle()
+                            }
+                        TipsView(storeKitManager: storeKitManager, isShowingTipsView: $isShowingTipsView, showThankYou: $showThankYou)
+                            .transition(.move(edge: .bottom).combined(with: .opacity))
+                    }
+                }
+                .animation(.spring(), value: isShowingTipsView)
+                .animation(.spring(), value: showThankYou)
             }
             .navigationTitle("Menu")
             .navigationBarTitleDisplayMode(.inline)
@@ -223,15 +257,33 @@ struct SettingsView: View {
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView(viewModel: PoemViewModel(apiService: APIService()), pcViewModel: PersistenceController())
-            .preferredColorScheme(.light)
-    }
-}
-
-extension View {
-    func toAnyView() -> AnyView {
-        AnyView(self)
+extension SettingsView {
+    var thankYouView: some View {
+        VStack(spacing: 8) {
+            Text("Thank you for your support!")
+                .font(.system(.title2).bold())
+                .multilineTextAlignment(.center)
+            
+            Text("Thank you for your generous tip! Here's to more inspiring verses and enriched experiences, together!")
+                .font(.system(.body, design: .rounded))
+                .multilineTextAlignment(.center)
+                .padding(.bottom, 16)
+            
+            Button {
+                showThankYou.toggle()
+            } label: {
+                Text("Close")
+                    .font(.system(.title3).bold())
+                    .tint(colorScheme == .light ? .white : .black)
+                    .frame(height: 55)
+                    .frame(maxWidth: .infinity)
+                    .background(colorScheme == .light ? Color.lightThemeColor : Color.darkThemeColor, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+            }
+        }
+        .padding(16)
+        .background(colorScheme == .light ? .white : Color(0x181716), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .padding(.horizontal, 8)
+        .padding(.bottom, 8)
+        .transition(.move(edge: .bottom).combined(with: .opacity))
     }
 }

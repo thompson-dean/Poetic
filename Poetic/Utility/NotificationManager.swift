@@ -30,7 +30,7 @@ class NotificationManager: ObservableObject {
     
     func addNotification() {
         let content = UNMutableNotificationContent()
-        content.title = "\(authors.authors.randomElement() ?? "Poetic") awaits you"
+        content.title = "\(authors.authors.randomElement() ?? Constants.appName) awaits you"
         content.subtitle = "Come read some poems."
         content.sound = .default
         content.badge = 1

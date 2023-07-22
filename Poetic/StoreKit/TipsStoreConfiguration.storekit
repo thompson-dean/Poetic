@@ -1,0 +1,67 @@
+{
+  "identifier" : "9C48A51B",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "B00CC257",
+      "localizations" : [
+        {
+          "description" : "Sugar for new app features.",
+          "displayName" : "Chocolate",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Dean.Thompson.Poetic.smallTip",
+      "referenceName" : "Small Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "D4D4BAFC",
+      "localizations" : [
+        {
+          "description" : "Coffee for focus.",
+          "displayName" : "Coffee",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Dean.Thompson.Poetic.mediumTip",
+      "referenceName" : "Medium Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "3.99",
+      "familyShareable" : false,
+      "internalID" : "F6082485",
+      "localizations" : [
+        {
+          "description" : "Sugar and caffeine - hyperfocus.",
+          "displayName" : "Coffee and Chocolate",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Dean.Thompson.Poetic.largeTip",
+      "referenceName" : "Large Tip",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_billingIssuesEnabled" : false,
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_AU",
+    "_storefront" : "AUS",
+    "_storeKitError" : 0
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

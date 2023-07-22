@@ -30,11 +30,11 @@ class PoemViewModel: ObservableObject {
         case loaded
     }
 
-    @AppStorage("darkModeEnabled") var darkModeEnabled = false
-    @AppStorage("systemThemeEnabled") var systemThemeEnabled = true
-    @AppStorage("featuredAuthors") var featuredAuthor1: String = ""
-    @AppStorage("featuredAuthors") var featuredAuthor2: String = ""
-    @AppStorage("featuredAuthors") var featuredAuthor3: String = ""
+    @AppStorage(Constants.darkModeEnable) var darkModeEnabled = false
+    @AppStorage(Constants.systemThemeEnabled) var systemThemeEnabled = true
+    @AppStorage(Constants.featuredAuthor1) var featuredAuthor1: String = ""
+    @AppStorage(Constants.featuredAuthor2) var featuredAuthor2: String = ""
+    @AppStorage(Constants.featuredAuthor3) var featuredAuthor3: String = ""
    
     @Published private(set) var poems = [Poem]()
     @Published private(set) var randomPoems = [Poem]()
@@ -68,7 +68,6 @@ class PoemViewModel: ObservableObject {
                     self?.state = .failed
                 } else {
                     self?.randomPoems = dataResponse.value!
-                    print("DEBUG: IN VIEW MODEL \(dataResponse.value!.count)")
                     self?.state = .loaded
                 }
             }.store(in: &cancellables)

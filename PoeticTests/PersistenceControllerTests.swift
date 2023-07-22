@@ -27,7 +27,7 @@ class PersistenceControllerTests: XCTestCase {
     }
     
     func mockPersistantContainer() -> NSPersistentContainer {
-        let container = NSPersistentContainer(name: "Poetic")
+        let container = NSPersistentContainer(name: Constants.appName)
         let description = NSPersistentStoreDescription()
         description.type = NSInMemoryStoreType
         description.shouldAddStoreAsynchronously = false

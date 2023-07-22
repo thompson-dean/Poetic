@@ -19,9 +19,10 @@ struct ContentView: View {
     @State private var quotes = UUID()
     @State private var menu = UUID()
     
-    
     @StateObject var viewModel = PoemViewModel(apiService: APIService())
     @StateObject var pcViewModel = PersistenceController()
+    @ObservedObject var storeKitManager: StoreKitManager
+    
     let notificationManager = NotificationManager()
     
     var authors: Authors = Bundle.main.decode("Authors.json")
@@ -90,7 +91,7 @@ struct ContentView: View {
                 }
                 .tag(4)
             
-            SettingsView(viewModel: viewModel, pcViewModel: pcViewModel)
+            SettingsView(viewModel: viewModel, pcViewModel: pcViewModel, storeKitManager: storeKitManager)
                 .id(menu)
                 .tabItem {
                     
@@ -116,11 +117,3 @@ struct ContentView: View {
         
     }
 }
-
-
-struct PracticeView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-
