@@ -10,7 +10,7 @@
       "internalID" : "B00CC257",
       "localizations" : [
         {
-          "description" : "Buy me a chocolate!",
+          "description" : "Sugar for new app features.",
           "displayName" : "Chocolate",
           "locale" : "en_US"
         }
@@ -25,8 +25,8 @@
       "internalID" : "D4D4BAFC",
       "localizations" : [
         {
-          "description" : "Buy me a coffee",
-          "displayName" : "One Coffee",
+          "description" : "Coffee for focus",
+          "displayName" : "Coffee",
           "locale" : "en_US"
         }
       ],
@@ -40,7 +40,7 @@
       "internalID" : "F6082485",
       "localizations" : [
         {
-          "description" : "Buy me coffee and a chocolate",
+          "description" : "Sugar and caffeine - hyperfocus.",
           "displayName" : "Coffee and Chocolate",
           "locale" : "en_US"
         }
@@ -52,7 +52,7 @@
   ],
   "settings" : {
     "_billingIssuesEnabled" : false,
-    "_failTransactionsEnabled" : true,
+    "_failTransactionsEnabled" : false,
     "_locale" : "en_AU",
     "_storefront" : "AUS",
     "_storeKitError" : 0
