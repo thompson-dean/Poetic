@@ -12,7 +12,7 @@ struct TipsView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var storeKitManager: StoreKitManager
     @Binding var isShowingTipsView: Bool
-    @Binding var showThankYou: Bool
+    
     var body: some View {
         VStack(spacing: 8) {
             HStack {
@@ -57,16 +57,6 @@ struct TipsView: View {
                 .padding(6)
                 .offset(y: -25)
         }
-        .onChange(of: storeKitManager.paymentState) { state in
-            if state == .successful {
-                isShowingTipsView = false
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
-                    self.showThankYou = true
-                    storeKitManager.reset()
-                }
-            }
-        }
-        .alert(isPresented: $storeKitManager.hasError, error: storeKitManager.error) { }
     }
 }
 

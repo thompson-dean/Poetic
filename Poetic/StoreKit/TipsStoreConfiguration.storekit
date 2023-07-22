@@ -20,7 +20,7 @@
       "type" : "Consumable"
     },
     {
-      "displayPrice" : "1.99",
+      "displayPrice" : "2.99",
       "familyShareable" : false,
       "internalID" : "D4D4BAFC",
       "localizations" : [
@@ -35,7 +35,7 @@
       "type" : "Consumable"
     },
     {
-      "displayPrice" : "3.99",
+      "displayPrice" : "5.99",
       "familyShareable" : false,
       "internalID" : "F6082485",
       "localizations" : [
@@ -51,8 +51,9 @@
     }
   ],
   "settings" : {
+    "_billingGracePeriodEnabled" : false,
     "_billingIssuesEnabled" : false,
-    "_failTransactionsEnabled" : false,
+    "_failTransactionsEnabled" : true,
     "_locale" : "en_AU",
     "_storefront" : "AUS",
     "_storeKitError" : 0

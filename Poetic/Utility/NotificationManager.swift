@@ -11,7 +11,7 @@ import UserNotifications
 class NotificationManager: ObservableObject {
     private let authors: Authors = Bundle.main.decode("Authors.json")
     
-    @AppStorage("notificationOn") var notificationOn = true
+    @AppStorage(Constants.notificationsOn) var notificationOn = true
     
     let center = UNUserNotificationCenter.current()
     
