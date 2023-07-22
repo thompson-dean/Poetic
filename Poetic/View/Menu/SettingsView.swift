@@ -21,6 +21,8 @@ struct SettingsView: View {
     @State private var lightOrDark = false
     @State private var isShowingTipsView = false
     @State private var showThankYou: Bool = false
+    @State var showPendingAlert: Bool = false
+
  
     var body: some View {
         NavigationView {
@@ -243,13 +245,34 @@ struct SettingsView: View {
                             .onTapGesture {
                                 isShowingTipsView.toggle()
                             }
-                        TipsView(storeKitManager: storeKitManager, isShowingTipsView: $isShowingTipsView, showThankYou: $showThankYou)
+                        TipsView(storeKitManager: storeKitManager, isShowingTipsView: $isShowingTipsView)
                             .transition(.move(edge: .bottom).combined(with: .opacity))
                     }
                 }
                 .animation(.spring(), value: isShowingTipsView)
                 .animation(.spring(), value: showThankYou)
             }
+            .onChange(of: storeKitManager.paymentState) { state in
+                if state == .successful {
+                    isShowingTipsView = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                        self.showThankYou = true
+                        storeKitManager.reset()
+                    }
+                }
+                
+                if state == .pending {
+                    showPendingAlert = true
+                }
+            }
+            .alert(isPresented: $showPendingAlert) {
+                Alert(
+                    title: Text("Your payment is pending."),
+                    message: Text("This may be due to a poor connection or suddenly closing the app. You will be notified when your payment has been successful."),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
+            .alert(isPresented: $storeKitManager.hasError, error: storeKitManager.error) { }
             .navigationTitle("Menu")
             .navigationBarTitleDisplayMode(.inline)
         }

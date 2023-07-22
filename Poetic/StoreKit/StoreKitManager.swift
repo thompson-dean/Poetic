@@ -24,11 +24,14 @@ enum PaymentError: LocalizedError {
 
 enum PaymentState: Equatable {
     case successful
+    case pending
     case failed(PaymentError)
     
     static func == (lhs: PaymentState, rhs: PaymentState) -> Bool {
         switch(lhs, rhs) {
         case (.successful, .successful):
+            return true
+        case (.pending, .pending):
             return true
         case (let .failed(lhsError), let .failed(rhsError)):
             return lhsError.localizedDescription == rhsError.localizedDescription
@@ -130,9 +133,9 @@ private extension StoreKitManager {
             paymentState = .successful
             await transaction.finish()
         case .pending:
-            print("pending")
+            paymentState = .pending
         case .userCancelled:
-            print("canclled")
+            print("cancelled")
         @unknown default:
             break
         }

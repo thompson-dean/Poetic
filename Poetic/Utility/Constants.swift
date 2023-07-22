@@ -14,6 +14,7 @@ struct Constants {
     static let featuredAuthor1 = "featuredAuthors"
     static let featuredAuthor2 = "featuredAuthors"
     static let featuredAuthor3 = "featuredAuthors"
+    static let notificationsOn = "notificationsOn"
     
     static let storeKitIdentifiers = [
         "Dean.Thompson.Poetic.smallTip",
