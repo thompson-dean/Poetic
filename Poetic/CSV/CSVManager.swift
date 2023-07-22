@@ -27,16 +27,17 @@ struct CSVPoem: Codable {
     }
     
     var cleanedPoem: String {
-        var lines = poem.components(separatedBy: "\r\n").map { $0.trimmingCharacters(in: .whitespaces) }
-        // Remove first and last empty lines if exist
-        if let first = lines.first, first.isEmpty || first == "\r" {
-            lines.removeFirst()
+            var lines = poem.components(separatedBy: "\r\n").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+
+            while let first = lines.first, first.isEmpty {
+                lines.removeFirst()
+            }
+            while let last = lines.last, last.isEmpty {
+                lines.removeLast()
+            }
+
+            return lines.joined(separator: "\r\n")
         }
-        if let last = lines.last, last.isEmpty || last == "\r" {
-            lines.removeLast()
-        }
-        return lines.joined(separator: "\n")
-    }
     
     enum CodingKeys: String, CodingKey {
         case title = "Title"
