@@ -50,6 +50,9 @@
 		2A81C48628C45B4300437EC3 /* View+FontWithLineHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A81C48528C45B4300437EC3 /* View+FontWithLineHeight.swift */; };
 		2A81C48828C4D25C00437EC3 /* PoemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A81C48728C4D25C00437EC3 /* PoemCard.swift */; };
 		2A8ADBC62A69019F001630B1 /* View+ToAnyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8ADBC52A69019F001630B1 /* View+ToAnyView.swift */; };
+		2A8ADBCD2A6C13A2001630B1 /* CSVManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8ADBCC2A6C13A2001630B1 /* CSVManager.swift */; };
+		2A8ADBCF2A6C13BE001630B1 /* PoetryFoundationData.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2A8ADBCE2A6C13BE001630B1 /* PoetryFoundationData.csv */; };
+		2A8ADBD22A6C1970001630B1 /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 2A8ADBD12A6C1970001630B1 /* CodableCSV */; };
 		2AB4B9A827E05F1C008FB84B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4B9A727E05F1C008FB84B /* Color.swift */; };
 		2AB4CE1727DDBBBF007937CC /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4CE1627DDBBBF007937CC /* Quote.swift */; };
 		2ABCC207285095A900CA0FB3 /* PoemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABCC206285095A900CA0FB3 /* PoemView.swift */; };
@@ -119,6 +122,8 @@
 		2A81C48528C45B4300437EC3 /* View+FontWithLineHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+FontWithLineHeight.swift"; sourceTree = "<group>"; };
 		2A81C48728C4D25C00437EC3 /* PoemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoemCard.swift; sourceTree = "<group>"; };
 		2A8ADBC52A69019F001630B1 /* View+ToAnyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ToAnyView.swift"; sourceTree = "<group>"; };
+		2A8ADBCC2A6C13A2001630B1 /* CSVManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVManager.swift; sourceTree = "<group>"; };
+		2A8ADBCE2A6C13BE001630B1 /* PoetryFoundationData.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PoetryFoundationData.csv; sourceTree = "<group>"; };
 		2AB4B9A727E05F1C008FB84B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		2AB4CE1627DDBBBF007937CC /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		2ABCC206285095A900CA0FB3 /* PoemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoemView.swift; sourceTree = "<group>"; };
@@ -139,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A8ADBD22A6C1970001630B1 /* CodableCSV in Frameworks */,
 				2A1EC6B72A68C4A40012F138 /* StoreKit.framework in Frameworks */,
 				2A1ABA4C28F3F61200D48AA1 /* Alamofire in Frameworks */,
 				2A1ABA4F28F3F6A300D48AA1 /* PKHUD in Frameworks */,
@@ -180,6 +186,7 @@
 			children = (
 				2A17BA9227D5D8E000E0D755 /* PoeticApp.swift */,
 				2A17BA9427D5D8E000E0D755 /* ContentView.swift */,
+				2A8ADBCB2A6C1386001630B1 /* CSV */,
 				2A1EC6BC2A68CA0F0012F138 /* StoreKit */,
 				2A1EC6C12A68CC580012F138 /* Utility */,
 				2A17BAA427D5D91600E0D755 /* Extensions */,
@@ -378,6 +385,15 @@
 			path = PoeticTests;
 			sourceTree = "<group>";
 		};
+		2A8ADBCB2A6C1386001630B1 /* CSV */ = {
+			isa = PBXGroup;
+			children = (
+				2A8ADBCE2A6C13BE001630B1 /* PoetryFoundationData.csv */,
+				2A8ADBCC2A6C13A2001630B1 /* CSVManager.swift */,
+			);
+			path = CSV;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -397,6 +413,7 @@
 			packageProductDependencies = (
 				2A1ABA4B28F3F61200D48AA1 /* Alamofire */,
 				2A1ABA4E28F3F6A300D48AA1 /* PKHUD */,
+				2A8ADBD12A6C1970001630B1 /* CodableCSV */,
 			);
 			productName = Poetic;
 			productReference = 2A17BA8F27D5D8E000E0D755 /* Poetic.app */;
@@ -451,6 +468,7 @@
 			packageReferences = (
 				2A1ABA4A28F3F61200D48AA1 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				2A1ABA4D28F3F6A300D48AA1 /* XCRemoteSwiftPackageReference "PKHUD" */,
+				2A8ADBD02A6C1970001630B1 /* XCRemoteSwiftPackageReference "CodableCSV" */,
 			);
 			productRefGroup = 2A17BA9027D5D8E000E0D755 /* Products */;
 			projectDirPath = "";
@@ -469,6 +487,7 @@
 			files = (
 				2A17BA9A27D5D8E000E0D755 /* Preview Assets.xcassets in Resources */,
 				2AF8600327DB16EA00B3BC40 /* Authors.json in Resources */,
+				2A8ADBCF2A6C13BE001630B1 /* PoetryFoundationData.csv in Resources */,
 				2A17BA9727D5D8E000E0D755 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -500,6 +519,7 @@
 				2A1EC6C02A68CBB50012F138 /* Constants.swift in Sources */,
 				2A17BAAC27D5D96E00E0D755 /* APIService.swift in Sources */,
 				2A37936C27D8A4B800FA48ED /* LineBreak.swift in Sources */,
+				2A8ADBCD2A6C13A2001630B1 /* CSVManager.swift in Sources */,
 				2A42F5E7299BBF9A00122847 /* AuthorCell.swift in Sources */,
 				2AB4CE1727DDBBBF007937CC /* Quote.swift in Sources */,
 				2A42F5E9299BBFBC00122847 /* AuthorPoemCell.swift in Sources */,
@@ -828,6 +848,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		2A8ADBD02A6C1970001630B1 /* XCRemoteSwiftPackageReference "CodableCSV" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dehesa/CodableCSV";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.7;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -840,6 +868,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2A1ABA4D28F3F6A300D48AA1 /* XCRemoteSwiftPackageReference "PKHUD" */;
 			productName = PKHUD;
+		};
+		2A8ADBD12A6C1970001630B1 /* CodableCSV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2A8ADBD02A6C1970001630B1 /* XCRemoteSwiftPackageReference "CodableCSV" */;
+			productName = CodableCSV;
 		};
 /* End XCSwiftPackageProductDependency section */
 

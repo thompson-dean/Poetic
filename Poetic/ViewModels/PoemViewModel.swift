@@ -57,6 +57,7 @@ class PoemViewModel: ObservableObject {
     
     init(apiService: APIServiceProtocol) {
         self.apiService = apiService
+        CSVManager.shared.parseCSV(fileName: "PoetryFoundationData", fileType: "csv")
     }
     
     func loadRandomPoems(number: String) {

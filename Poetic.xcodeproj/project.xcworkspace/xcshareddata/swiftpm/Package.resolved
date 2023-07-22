@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "codablecsv",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dehesa/CodableCSV",
+      "state" : {
+        "revision" : "99ace2cfdfbc19108b529c021005fb57a460e715",
+        "version" : "0.6.7"
+      }
+    },
+    {
       "identity" : "pkhud",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pkluz/PKHUD",
