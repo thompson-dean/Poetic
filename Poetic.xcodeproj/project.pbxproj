@@ -39,6 +39,12 @@
 		2A42F5E5299A691A00122847 /* AuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42F5E4299A691A00122847 /* AuthorView.swift */; };
 		2A42F5E7299BBF9A00122847 /* AuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42F5E6299BBF9900122847 /* AuthorCell.swift */; };
 		2A42F5E9299BBFBC00122847 /* AuthorPoemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42F5E8299BBFBC00122847 /* AuthorPoemCell.swift */; };
+		2A495E3E2A734F2A00BCAA0F /* PoeticWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A495E3D2A734F2A00BCAA0F /* PoeticWatchApp.swift */; };
+		2A495E402A734F2A00BCAA0F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A495E3F2A734F2A00BCAA0F /* ContentView.swift */; };
+		2A495E422A734F2B00BCAA0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A495E412A734F2B00BCAA0F /* Assets.xcassets */; };
+		2A495E452A734F2B00BCAA0F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A495E442A734F2B00BCAA0F /* Preview Assets.xcassets */; };
+		2A495E4F2A734F2B00BCAA0F /* PoeticWatch_Watch_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A495E4E2A734F2B00BCAA0F /* PoeticWatch_Watch_AppTests.swift */; };
+		2A495E5E2A734F2B00BCAA0F /* PoeticWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2A495E3B2A734F2A00BCAA0F /* PoeticWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2A67DA4828DF2CBD00F1A5C0 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A67DA4728DF2CBD00F1A5C0 /* Fonts.swift */; };
 		2A77337A28C777C700C115E9 /* FlatLinkStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A77337928C777C700C115E9 /* FlatLinkStyle.swift */; };
 		2A77337E28C8C6B000C115E9 /* FailedPoemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A77337D28C8C6B000C115E9 /* FailedPoemCard.swift */; };
@@ -65,6 +71,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2A495E4B2A734F2B00BCAA0F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A17BA8727D5D8E000E0D755 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A495E3A2A734F2A00BCAA0F;
+			remoteInfo = "PoeticWatch Watch App";
+		};
+		2A495E552A734F2B00BCAA0F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A17BA8727D5D8E000E0D755 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A495E3A2A734F2A00BCAA0F;
+			remoteInfo = "PoeticWatch Watch App";
+		};
+		2A495E5C2A734F2B00BCAA0F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A17BA8727D5D8E000E0D755 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A495E3A2A734F2A00BCAA0F;
+			remoteInfo = "PoeticWatch Watch App";
+		};
 		2A7FD5EB2A62710700E924EE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A17BA8727D5D8E000E0D755 /* Project object */;
@@ -73,6 +100,20 @@
 			remoteInfo = Poetic;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2A495E5F2A734F2B00BCAA0F /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				2A495E5E2A734F2B00BCAA0F /* PoeticWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2A13BE0028B9B42800E79A0E /* NewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDetailView.swift; sourceTree = "<group>"; };
@@ -107,6 +148,14 @@
 		2A42F5E4299A691A00122847 /* AuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorView.swift; sourceTree = "<group>"; };
 		2A42F5E6299BBF9900122847 /* AuthorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorCell.swift; sourceTree = "<group>"; };
 		2A42F5E8299BBFBC00122847 /* AuthorPoemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorPoemCell.swift; sourceTree = "<group>"; };
+		2A495E3B2A734F2A00BCAA0F /* PoeticWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PoeticWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A495E3D2A734F2A00BCAA0F /* PoeticWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoeticWatchApp.swift; sourceTree = "<group>"; };
+		2A495E3F2A734F2A00BCAA0F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2A495E412A734F2B00BCAA0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2A495E442A734F2B00BCAA0F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2A495E4A2A734F2B00BCAA0F /* PoeticWatchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PoeticWatchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A495E4E2A734F2B00BCAA0F /* PoeticWatch_Watch_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoeticWatch_Watch_AppTests.swift; sourceTree = "<group>"; };
+		2A495E542A734F2B00BCAA0F /* PoeticWatch Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PoeticWatch Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A67DA4728DF2CBD00F1A5C0 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		2A77337928C777C700C115E9 /* FlatLinkStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatLinkStyle.swift; sourceTree = "<group>"; };
 		2A77337D28C8C6B000C115E9 /* FailedPoemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailedPoemCard.swift; sourceTree = "<group>"; };
@@ -145,6 +194,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2A495E382A734F2A00BCAA0F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A495E472A734F2B00BCAA0F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A495E512A734F2B00BCAA0F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2A7FD5E42A62710700E924EE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -161,6 +231,8 @@
 				2AF5D93B2A656983006725A8 /* Poetic.xctestplan */,
 				2A17BA9127D5D8E000E0D755 /* Poetic */,
 				2A7FD5E82A62710700E924EE /* PoeticTests */,
+				2A495E3C2A734F2A00BCAA0F /* PoeticWatch */,
+				2A495E4D2A734F2B00BCAA0F /* PoeticWatchTests */,
 				2A17BA9027D5D8E000E0D755 /* Products */,
 				2A1EC6B52A68C4A40012F138 /* Frameworks */,
 			);
@@ -171,6 +243,9 @@
 			children = (
 				2A17BA8F27D5D8E000E0D755 /* Poetic.app */,
 				2A7FD5E72A62710700E924EE /* PoeticTests.xctest */,
+				2A495E3B2A734F2A00BCAA0F /* PoeticWatch.app */,
+				2A495E4A2A734F2B00BCAA0F /* PoeticWatchTests.xctest */,
+				2A495E542A734F2B00BCAA0F /* PoeticWatch Watch AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -312,6 +387,33 @@
 			path = Author;
 			sourceTree = "<group>";
 		};
+		2A495E3C2A734F2A00BCAA0F /* PoeticWatch */ = {
+			isa = PBXGroup;
+			children = (
+				2A495E3D2A734F2A00BCAA0F /* PoeticWatchApp.swift */,
+				2A495E3F2A734F2A00BCAA0F /* ContentView.swift */,
+				2A495E412A734F2B00BCAA0F /* Assets.xcassets */,
+				2A495E432A734F2B00BCAA0F /* Preview Content */,
+			);
+			path = PoeticWatch;
+			sourceTree = "<group>";
+		};
+		2A495E432A734F2B00BCAA0F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				2A495E442A734F2B00BCAA0F /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2A495E4D2A734F2B00BCAA0F /* PoeticWatchTests */ = {
+			isa = PBXGroup;
+			children = (
+				2A495E4E2A734F2B00BCAA0F /* PoeticWatch_Watch_AppTests.swift */,
+			);
+			path = PoeticWatchTests;
+			sourceTree = "<group>";
+		};
 		2A77337328C6211200C115E9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -388,10 +490,12 @@
 				2A17BA8B27D5D8E000E0D755 /* Sources */,
 				2A17BA8C27D5D8E000E0D755 /* Frameworks */,
 				2A17BA8D27D5D8E000E0D755 /* Resources */,
+				2A495E5F2A734F2B00BCAA0F /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2A495E5D2A734F2B00BCAA0F /* PBXTargetDependency */,
 			);
 			name = Poetic;
 			packageProductDependencies = (
@@ -401,6 +505,59 @@
 			productName = Poetic;
 			productReference = 2A17BA8F27D5D8E000E0D755 /* Poetic.app */;
 			productType = "com.apple.product-type.application";
+		};
+		2A495E3A2A734F2A00BCAA0F /* PoeticWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A495E662A734F2B00BCAA0F /* Build configuration list for PBXNativeTarget "PoeticWatch" */;
+			buildPhases = (
+				2A495E372A734F2A00BCAA0F /* Sources */,
+				2A495E382A734F2A00BCAA0F /* Frameworks */,
+				2A495E392A734F2A00BCAA0F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PoeticWatch;
+			productName = "PoeticWatch Watch App";
+			productReference = 2A495E3B2A734F2A00BCAA0F /* PoeticWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2A495E492A734F2B00BCAA0F /* PoeticWatchTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A495E672A734F2B00BCAA0F /* Build configuration list for PBXNativeTarget "PoeticWatchTests" */;
+			buildPhases = (
+				2A495E462A734F2B00BCAA0F /* Sources */,
+				2A495E472A734F2B00BCAA0F /* Frameworks */,
+				2A495E482A734F2B00BCAA0F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2A495E4C2A734F2B00BCAA0F /* PBXTargetDependency */,
+			);
+			name = PoeticWatchTests;
+			productName = "PoeticWatch Watch AppTests";
+			productReference = 2A495E4A2A734F2B00BCAA0F /* PoeticWatchTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2A495E532A734F2B00BCAA0F /* PoeticWatch Watch AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A495E682A734F2B00BCAA0F /* Build configuration list for PBXNativeTarget "PoeticWatch Watch AppUITests" */;
+			buildPhases = (
+				2A495E502A734F2B00BCAA0F /* Sources */,
+				2A495E512A734F2B00BCAA0F /* Frameworks */,
+				2A495E522A734F2B00BCAA0F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2A495E562A734F2B00BCAA0F /* PBXTargetDependency */,
+			);
+			name = "PoeticWatch Watch AppUITests";
+			productName = "PoeticWatch Watch AppUITests";
+			productReference = 2A495E542A734F2B00BCAA0F /* PoeticWatch Watch AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		2A7FD5E62A62710700E924EE /* PoeticTests */ = {
 			isa = PBXNativeTarget;
@@ -433,6 +590,17 @@
 					2A17BA8E27D5D8E000E0D755 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
+					2A495E3A2A734F2A00BCAA0F = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					2A495E492A734F2B00BCAA0F = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 2A495E3A2A734F2A00BCAA0F;
+					};
+					2A495E532A734F2B00BCAA0F = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 2A495E3A2A734F2A00BCAA0F;
+					};
 					2A7FD5E62A62710700E924EE = {
 						CreatedOnToolsVersion = 14.3.1;
 						TestTargetID = 2A17BA8E27D5D8E000E0D755;
@@ -458,6 +626,9 @@
 			targets = (
 				2A17BA8E27D5D8E000E0D755 /* Poetic */,
 				2A7FD5E62A62710700E924EE /* PoeticTests */,
+				2A495E3A2A734F2A00BCAA0F /* PoeticWatch */,
+				2A495E492A734F2B00BCAA0F /* PoeticWatchTests */,
+				2A495E532A734F2B00BCAA0F /* PoeticWatch Watch AppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -470,6 +641,29 @@
 				2A17BA9A27D5D8E000E0D755 /* Preview Assets.xcassets in Resources */,
 				2AF8600327DB16EA00B3BC40 /* Authors.json in Resources */,
 				2A17BA9727D5D8E000E0D755 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A495E392A734F2A00BCAA0F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A495E452A734F2B00BCAA0F /* Preview Assets.xcassets in Resources */,
+				2A495E422A734F2B00BCAA0F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A495E482A734F2B00BCAA0F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A495E522A734F2B00BCAA0F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,6 +729,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2A495E372A734F2A00BCAA0F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A495E402A734F2A00BCAA0F /* ContentView.swift in Sources */,
+				2A495E3E2A734F2A00BCAA0F /* PoeticWatchApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A495E462A734F2B00BCAA0F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A495E4F2A734F2B00BCAA0F /* PoeticWatch_Watch_AppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A495E502A734F2B00BCAA0F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2A7FD5E32A62710700E924EE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -549,6 +767,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2A495E4C2A734F2B00BCAA0F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2A495E3A2A734F2A00BCAA0F /* PoeticWatch */;
+			targetProxy = 2A495E4B2A734F2B00BCAA0F /* PBXContainerItemProxy */;
+		};
+		2A495E562A734F2B00BCAA0F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2A495E3A2A734F2A00BCAA0F /* PoeticWatch */;
+			targetProxy = 2A495E552A734F2B00BCAA0F /* PBXContainerItemProxy */;
+		};
+		2A495E5D2A734F2B00BCAA0F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2A495E3A2A734F2A00BCAA0F /* PoeticWatch */;
+			targetProxy = 2A495E5C2A734F2B00BCAA0F /* PBXContainerItemProxy */;
+		};
 		2A7FD5EC2A62710700E924EE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2A17BA8E27D5D8E000E0D755 /* Poetic */;
@@ -676,6 +909,7 @@
 		2A17BA9E27D5D8E000E0D755 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -709,6 +943,7 @@
 		2A17BA9F27D5D8E000E0D755 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -736,6 +971,154 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		2A495E602A734F2B00BCAA0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PoeticWatch/Preview Content\"";
+				DEVELOPMENT_TEAM = YT4PWFD9G5;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = PoeticWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = Dean.Thompson.Poetic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Dean.Thompson.Poetic.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+			};
+			name = Debug;
+		};
+		2A495E612A734F2B00BCAA0F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PoeticWatch/Preview Content\"";
+				DEVELOPMENT_TEAM = YT4PWFD9G5;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = PoeticWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = Dean.Thompson.Poetic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Dean.Thompson.Poetic.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+			};
+			name = Release;
+		};
+		2A495E622A734F2B00BCAA0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YT4PWFD9G5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Dean.Thompson.PoeticWatch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PoeticWatch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PoeticWatch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+			};
+			name = Debug;
+		};
+		2A495E632A734F2B00BCAA0F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YT4PWFD9G5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Dean.Thompson.PoeticWatch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PoeticWatch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PoeticWatch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+			};
+			name = Release;
+		};
+		2A495E642A734F2B00BCAA0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YT4PWFD9G5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Dean.Thompson.PoeticWatch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "PoeticWatch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+			};
+			name = Debug;
+		};
+		2A495E652A734F2B00BCAA0F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YT4PWFD9G5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Dean.Thompson.PoeticWatch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "PoeticWatch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
 			};
 			name = Release;
 		};
@@ -796,6 +1179,33 @@
 			buildConfigurations = (
 				2A17BA9E27D5D8E000E0D755 /* Debug */,
 				2A17BA9F27D5D8E000E0D755 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2A495E662A734F2B00BCAA0F /* Build configuration list for PBXNativeTarget "PoeticWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A495E602A734F2B00BCAA0F /* Debug */,
+				2A495E612A734F2B00BCAA0F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2A495E672A734F2B00BCAA0F /* Build configuration list for PBXNativeTarget "PoeticWatchTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A495E622A734F2B00BCAA0F /* Debug */,
+				2A495E632A734F2B00BCAA0F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2A495E682A734F2B00BCAA0F /* Build configuration list for PBXNativeTarget "PoeticWatch Watch AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A495E642A734F2B00BCAA0F /* Debug */,
+				2A495E652A734F2B00BCAA0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
