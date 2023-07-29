@@ -51,7 +51,7 @@ struct NewHomeContent: View {
                 .foregroundColor(.primary)
                 .padding(.horizontal, 16)
             
-            Text("Discover Classic Poetry!")
+            Text("Discover Poetry!")
                 .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 16)
                 .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                 .padding(.horizontal, 16)
@@ -122,7 +122,7 @@ struct NewHomeContent: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        NewHomeView(viewModel: PoemViewModel(apiService: APIService()), pcViewModel: PersistenceController()).preferredColorScheme(.dark)
+        NewHomeView(viewModel: PoemViewModel(apiService: APIService(), csvManager: CSVManager()), pcViewModel: PersistenceController()).preferredColorScheme(.dark)
     }
 }
 

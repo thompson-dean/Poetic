@@ -45,3 +45,9 @@ struct CSVPoem: Codable {
         case tags = "Tags"
     }
 }
+
+extension CSVPoem: Identifiable {
+    var id: UUID {
+        UUID()
+    }
+}

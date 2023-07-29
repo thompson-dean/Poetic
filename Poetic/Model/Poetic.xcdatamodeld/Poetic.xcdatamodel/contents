@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22E252" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="PoemEntity" representedClassName=".PoemEntity" syncable="YES" codeGenerationType="class">
         <attribute name="author" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -26,10 +26,4 @@
         <attribute name="lines" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName" customClassName="[String]"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
-    <elements>
-        <element name="PoemEntity" positionX="-45" positionY="0" width="128" height="104"/>
-        <element name="QuoteEntity" positionX="-18" positionY="63" width="128" height="89"/>
-        <element name="QuotePoemsEntity" positionX="-27" positionY="63" width="128" height="89"/>
-        <element name="ViewedPoemEntity" positionX="-27" positionY="63" width="128" height="104"/>
-    </elements>
 </model>

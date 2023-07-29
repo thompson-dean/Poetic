@@ -29,6 +29,12 @@ class PoemViewModel: ObservableObject {
         case failed
         case loaded
     }
+    
+    enum CSVPoemState  {
+        case loading
+        case failed(Error)
+        case loaded([CSVPoem])
+    }
 
     @AppStorage(Constants.darkModeEnable) var darkModeEnabled = false
     @AppStorage(Constants.systemThemeEnabled) var systemThemeEnabled = true
@@ -36,6 +42,7 @@ class PoemViewModel: ObservableObject {
     @AppStorage(Constants.featuredAuthor2) var featuredAuthor2: String = ""
     @AppStorage(Constants.featuredAuthor3) var featuredAuthor3: String = ""
    
+    @Published private(set) var csvPoems = [CSVPoem]()
     @Published private(set) var poems = [Poem]()
     @Published private(set) var randomPoems = [Poem]()
     @Published private(set) var authorPoems = [Poem]()
@@ -43,6 +50,7 @@ class PoemViewModel: ObservableObject {
     @Published var isTitle: Bool = true
     
     private let apiService: APIServiceProtocol
+    private let csvManager: CSVManagerDelegate
     private var cancellables: Set<AnyCancellable> = []
     
     @Published var searchListLoadingError: String = ""
@@ -51,13 +59,24 @@ class PoemViewModel: ObservableObject {
     var authorTitleCache: [String: [Poem]] = [:]
     var poemTitleSearchCache: [String: [Poem]] = [:]
    
+    @Published private(set) var csvPoemState: CSVPoemState = .loading
     @Published private(set) var state = State.idle
     @Published private(set) var searchState = SearchTitleState.idle
     @Published private(set) var authorPoemState = AuthorPoemState.idle
     
-    init(apiService: APIServiceProtocol) {
+    init(apiService: APIServiceProtocol, csvManager: CSVManagerDelegate) {
         self.apiService = apiService
-        CSVManager.shared.parseCSV(fileName: "PoetryFoundationData", fileType: "csv")
+        self.csvManager = csvManager
+    }
+    
+    func fetchCSVPoems() async {
+        csvPoemState = .loading
+        do {
+            csvPoems = try await csvManager.parseCSV(fileName: "PoetryFoundationData", fileType: "csv")
+            csvPoemState = .loaded(csvPoems)
+        } catch {
+            csvPoemState = .failed(error)
+        }
     }
     
     func loadRandomPoems(number: String) {

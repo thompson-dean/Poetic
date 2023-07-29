@@ -19,7 +19,7 @@ struct ContentView: View {
     @State private var quotes = UUID()
     @State private var menu = UUID()
     
-    @StateObject var viewModel = PoemViewModel(apiService: APIService())
+    @ObservedObject var viewModel: PoemViewModel
     @StateObject var pcViewModel = PersistenceController()
     @ObservedObject var storeKitManager: StoreKitManager
     

@@ -62,6 +62,8 @@
 		2ACC8A4327E8A441002F5B6D /* DevView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACC8A4227E8A441002F5B6D /* DevView.swift */; };
 		2ACC8A4727E8AFC9002F5B6D /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACC8A4627E8AFC9002F5B6D /* Links.swift */; };
 		2ACC8A4927E8C39E002F5B6D /* SystemThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACC8A4827E8C39E002F5B6D /* SystemThemeManager.swift */; };
+		2AE5DF452A75235000A8E50F /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE5DF442A75235000A8E50F /* SplashView.swift */; };
+		2AE5DF472A75272A00A8E50F /* CSVError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE5DF462A75272A00A8E50F /* CSVError.swift */; };
 		2AF5D93A2A63EE5E006725A8 /* PersistenceControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF5D9392A63EE5E006725A8 /* PersistenceControllerTests.swift */; };
 		2AF8600327DB16EA00B3BC40 /* Authors.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AF8600227DB16EA00B3BC40 /* Authors.json */; };
 		2AF8600527DC5B2C00B3BC40 /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8600427DC5B2C00B3BC40 /* QuoteView.swift */; };
@@ -134,6 +136,8 @@
 		2ACC8A4227E8A441002F5B6D /* DevView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevView.swift; sourceTree = "<group>"; };
 		2ACC8A4627E8AFC9002F5B6D /* Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
 		2ACC8A4827E8C39E002F5B6D /* SystemThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemThemeManager.swift; sourceTree = "<group>"; };
+		2AE5DF442A75235000A8E50F /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		2AE5DF462A75272A00A8E50F /* CSVError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVError.swift; sourceTree = "<group>"; };
 		2AF5D9392A63EE5E006725A8 /* PersistenceControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceControllerTests.swift; sourceTree = "<group>"; };
 		2AF5D93B2A656983006725A8 /* Poetic.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Poetic.xctestplan; sourceTree = "<group>"; };
 		2AF8600227DB16EA00B3BC40 /* Authors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Authors.json; sourceTree = "<group>"; };
@@ -214,6 +218,7 @@
 		2A17BAA027D5D8F900E0D755 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2AE5DF432A75234200A8E50F /* Splash */,
 				2A42F5E3299A690C00122847 /* Author */,
 				2A77337328C6211200C115E9 /* Home */,
 				2A77337428C6211C00C115E9 /* Search */,
@@ -393,8 +398,17 @@
 			children = (
 				2A8ADBCE2A6C13BE001630B1 /* PoetryFoundationData.csv */,
 				2A8ADBCC2A6C13A2001630B1 /* CSVManager.swift */,
+				2AE5DF462A75272A00A8E50F /* CSVError.swift */,
 			);
 			path = CSV;
+			sourceTree = "<group>";
+		};
+		2AE5DF432A75234200A8E50F /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				2AE5DF442A75235000A8E50F /* SplashView.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -520,6 +534,7 @@
 				2A7FD5E22A626E8200E924EE /* HapticFeedBackGenerator.swift in Sources */,
 				2A304724288FB01500E43820 /* NewHomeView.swift in Sources */,
 				2A1ABA5828F4016900D48AA1 /* APIConst.swift in Sources */,
+				2AE5DF452A75235000A8E50F /* SplashView.swift in Sources */,
 				2A1EC6C02A68CBB50012F138 /* Constants.swift in Sources */,
 				2A17BAAC27D5D96E00E0D755 /* APIService.swift in Sources */,
 				2A37936C27D8A4B800FA48ED /* LineBreak.swift in Sources */,
@@ -540,6 +555,7 @@
 				2A38CF7927DF74BB00A44268 /* Poetic.xcdatamodeld in Sources */,
 				2A17BAB027D641D200E0D755 /* PoemViewModel.swift in Sources */,
 				2ACC8A4327E8A441002F5B6D /* DevView.swift in Sources */,
+				2AE5DF472A75272A00A8E50F /* CSVError.swift in Sources */,
 				2A67DA4828DF2CBD00F1A5C0 /* Fonts.swift in Sources */,
 				2AF8600527DC5B2C00B3BC40 /* QuoteView.swift in Sources */,
 				2A17BAAE27D6418400E0D755 /* Poem.swift in Sources */,

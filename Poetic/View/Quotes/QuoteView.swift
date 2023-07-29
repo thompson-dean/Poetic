@@ -177,7 +177,7 @@ struct QuoteView: View {
 
 struct QuoteView_Previews: PreviewProvider {
     static var previews: some View {
-        QuoteView(viewModel: PoemViewModel(apiService: APIService()), pcViewModel: PersistenceController())
+        QuoteView(viewModel: PoemViewModel(apiService: APIService(), csvManager: CSVManager()), pcViewModel: PersistenceController())
     }
 }
 
