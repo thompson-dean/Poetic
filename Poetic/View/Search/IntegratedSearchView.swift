@@ -77,18 +77,18 @@ struct IntegratedSearchView: View {
                                             
                                             ForEach(viewModel.randomPoems, id: \.self) { poem in
                                                 NavigationLink {
-                                                    let sentPoem = Poem(title: poem.title , author: poem.author , lines: poem.lines , linecount: poem.title)
-                                                    NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
+//                                                    let sentPoem = Poem(title: poem.title , author: poem.author , lines: poem.lines , linecount: poem.title)
+//                                                    NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
                                                 } label: {
                                                     VStack {
                                                         HStack {
                                                             VStack(alignment: .leading, spacing: 2) {
                                                                 
-                                                                Text(poem.author)
+                                                                Text(poem.cleanedPoet)
                                                                     .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
                                                                     .foregroundColor(.primary)
                                                                 
-                                                                Text(poem.title)
+                                                                Text(poem.cleanedTitle)
                                                                     .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
                                                                     .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                                                             }
@@ -120,11 +120,11 @@ struct IntegratedSearchView: View {
                                                 HStack {
                                                     VStack(alignment: .leading, spacing: 2) {
                                                         
-                                                        Text(poem.author)
+                                                        Text(poem.cleanedPoet)
                                                             .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
                                                             .foregroundColor(.primary)
                                                         
-                                                        Text(poem.title)
+                                                        Text(poem.cleanedTitle)
                                                             .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
                                                             .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                                                     }
@@ -145,8 +145,8 @@ struct IntegratedSearchView: View {
                                 case .loaded:
                                     ForEach(viewModel.poems, id: \.self) { poem in
                                         NavigationLink {
-                                            let sentPoem = Poem(title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.title)
-                                            NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
+//                                            let sentPoem = Poem(title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.title)
+//                                            NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
                                         } label: {
                                             LazyVStack {
                                                 HStack {

@@ -15,7 +15,7 @@ struct NewDetailView: View {
     
     let fonts = Fonts()
     let links = Links()
-    let poem: Poem
+    let poem: CSVPoem
     
     var body: some View {
         ZStack(alignment: .leading) {
@@ -34,12 +34,12 @@ struct NewDetailView: View {
                         .fontWithLineHeight(font: .systemFont(ofSize: 8, weight: .medium), lineHeight: 8)
                         .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                     
-                    Text(poem.author)
+                    Text(poem.cleanedPoet)
                         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 18)
                         .foregroundColor(.primary)
                         .padding(.top, 16)
                     
-                    Text(poem.title)
+                    Text(poem.cleanedTitle)
                         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 14.32)
                         .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                         .padding(.bottom, 16)
@@ -54,51 +54,42 @@ struct NewDetailView: View {
                         }
                         .frame(alignment: .leading)
                         
+                        Text(poem.cleanedPoem)
+                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 24)
+                            .padding(.leading, 16)
                         
-                        VStack(alignment: .leading) {
-                            ForEach(0..<poem.lines.count, id: \.self) { index in
-                                PoemView(viewModel: viewModel, pcViewModel: pcViewModel, author: poem.author, title: poem.title, index: index, poemLines: poem.lines)
-                                
-                            }
-                        }
-                        .padding(.leading, 16)
                     }
                 }
                 .padding(16)
                 
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    HStack {}
+        }
+        .toolbar {
+            ToolbarItemGroup {
+                Button {
+//                    links.sharePoem(poem: poem, title: poem.title, author: poem.author)
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        if let entity = pcViewModel.favoritedPoems.first(where: { $0.title == poem.title}) {
-                            pcViewModel.deleteFavoritedPoemFromTappingStar(entity: entity)
-                        } else {
-                            pcViewModel.addFavoritePoem(id: UUID(), title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
-                        }
-                        
-                    } label: {
-                        if pcViewModel.favoritedPoems.contains(where: { $0.title == poem.title })  {
-                            Image(systemName: "star.fill")
-                        } else {
-                            Image(systemName: "star")
-                        }
+                
+                Button {
+                    if let entity = pcViewModel.favoritedPoems.first(where: { $0.title == poem.title}) {
+                        pcViewModel.deleteFavoritedPoemFromTappingStar(entity: entity)
+                    } else {
+//                        pcViewModel.addFavoritePoem(id: UUID(), title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.linecount)
                     }
-                }
-                ToolbarItem {
-                    Button {
-                        links.sharePoem(poem: poem.lines, title: poem.title, author: poem.author)
-                    } label: {
-                        Image(systemName: "square.and.arrow.up")
+                    
+                } label: {
+                    if pcViewModel.favoritedPoems.contains(where: { $0.title == poem.title })  {
+                        Image(systemName: "star.fill")
+                    } else {
+                        Image(systemName: "star")
                     }
                 }
             }
-        }
-        .onAppear {
+        }        .onAppear {
             if (pcViewModel.viewedPoems.first(where: { $0.title == poem.title}) == nil) {
-                pcViewModel.addViewedPoem(id: UUID(), title: poem.title, author: poem.author, lines: poem.lines)
+//                pcViewModel.addViewedPoem(id: UUID(), title: poem.title, author: poem.author, lines: poem.lines)
             } else {
                 
             }

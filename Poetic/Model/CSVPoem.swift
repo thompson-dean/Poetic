@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CSVPoem: Codable {
+struct CSVPoem: Codable, Hashable {
     let title: String
     let poem: String
     let poet: String
@@ -26,16 +26,21 @@ struct CSVPoem: Codable {
     }
     
     var cleanedPoem: String {
-            var lines = poem.components(separatedBy: "\r\n").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            return cleanUpString(poem)
+        }
+    
+    private func cleanUpString(_ str: String) -> String {
+            var cleanedString = str.trimmingCharacters(in: .whitespacesAndNewlines)
 
-            while let first = lines.first, first.isEmpty {
-                lines.removeFirst()
-            }
-            while let last = lines.last, last.isEmpty {
-                lines.removeLast()
+            // Count number of occurrences of "\r\r\n"
+            let count = cleanedString.components(separatedBy: "\r\r\n").count - 1
+
+            if count <= 2 {
+                // Replace ". " with ".\n" only if there are no more than two "\r\r\n" occurrences
+                cleanedString = cleanedString.replacingOccurrences(of: ". ", with: ".\n")
             }
 
-            return lines.joined(separator: "\r\n")
+            return cleanedString
         }
     
     enum CodingKeys: String, CodingKey {
@@ -51,3 +56,23 @@ extension CSVPoem: Identifiable {
         UUID()
     }
 }
+//
+//extension CSVPoem: RawRepresentable {
+//    public init?(rawValue: String) {
+//        guard let data = rawValue.data(using: .utf8),
+//            let result = try? JSONDecoder().decode(CSVPoem.self, from: data)
+//        else {
+//            return nil
+//        }
+//        self = result
+//    }
+//
+//    public var rawValue: String {
+//        guard let data = try? JSONEncoder().encode(self),
+//            let result = String(data: data, encoding: .utf8)
+//        else {
+//            return "[]"
+//        }
+//        return result
+//    }
+//}

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import BackgroundTasks
 
 class PoemViewModel: ObservableObject {
     enum State {
@@ -36,6 +37,7 @@ class PoemViewModel: ObservableObject {
         case loaded([CSVPoem])
     }
 
+//    @AppStorage(Constants.poemOfTheDay) var poemOfTheDay: CSVPoem?
     @AppStorage(Constants.darkModeEnable) var darkModeEnabled = false
     @AppStorage(Constants.systemThemeEnabled) var systemThemeEnabled = true
     @AppStorage(Constants.featuredAuthor1) var featuredAuthor1: String = ""
@@ -44,7 +46,7 @@ class PoemViewModel: ObservableObject {
    
     @Published private(set) var csvPoems = [CSVPoem]()
     @Published private(set) var poems = [Poem]()
-    @Published private(set) var randomPoems = [Poem]()
+    @Published private(set) var randomPoems = [CSVPoem]()
     @Published private(set) var authorPoems = [Poem]()
     @Published var searchTerm: String = ""
     @Published var isTitle: Bool = true
@@ -69,6 +71,7 @@ class PoemViewModel: ObservableObject {
         self.csvManager = csvManager
     }
     
+    @MainActor
     func fetchCSVPoems() async {
         csvPoemState = .loading
         do {
@@ -79,20 +82,58 @@ class PoemViewModel: ObservableObject {
         }
     }
     
-    func loadRandomPoems(number: String) {
+    func loadRandomPoems(number: Int) {
         state = .loading
-        apiService.fetchPoems(searchTerm: number, filter: .random)
-            .sink { [weak self] (dataResponse) in
-                if dataResponse.error != nil {
-                    self?.createAlert(with: dataResponse.error!)
-                    self?.state = .failed
-                } else {
-                    self?.randomPoems = dataResponse.value!
-                    self?.state = .loaded
+        var uniquePoems = Set<CSVPoem>()
+        
+        DispatchQueue.global().async {
+            while uniquePoems.count < number {
+                if let randomPoem = self.csvPoems.randomElement() {
+                    uniquePoems.insert(randomPoem)
                 }
-            }.store(in: &cancellables)
+            }
+            
+            DispatchQueue.main.async {
+                self.state = .loaded
+                self.randomPoems = Array(uniquePoems)
+                print(self.randomPoems)
+            }
+        }
     }
     
+    func schedulePoemUpdate() {
+            let request = BGAppRefreshTaskRequest(identifier: Constants.updatePoemIdentifier)
+            request.earliestBeginDate = Calendar.current.nextDate(
+                after: Date(),
+                matching: DateComponents(hour: 9),
+                matchingPolicy: .nextTime
+            )
+            do {
+                try BGTaskScheduler.shared.submit(request)
+            } catch {
+                print("Could not schedule poem update: \(error)")
+            }
+        }
+
+        func handleAppRefresh(task: BGAppRefreshTask) {
+            schedulePoemUpdate()
+            getPoemOfTheDay()
+            task.setTaskCompleted(success: true)
+        }
+    
+    func getPoemOfTheDay() {
+            // Check if the poem of the day has already been selected.
+//            if let storedPoem = poemOfTheDay {
+//                // Use the stored poem of the day.
+//                poemOfTheDay = storedPoem
+//            } else {
+//                // Pick a new poem of the day.
+//                if let newPoemOfTheDay = csvPoems.randomElement() {
+//                    poemOfTheDay = newPoemOfTheDay
+//                }
+//            }
+        }
+
     func fetchTitles(searchTerm: String) {
         if let cache = poemTitleSearchCache[searchTerm] {
             self.authorPoemState = .loaded

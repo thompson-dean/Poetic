@@ -78,7 +78,7 @@ struct AuthorView: View {
                     ScrollView {
                         ForEach(0..<viewModel.authorPoems.count, id: \.self) { index in
                             NavigationLink {
-                                NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: viewModel.authorPoems[index])
+//                                NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: viewModel.authorPoems[index])
                             } label: {
                                 AuthorPoemCell(poem: viewModel.authorPoems[index], indexString: String(index + 1))
                             }

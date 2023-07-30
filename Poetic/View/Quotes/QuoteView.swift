@@ -82,9 +82,9 @@ struct QuoteView: View {
                     ForEach(0..<pcViewModel.quotes.count, id: \.self) { index in
                         ZStack {
                             NavigationLink {
-                                if let poem = pcViewModel.favoritedQuotesPoem.first(where: { $0.title == pcViewModel.quotes[index].title }) {
-                                    NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: Poem(title: poem.title ?? "Unknown", author: poem.author ?? "Unknown", lines: poem.lines ?? ["Unknown"], linecount: "0"))
-                                }
+//                                if let poem = pcViewModel.favoritedQuotesPoem.first(where: { $0.title == pcViewModel.quotes[index].title }) {
+//                                    NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: Poem(title: poem.title ?? "Unknown", author: poem.author ?? "Unknown", lines: poem.lines ?? ["Unknown"], linecount: "0"))
+//                                }
                             } label: {
                                 EmptyView().opacity(0)
                             }

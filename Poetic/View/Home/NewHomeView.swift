@@ -25,7 +25,7 @@ struct NewHomeView: View {
                     NewHomeContent(viewModel: viewModel, pcViewModel: pcViewModel)
                 }
                 .refreshable {
-                    viewModel.loadRandomPoems(number: "5")
+                    viewModel.loadRandomPoems(number: 5)
                 }
             }
             .navigationBarHidden(true)
@@ -74,7 +74,7 @@ struct NewHomeContent: View {
                             PoemCard(poem: poem)
                                 .redacted(reason: .placeholder)
                                 .onAppear {
-                                    viewModel.loadRandomPoems(number: "5")
+                                    viewModel.loadRandomPoems(number: 5)
                                 }
                         case .loading:
                             PoemCard(poem: poem)
@@ -83,7 +83,7 @@ struct NewHomeContent: View {
                             FailedPoemCard()
                         case .loaded:
                             NavigationLink {
-                                NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: poem)
+NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: poem)
                             } label: {
                                 PoemCard(poem: poem)
                             }
@@ -107,7 +107,7 @@ struct NewHomeContent: View {
                 ForEach(pcViewModel.viewedPoems, id: \.self) { poem in
                     NavigationLink {
                         let sentPoem = Poem(title: poem.title ?? "", author: poem.author ?? "", lines: poem.lines ?? [], linecount: poem.title ?? "")
-                        NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
+//                        NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
                     } label: {
                         TitleAuthorDateHomeCell(pcViewModel: pcViewModel, poem: poem)
                     }

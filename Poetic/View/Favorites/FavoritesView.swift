@@ -81,8 +81,8 @@ struct FavoritesView: View {
                     ForEach(pcViewModel.favoritedPoems) { poem in
                         ZStack {
                             NavigationLink {
-                                let sentPoem = Poem(title: poem.title ?? "", author: poem.author ?? "", lines: poem.lines ?? [], linecount: poem.linecount ?? "")
-                                NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
+//                                let sentPoem = Poem(title: poem.title ?? "", author: poem.author ?? "", lines: poem.lines ?? [], linecount: poem.linecount ?? "")
+//                                NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
                             } label: {
                                 EmptyView().opacity(0.0)
                             }
