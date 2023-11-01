@@ -2,7 +2,7 @@
 
 # Poetic
 
-Poetic is a mobile app designed to bring the world of classic English poetry right to your fingertips. Built to fuel my passion for poetry and my learning journey in iOS development, Poetic allows users to search through thousands of poems, save favorites, share with friends, and discover new poetry easily.
+ is a mobile app designed to bring the world of classic English poetry right to your fingertips. Built to fuel my passion for poetry and my learning journey in iOS development, Poetic allows users to search through thousands of poems, save favorites, share with friends, and discover new poetry easily.
 
 ## Features
 
