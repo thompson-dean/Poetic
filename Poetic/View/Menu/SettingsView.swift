@@ -25,7 +25,7 @@ struct SettingsView: View {
 
  
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(alignment: .center) {
                 Form {
                     Section(header: Text("Appearance")) {
@@ -43,14 +43,6 @@ struct SettingsView: View {
                             .onChange(of: viewModel.darkModeEnabled) { _ in
                                 SystemThemeManager.shared.handleTheme(darkMode: viewModel.darkModeEnabled, system: viewModel.systemThemeEnabled)
                             }
-                        }
-                    }
-                    
-                    Section(header: Text("Viewed Poems")) {
-                        HStack {
-                            Text("Viewed poems")
-                            Spacer()
-                            Text(String(pcViewModel.viewedPoems.count))
                         }
                     }
                     
@@ -217,7 +209,7 @@ struct SettingsView: View {
                                     .cornerRadius(5)
                                 
                                 VStack(alignment: .leading, spacing: 5) {
-                                    Text("Poetic version 2.1")
+                                    Text("Poetic version 2.3.0")
                                     HStack(spacing: 3) {
                                         Text("Made with love by")
                                         

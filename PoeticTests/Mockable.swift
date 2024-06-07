@@ -19,18 +19,19 @@ extension Mockable {
     
     func loadJSON<T: Decodable>(filename: String, type: T.Type) -> [T] {
         guard let url = bundle.url(forResource: filename, withExtension: "json") else {
-            fatalError("Failed to load JSON File")
+            fatalError("Failed to load JSON file named \(filename).json")
         }
         
         guard let data = try? Data(contentsOf: url) else {
-            fatalError("no data")
+            fatalError("Failed to load data from \(filename).json")
         }
         
         let decoder = JSONDecoder()
         
         guard let loaded = try? decoder.decode([T].self, from: data) else {
-            fatalError("no decoding")
+            fatalError("Failed to decode JSON data from \(filename).json")
         }
+        
         return loaded
     }
 }

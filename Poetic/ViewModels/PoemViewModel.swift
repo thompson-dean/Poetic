@@ -23,7 +23,7 @@ class PoemViewModel: ObservableObject {
         case loaded
     }
     
-    enum AuthorPoemState  {
+    enum AuthorPoemState {
         case idle
         case loading
         case failed
@@ -63,11 +63,11 @@ class PoemViewModel: ObservableObject {
         state = .loading
         apiService.fetchPoems(searchTerm: number, filter: .random)
             .sink { [weak self] (dataResponse) in
-                if dataResponse.error != nil {
-                    self?.createAlert(with: dataResponse.error!)
+                if let error = dataResponse.error {
+                    self?.createAlert(with: error)
                     self?.state = .failed
-                } else {
-                    self?.randomPoems = dataResponse.value!
+                } else if let poems = dataResponse.value {
+                    self?.randomPoems = poems
                     self?.state = .loaded
                 }
             }.store(in: &cancellables)
@@ -75,8 +75,8 @@ class PoemViewModel: ObservableObject {
     
     func fetchTitles(searchTerm: String) {
         if let cache = poemTitleSearchCache[searchTerm] {
-            self.authorPoemState = .loaded
-            self.authorPoems = cache
+            self.searchState = .loaded
+            self.poems = cache
             return
         }
         let trimmedString = searchTerm.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -84,17 +84,17 @@ class PoemViewModel: ObservableObject {
             searchState = .loading
             apiService.fetchPoems(searchTerm: trimmedString, filter: .title)
                 .sink { [weak self] (dataResponse) in
-                    if dataResponse.error != nil {
-                        self?.createAlert(with: dataResponse.error!)
+                    if let error = dataResponse.error {
+                        self?.createAlert(with: error)
                         self?.searchState = .failed
-                    } else {
-                        self?.poems = dataResponse.value!
-                        self?.poemTitleSearchCache[searchTerm] = self?.poems
+                    } else if let poems = dataResponse.value {
+                        self?.poems = poems
+                        self?.poemTitleSearchCache[searchTerm] = poems
                         self?.searchState = .loaded
                     }
                 }.store(in: &cancellables)
         } else {
-            return
+            searchState = .idle
         }
     }
     
@@ -127,68 +127,19 @@ class PoemViewModel: ObservableObject {
         
         apiService.fetchPoems(searchTerm: searchTerm, filter: .author)
             .sink { [weak self] (dataResponse) in
-                if dataResponse.error != nil {
-                    self?.createAlert(with: dataResponse.error!)
+                if let error = dataResponse.error {
+                    self?.createAlert(with: error)
                     self?.authorPoemState = .failed
-                } else {
-                    self?.authorPoems = dataResponse.value!
-                    self?.authorTitleCache[searchTerm] = self?.authorPoems
+                } else if let poems = dataResponse.value {
+                    self?.authorPoems = poems
+                    self?.authorTitleCache[searchTerm] = poems
                     self?.authorPoemState = .loaded
                 }
             }.store(in: &cancellables)
     }
     
     func createAlert(with error: NetworkError) {
-        searchListLoadingError = error.backendError == nil ? error.initialError.localizedDescription : error.backendError!.message
+        searchListLoadingError = error.localizedDescription
         self.showAlert = true
     }
-    
-    func exampleData() -> [Poem] {
-        let poems = [
-            Poem(
-                title: "Sonnet 1: From fairest creatures we desire increase",
-                author: "William Shakespeare",
-                lines: [
-                    "From fairest creatures we desire increase,",
-                    "That thereby beauty's rose might never die,",
-                    "But as the riper should by time decease, ",
-                    "His tender heir might bear his memory",
-                    "But thou contracted to thine own bright eyes,",
-                    "Feed'st thy light's flame with self-substantial fuel,",
-                    "Making a famine where abundance lies,",
-                    "Thy self thy foe, to thy sweet self too cruel:",
-                    "Thou that art now the world's fresh ornament,",
-                    "And only herald to the gaudy spring,",
-                    "Within thine own bud buriest thy content,",
-                    "And tender churl mak'st waste in niggarding:",
-                    " Pity the world, or else this glutton be,",
-                    " To eat the world's due, by the grave and thee."
-                ],
-                linecount: "14"),
-            Poem(
-                title: "Sonnet 1: From fairest creatures we desire increase",
-                author: "William Shakespeare",
-                lines: [
-                    "From fairest creatures we desire increase,",
-                    "That thereby beauty's rose might never die,",
-                    "But as the riper should by time decease, ",
-                    "His tender heir might bear his memory",
-                    "But thou contracted to thine own bright eyes,",
-                    "Feed'st thy light's flame with self-substantial fuel,",
-                    "Making a famine where abundance lies,",
-                    "Thy self thy foe, to thy sweet self too cruel:",
-                    "Thou that art now the world's fresh ornament,",
-                    "And only herald to the gaudy spring,",
-                    "Within thine own bud buriest thy content,",
-                    "And tender churl mak'st waste in niggarding:",
-                    " Pity the world, or else this glutton be,",
-                    " To eat the world's due, by the grave and thee."
-                ],
-                linecount: "14")
-        ]
-        return poems
-    }
 }
-
-
-

@@ -23,14 +23,20 @@ final class APIService: APIServiceProtocol {
             .publishDecodable(type: [Poem].self)
             .map { response in
                 response.mapError { error in
-                    let backendError = response.data.flatMap { try? JSONDecoder().decode(BackendError.self, from: $0)}
-                    return NetworkError(initialError: error, backendError: backendError)
+                    if let backendError = response.data.flatMap({ try? JSONDecoder().decode(BackendError.self, from: $0)}) {
+                        return NetworkError.backend(backendError)
+                    } else if error.isSessionTaskError {
+                        return NetworkError.noNetwork
+                    } else if error.responseCode == 404 {
+                        return NetworkError.noResults
+                    } else {
+                        return NetworkError.unknown(error)
+                    }
                 }
             }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 }
-
 
 

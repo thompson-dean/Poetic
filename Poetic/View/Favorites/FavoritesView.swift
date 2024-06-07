@@ -24,7 +24,7 @@ struct FavoritesView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             if pcViewModel.favoritedPoems.isEmpty {
                 VStack {
                     VStack {

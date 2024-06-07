@@ -26,7 +26,7 @@ struct QuoteView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             if pcViewModel.quotes.isEmpty {
                 VStack {
                     VStack {

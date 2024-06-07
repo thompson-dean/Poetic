@@ -19,17 +19,15 @@
 		2A19EA9B27F09E1C00022EFE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A19EA9A27F09E1C00022EFE /* NotificationManager.swift */; };
 		2A1ABA4928F2CEAA00D48AA1 /* IntegratedSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1ABA4828F2CEAA00D48AA1 /* IntegratedSearchView.swift */; };
 		2A1ABA4C28F3F61200D48AA1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 2A1ABA4B28F3F61200D48AA1 /* Alamofire */; };
-		2A1ABA4F28F3F6A300D48AA1 /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 2A1ABA4E28F3F6A300D48AA1 /* PKHUD */; };
 		2A1ABA5428F3FBA400D48AA1 /* SearchFIlter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1ABA5328F3FBA400D48AA1 /* SearchFIlter.swift */; };
 		2A1ABA5828F4016900D48AA1 /* APIConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1ABA5728F4016900D48AA1 /* APIConst.swift */; };
 		2A1ABA5A28F4090000D48AA1 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1ABA5928F4090000D48AA1 /* NetworkError.swift */; };
-		2A1ABA5C28F41DD100D48AA1 /* PKHUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1ABA5B28F41DD100D48AA1 /* PKHUDView.swift */; };
-		2A1ABA5E28F41E1C00D48AA1 /* View+PKHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1ABA5D28F41E1C00D48AA1 /* View+PKHUD.swift */; };
 		2A1EC6B72A68C4A40012F138 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A1EC6B62A68C4A40012F138 /* StoreKit.framework */; };
 		2A1EC6BE2A68CA4F0012F138 /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1EC6BD2A68CA4F0012F138 /* StoreKitManager.swift */; };
 		2A1EC6C02A68CBB50012F138 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1EC6BF2A68CBB50012F138 /* Constants.swift */; };
 		2A1EC6C32A68D2350012F138 /* TipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1EC6C22A68D2350012F138 /* TipsView.swift */; };
 		2A304724288FB01500E43820 /* NewHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A304723288FB01500E43820 /* NewHomeView.swift */; };
+		2A3190142C13086B009BC3A0 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3190132C13086B009BC3A0 /* SafariWebView.swift */; };
 		2A37936C27D8A4B800FA48ED /* LineBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A37936B27D8A4B800FA48ED /* LineBreak.swift */; };
 		2A37937B27D8D48A00FA48ED /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A37937A27D8D48A00FA48ED /* Bundle-Decodable.swift */; };
 		2A38CF7927DF74BB00A44268 /* Poetic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2A38CF7727DF74BB00A44268 /* Poetic.xcdatamodeld */; };
@@ -90,8 +88,6 @@
 		2A1ABA5328F3FBA400D48AA1 /* SearchFIlter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFIlter.swift; sourceTree = "<group>"; };
 		2A1ABA5728F4016900D48AA1 /* APIConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConst.swift; sourceTree = "<group>"; };
 		2A1ABA5928F4090000D48AA1 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		2A1ABA5B28F41DD100D48AA1 /* PKHUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKHUDView.swift; sourceTree = "<group>"; };
-		2A1ABA5D28F41E1C00D48AA1 /* View+PKHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+PKHUD.swift"; sourceTree = "<group>"; };
 		2A1EC6B62A68C4A40012F138 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2A1EC6BB2A68C8380012F138 /* TipsStoreConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = TipsStoreConfiguration.storekit; sourceTree = "<group>"; };
 		2A1EC6BD2A68CA4F0012F138 /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
@@ -99,6 +95,7 @@
 		2A1EC6C22A68D2350012F138 /* TipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsView.swift; sourceTree = "<group>"; };
 		2A304723288FB01500E43820 /* NewHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewHomeView.swift; sourceTree = "<group>"; };
 		2A3190102C11DBA9009BC3A0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		2A3190132C13086B009BC3A0 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
 		2A37936B27D8A4B800FA48ED /* LineBreak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineBreak.swift; sourceTree = "<group>"; };
 		2A37937A27D8D48A00FA48ED /* Bundle-Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
 		2A38CF7827DF74BB00A44268 /* Poetic.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Poetic.xcdatamodel; sourceTree = "<group>"; };
@@ -142,7 +139,6 @@
 			files = (
 				2A1EC6B72A68C4A40012F138 /* StoreKit.framework in Frameworks */,
 				2A1ABA4C28F3F61200D48AA1 /* Alamofire in Frameworks */,
-				2A1ABA4F28F3F6A300D48AA1 /* PKHUD in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,7 +251,6 @@
 			isa = PBXGroup;
 			children = (
 				2AB4B9A727E05F1C008FB84B /* Color.swift */,
-				2A1ABA5D28F41E1C00D48AA1 /* View+PKHUD.swift */,
 				2A8ADBC52A69019F001630B1 /* View+ToAnyView.swift */,
 				2A81C48528C45B4300437EC3 /* View+FontWithLineHeight.swift */,
 			);
@@ -298,9 +293,9 @@
 			isa = PBXGroup;
 			children = (
 				2ABCC206285095A900CA0FB3 /* PoemView.swift */,
-				2A1ABA5B28F41DD100D48AA1 /* PKHUDView.swift */,
 				2A37936B27D8A4B800FA48ED /* LineBreak.swift */,
 				2ACC8A4027E89ECC002F5B6D /* WebView.swift */,
+				2A3190132C13086B009BC3A0 /* SafariWebView.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -398,7 +393,6 @@
 			name = Poetic;
 			packageProductDependencies = (
 				2A1ABA4B28F3F61200D48AA1 /* Alamofire */,
-				2A1ABA4E28F3F6A300D48AA1 /* PKHUD */,
 			);
 			productName = Poetic;
 			productReference = 2A17BA8F27D5D8E000E0D755 /* Poetic.app */;
@@ -452,7 +446,6 @@
 			mainGroup = 2A17BA8627D5D8E000E0D755;
 			packageReferences = (
 				2A1ABA4A28F3F61200D48AA1 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				2A1ABA4D28F3F6A300D48AA1 /* XCRemoteSwiftPackageReference "PKHUD" */,
 			);
 			productRefGroup = 2A17BA9027D5D8E000E0D755 /* Products */;
 			projectDirPath = "";
@@ -491,7 +484,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2ACC8A3D27E86E3B002F5B6D /* SettingsView.swift in Sources */,
-				2A1ABA5C28F41DD100D48AA1 /* PKHUDView.swift in Sources */,
 				2A1ABA5428F3FBA400D48AA1 /* SearchFIlter.swift in Sources */,
 				2A8ADBC62A69019F001630B1 /* View+ToAnyView.swift in Sources */,
 				2A17BAAA27D5D95400E0D755 /* FavoritesView.swift in Sources */,
@@ -517,12 +509,12 @@
 				2A42F5E0299A623200122847 /* TitleAuthorFavoriteCell.swift in Sources */,
 				2A38CF7927DF74BB00A44268 /* Poetic.xcdatamodeld in Sources */,
 				2A17BAB027D641D200E0D755 /* PoemViewModel.swift in Sources */,
+				2A3190142C13086B009BC3A0 /* SafariWebView.swift in Sources */,
 				2ACC8A4327E8A441002F5B6D /* DevView.swift in Sources */,
 				2A67DA4828DF2CBD00F1A5C0 /* Fonts.swift in Sources */,
 				2AF8600527DC5B2C00B3BC40 /* QuoteView.swift in Sources */,
 				2A17BAAE27D6418400E0D755 /* Poem.swift in Sources */,
 				2A1EC6BE2A68CA4F0012F138 /* StoreKitManager.swift in Sources */,
-				2A1ABA5E28F41E1C00D48AA1 /* View+PKHUD.swift in Sources */,
 				2A1ABA4928F2CEAA00D48AA1 /* IntegratedSearchView.swift in Sources */,
 				2A38CF7B27DF74CC00A44268 /* PersistenceController.swift in Sources */,
 				2AB4B9A827E05F1C008FB84B /* Color.swift in Sources */,
@@ -699,7 +691,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2;
+				MARKETING_VERSION = 2.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Dean.Thompson.Poetic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -732,7 +724,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2;
+				MARKETING_VERSION = 2.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Dean.Thompson.Poetic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -822,14 +814,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		2A1ABA4D28F3F6A300D48AA1 /* XCRemoteSwiftPackageReference "PKHUD" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pkluz/PKHUD";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -837,11 +821,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2A1ABA4A28F3F61200D48AA1 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		2A1ABA4E28F3F6A300D48AA1 /* PKHUD */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2A1ABA4D28F3F6A300D48AA1 /* XCRemoteSwiftPackageReference "PKHUD" */;
-			productName = PKHUD;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -9,9 +9,24 @@
 import Foundation
 import Alamofire
 
-struct NetworkError: Error {
-  let initialError: AFError
-  let backendError: BackendError?
+enum NetworkError: Error {
+    case noNetwork
+    case noResults
+    case backend(BackendError)
+    case unknown(Error)
+    
+    var localizedDescription: String {
+        switch self {
+        case .noNetwork:
+            return "No network connection. Please check your internet connection and try again."
+        case .noResults:
+            return "No results found. Please try a different search term."
+        case .backend(let error):
+            return error.message
+        case .unknown:
+            return "No results found. Please try a different search term."
+        }
+    }
 }
 
 struct BackendError: Codable, Error {

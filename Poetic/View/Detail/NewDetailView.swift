@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NewDetailView: View {
     @Environment(\.colorScheme) var colorScheme
-    
+    @State private var showWebView = false
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
     
@@ -94,13 +94,27 @@ struct NewDetailView: View {
                         Image(systemName: "square.and.arrow.up")
                     }
                 }
+                ToolbarItem {
+                    Button {
+                        showWebView.toggle()
+                    } label: {
+                        Image(systemName: "info.circle")
+                    }
+                }
             }
         }
         .onAppear {
             if (pcViewModel.viewedPoems.first(where: { $0.title == poem.title}) == nil) {
                 pcViewModel.addViewedPoem(id: UUID(), title: poem.title, author: poem.author, lines: poem.lines)
+            }
+        }
+        .sheet(isPresented: $showWebView) {
+            if let urlString = links.authorLinksDictionary[poem.author], let url = URL(string: urlString) {
+                SafariView(url: url)
             } else {
-                
+                Text("No link available")
+                    .font(.headline)
+                    .padding()
             }
         }
     }
@@ -108,25 +122,6 @@ struct NewDetailView: View {
 
 struct PracticePoemView_Previews: PreviewProvider {
     static var previews: some View {
-        NewDetailView(viewModel: PoemViewModel(apiService: APIService()), pcViewModel: PersistenceController(), poem: Poem(
-            title: "Sonnet 1: From fairest creatures we desire increase",
-            author: "William Shakespeare",
-            lines: [
-                "From fairest creatures we desire increase, ",
-                "That thereby beauty's rose might never die, ",
-                "But as the riper should by time decease, ",
-                "His tender heir might bear his memory: ",
-                "But thou contracted to thine own bright eyes,",
-                "Feed'st thy light's flame with self-substantial fuel,",
-                "Making a famine where abundance lies,",
-                "Thy self thy foe, to thy sweet self too cruel:",
-                "Thou that art now the world's fresh ornament,",
-                "And only herald to the gaudy spring,",
-                "Within thine own bud buriest thy content,",
-                "And tender churl mak'st waste in niggarding:",
-                "Pity the world, or else this glutton be,",
-                "To eat the world's due, by the grave and thee."
-            ],
-            linecount: "14"))
+        NewDetailView(viewModel: PoemViewModel(apiService: APIService()), pcViewModel: PersistenceController(), poem: Poem.stub)
     }
 }

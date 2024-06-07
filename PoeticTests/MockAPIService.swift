@@ -19,49 +19,36 @@ final class MockAPIService: APIServiceProtocol, Mockable {
         let poems: [Poem] = self.loadJSON(filename: "mockResponse", type: Poem.self)
         
         switch filter {
-            
         case .author:
             let filtered = poems.filter { $0.author.contains(searchTerm) }
-            if isFailedResponse {
-                let publisher = failedResponse()
-                return publisher
-            } else {
-                let response = DataResponse<[Poem], NetworkError>(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0, result: .success(filtered))
-                let publisher = Just(response)
-                    .eraseToAnyPublisher()
-                return publisher
-            }
+            return createResponse(filtered)
         case .title:
             let filtered = poems.filter { $0.title.contains(searchTerm) }
-            if isFailedResponse {
-                let publisher = failedResponse()
-                return publisher
-            } else {
-                let response = DataResponse<[Poem], NetworkError>(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0, result: .success(filtered))
-                let publisher = Just(response)
-                    .eraseToAnyPublisher()
-                return publisher
-            }
+            return createResponse(filtered)
         case .random:
-            if isFailedResponse {
-                let publisher = failedResponse()
-                return publisher
-            } else {
-                let response = DataResponse<[Poem], NetworkError>(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0, result: .success(poems))
-                let publisher = Just(response)
-                    .eraseToAnyPublisher()
-                return publisher
-            }
+            return createResponse(poems)
+        }
+    }
+    
+    private func createResponse(_ poems: [Poem]) -> AnyPublisher<DataResponse<[Poem], NetworkError>, Never> {
+        if isFailedResponse {
+            return failedResponse()
+        } else {
+            let response = DataResponse<[Poem], NetworkError>(
+                request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0,
+                result: .success(poems)
+            )
+            return Just(response).eraseToAnyPublisher()
         }
     }
     
     private func failedResponse() -> AnyPublisher<DataResponse<[Poem], NetworkError>, Never> {
-        let error = URLError(.badURL)
-        let response = DataResponse<[Poem], NetworkError>(request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0, result: .failure(NetworkError(initialError: .createURLRequestFailed(error: error), backendError: nil)))
-        
-        let publisher = Just(response)
-            .eraseToAnyPublisher()
-        
-        return publisher
+        let backendError = BackendError(status: "404", message: "Not Found")
+        let networkError = NetworkError.backend(backendError)
+        let response = DataResponse<[Poem], NetworkError>(
+            request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0,
+            result: .failure(networkError)
+        )
+        return Just(response).eraseToAnyPublisher()
     }
 }
