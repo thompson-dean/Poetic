@@ -11,7 +11,7 @@ import StoreKit
 enum PaymentError: LocalizedError {
     case failedVerification
     case system(Error)
-    
+
     var errorDescription: String? {
         switch self {
         case .failedVerification:
@@ -26,7 +26,7 @@ enum PaymentState: Equatable {
     case successful
     case pending
     case failed(PaymentError)
-    
+
     static func == (lhs: PaymentState, rhs: PaymentState) -> Bool {
         switch(lhs, rhs) {
         case (.successful, .successful):
@@ -47,6 +47,7 @@ typealias TransactionListener = Task<Void, Error>
 @MainActor
 final class StoreKitManager: ObservableObject {
     @Published private(set) var items: [Product] = []
+    @Published var hasError: Bool = false
     @Published private(set) var paymentState: PaymentState? {
         didSet {
             switch paymentState {
@@ -57,9 +58,7 @@ final class StoreKitManager: ObservableObject {
             }
         }
     }
-    
-    @Published var hasError: Bool = false
-    
+
     var error: PaymentError? {
         switch paymentState {
         case .failed(let error):
@@ -68,39 +67,37 @@ final class StoreKitManager: ObservableObject {
             return nil
         }
     }
-    
+
     private var transactionListener: TransactionListener?
-    
+
     init() {
         transactionListener = confiureTransactionListener()
-        
         Task { [weak self] in
             await self?.retrieveProducts()
         }
     }
-    
+
     deinit {
         transactionListener?.cancel()
     }
-    
+
     func purchase(_ item: Product) async {
         do {
             let result = try await item.purchase()
-            
+
             try await handlePurchase(from: result)
         } catch {
             paymentState = .failed(.system(error))
             print("DEBUG: \(error.localizedDescription)")
         }
     }
-    
+
     func reset() {
         paymentState = nil
     }
 }
 
 private extension StoreKitManager {
-    
     func confiureTransactionListener() -> TransactionListener {
         Task.detached(priority: .background) { @MainActor [weak self] in
             do {
@@ -115,17 +112,19 @@ private extension StoreKitManager {
             }
         }
     }
-    
+
     func retrieveProducts() async {
         do {
-            let products = try await Product.products(for: Constants.storeKitIdentifiers).sorted(by: { $0.price < $1.price})
+            let products = try await Product.products(
+                for: Constants.storeKitIdentifiers
+            ).sorted(by: { $0.price < $1.price})
             items = products
         } catch {
             paymentState = .failed(.system(error))
             print("DEBUG: \(error.localizedDescription)")
         }
     }
-    
+
     func handlePurchase(from result: PurchaseResult) async throws {
         switch result {
         case .success(let verification):
@@ -140,10 +139,10 @@ private extension StoreKitManager {
             break
         }
     }
-    
+
     func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
         switch result {
-        case .unverified(_, _):
+        case .unverified:
             print("The verfication of the user failed.")
             throw PaymentError.failedVerification
         case .verified(let safe):

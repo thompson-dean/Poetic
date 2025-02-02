@@ -7,6 +7,6 @@
 
 import Foundation
 
-class APIConst {
+enum APIConst {
     static let api: String = "https://poetrydb.org/"
 }

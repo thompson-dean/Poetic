@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct NewHomeView: View {
-    let fonts = Fonts()
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
     @State private var isRotating: CGFloat = 0.0
     @Environment(\.colorScheme) var colorScheme
-    
+
     var body: some View {
         NavigationStack {
             ZStack(alignment: .leading) {
@@ -32,13 +31,13 @@ struct NewHomeView: View {
             pcViewModel.fetchViewedPoems()
         }
     }
-    
+
     private var backgroundImage: some View {
         Image(colorScheme == .light ? "background" : "background-dark")
             .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
             .ignoresSafeArea(.all)
     }
-    
+
     private var content: some View {
         VStack(alignment: .leading) {
             header
@@ -48,21 +47,21 @@ struct NewHomeView: View {
         }
         .padding(.top, 24)
     }
-    
+
     private var header: some View {
         Text("Poetic.")
-            .fontWithLineHeight(font: fonts.newYorkFont, lineHeight: 48)
+            .fontWithLineHeight(font: Fonts.newYorkFont, lineHeight: 48)
             .foregroundColor(.primary)
             .padding(.horizontal, 16)
     }
-    
+
     private var discoverText: some View {
         Text("Discover Classic Poetry!")
             .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 16)
             .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
             .padding(.horizontal, 16)
     }
-    
+
     private var recommendedSection: some View {
         VStack(alignment: .leading) {
             sectionTitle("Recommended")
@@ -81,7 +80,7 @@ struct NewHomeView: View {
             }
         }
     }
-    
+
     private var recentSection: some View {
         VStack(alignment: .leading) {
             sectionTitle("Recent")
@@ -92,7 +91,7 @@ struct NewHomeView: View {
             }
         }
     }
-    
+
     private var poemCards: some View {
         ForEach(viewModel.randomPoems, id: \.self) { poem in
             NavigationLink {
@@ -103,11 +102,16 @@ struct NewHomeView: View {
             .buttonStyle(FlatLinkStyle())
         }
     }
-    
+
     private var viewedPoemsList: some View {
         ForEach(pcViewModel.viewedPoems, id: \.self) { poem in
             NavigationLink {
-                let sentPoem = Poem(title: poem.title ?? "", author: poem.author ?? "", lines: poem.lines ?? [], linecount: poem.title ?? "")
+                let sentPoem = Poem(
+                    title: poem.title ?? "",
+                    author: poem.author ?? "",
+                    lines: poem.lines ?? [],
+                    linecount: poem.title ?? ""
+                )
                 NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
             } label: {
                 TitleAuthorDateHomeCell(pcViewModel: pcViewModel, poem: poem)
@@ -115,7 +119,7 @@ struct NewHomeView: View {
             .buttonStyle(FlatLinkStyle())
         }
     }
-    
+
     private func sectionTitle(_ text: String) -> some View {
         Text(text)
             .foregroundColor(.primary)
@@ -123,7 +127,7 @@ struct NewHomeView: View {
             .padding(.horizontal, 16)
             .padding(.top, 12)
     }
-    
+
     var noViewedPoemsView: some View {
         VStack {
             HStack {
@@ -131,7 +135,7 @@ struct NewHomeView: View {
                     Text("No Recents.")
                         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
                         .foregroundColor(.primary)
-                    
+
                     Text("Read some poems!")
                         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
                         .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)

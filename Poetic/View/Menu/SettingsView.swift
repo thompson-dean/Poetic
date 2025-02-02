@@ -8,22 +8,18 @@
 import SwiftUI
 
 struct SettingsView: View {
-    
     @Environment(\.colorScheme) var colorScheme
-    
-    let links = Links()
     @StateObject var notificationManager = NotificationManager()
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
     @ObservedObject var storeKitManager: StoreKitManager
-    
+
     @State private var showLoading: Bool = false
     @State private var lightOrDark = false
     @State private var isShowingTipsView = false
     @State private var showThankYou: Bool = false
     @State var showPendingAlert: Bool = false
 
- 
     var body: some View {
         NavigationStack {
             VStack(alignment: .center) {
@@ -31,9 +27,12 @@ struct SettingsView: View {
                     Section(header: Text("Appearance")) {
                         Toggle("Adaptive background", isOn: $viewModel.systemThemeEnabled)
                             .onChange(of: viewModel.systemThemeEnabled) { _ in
-                                SystemThemeManager.shared.handleTheme(darkMode: viewModel.darkModeEnabled, system: viewModel.systemThemeEnabled)
+                                SystemThemeManager.shared.handleTheme(
+                                    darkMode: viewModel.darkModeEnabled,
+                                    system: viewModel.systemThemeEnabled
+                                )
                             }
-                        
+
                         if !viewModel.systemThemeEnabled {
                             Picker("", selection: $viewModel.darkModeEnabled) {
                                 Text("Light").tag(false)
@@ -41,11 +40,14 @@ struct SettingsView: View {
                             }
                             .pickerStyle(SegmentedPickerStyle())
                             .onChange(of: viewModel.darkModeEnabled) { _ in
-                                SystemThemeManager.shared.handleTheme(darkMode: viewModel.darkModeEnabled, system: viewModel.systemThemeEnabled)
+                                SystemThemeManager.shared.handleTheme(
+                                    darkMode: viewModel.darkModeEnabled,
+                                    system: viewModel.systemThemeEnabled
+                                )
                             }
                         }
                     }
-                    
+
                     Section(header: Text("Notifications")) {
                         Toggle("Notifications On", isOn: $notificationManager.notificationOn)
                             .onChange(of: notificationManager.notificationOn) { _ in
@@ -56,28 +58,32 @@ struct SettingsView: View {
                                 }
                             }
                     }
-                    
+
                     Section(header: Text("Resources")) {
                         NavigationLink {
-                            if let url = URL(string: links.poetryDBURLSTring) {
+                            if let url = URL(string: Links.poetryDBURLSTring) {
                                 WebView(url: url, showLoading: $showLoading)
-                                    .overlay(showLoading ? ProgressView("Loading...").toAnyView() : EmptyView().toAnyView())
+                                    .overlay(
+                                        showLoading ? ProgressView("Loading...").toAnyView() : EmptyView().toAnyView()
+                                    )
                             }
                         } label: {
                             Text("PoetryDB's fantastic poetry API")
                         }
                         NavigationLink {
-                            if let url = URL(string: links.PoeticURLString) {
+                            if let url = URL(string: Links.poeticURLString) {
                                 WebView(url: url, showLoading: $showLoading)
-                                    .overlay(showLoading ? ProgressView("Loading...").toAnyView() : EmptyView().toAnyView())
+                                    .overlay(
+                                        showLoading ? ProgressView("Loading...").toAnyView() : EmptyView().toAnyView()
+                                    )
                             } else {
-                                
+
                             }
                         } label: {
                             Text("Poetic open source repository")
                         }
                     }
-                    
+
                     Section {
                         Button {
                             if let url = URL(string: "itms-apps://apple.com/app/id1614416936") {
@@ -88,7 +94,7 @@ struct SettingsView: View {
                         } label: {
                             ZStack {
                                 NavigationLink(destination: EmptyView()) {
-                                    
+
                                 }
                                 HStack {
                                     Image(systemName: "hand.thumbsup")
@@ -98,7 +104,7 @@ struct SettingsView: View {
                                         .padding(.trailing)
                                     VStack(alignment: .leading, spacing: 3) {
                                         Text("Leave a rating")
-                                        
+
                                         Text("Support this app, support poetry!")
                                             .font(.caption)
                                     }
@@ -118,7 +124,7 @@ struct SettingsView: View {
                                     .padding(.trailing)
                                 VStack(alignment: .leading, spacing: 3) {
                                     Text("Tip Jar")
-                                    
+
                                     Text("Support the dev. Support the app.")
                                         .font(.caption)
                                 }
@@ -127,11 +133,11 @@ struct SettingsView: View {
                             .foregroundColor(.primary)
                         }
                         Button {
-                            links.shareApp()
+                            Links.shareApp()
                         } label: {
                             ZStack {
                                 NavigationLink(destination: EmptyView()) {
-                                    
+
                                 }
                                 HStack {
                                     Image(systemName: "square.and.arrow.up")
@@ -141,7 +147,7 @@ struct SettingsView: View {
                                         .padding(.trailing)
                                     VStack(alignment: .leading, spacing: 3) {
                                         Text("Share")
-                                        
+
                                         Text("Send to your friend's who love poetry.")
                                             .font(.caption)
                                     }
@@ -149,15 +155,19 @@ struct SettingsView: View {
                                 }
                                 .foregroundColor(.primary)
                             }
-                            
+
                         }
-                        
+
                         NavigationLink {
-                            if let url = URL(string: links.twitterPoeticURLString) {
+                            if let url = URL(string: Links.twitterPoeticURLString) {
                                 WebView(url: url, showLoading: $showLoading)
-                                    .overlay(showLoading ? ProgressView("Loading...").toAnyView() : EmptyView().toAnyView())
+                                    .overlay(
+                                        showLoading ?
+                                        ProgressView("Loading...") .toAnyView() :
+                                        EmptyView().toAnyView()
+                                    )
                             } else {
-                                
+
                             }
                         } label: {
                             HStack {
@@ -168,7 +178,7 @@ struct SettingsView: View {
                                     .padding(.trailing)
                                 VStack(alignment: .leading, spacing: 3) {
                                     Text("Send feedback")
-                                    
+
                                     Text("Want new features? Found a bug?")
                                         .font(.caption)
                                 }
@@ -185,7 +195,7 @@ struct SettingsView: View {
                                     .padding(.trailing)
                                 VStack(alignment: .leading, spacing: 3) {
                                     Text("About the app")
-                                        
+
                                     Text("App and developer information")
                                         .font(.caption)
                                 }
@@ -194,11 +204,15 @@ struct SettingsView: View {
                     }
                     Section {
                         NavigationLink {
-                            if let url = URL(string: links.twitterURLString) {
+                            if let url = URL(string: Links.twitterURLString) {
                                 WebView(url: url, showLoading: $showLoading)
-                                    .overlay(showLoading ? ProgressView("Loading...").toAnyView() : EmptyView().toAnyView())
+                                    .overlay(
+                                        showLoading ?
+                                        ProgressView("Loading...").toAnyView() :
+                                        EmptyView().toAnyView()
+                                    )
                             } else {
-                                
+
                             }
                         } label: {
                             HStack {
@@ -207,12 +221,12 @@ struct SettingsView: View {
                                     .scaledToFit()
                                     .frame(width: 50, height: 50)
                                     .cornerRadius(5)
-                                
+
                                 VStack(alignment: .leading, spacing: 5) {
                                     Text("Poetic version 2.3.0")
                                     HStack(spacing: 3) {
                                         Text("Made with love by")
-                                        
+
                                         Text("@DeanWThompson")
                                             .foregroundColor(.blue)
                                     }
@@ -229,7 +243,7 @@ struct SettingsView: View {
                     }
                 }
                 .overlay {
-                    
+
                     if isShowingTipsView {
                         Color.black.opacity(0.8)
                             .ignoresSafeArea()
@@ -252,11 +266,12 @@ struct SettingsView: View {
                         storeKitManager.reset()
                     }
                 }
-                
+
                 if state == .pending {
                     showPendingAlert = true
                 }
             }
+            // swiftlint:disable line_length
             .alert(isPresented: $showPendingAlert) {
                 Alert(
                     title: Text("Your payment is pending."),
@@ -264,6 +279,7 @@ struct SettingsView: View {
                     dismissButton: .default(Text("OK"))
                 )
             }
+            // swiftlint:enable line_length
             .alert(isPresented: $storeKitManager.hasError, error: storeKitManager.error) { }
             .navigationTitle("Menu")
             .navigationBarTitleDisplayMode(.inline)
@@ -278,12 +294,12 @@ extension SettingsView {
             Text("Thank you for your support!")
                 .font(.system(.title2).bold())
                 .multilineTextAlignment(.center)
-            
+
             Text("Thank you for your generous tip! Here's to more inspiring verses and enriched experiences, together!")
                 .font(.system(.body, design: .rounded))
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 16)
-            
+
             Button {
                 showThankYou.toggle()
             } label: {
@@ -292,11 +308,17 @@ extension SettingsView {
                     .tint(colorScheme == .light ? .white : .black)
                     .frame(height: 55)
                     .frame(maxWidth: .infinity)
-                    .background(colorScheme == .light ? Color.lightThemeColor : Color.darkThemeColor, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .background(
+                        colorScheme == .light ? Color.lightThemeColor : Color.darkThemeColor,
+                        in: RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    )
             }
         }
         .padding(16)
-        .background(colorScheme == .light ? .white : Color(0x181716), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .background(
+            colorScheme == .light ? .white : Color(0x181716),
+            in: RoundedRectangle(cornerRadius: 10, style: .continuous)
+        )
         .padding(.horizontal, 8)
         .padding(.bottom, 8)
         .transition(.move(edge: .bottom).combined(with: .opacity))

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Constants {
+enum Constants {
     static let appName = "Poetic"
     static let darkModeEnable = "darkModeEnabled"
     static let systemThemeEnabled = "systemThemeEnabled"
@@ -15,7 +15,7 @@ struct Constants {
     static let featuredAuthor2 = "featuredAuthors"
     static let featuredAuthor3 = "featuredAuthors"
     static let notificationsOn = "notificationsOn"
-    
+
     static let storeKitIdentifiers = [
         "Dean.Thompson.Poetic.smallTip",
         "Dean.Thompson.Poetic.mediumTip",

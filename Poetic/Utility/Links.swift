@@ -8,55 +8,52 @@
 import Foundation
 import SwiftUI
 
-class Links {
-    let twitterURLString = "https://twitter.com/DeanWThompson"
-    let twitterPoeticURLString = "https://twitter.com/PoeticApp"
-    let poetryDBURLSTring = "https://github.com/thundercomb/poetrydb"
-    let PoeticURLString = "https://github.com/thompson-dean/Poetic"
-    let appStoreDeepLink = "itms-apps://apple.com/app/id1614416936"
-    let appStoreWebsiteLink = "https://apps.apple.com/us/app/poetic/id1614416936"
-    let gitHubLink = "https://github.com/thompson-dean"
-    
-    func shareQuote(quote: String, title: String, author: String) {
+enum Links {
+    static let twitterURLString = "https://twitter.com/DeanWThompson"
+    static let twitterPoeticURLString = "https://twitter.com/PoeticApp"
+    static let poetryDBURLSTring = "https://github.com/thundercomb/poetrydb"
+    static let poeticURLString = "https://github.com/thompson-dean/Poetic"
+    static let appStoreDeepLink = "itms-apps://apple.com/app/id1614416936"
+    static let appStoreWebsiteLink = "https://apps.apple.com/us/app/poetic/id1614416936"
+    static let gitHubLink = "https://github.com/thompson-dean"
+
+    static func shareQuote(quote: String, title: String, author: String) {
         let sharedString = """
-"\(quote)" A quote from \(title) by \(author), found on Poetic, your favorite classical poetry app. Available here:  https://apps.apple.com/us/app/poetic/id1614416936
+"\(quote)" A quote from \(title) by \(author), found on Poetic, your favorite classical poetry app.
+Available here:  https://apps.apple.com/us/app/poetic/id1614416936
 """
-        let av = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
-        
+        let activityViewController = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
+
         let scenes = UIApplication.shared.connectedScenes
         let windowScene = scenes.first as? UIWindowScene
         let window = windowScene?.windows.first
-        window?.rootViewController?.present(av, animated: true, completion: nil)
-        
-    }
-    
-    func sharePoem(poem: [String], title: String, author: String) {
-        let sharedString = """
-\(title) by \(author) \n \(poem.joined(separator: "\n")) \n
-Found on Poetic, your favorite classical poetry app. Available here:  https://apps.apple.com/us/app/poetic/id1614416936
-"""
-        let av = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
-        
-        let scenes = UIApplication.shared.connectedScenes
-        let windowScene = scenes.first as? UIWindowScene
-        let window = windowScene?.windows.first
-        window?.rootViewController?.present(av, animated: true, completion: nil)
-        
-    }
-    
-    func shareApp() {
-        let sharedString = "https://apps.apple.com/us/app/poetic/id1614416936"
-        
-        let av = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
-        
-        let scenes = UIApplication.shared.connectedScenes
-        let windowScene = scenes.first as? UIWindowScene
-        let window = windowScene?.windows.first
-        window?.rootViewController?.present(av, animated: true, completion: nil)
-        
+        window?.rootViewController?.present(activityViewController, animated: true, completion: nil)
+
     }
 
-    let authorLinksDictionary: [String: String] = [
+    static func sharePoem(poem: [String], title: String, author: String) {
+        let sharedString = """
+\(title) by \(author) \n \(poem.joined(separator: "\n")) \n
+Found on Poetic, your favorite classical poetry app.
+Available here:  https://apps.apple.com/us/app/poetic/id1614416936
+"""
+        let activityViewController = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        window?.rootViewController?.present(activityViewController, animated: true, completion: nil)
+    }
+
+    static func shareApp() {
+        let sharedString = "https://apps.apple.com/us/app/poetic/id1614416936"
+        let activityViewController = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        window?.rootViewController?.present(activityViewController, animated: true, completion: nil)
+    }
+
+    static let authorLinksDictionary: [String: String] = [
         "Adam Lindsay Gordon": "https://mypoeticside.com/poets/adam-lindsay-gordon-poems",
         "Alan Seeger": "https://mypoeticside.com/poets/alan-seeger-poems",
         "Alexander Pope": "https://mypoeticside.com/poets/alexander-pope-poems",
@@ -187,5 +184,4 @@ Found on Poetic, your favorite classical poetry app. Available here:  https://ap
         "William Vaughn Moody": "https://mypoeticside.com/poets/william-vaughn-moody-poems",
         "William Wordsworth": "https://mypoeticside.com/poets/william-wordsworth-poems"
     ]
-
 }

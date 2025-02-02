@@ -13,5 +13,3 @@ struct Quote: Identifiable {
     var author: String
     var quote: String
 }
-
-

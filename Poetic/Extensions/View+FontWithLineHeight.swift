@@ -10,7 +10,7 @@ import SwiftUI
 struct FontWithLineHeight: ViewModifier {
     let font: UIFont
     let lineHeight: CGFloat
-    
+
     func body(content: Content) -> some View {
         content
             .font(Font(font))

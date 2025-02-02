@@ -5,7 +5,6 @@
 //  Created by Dean Thompson on 2022/10/10.
 //
 
-
 import Foundation
 import Alamofire
 
@@ -14,7 +13,7 @@ enum NetworkError: Error {
     case noResults
     case backend(BackendError)
     case unknown(Error)
-    
+
     var localizedDescription: String {
         switch self {
         case .noNetwork:

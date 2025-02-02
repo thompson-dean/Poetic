@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct ScrollRefreshable<Content: View>: View {
-    
+
     @Environment(\.colorScheme) var colorScheme
-    
+
     var content: Content
     var onRefresh: () -> Void
-    
+
     init(@ViewBuilder content: @escaping () -> Content, onRefresh: @escaping () -> Void) {
         self.content = content()
         self.onRefresh = onRefresh
-        
+
         UIRefreshControl.appearance().tintColor = UIColor(Color.primary)
         UITableView.appearance().showsVerticalScrollIndicator = false
         UITableView.appearance().backgroundColor = .clear
     }
-    
+
     var body: some View {
-        
+
         List {
             content
                 .listRowSeparatorTint(.clear)
@@ -37,11 +37,5 @@ struct ScrollRefreshable<Content: View>: View {
         .refreshable {
             onRefresh()
         }
-    }
-}
-
-struct Previews_ScrollRefreshable_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }

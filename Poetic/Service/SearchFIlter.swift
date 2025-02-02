@@ -8,7 +8,7 @@
 import Foundation
 
 enum SearchFilter: String {
-    case author = "author"
-    case title = "title"
-    case random = "random"
+    case author
+    case title
+    case random
 }
