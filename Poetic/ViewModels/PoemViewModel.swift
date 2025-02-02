@@ -142,4 +142,12 @@ class PoemViewModel: ObservableObject {
         searchListLoadingError = error.localizedDescription
         self.showAlert = true
     }
+
+    func resetBadgeCount() {
+        UNUserNotificationCenter.current().setBadgeCount(0) { error in
+            if let error = error {
+                print("Failed to set badge count: \(error.localizedDescription)")
+            }
+        }
+    }
 }

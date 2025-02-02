@@ -26,7 +26,7 @@ struct SettingsView: View {
                 Form {
                     Section(header: Text("Appearance")) {
                         Toggle("Adaptive background", isOn: $viewModel.systemThemeEnabled)
-                            .onChange(of: viewModel.systemThemeEnabled) { _ in
+                            .onChange(of: viewModel.systemThemeEnabled) { _, _ in
                                 SystemThemeManager.shared.handleTheme(
                                     darkMode: viewModel.darkModeEnabled,
                                     system: viewModel.systemThemeEnabled
@@ -39,7 +39,7 @@ struct SettingsView: View {
                                 Text("Dark").tag(true)
                             }
                             .pickerStyle(SegmentedPickerStyle())
-                            .onChange(of: viewModel.darkModeEnabled) { _ in
+                            .onChange(of: viewModel.darkModeEnabled) { _, _ in
                                 SystemThemeManager.shared.handleTheme(
                                     darkMode: viewModel.darkModeEnabled,
                                     system: viewModel.systemThemeEnabled
@@ -50,7 +50,7 @@ struct SettingsView: View {
 
                     Section(header: Text("Notifications")) {
                         Toggle("Notifications On", isOn: $notificationManager.notificationOn)
-                            .onChange(of: notificationManager.notificationOn) { _ in
+                            .onChange(of: notificationManager.notificationOn) { _, _ in
                                 if notificationManager.notificationOn {
                                     notificationManager.addNotification()
                                 } else {
@@ -258,7 +258,7 @@ struct SettingsView: View {
                 .animation(.spring(), value: isShowingTipsView)
                 .animation(.spring(), value: showThankYou)
             }
-            .onChange(of: storeKitManager.paymentState) { state in
+            .onChange(of: storeKitManager.paymentState) { state, _ in
                 if state == .successful {
                     isShowingTipsView = false
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
