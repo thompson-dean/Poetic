@@ -23,120 +23,74 @@ struct FavoritesView: View {
 
     var body: some View {
         NavigationStack {
-            if pcViewModel.favoritedPoems.isEmpty {
-                VStack {
-                    VStack {
-                        HStack {
-                            Image(systemName: "star")
-                                .foregroundColor(.primary)
-                                .font(.title)
-                                .padding(.vertical, 8)
-                                .padding(.leading, 8)
-
-                            VStack(alignment: .leading, spacing: 2) {
-
-                                Text("No favorited poems...")
-                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
-                                    .foregroundColor(.primary)
-
-                                Text("Star your favorite poems.")
-                                    .fontWithLineHeight(
-                                        font: .systemFont(ofSize: 16, weight: .semibold),
-                                        lineHeight: 24
+            VStack {
+                if pcViewModel.favoritedPoems.isEmpty {
+                    ContentUnavailableView(
+                        "No favourites yet!",
+                        systemImage: "star",
+                        description: Text("Tap the star to save your favourite poems.")
+                    )
+                } else {
+                    List {
+                        ForEach(pcViewModel.favoritedPoems) { poem in
+                            ZStack {
+                                NavigationLink {
+                                    let sentPoem = Poem(
+                                        title: poem.title ?? "",
+                                        author: poem.author ?? "",
+                                        lines: poem.lines ?? [],
+                                        linecount: poem.linecount ?? ""
                                     )
-                                    .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                                    NewDetailView(
+                                        viewModel: viewModel,
+                                        pcViewModel: pcViewModel,
+                                        poem: sentPoem
+                                    )
+                                } label: {
+                                    EmptyView().opacity(0.0)
+                                }
+                                TitleAuthorFavoriteCell(poem: poem)
                             }
-                            .padding(.vertical, 8)
-                            .padding(.horizontal, 8)
-                            Spacer()
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
+                            .listRowInsets(.init(top: 0,
+                                                 leading: 0,
+                                                 bottom: 0,
+                                                 trailing: 0))
                         }
-
+                        .onDelete { indexSet in
+                            pcViewModel.deleteFavoritedPoem(indexSet: indexSet)
+                        }
                     }
-                    .background(colorScheme == .light ? .white : .black)
+                    .scrollIndicators(ScrollIndicatorVisibility.hidden)
                     .cornerRadius(8)
-                    .padding(.horizontal, 8)
-                    Spacer()
+                    .padding(8)
+                    .listStyle(.plain)
+                    .scrollContentBackground(.hidden)
                 }
-                .background(
-                    Image(colorScheme == .light ? "background" : "background-dark")
-                        .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
-                        .ignoresSafeArea(.all)
-                )
-                .navigationTitle("Favorites")
-                .navigationBarTitleDisplayMode(.inline)
-                .foregroundColor(.primary)
-                .toolbar {
-                    ToolbarItem {
-                        EditButton()
-                    }
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
+            }
+            .background(
+                Image(colorScheme == .light ? "background" : "background-dark")
+                    .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+                    .ignoresSafeArea(.all)
+            )
+            .navigationTitle("Favorites")
+            .navigationBarTitleDisplayMode(.inline)
+            .foregroundColor(.primary)
+            .onAppear {
+                pcViewModel.fetchFavoritedPoems()
+            }
+            .toolbar {
+                ToolbarItem {
+                    EditButton()
+                }
 
-                        } label: {
-                            Image(systemName: "arrow.up.arrow.down")
-                        }
-                    }
-                }
-            } else {
-                List {
-                    ForEach(pcViewModel.favoritedPoems) { poem in
-                        ZStack {
-                            NavigationLink {
-                                let sentPoem = Poem(
-                                    title: poem.title ?? "",
-                                    author: poem.author ?? "",
-                                    lines: poem.lines ?? [],
-                                    linecount: poem.linecount ?? ""
-                                )
-                                NewDetailView(
-                                    viewModel: viewModel,
-                                    pcViewModel: pcViewModel,
-                                    poem: sentPoem
-                                )
-                            } label: {
-                                EmptyView().opacity(0.0)
-                            }
-                            TitleAuthorFavoriteCell(poem: poem)
-                        }
-                        .listRowBackground(Color.clear)
-                        .listRowSeparator(.hidden)
-                        .listRowInsets(.init(top: 0,
-                                             leading: 0,
-                                             bottom: 0,
-                                             trailing: 0))
-                    }
-                    .onDelete { indexSet in
-                        pcViewModel.deleteFavoritedPoem(indexSet: indexSet)
-                    }
-                }
-                .scrollIndicators(ScrollIndicatorVisibility.hidden)
-                .cornerRadius(8)
-                .padding(8)
-                .listStyle(.plain)
-                .scrollContentBackground(.hidden)
-                .background(
-                    Image(colorScheme == .light ? "background" : "background-dark")
-                        .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
-                        .ignoresSafeArea(.all)
-                )
-                .navigationTitle("Favorites")
-                .navigationBarTitleDisplayMode(.inline)
-                .foregroundColor(.primary)
-                .onAppear {
-                    pcViewModel.fetchFavoritedPoems()
-                }
-                .toolbar {
-                    ToolbarItem {
-                        EditButton()
-                    }
-
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
-                            pcViewModel.poemsFilter.toggle()
-                            pcViewModel.fetchFavoritedPoems()
-                        } label: {
-                            Image(systemName: "arrow.up.arrow.down")
-                        }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        pcViewModel.poemsFilter.toggle()
+                        pcViewModel.fetchFavoritedPoems()
+                    } label: {
+                        Image(systemName: "arrow.up.arrow.down")
                     }
                 }
             }

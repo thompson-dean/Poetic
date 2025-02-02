@@ -85,7 +85,7 @@ struct NewHomeView: View {
         VStack(alignment: .leading) {
             sectionTitle("Recent")
             if pcViewModel.viewedPoems.isEmpty {
-                noViewedPoemsView
+                ContentUnavailableView("No recents", systemImage: "text.page")
             } else {
                 viewedPoemsList
             }
@@ -126,28 +126,6 @@ struct NewHomeView: View {
             .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
             .padding(.horizontal, 16)
             .padding(.top, 12)
-    }
-
-    var noViewedPoemsView: some View {
-        VStack {
-            HStack {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("No Recents.")
-                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
-                        .foregroundColor(.primary)
-
-                    Text("Read some poems!")
-                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                        .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
-                }
-                .padding(.vertical, 8)
-                .padding(.horizontal, 8)
-                Spacer()
-            }
-        }
-        .background(colorScheme == .light ? .white : .black)
-        .cornerRadius(8)
-        .padding(.horizontal, 8)
     }
 }
 

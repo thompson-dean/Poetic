@@ -45,7 +45,8 @@ struct ContentView: View {
                 darkMode: viewModel.darkModeEnabled,
                 system: viewModel.systemThemeEnabled
             )
-            UIApplication.shared.applicationIconBadgeNumber = 0
+
+            viewModel.resetBadgeCount()
             viewModel.loadRandomPoems(number: "5")
             viewModel.featuredAuthor1 = authors.authors.randomElement() ?? ""
             viewModel.featuredAuthor2 = authors.authors.randomElement() ?? ""

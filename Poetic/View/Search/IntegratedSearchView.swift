@@ -27,7 +27,7 @@ struct IntegratedSearchView: View {
                 .onAppear {
                     viewModel.listenToSearch()
                 }
-                .onChange(of: viewModel.searchState) { newState in
+                .onChange(of: viewModel.searchState) { newState, _ in
                     if newState == .failed {
                         alertMessage = viewModel.searchListLoadingError
                         didFail = true

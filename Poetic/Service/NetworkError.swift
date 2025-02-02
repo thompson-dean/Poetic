@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Alamofire
 
 enum NetworkError: Error {
     case noNetwork
