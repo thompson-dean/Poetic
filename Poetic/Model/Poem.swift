@@ -20,7 +20,6 @@ extension Poem: Identifiable {
     }
 }
 
-
 extension Poem {
     static var stub: Poem {
         return Poem(
@@ -46,5 +45,3 @@ extension Poem {
         )
     }
 }
-
-

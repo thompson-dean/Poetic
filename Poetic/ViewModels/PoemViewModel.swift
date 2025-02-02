@@ -15,14 +15,14 @@ class PoemViewModel: ObservableObject {
         case failed
         case loaded
     }
-    
+
     enum SearchTitleState {
         case idle
         case loading
         case failed
         case loaded
     }
-    
+
     enum AuthorPoemState {
         case idle
         case loading
@@ -35,30 +35,30 @@ class PoemViewModel: ObservableObject {
     @AppStorage(Constants.featuredAuthor1) var featuredAuthor1: String = ""
     @AppStorage(Constants.featuredAuthor2) var featuredAuthor2: String = ""
     @AppStorage(Constants.featuredAuthor3) var featuredAuthor3: String = ""
-   
+
     @Published private(set) var poems = [Poem]()
     @Published private(set) var randomPoems = [Poem]()
     @Published private(set) var authorPoems = [Poem]()
     @Published var searchTerm: String = ""
     @Published var isTitle: Bool = true
-    
+
     private let apiService: APIServiceProtocol
     private var cancellables: Set<AnyCancellable> = []
-    
+
     @Published var searchListLoadingError: String = ""
     @Published var showAlert: Bool = false
-    
+
     var authorTitleCache: [String: [Poem]] = [:]
     var poemTitleSearchCache: [String: [Poem]] = [:]
-   
+
     @Published private(set) var state = State.idle
     @Published private(set) var searchState = SearchTitleState.idle
     @Published private(set) var authorPoemState = AuthorPoemState.idle
-    
+
     init(apiService: APIServiceProtocol) {
         self.apiService = apiService
     }
-    
+
     func loadRandomPoems(number: String) {
         state = .loading
         apiService.fetchPoems(searchTerm: number, filter: .random)
@@ -72,7 +72,7 @@ class PoemViewModel: ObservableObject {
                 }
             }.store(in: &cancellables)
     }
-    
+
     func fetchTitles(searchTerm: String) {
         if let cache = poemTitleSearchCache[searchTerm] {
             self.searchState = .loaded
@@ -97,7 +97,7 @@ class PoemViewModel: ObservableObject {
             searchState = .idle
         }
     }
-    
+
     func listenToSearch() {
         $searchTerm
             .debounce(for: .milliseconds(350), scheduler: RunLoop.main, options: .none)
@@ -114,17 +114,17 @@ class PoemViewModel: ObservableObject {
             }
             .store(in: &self.cancellables)
     }
-    
+
     func loadAuthorPoem(searchTerm: String) {
         if let cache = authorTitleCache[searchTerm] {
             self.authorPoemState = .loaded
             self.authorPoems = cache
             return
         }
-        
+
         authorPoems = []
         authorPoemState = .loading
-        
+
         apiService.fetchPoems(searchTerm: searchTerm, filter: .author)
             .sink { [weak self] (dataResponse) in
                 if let error = dataResponse.error {
@@ -137,7 +137,7 @@ class PoemViewModel: ObservableObject {
                 }
             }.store(in: &cancellables)
     }
-    
+
     func createAlert(with error: NetworkError) {
         searchListLoadingError = error.localizedDescription
         self.showAlert = true

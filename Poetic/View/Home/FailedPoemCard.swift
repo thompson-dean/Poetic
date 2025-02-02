@@ -11,10 +11,10 @@ struct RedactedPoemCardView: View {
     enum RedactedType {
         case failed, idle
     }
-    
+
     let type: RedactedType
     @Environment(\.colorScheme) var colorScheme
-    
+
     var body: some View {
         ForEach(0..<5) { _ in
             HStack {

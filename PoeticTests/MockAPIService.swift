@@ -11,13 +11,15 @@ import Combine
 import Alamofire
 
 final class MockAPIService: APIServiceProtocol, Mockable {
-    
+
     var isFailedResponse: Bool = false
-    
-    func fetchPoems(searchTerm: String, filter: Poetic.SearchFilter) -> AnyPublisher<DataResponse<[Poem], NetworkError>, Never> {
-        
+
+    func fetchPoems(
+        searchTerm: String,
+        filter: Poetic.SearchFilter
+    ) -> AnyPublisher<DataResponse<[Poem], NetworkError>, Never> {
         let poems: [Poem] = self.loadJSON(filename: "mockResponse", type: Poem.self)
-        
+
         switch filter {
         case .author:
             let filtered = poems.filter { $0.author.contains(searchTerm) }
@@ -29,7 +31,7 @@ final class MockAPIService: APIServiceProtocol, Mockable {
             return createResponse(poems)
         }
     }
-    
+
     private func createResponse(_ poems: [Poem]) -> AnyPublisher<DataResponse<[Poem], NetworkError>, Never> {
         if isFailedResponse {
             return failedResponse()
@@ -41,7 +43,7 @@ final class MockAPIService: APIServiceProtocol, Mockable {
             return Just(response).eraseToAnyPublisher()
         }
     }
-    
+
     private func failedResponse() -> AnyPublisher<DataResponse<[Poem], NetworkError>, Never> {
         let backendError = BackendError(status: "404", message: "Not Found")
         let networkError = NetworkError.backend(backendError)

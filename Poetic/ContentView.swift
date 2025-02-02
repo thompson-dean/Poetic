@@ -11,11 +11,10 @@ struct ContentView: View {
     @StateObject var viewModel = PoemViewModel(apiService: APIService())
     @StateObject var pcViewModel = PersistenceController()
     @ObservedObject var storeKitManager: StoreKitManager
-    
+
     let notificationManager = NotificationManager()
-    
     var authors: Authors = Bundle.main.decode("Authors.json")
-    
+
     var body: some View {
         TabView {
             NewHomeView(viewModel: viewModel, pcViewModel: pcViewModel)
@@ -42,13 +41,15 @@ struct ContentView: View {
         .accentColor(.primary)
         .onAppear {
             notificationManager.requestAuthorization()
-            SystemThemeManager.shared.handleTheme(darkMode: viewModel.darkModeEnabled, system: viewModel.systemThemeEnabled)
+            SystemThemeManager.shared.handleTheme(
+                darkMode: viewModel.darkModeEnabled,
+                system: viewModel.systemThemeEnabled
+            )
             UIApplication.shared.applicationIconBadgeNumber = 0
             viewModel.loadRandomPoems(number: "5")
             viewModel.featuredAuthor1 = authors.authors.randomElement() ?? ""
             viewModel.featuredAuthor2 = authors.authors.randomElement() ?? ""
             viewModel.featuredAuthor3 = authors.authors.randomElement() ?? ""
         }
-        
     }
 }

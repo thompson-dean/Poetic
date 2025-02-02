@@ -13,7 +13,7 @@ import CoreData
 class PersistenceControllerTests: XCTestCase {
     var persistenceController: PersistenceController!
     var mockContainer: NSPersistentContainer!
-    
+
     override func setUp() {
         super.setUp()
         mockContainer = mockPersistantContainer()
@@ -25,7 +25,7 @@ class PersistenceControllerTests: XCTestCase {
         mockContainer = nil
         super.tearDown()
     }
-    
+
     func mockPersistantContainer() -> NSPersistentContainer {
         let container = NSPersistentContainer(name: Constants.appName)
         let description = NSPersistentStoreDescription()
@@ -41,7 +41,7 @@ class PersistenceControllerTests: XCTestCase {
         }
         return container
     }
-    
+
     func test_PersistenceController_addFavoritePoem_incrementsFavoritedPoems() {
         let id = UUID()
         let title = "Test Poem"
@@ -59,10 +59,16 @@ class PersistenceControllerTests: XCTestCase {
         XCTAssertEqual(persistenceController.favoritedPoems.first?.lines, lines)
         XCTAssertEqual(persistenceController.favoritedPoems.first?.linecount, linecount)
     }
-    
+
     func test_PersistenceController_fetchFavoritedPoems_returnsCorrectTitle() {
-        persistenceController.addFavoritePoem(id: UUID(), title: "Test Title", author: "Test Author", lines: ["Test line 1"], linecount: "1")
-        
+        persistenceController.addFavoritePoem(
+            id: UUID(),
+            title: "Test Title",
+            author: "Test Author",
+            lines: ["Test line 1"],
+            linecount: "1"
+        )
+
         XCTAssertEqual(persistenceController.favoritedPoems.first?.title, "Test Title")
         XCTAssertEqual(persistenceController.favoritedPoems.first?.author, "Test Author")
         XCTAssertEqual(persistenceController.favoritedPoems.first?.lines, ["Test line 1"])
@@ -71,15 +77,21 @@ class PersistenceControllerTests: XCTestCase {
 
     func test_PersistenceController_addAndDeleteFavoritePoem_returnsEmptyFavoritedPoems() {
         let id = UUID()
-        
-        persistenceController.addFavoritePoem(id: id, title: "Test Title", author: "Test Author", lines: ["Test line 1"], linecount: "1")
+
+        persistenceController.addFavoritePoem(
+            id: id,
+            title: "Test Title",
+            author: "Test Author",
+            lines: ["Test line 1"],
+            linecount: "1"
+        )
         XCTAssertEqual(persistenceController.favoritedPoems.first?.title, "Test Title")
-        
+
         guard let poem = persistenceController.favoritedPoems.first else { XCTFail("Failed to fetch poem"); return }
         persistenceController.deleteFavoritedPoemFromTappingStar(entity: poem)
         XCTAssertTrue(persistenceController.favoritedPoems.isEmpty)
     }
-    
+
     func test_PersistenceController_addQuote_incrementsQuotes() {
         let id = UUID()
         let title = "Test Quote"
@@ -88,7 +100,14 @@ class PersistenceControllerTests: XCTestCase {
         let lines = ["Line 1", "Line 2"]
         let linecount = "2"
 
-        persistenceController.addQuote(id: id, title: title, author: author, quote: quote, lines: lines, linecount: linecount)
+        persistenceController.addQuote(
+            id: id,
+            title: title,
+            author: author,
+            quote: quote,
+            lines: lines,
+            linecount: linecount
+        )
 
         XCTAssertEqual(persistenceController.quotes.count, 1)
         XCTAssertEqual(persistenceController.quotes.first?.id, id)
@@ -105,9 +124,16 @@ class PersistenceControllerTests: XCTestCase {
         let lines = ["Line 1", "Line 2"]
         let linecount = "2"
 
-        persistenceController.addQuote(id: id, title: title, author: author, quote: quote, lines: lines, linecount: linecount)
+        persistenceController.addQuote(
+            id: id,
+            title: title,
+            author: author,
+            quote: quote,
+            lines: lines,
+            linecount: linecount
+        )
         XCTAssertEqual(persistenceController.quotes.first?.quote, quote)
-        
+
         guard let quoteEntity = persistenceController.quotes.first else { XCTFail("Failed to fetch quote"); return }
         persistenceController.removeQuoteFromQuotes(entity: quoteEntity)
         XCTAssertTrue(persistenceController.quotes.isEmpty)
@@ -121,7 +147,7 @@ class PersistenceControllerTests: XCTestCase {
 
         persistenceController.addViewedPoem(id: id, title: title, author: author, lines: lines)
         XCTAssertEqual(persistenceController.viewedPoems.first?.title, title)
-        
+
         guard let poem = persistenceController.viewedPoems.first else { XCTFail("Failed to fetch poem"); return }
         persistenceController.deleteViewedPoem(entity: poem)
         XCTAssertTrue(persistenceController.viewedPoems.isEmpty)

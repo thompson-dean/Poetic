@@ -9,23 +9,19 @@ import XCTest
 @testable import Poetic
 import Combine
 
+// swiftlint:disable type_body_length file_length
 final class PoemViewModelTests: XCTestCase {
-    
     var viewModel: PoemViewModel!
     var cancellables = Set<AnyCancellable>()
-    
-    override func setUp() {
-        super.setUp()
-    }
-    
+
     override func tearDown() {
         super.tearDown()
         viewModel = nil
     }
-    
+
     func test_PoemViewModel_loadRandomPoems_returnsExpectedNumber() {
         let expectation = XCTestExpectation(description: "Random Poems")
-        
+
         // Given
         let number = "8"
         let mockService = MockAPIService()
@@ -33,20 +29,23 @@ final class PoemViewModelTests: XCTestCase {
 
         // When
         viewModel.loadRandomPoems(number: number)
-        
+
         // Then
         viewModel
             .$randomPoems
             .sink { value in
-                XCTAssertFalse(value.isEmpty, "The poems array should be populated with data from the mock API service.")
+                XCTAssertFalse(
+                    value.isEmpty,
+                    "The poems array should be populated with data from the mock API service."
+                )
                 XCTAssertEqual(value.count, 8, "The poems aray should hold 8 Poem items.")
                 expectation.fulfill()
             }
             .store(in: &cancellables)
-        
+
         wait(for: [expectation], timeout: 1)
     }
-    
+
     func test_PoemViewModel_loadRandomPoems_returnsNoPoemsWhenServiceFails() {
          let expectation = XCTestExpectation(description: "Failed Service")
 
@@ -58,7 +57,7 @@ final class PoemViewModelTests: XCTestCase {
 
          // When
          viewModel.loadRandomPoems(number: number)
-         
+
          // Then
          viewModel
              .$randomPoems
@@ -68,10 +67,10 @@ final class PoemViewModelTests: XCTestCase {
                  expectation.fulfill()
              }
              .store(in: &cancellables)
-         
+
          wait(for: [expectation], timeout: 1)
      }
-    
+
     func test_PoemViewModel_state_changesToLoadedAfterSuccessfulRequest() {
         let expectation = XCTestExpectation(description: "State Success")
 
@@ -87,8 +86,12 @@ final class PoemViewModelTests: XCTestCase {
         // Then
         viewModel
             .$randomPoems
-            .sink { value in
-                XCTAssertEqual(self.viewModel.state, .loaded, "The state should be .loaded when the fetch operation has completed.")
+            .sink { _ in
+                XCTAssertEqual(
+                    self.viewModel.state,
+                    .loaded,
+                    "The state should be .loaded when the fetch operation has completed."
+                )
                 expectation.fulfill()
             }
             .store(in: &cancellables)
@@ -112,18 +115,22 @@ final class PoemViewModelTests: XCTestCase {
         // Then
         viewModel
             .$randomPoems
-            .sink { value in
-                XCTAssertEqual(self.viewModel.state, .failed, "The state should be .failed when the fetch operation has failed.")
+            .sink { _ in
+                XCTAssertEqual(
+                    self.viewModel.state,
+                    .failed,
+                    "The state should be .failed when the fetch operation has failed."
+                )
                 expectation.fulfill()
             }
             .store(in: &cancellables)
 
         wait(for: [expectation], timeout: 1)
     }
-    
+
     func test_PoemViewModel_fetchTitles_returnsExpectedPoems() {
         let expectation = XCTestExpectation(description: "Title Fetching")
-        
+
         // Given
         let searchTerm = "Defrauded"
         let mockService = MockAPIService()
@@ -131,23 +138,26 @@ final class PoemViewModelTests: XCTestCase {
 
         // When
         viewModel.fetchTitles(searchTerm: searchTerm)
-        
+
         // Then
         viewModel
             .$poems
             .sink { value in
-                XCTAssertFalse(value.isEmpty, "The poems array should be populated with data from the mock API service.")
+                XCTAssertFalse(
+                    value.isEmpty,
+                    "The poems array should be populated with data from the mock API service."
+                )
                 XCTAssertEqual(value.count, 1, "The poems array should hold 1 Poem items.")
                 expectation.fulfill()
             }
             .store(in: &cancellables)
-        
+
         wait(for: [expectation], timeout: 1)
     }
-    
+
     func test_PoemViewModel_fetchTitles_returnsExpectedPoemsForWordInCommon() {
         let expectation = XCTestExpectation(description: "Title Fetching Common Word")
-        
+
         // Given
         let searchTerm = "d"
         let mockService = MockAPIService()
@@ -155,23 +165,26 @@ final class PoemViewModelTests: XCTestCase {
 
         // When
         viewModel.fetchTitles(searchTerm: searchTerm)
-        
+
         // Then
         viewModel
             .$poems
             .sink { value in
-                XCTAssertFalse(value.isEmpty, "The poems array should be populated with data from the mock API service.")
+                XCTAssertFalse(
+                    value.isEmpty,
+                    "The poems array should be populated with data from the mock API service."
+                )
                 XCTAssertEqual(value.count, 5, "The poems array should hold 1 Poem items.")
                 expectation.fulfill()
             }
             .store(in: &cancellables)
-        
+
         wait(for: [expectation], timeout: 1)
     }
-    
+
     func test_PoemViewModel_fetchTitles_returnsNoPoemsWhenServiceFails() {
         let expectation = XCTestExpectation(description: "Title Fetching Common Word")
-        
+
         // Given
         let searchTerm = "d"
         let mockService = MockAPIService()
@@ -180,20 +193,23 @@ final class PoemViewModelTests: XCTestCase {
 
         // When
         viewModel.fetchTitles(searchTerm: searchTerm)
-        
+
         // Then
         viewModel
             .$poems
             .sink { value in
-                XCTAssertTrue(value.isEmpty, "The poems array should be empty because the API service failed.")
+                XCTAssertTrue(
+                    value.isEmpty,
+                    "The poems array should be empty because the API service failed."
+                )
                 XCTAssertEqual(value.count, 0, "The poems array should hold 0 Poem items.")
                 expectation.fulfill()
             }
             .store(in: &cancellables)
-        
+
         wait(for: [expectation], timeout: 1)
     }
-    
+
     func test_PoemViewModel_searchState_ChangesToLoadedAfterSuccessfulTitleFetch() {
         let expectation = XCTestExpectation(description: "State Success on Title Fetch")
 
@@ -209,15 +225,19 @@ final class PoemViewModelTests: XCTestCase {
         // Then
         viewModel
             .$searchState
-            .sink { value in
-                XCTAssertEqual(self.viewModel.searchState, .loaded, "The searchState should be .loaded when the fetch operation has completed.")
+            .sink { _ in
+                XCTAssertEqual(
+                    self.viewModel.searchState,
+                    .loaded,
+                    "The searchState should be .loaded when the fetch operation has completed."
+                )
                 expectation.fulfill()
             }
             .store(in: &cancellables)
 
         wait(for: [expectation], timeout: 1)
     }
-    
+
     func test_PoemViewModel_searchState_ChangesToFailedAfterUnsuccessfulTitleFetch() {
         let expectation = XCTestExpectation(description: "State Success on Title Fetch")
 
@@ -234,8 +254,12 @@ final class PoemViewModelTests: XCTestCase {
         // Then
         viewModel
             .$searchState
-            .sink { value in
-                XCTAssertEqual(self.viewModel.searchState, .failed, "The searchState should be .failed when the fetch operation has failed.")
+            .sink { _ in
+                XCTAssertEqual(
+                    self.viewModel.searchState,
+                    .failed,
+                    "The searchState should be .failed when the fetch operation has failed."
+                )
                 expectation.fulfill()
             }
             .store(in: &cancellables)
@@ -256,14 +280,21 @@ final class PoemViewModelTests: XCTestCase {
 
         // Then
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            XCTAssertFalse(self.viewModel.poemTitleSearchCache.isEmpty, "The poemTitleSearchCache should be populated after fetching titles.")
-            XCTAssertEqual(self.viewModel.poemTitleSearchCache[searchTerm]?.count, 5, "The cache for the given search term should hold 5 Poem items.")
+            XCTAssertFalse(
+                self.viewModel.poemTitleSearchCache.isEmpty,
+                "The poemTitleSearchCache should be populated after fetching titles."
+            )
+            XCTAssertEqual(
+                self.viewModel.poemTitleSearchCache[searchTerm]?.count,
+                5,
+                "The cache for the given search term should hold 5 Poem items."
+            )
             expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 2)
     }
-    
+
     func test_PoemViewModel_loadAuthorPoem_returnsExpectedPoems() {
         let expectation = XCTestExpectation(description: "Author Poem Loading")
 
@@ -279,7 +310,10 @@ final class PoemViewModelTests: XCTestCase {
         viewModel
             .$authorPoems
             .sink { value in
-                XCTAssertFalse(value.isEmpty, "The authorPoems array should be populated with data from the mock API service.")
+                XCTAssertFalse(
+                    value.isEmpty,
+                    "The authorPoems array should be populated with data from the mock API service."
+                )
                 XCTAssertEqual(value.count, 7, "The authorPoems array should hold 7 Poem items.")
                 expectation.fulfill()
             }
@@ -303,7 +337,10 @@ final class PoemViewModelTests: XCTestCase {
         viewModel
             .$authorPoems
             .sink { value in
-                XCTAssertFalse(value.isEmpty, "The authorPoems array should be populated with data from the mock API service.")
+                XCTAssertFalse(
+                    value.isEmpty,
+                    "The authorPoems array should be populated with data from the mock API service."
+                )
                 XCTAssertEqual(value.count, 8, "The authorPoems array should hold 8 Poem items.")
                 expectation.fulfill()
             }
@@ -352,8 +389,12 @@ final class PoemViewModelTests: XCTestCase {
         // Then
         viewModel
             .$authorPoemState
-            .sink { value in
-                XCTAssertEqual(self.viewModel.authorPoemState, .loaded, "The authorPoemState should be .loaded when the load operation has completed.")
+            .sink { _ in
+                XCTAssertEqual(
+                    self.viewModel.authorPoemState,
+                    .loaded,
+                    "The authorPoemState should be .loaded when the load operation has completed."
+                )
                 expectation.fulfill()
             }
             .store(in: &cancellables)
@@ -377,8 +418,12 @@ final class PoemViewModelTests: XCTestCase {
         // Then
         viewModel
             .$authorPoemState
-            .sink { value in
-                XCTAssertEqual(self.viewModel.authorPoemState, .failed, "The authorPoemState should be .failed when the load operation has failed.")
+            .sink { _ in
+                XCTAssertEqual(
+                    self.viewModel.authorPoemState,
+                    .failed,
+                    "The authorPoemState should be .failed when the load operation has failed."
+                )
                 expectation.fulfill()
             }
             .store(in: &cancellables)
@@ -399,13 +444,19 @@ final class PoemViewModelTests: XCTestCase {
 
         // Then
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            XCTAssertFalse(self.viewModel.authorTitleCache.isEmpty, "The authorTitleCache should be populated after loading author poems.")
-            XCTAssertEqual(self.viewModel.authorTitleCache[searchTerm]?.count, 7, "The cache for the given search term should hold 7 Poem items.")
+            XCTAssertFalse(
+                self.viewModel.authorTitleCache.isEmpty,
+                "The authorTitleCache should be populated after loading author poems."
+            )
+            XCTAssertEqual(
+                self.viewModel.authorTitleCache[searchTerm]?.count,
+                7,
+                "The cache for the given search term should hold 7 Poem items."
+            )
             expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 2)
     }
 }
-
-
+// swiftlint:enable type_body_length file_length

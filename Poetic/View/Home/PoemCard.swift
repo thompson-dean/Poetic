@@ -10,7 +10,7 @@ import SwiftUI
 struct PoemCard: View {
     @Environment(\.colorScheme) var colorScheme
     let poem: Poem
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             authorText
@@ -25,14 +25,14 @@ struct PoemCard: View {
         .background(cardBackgroundColor)
         .cornerRadius(8)
     }
-    
+
     private var authorText: some View {
         Text(poem.author)
             .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 20)
             .padding(.top, 8)
             .foregroundColor(.primary)
     }
-    
+
     private var titleText: some View {
         Text(poem.title)
             .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
@@ -40,7 +40,7 @@ struct PoemCard: View {
             .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 24)
             .padding(.bottom, 8)
     }
-    
+
     private var poemLines: some View {
         VStack(alignment: .leading, spacing: 4) {
             ForEach(filteredLines(poem.lines), id: \.self) { line in
@@ -52,11 +52,11 @@ struct PoemCard: View {
             }
         }
     }
-    
+
     private var cardBackgroundColor: Color {
         colorScheme == .light ? .white : .black
     }
-    
+
     private func filteredLines(_ lines: [String]) -> [String] {
         var result: [String] = []
         for line in lines {

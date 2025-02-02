@@ -9,12 +9,10 @@ import SwiftUI
 
 struct FavoritesView: View {
     @Environment(\.colorScheme) var colorScheme
-    
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
-    
     @State private var isEditing: Bool = false
-    
+
     init(viewModel: PoemViewModel, pcViewModel: PersistenceController) {
         UITableView.appearance().separatorStyle = .none
         UITableView.appearance().backgroundColor = .clear
@@ -22,7 +20,7 @@ struct FavoritesView: View {
         self.viewModel = viewModel
         self.pcViewModel = pcViewModel
     }
-    
+
     var body: some View {
         NavigationStack {
             if pcViewModel.favoritedPoems.isEmpty {
@@ -34,22 +32,25 @@ struct FavoritesView: View {
                                 .font(.title)
                                 .padding(.vertical, 8)
                                 .padding(.leading, 8)
-                            
+
                             VStack(alignment: .leading, spacing: 2) {
-                                
+
                                 Text("No favorited poems...")
                                     .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
                                     .foregroundColor(.primary)
-                                
+
                                 Text("Star your favorite poems.")
-                                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                                    .fontWithLineHeight(
+                                        font: .systemFont(ofSize: 16, weight: .semibold),
+                                        lineHeight: 24
+                                    )
                                     .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
                             }
                             .padding(.vertical, 8)
                             .padding(.horizontal, 8)
                             Spacer()
                         }
-                        
+
                     }
                     .background(colorScheme == .light ? .white : .black)
                     .cornerRadius(8)
@@ -70,7 +71,7 @@ struct FavoritesView: View {
                     }
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button {
-                            
+
                         } label: {
                             Image(systemName: "arrow.up.arrow.down")
                         }
@@ -81,8 +82,17 @@ struct FavoritesView: View {
                     ForEach(pcViewModel.favoritedPoems) { poem in
                         ZStack {
                             NavigationLink {
-                                let sentPoem = Poem(title: poem.title ?? "", author: poem.author ?? "", lines: poem.lines ?? [], linecount: poem.linecount ?? "")
-                                NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
+                                let sentPoem = Poem(
+                                    title: poem.title ?? "",
+                                    author: poem.author ?? "",
+                                    lines: poem.lines ?? [],
+                                    linecount: poem.linecount ?? ""
+                                )
+                                NewDetailView(
+                                    viewModel: viewModel,
+                                    pcViewModel: pcViewModel,
+                                    poem: sentPoem
+                                )
                             } label: {
                                 EmptyView().opacity(0.0)
                             }
@@ -119,7 +129,7 @@ struct FavoritesView: View {
                     ToolbarItem {
                         EditButton()
                     }
-                    
+
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button {
                             pcViewModel.poemsFilter.toggle()
@@ -133,6 +143,3 @@ struct FavoritesView: View {
         }
     }
 }
-
-
-

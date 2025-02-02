@@ -12,7 +12,7 @@ struct TipsView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var storeKitManager: StoreKitManager
     @Binding var isShowingTipsView: Bool
-    
+
     var body: some View {
         VStack(spacing: 8) {
             HStack {
@@ -27,16 +27,17 @@ struct TipsView: View {
                         .foregroundStyle(.gray, .gray.opacity(0.2))
                 }
             }
-            
+
             Text("Enjoying the app so far?")
                 .font(.system(.title2).bold())
                 .multilineTextAlignment(.center)
-            
+
+            // swiftlint:disable line_length
             Text("If Poetic enriches your days or sparks your imagination, consider leaving a tip. Every contribution, large or small, helps enhance the Poetic App. Thank you for your generosity!")
-               
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 16)
-            
+            // swiftlint:enable line_length
+
             ForEach(storeKitManager.items) { item in
                 TipsItemView(item: item) {
                     Task {
@@ -46,7 +47,10 @@ struct TipsView: View {
             }
         }
         .padding(16)
-        .background(colorScheme == .light ? .white.opacity(0.9) : Color(0x181716) , in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .background(
+            colorScheme == .light ? .white.opacity(0.9) : Color(0x181716),
+            in: RoundedRectangle(cornerRadius: 10, style: .continuous)
+        )
         .padding(8)
         .overlay(alignment: .top) {
             Image("poeticPic")
@@ -73,9 +77,9 @@ struct TipsItemView: View {
                 Text(item.description)
                     .font(.system(.callout, design: .rounded).weight(.regular))
             }
-            
+
             Spacer()
-            
+
             Button(item.displayPrice) {
               purchaseButtonTapped()
             }
@@ -84,8 +88,9 @@ struct TipsItemView: View {
             .font(.callout.bold())
         }
         .padding(16)
-        .background(Color(UIColor.systemBackground),
-                    in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .background(
+            Color(UIColor.systemBackground),
+            in: RoundedRectangle(cornerRadius: 10, style: .continuous)
+        )
     }
 }
-
