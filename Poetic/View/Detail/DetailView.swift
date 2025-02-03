@@ -1,5 +1,5 @@
 //
-//  PracticePoemView.swift
+//  DetailView.swift
 //  Poetic
 //
 //  Created by Dean Thompson on 2022/08/27.
@@ -7,10 +7,9 @@
 
 import SwiftUI
 
-struct NewDetailView: View {
+struct DetailView: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var showWebView = false
-    @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
     let poem: Poem
 
@@ -54,7 +53,6 @@ struct NewDetailView: View {
                         VStack(alignment: .leading) {
                             ForEach(0..<poem.lines.count, id: \.self) { index in
                                 PoemView(
-                                    viewModel: viewModel,
                                     pcViewModel: pcViewModel,
                                     author: poem.author,
                                     title: poem.title,
@@ -127,17 +125,5 @@ struct NewDetailView: View {
                     .padding()
             }
         }
-    }
-}
-
-struct PracticePoemView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewDetailView(
-            viewModel: PoemViewModel(
-                apiService: APIService()
-            ),
-            pcViewModel: PersistenceController(),
-            poem: Poem.stub
-        )
     }
 }

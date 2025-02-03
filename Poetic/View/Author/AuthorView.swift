@@ -15,7 +15,6 @@ struct AuthorView: View {
     let author: String
 
     var body: some View {
-
             VStack {
                 switch viewModel.authorPoemState {
 
@@ -71,8 +70,7 @@ struct AuthorView: View {
                     ScrollView {
                         ForEach(0..<viewModel.authorPoems.count, id: \.self) { index in
                             NavigationLink {
-                                NewDetailView(
-                                    viewModel: viewModel,
+                                DetailView(
                                     pcViewModel: pcViewModel,
                                     poem: viewModel.authorPoems[index]
                                 )

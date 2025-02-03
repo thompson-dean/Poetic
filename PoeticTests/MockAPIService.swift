@@ -45,7 +45,7 @@ final class MockAPIService: APIServiceProtocol, Mockable {
     }
 
     private func failedResponse() -> AnyPublisher<DataResponse<[Poem], NetworkError>, Never> {
-        let backendError = BackendError(status: "404", message: "Not Found")
+        let backendError = BackendError(message: "Not Found")
         let networkError = NetworkError.backend(backendError)
         let response = DataResponse<[Poem], NetworkError>(
             request: nil, response: nil, data: nil, metrics: nil, serializationDuration: 0,

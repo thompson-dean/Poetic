@@ -11,7 +11,6 @@ struct FavoritesView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
-    @State private var isEditing: Bool = false
 
     init(viewModel: PoemViewModel, pcViewModel: PersistenceController) {
         UITableView.appearance().separatorStyle = .none
@@ -41,8 +40,7 @@ struct FavoritesView: View {
                                         lines: poem.lines ?? [],
                                         linecount: poem.linecount ?? ""
                                     )
-                                    NewDetailView(
-                                        viewModel: viewModel,
+                                    DetailView(
                                         pcViewModel: pcViewModel,
                                         poem: sentPoem
                                     )

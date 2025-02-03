@@ -98,15 +98,13 @@ class PersistenceControllerTests: XCTestCase {
         let author = "Test Author"
         let quote = "This is a test quote."
         let lines = ["Line 1", "Line 2"]
-        let linecount = "2"
 
         persistenceController.addQuote(
             id: id,
             title: title,
             author: author,
             quote: quote,
-            lines: lines,
-            linecount: linecount
+            lines: lines
         )
 
         XCTAssertEqual(persistenceController.quotes.count, 1)
@@ -122,15 +120,13 @@ class PersistenceControllerTests: XCTestCase {
         let author = "Test Author"
         let quote = "This is a test quote."
         let lines = ["Line 1", "Line 2"]
-        let linecount = "2"
 
         persistenceController.addQuote(
             id: id,
             title: title,
             author: author,
             quote: quote,
-            lines: lines,
-            linecount: linecount
+            lines: lines
         )
         XCTAssertEqual(persistenceController.quotes.first?.quote, quote)
 

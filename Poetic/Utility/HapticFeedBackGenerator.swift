@@ -15,14 +15,4 @@ class HapticFeedbackGenerator {
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
     }
-
-    func simpleHapticError() {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.error)
-    }
-
-    func mediumImpactHaptic() {
-        let generator = UIImpactFeedbackGenerator()
-        generator.impactOccurred(intensity: 1.0)
-    }
 }

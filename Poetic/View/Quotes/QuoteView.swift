@@ -11,7 +11,6 @@ struct QuoteView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
-    @State private var showShareSheet = false
 
     init(viewModel: PoemViewModel, pcViewModel: PersistenceController) {
         UITableView.appearance().separatorStyle = .none
@@ -38,8 +37,7 @@ struct QuoteView: View {
                                     if let poem = pcViewModel.favoritedQuotesPoem.first(where: {
                                         $0.title == pcViewModel.quotes[index].title
                                     }) {
-                                        NewDetailView(
-                                            viewModel: viewModel,
+                                        DetailView(
                                             pcViewModel: pcViewModel,
                                             poem: Poem(
                                                 title: poem.title ?? "Unknown",
@@ -70,7 +68,9 @@ struct QuoteView: View {
                                                     font: .systemFont(ofSize: 16, weight: .semibold),
                                                     lineHeight: 24
                                                 )
-                                                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                                                .foregroundColor(
+                                                    colorScheme == .light ? .lightThemeColor : .darkThemeColor
+                                                )
                                         }
 
                                         Spacer()
@@ -145,11 +145,5 @@ struct QuoteView: View {
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
-    }
-}
-
-struct QuoteView_Previews: PreviewProvider {
-    static var previews: some View {
-        QuoteView(viewModel: PoemViewModel(apiService: APIService()), pcViewModel: PersistenceController())
     }
 }

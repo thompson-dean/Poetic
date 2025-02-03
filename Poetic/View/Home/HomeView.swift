@@ -1,5 +1,5 @@
 //
-//  NewHomeView.swift
+//  HomeView.swift
 //  Poetic
 //
 //  Created by Dean Thompson on 2022/07/09.
@@ -7,10 +7,9 @@
 
 import SwiftUI
 
-struct NewHomeView: View {
+struct HomeView: View {
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
-    @State private var isRotating: CGFloat = 0.0
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
@@ -95,7 +94,7 @@ struct NewHomeView: View {
     private var poemCards: some View {
         ForEach(viewModel.randomPoems, id: \.self) { poem in
             NavigationLink {
-                NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: poem)
+                DetailView(pcViewModel: pcViewModel, poem: poem)
             } label: {
                 PoemCard(poem: poem)
             }
@@ -112,7 +111,7 @@ struct NewHomeView: View {
                     lines: poem.lines ?? [],
                     linecount: poem.title ?? ""
                 )
-                NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
+                DetailView(pcViewModel: pcViewModel, poem: sentPoem)
             } label: {
                 TitleAuthorDateHomeCell(pcViewModel: pcViewModel, poem: poem)
             }
@@ -126,12 +125,5 @@ struct NewHomeView: View {
             .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
             .padding(.horizontal, 16)
             .padding(.top, 12)
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewHomeView(viewModel: PoemViewModel(apiService: APIService()), pcViewModel: PersistenceController())
-            .preferredColorScheme(.dark)
     }
 }

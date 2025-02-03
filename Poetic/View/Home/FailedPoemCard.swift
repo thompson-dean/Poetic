@@ -43,13 +43,3 @@ struct RedactedPoemCardView: View {
         .padding(.leading, 8)
     }
 }
-
-struct RedactedPoemCard_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            RedactedPoemCardView(type: .failed)
-            RedactedPoemCardView(type: .idle)
-        }
-        .previewLayout(.sizeThatFits)
-    }
-}

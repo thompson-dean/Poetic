@@ -41,12 +41,10 @@ class PoemViewModel: ObservableObject {
     @Published private(set) var authorPoems = [Poem]()
     @Published var searchTerm: String = ""
     @Published var isTitle: Bool = true
+    @Published var searchListLoadingError: String = ""
 
     private let apiService: APIServiceProtocol
     private var cancellables: Set<AnyCancellable> = []
-
-    @Published var searchListLoadingError: String = ""
-    @Published var showAlert: Bool = false
 
     var authorTitleCache: [String: [Poem]] = [:]
     var poemTitleSearchCache: [String: [Poem]] = [:]
@@ -140,7 +138,6 @@ class PoemViewModel: ObservableObject {
 
     func createAlert(with error: NetworkError) {
         searchListLoadingError = error.localizedDescription
-        self.showAlert = true
     }
 
     func resetBadgeCount() {

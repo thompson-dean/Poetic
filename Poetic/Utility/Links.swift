@@ -20,7 +20,7 @@ enum Links {
     static func shareQuote(quote: String, title: String, author: String) {
         let sharedString = """
 "\(quote)" A quote from \(title) by \(author), found on Poetic, your favorite classical poetry app.
-Available here:  https://apps.apple.com/us/app/poetic/id1614416936
+Available here:  \(Self.appStoreWebsiteLink)
 """
         let activityViewController = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
 
@@ -35,7 +35,7 @@ Available here:  https://apps.apple.com/us/app/poetic/id1614416936
         let sharedString = """
 \(title) by \(author) \n \(poem.joined(separator: "\n")) \n
 Found on Poetic, your favorite classical poetry app.
-Available here:  https://apps.apple.com/us/app/poetic/id1614416936
+Available here:  \(Self.appStoreWebsiteLink)
 """
         let activityViewController = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
         let scenes = UIApplication.shared.connectedScenes
@@ -45,7 +45,7 @@ Available here:  https://apps.apple.com/us/app/poetic/id1614416936
     }
 
     static func shareApp() {
-        let sharedString = "https://apps.apple.com/us/app/poetic/id1614416936"
+        let sharedString = Self.appStoreWebsiteLink
         let activityViewController = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
         let scenes = UIApplication.shared.connectedScenes
         let windowScene = scenes.first as? UIWindowScene
