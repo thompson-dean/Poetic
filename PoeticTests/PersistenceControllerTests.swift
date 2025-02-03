@@ -98,7 +98,6 @@ class PersistenceControllerTests: XCTestCase {
         let author = "Test Author"
         let quote = "This is a test quote."
         let lines = ["Line 1", "Line 2"]
-        let linecount = "2"
 
         persistenceController.addQuote(
             id: id,
@@ -121,7 +120,6 @@ class PersistenceControllerTests: XCTestCase {
         let author = "Test Author"
         let quote = "This is a test quote."
         let lines = ["Line 1", "Line 2"]
-        let linecount = "2"
 
         persistenceController.addQuote(
             id: id,
