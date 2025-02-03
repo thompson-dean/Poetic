@@ -17,23 +17,38 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
-            NewHomeView(viewModel: viewModel, pcViewModel: pcViewModel)
+            HomeView(
+                viewModel: viewModel,
+                pcViewModel: pcViewModel
+            )
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
-            IntegratedSearchView(viewModel: viewModel, pcViewModel: pcViewModel)
+            IntegratedSearchView(
+                viewModel: viewModel,
+                pcViewModel: pcViewModel
+            )
                 .tabItem {
                     Label("Explore", systemImage: "magnifyingglass")
                 }
-            FavoritesView(viewModel: viewModel, pcViewModel: pcViewModel)
+            FavoritesView(
+                viewModel: viewModel,
+                pcViewModel: pcViewModel
+            )
                 .tabItem {
                     Label("Favorites", systemImage: "star")
                 }
-            QuoteView(viewModel: viewModel, pcViewModel: pcViewModel)
+            QuoteView(
+                viewModel: viewModel,
+                pcViewModel: pcViewModel
+            )
                 .tabItem {
                     Label("Quotes", systemImage: "quote.bubble.fill")
                 }
-            SettingsView(viewModel: viewModel, pcViewModel: pcViewModel, storeKitManager: storeKitManager)
+            SettingsView(
+                viewModel: viewModel,
+                storeKitManager: storeKitManager
+            )
                 .tabItem {
                     Label("Menu", systemImage: "line.3.horizontal")
                 }

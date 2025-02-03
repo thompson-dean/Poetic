@@ -105,8 +105,7 @@ class PersistenceControllerTests: XCTestCase {
             title: title,
             author: author,
             quote: quote,
-            lines: lines,
-            linecount: linecount
+            lines: lines
         )
 
         XCTAssertEqual(persistenceController.quotes.count, 1)
@@ -129,8 +128,7 @@ class PersistenceControllerTests: XCTestCase {
             title: title,
             author: author,
             quote: quote,
-            lines: lines,
-            linecount: linecount
+            lines: lines
         )
         XCTAssertEqual(persistenceController.quotes.first?.quote, quote)
 

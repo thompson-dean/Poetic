@@ -11,7 +11,6 @@ import CoreData
 
 class PersistenceController: ObservableObject {
     let container: NSPersistentContainer
-    static let shared = PersistenceController()
 
     @Published var favoritedPoems: [PoemEntity] = []
     @Published var quotes: [QuoteEntity] = []
@@ -110,8 +109,7 @@ class PersistenceController: ObservableObject {
         title: String,
         author: String,
         quote: String,
-        lines: [String],
-        linecount: String
+        lines: [String]
     ) {
         guard let description = NSEntityDescription.entity(
             forEntityName: "QuotePoemsEntity",
@@ -189,11 +187,6 @@ class PersistenceController: ObservableObject {
 
     func removeQuoteFromQuotes(entity quote: QuoteEntity) {
         container.viewContext.delete(quote)
-        saveData()
-    }
-
-    func deleteQuotePoem(entity quotePoem: QuotePoemsEntity) {
-        container.viewContext.delete(quotePoem)
         saveData()
     }
 

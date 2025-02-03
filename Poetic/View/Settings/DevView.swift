@@ -59,7 +59,7 @@ struct DevView: View {
 
             Section(header: Text("Support")) {
                 Button {
-                    if let url = URL(string: "itms-apps://apple.com/app/id1614416936") {
+                    if let url = URL(string: Links.appStoreDeepLink) {
                                 UIApplication.shared.open(url)
                             } else {
                                 print("error with app store URL")
@@ -100,13 +100,5 @@ struct DevView: View {
         }
         .navigationTitle("About Poetic")
         .navigationBarTitleDisplayMode(.inline)
-    }
-}
-
-struct DevView_Previews: PreviewProvider {
-    static var previews: some View {
-        DevView()
-            .preferredColorScheme(.dark)
-
     }
 }

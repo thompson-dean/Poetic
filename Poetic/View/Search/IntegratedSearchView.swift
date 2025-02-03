@@ -137,7 +137,7 @@ struct IntegratedSearchView: View {
                             lines: poem.lines,
                             linecount: poem.title
                         )
-                        NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
+                        DetailView(pcViewModel: pcViewModel, poem: sentPoem)
                     } label: {
                         PoemCell(poem: poem, colorScheme: colorScheme)
                     }
@@ -163,7 +163,7 @@ struct IntegratedSearchView: View {
         ForEach(viewModel.poems, id: \.self) { poem in
             NavigationLink {
                 let sentPoem = Poem(title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.title)
-                NewDetailView(viewModel: viewModel, pcViewModel: pcViewModel, poem: sentPoem)
+                DetailView(pcViewModel: pcViewModel, poem: sentPoem)
             } label: {
                 LazyVStack {
                     PoemCell(poem: poem, colorScheme: colorScheme)

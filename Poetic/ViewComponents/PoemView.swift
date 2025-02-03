@@ -9,7 +9,6 @@ import SwiftUI
 
 struct PoemView: View {
     @Environment(\.colorScheme) var colorScheme
-    @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var pcViewModel: PersistenceController
 
     let author: String
@@ -51,8 +50,7 @@ struct PoemView: View {
                                 title: title,
                                 author: author,
                                 quote: poemLines[index],
-                                lines: poemLines,
-                                linecount: ""
+                                lines: poemLines
                             )
                             HapticFeedbackGenerator.shared.simpleHapticSuccess()
                         }

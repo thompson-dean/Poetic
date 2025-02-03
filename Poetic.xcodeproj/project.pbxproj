@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A13BE0128B9B42800E79A0E /* NewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A13BE0028B9B42800E79A0E /* NewDetailView.swift */; };
+		2A13BE0128B9B42800E79A0E /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A13BE0028B9B42800E79A0E /* DetailView.swift */; };
 		2A17BA9327D5D8E000E0D755 /* PoeticApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17BA9227D5D8E000E0D755 /* PoeticApp.swift */; };
 		2A17BA9527D5D8E000E0D755 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17BA9427D5D8E000E0D755 /* ContentView.swift */; };
 		2A17BA9727D5D8E000E0D755 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A17BA9627D5D8E000E0D755 /* Assets.xcassets */; };
@@ -26,9 +26,8 @@
 		2A1EC6BE2A68CA4F0012F138 /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1EC6BD2A68CA4F0012F138 /* StoreKitManager.swift */; };
 		2A1EC6C02A68CBB50012F138 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1EC6BF2A68CBB50012F138 /* Constants.swift */; };
 		2A1EC6C32A68D2350012F138 /* TipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1EC6C22A68D2350012F138 /* TipsView.swift */; };
-		2A304724288FB01500E43820 /* NewHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A304723288FB01500E43820 /* NewHomeView.swift */; };
+		2A304724288FB01500E43820 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A304723288FB01500E43820 /* HomeView.swift */; };
 		2A3190142C13086B009BC3A0 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3190132C13086B009BC3A0 /* SafariWebView.swift */; };
-		2A37936C27D8A4B800FA48ED /* LineBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A37936B27D8A4B800FA48ED /* LineBreak.swift */; };
 		2A37937B27D8D48A00FA48ED /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A37937A27D8D48A00FA48ED /* Bundle-Decodable.swift */; };
 		2A38CF7927DF74BB00A44268 /* Poetic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2A38CF7727DF74BB00A44268 /* Poetic.xcdatamodeld */; };
 		2A38CF7B27DF74CC00A44268 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A38CF7A27DF74CC00A44268 /* PersistenceController.swift */; };
@@ -49,7 +48,6 @@
 		2A81C48828C4D25C00437EC3 /* PoemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A81C48728C4D25C00437EC3 /* PoemCard.swift */; };
 		2A8ADBC62A69019F001630B1 /* View+ToAnyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8ADBC52A69019F001630B1 /* View+ToAnyView.swift */; };
 		2AB4B9A827E05F1C008FB84B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4B9A727E05F1C008FB84B /* Color.swift */; };
-		2AB4CE1727DDBBBF007937CC /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4CE1627DDBBBF007937CC /* Quote.swift */; };
 		2ABCC207285095A900CA0FB3 /* PoemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABCC206285095A900CA0FB3 /* PoemView.swift */; };
 		2ACC8A3D27E86E3B002F5B6D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACC8A3C27E86E3B002F5B6D /* SettingsView.swift */; };
 		2ACC8A4127E89ECC002F5B6D /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACC8A4027E89ECC002F5B6D /* WebView.swift */; };
@@ -73,7 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2A13BE0028B9B42800E79A0E /* NewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDetailView.swift; sourceTree = "<group>"; };
+		2A13BE0028B9B42800E79A0E /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		2A17BA8F27D5D8E000E0D755 /* Poetic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poetic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A17BA9227D5D8E000E0D755 /* PoeticApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoeticApp.swift; sourceTree = "<group>"; };
 		2A17BA9427D5D8E000E0D755 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -93,10 +91,9 @@
 		2A1EC6BD2A68CA4F0012F138 /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
 		2A1EC6BF2A68CBB50012F138 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2A1EC6C22A68D2350012F138 /* TipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsView.swift; sourceTree = "<group>"; };
-		2A304723288FB01500E43820 /* NewHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewHomeView.swift; sourceTree = "<group>"; };
+		2A304723288FB01500E43820 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2A3190102C11DBA9009BC3A0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		2A3190132C13086B009BC3A0 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
-		2A37936B27D8A4B800FA48ED /* LineBreak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineBreak.swift; sourceTree = "<group>"; };
 		2A37937A27D8D48A00FA48ED /* Bundle-Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
 		2A38CF7827DF74BB00A44268 /* Poetic.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Poetic.xcdatamodel; sourceTree = "<group>"; };
 		2A38CF7A27DF74CC00A44268 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
@@ -118,7 +115,6 @@
 		2A81C48728C4D25C00437EC3 /* PoemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoemCard.swift; sourceTree = "<group>"; };
 		2A8ADBC52A69019F001630B1 /* View+ToAnyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ToAnyView.swift"; sourceTree = "<group>"; };
 		2AB4B9A727E05F1C008FB84B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		2AB4CE1627DDBBBF007937CC /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		2ABCC206285095A900CA0FB3 /* PoemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoemView.swift; sourceTree = "<group>"; };
 		2ACC8A3C27E86E3B002F5B6D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2ACC8A4027E89ECC002F5B6D /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
@@ -208,7 +204,7 @@
 				2A77337428C6211C00C115E9 /* Search */,
 				2A77337528C6212300C115E9 /* Favorites */,
 				2A77337628C6212A00C115E9 /* Quotes */,
-				2A77337728C6213300C115E9 /* Menu */,
+				2A77337728C6213300C115E9 /* Settings */,
 				2A77337828C6216100C115E9 /* Detail */,
 			);
 			path = View;
@@ -228,7 +224,6 @@
 			children = (
 				2A17BAAD27D6418400E0D755 /* Poem.swift */,
 				2AF98E3A27DE2E00004D21DA /* Authors.swift */,
-				2AB4CE1627DDBBBF007937CC /* Quote.swift */,
 				2A38CF7727DF74BB00A44268 /* Poetic.xcdatamodeld */,
 			);
 			path = Model;
@@ -293,7 +288,6 @@
 			isa = PBXGroup;
 			children = (
 				2ABCC206285095A900CA0FB3 /* PoemView.swift */,
-				2A37936B27D8A4B800FA48ED /* LineBreak.swift */,
 				2ACC8A4027E89ECC002F5B6D /* WebView.swift */,
 				2A3190132C13086B009BC3A0 /* SafariWebView.swift */,
 			);
@@ -312,7 +306,7 @@
 		2A77337328C6211200C115E9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				2A304723288FB01500E43820 /* NewHomeView.swift */,
+				2A304723288FB01500E43820 /* HomeView.swift */,
 				2A42F5E1299A62B500122847 /* TitleAuthorDateHomeCell.swift */,
 				2A81C48728C4D25C00437EC3 /* PoemCard.swift */,
 				2A77337D28C8C6B000C115E9 /* FailedPoemCard.swift */,
@@ -346,19 +340,19 @@
 			path = Quotes;
 			sourceTree = "<group>";
 		};
-		2A77337728C6213300C115E9 /* Menu */ = {
+		2A77337728C6213300C115E9 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				2ACC8A3C27E86E3B002F5B6D /* SettingsView.swift */,
 				2ACC8A4227E8A441002F5B6D /* DevView.swift */,
 			);
-			path = Menu;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		2A77337828C6216100C115E9 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				2A13BE0028B9B42800E79A0E /* NewDetailView.swift */,
+				2A13BE0028B9B42800E79A0E /* DetailView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -512,13 +506,11 @@
 				2A17BAAA27D5D95400E0D755 /* FavoritesView.swift in Sources */,
 				2A81C48828C4D25C00437EC3 /* PoemCard.swift in Sources */,
 				2A7FD5E22A626E8200E924EE /* HapticFeedBackGenerator.swift in Sources */,
-				2A304724288FB01500E43820 /* NewHomeView.swift in Sources */,
+				2A304724288FB01500E43820 /* HomeView.swift in Sources */,
 				2A1ABA5828F4016900D48AA1 /* APIConst.swift in Sources */,
 				2A1EC6C02A68CBB50012F138 /* Constants.swift in Sources */,
 				2A17BAAC27D5D96E00E0D755 /* APIService.swift in Sources */,
-				2A37936C27D8A4B800FA48ED /* LineBreak.swift in Sources */,
 				2A42F5E7299BBF9A00122847 /* AuthorCell.swift in Sources */,
-				2AB4CE1727DDBBBF007937CC /* Quote.swift in Sources */,
 				2A42F5E9299BBFBC00122847 /* AuthorPoemCell.swift in Sources */,
 				2A19EA9B27F09E1C00022EFE /* NotificationManager.swift in Sources */,
 				2A42F5E2299A62B500122847 /* TitleAuthorDateHomeCell.swift in Sources */,
@@ -528,7 +520,7 @@
 				2A77337A28C777C700C115E9 /* FlatLinkStyle.swift in Sources */,
 				2A1EC6C32A68D2350012F138 /* TipsView.swift in Sources */,
 				2A1ABA5A28F4090000D48AA1 /* NetworkError.swift in Sources */,
-				2A13BE0128B9B42800E79A0E /* NewDetailView.swift in Sources */,
+				2A13BE0128B9B42800E79A0E /* DetailView.swift in Sources */,
 				2A42F5E0299A623200122847 /* TitleAuthorFavoriteCell.swift in Sources */,
 				2A38CF7927DF74BB00A44268 /* Poetic.xcdatamodeld in Sources */,
 				2A17BAB027D641D200E0D755 /* PoemViewModel.swift in Sources */,

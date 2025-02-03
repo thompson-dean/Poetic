@@ -71,10 +71,3 @@ struct PoemCard: View {
         return result
     }
 }
-
-struct PoemCard_Previews: PreviewProvider {
-    static var previews: some View {
-        PoemCard(poem: Poem.stub)
-            .previewLayout(.sizeThatFits)
-    }
-}
