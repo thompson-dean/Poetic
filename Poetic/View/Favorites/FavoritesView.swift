@@ -10,20 +10,19 @@ import SwiftUI
 struct FavoritesView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var viewModel: PoemViewModel
-    @ObservedObject var pcViewModel: PersistenceController
+    @EnvironmentObject var store: PoemStore
 
-    init(viewModel: PoemViewModel, pcViewModel: PersistenceController) {
+    init(viewModel: PoemViewModel) {
         UITableView.appearance().separatorStyle = .none
         UITableView.appearance().backgroundColor = .clear
         UITableView.appearance().showsVerticalScrollIndicator = false
         self.viewModel = viewModel
-        self.pcViewModel = pcViewModel
     }
 
     var body: some View {
         NavigationStack {
             VStack {
-                if pcViewModel.favoritedPoems.isEmpty {
+                if store.favorites.isEmpty {
                     ContentUnavailableView(
                         "No favourites yet!",
                         systemImage: "star",
@@ -31,19 +30,10 @@ struct FavoritesView: View {
                     )
                 } else {
                     List {
-                        ForEach(pcViewModel.favoritedPoems) { poem in
+                        ForEach(store.favorites) { poem in
                             ZStack {
                                 NavigationLink {
-                                    let sentPoem = Poem(
-                                        title: poem.title ?? "",
-                                        author: poem.author ?? "",
-                                        lines: poem.lines ?? [],
-                                        linecount: poem.linecount ?? ""
-                                    )
-                                    DetailView(
-                                        pcViewModel: pcViewModel,
-                                        poem: sentPoem
-                                    )
+                                    DetailView(poem: poem.asPoem())
                                 } label: {
                                     EmptyView().opacity(0.0)
                                 }
@@ -57,7 +47,7 @@ struct FavoritesView: View {
                                                  trailing: 0))
                         }
                         .onDelete { indexSet in
-                            pcViewModel.deleteFavoritedPoem(indexSet: indexSet)
+                            store.deleteFavorites(at: indexSet)
                         }
                     }
                     .scrollIndicators(ScrollIndicatorVisibility.hidden)
@@ -75,9 +65,6 @@ struct FavoritesView: View {
             .navigationTitle("Favorites")
             .navigationBarTitleDisplayMode(.inline)
             .foregroundColor(.primary)
-            .onAppear {
-                pcViewModel.fetchFavoritedPoems()
-            }
             .toolbar {
                 ToolbarItem {
                     EditButton()
@@ -85,8 +72,7 @@ struct FavoritesView: View {
 
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        pcViewModel.poemsFilter.toggle()
-                        pcViewModel.fetchFavoritedPoems()
+                        store.favoriteSort = store.favoriteSort == .title ? .author : .title
                     } label: {
                         Image(systemName: "arrow.up.arrow.down")
                     }

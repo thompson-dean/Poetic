@@ -9,14 +9,19 @@ import SwiftUI
 
 struct PoemView: View {
     @Environment(\.colorScheme) var colorScheme
-    @ObservedObject var pcViewModel: PersistenceController
+    @EnvironmentObject var store: PoemStore
 
     let author: String
     let title: String
     let index: Int
     let poemLines: [String]
+
+    private var poem: Poem {
+        Poem(title: title, author: author, lines: poemLines, linecount: String(poemLines.count))
+    }
+
     var body: some View {
-        if pcViewModel.quotes.contains(where: { $0.quote == poemLines[index] }) {
+        if store.hasQuote(poemLines[index], in: poem) {
             Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
                 .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 18)
                 .background(colorScheme == . light ? Color.lightHighlightThemeColor : Color.darkHighlightThemeColor)
@@ -41,19 +46,8 @@ struct PoemView: View {
                 .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 18)
                 .contextMenu {
                     Button {
-                        if !pcViewModel.quotes
-                            .contains(where: {
-                                $0.quote == poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines)
-                            }) {
-                            pcViewModel.addQuote(
-                                id: UUID(),
-                                title: title,
-                                author: author,
-                                quote: poemLines[index],
-                                lines: poemLines
-                            )
-                            HapticFeedbackGenerator.shared.simpleHapticSuccess()
-                        }
+                        store.addQuote(poemLines[index], to: poem)
+                        HapticFeedbackGenerator.shared.simpleHapticSuccess()
                     } label: {
                         Label("Highlight and Save", systemImage: "quote.bubble.fill")
                     }

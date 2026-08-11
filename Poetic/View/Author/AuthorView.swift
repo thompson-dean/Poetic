@@ -10,7 +10,6 @@ import SwiftUI
 struct AuthorView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var viewModel: PoemViewModel
-    @ObservedObject var pcViewModel: PersistenceController
     @State var count = 0
     let author: String
 
@@ -70,10 +69,7 @@ struct AuthorView: View {
                     ScrollView {
                         ForEach(0..<viewModel.authorPoems.count, id: \.self) { index in
                             NavigationLink {
-                                DetailView(
-                                    pcViewModel: pcViewModel,
-                                    poem: viewModel.authorPoems[index]
-                                )
+                                DetailView(poem: viewModel.authorPoems[index])
                             } label: {
                                 AuthorPoemCell(poem: viewModel.authorPoems[index], indexString: String(index + 1))
                             }

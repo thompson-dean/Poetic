@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23507" systemVersion="25G74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="v2">
+    <entity name="Poem" representedClassName="PoemEntity" syncable="YES">
+        <attribute name="author" attributeType="String" defaultValueString=""/>
+        <attribute name="favoritedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isFavorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="lastViewedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="lines" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="NSArray"/>
+        <attribute name="title" attributeType="String" defaultValueString=""/>
+        <relationship name="quotes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Quote" inverseName="poem" inverseEntity="Quote"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="title"/>
+                <constraint value="author"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Quote" representedClassName="QuoteEntity" syncable="YES">
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="quote" attributeType="String" defaultValueString=""/>
+        <relationship name="poem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Poem" inverseName="quotes" inverseEntity="Poem"/>
+    </entity>
+    <elements>
+        <element name="Poem" positionX="-63" positionY="-18" width="128" height="149"/>
+        <element name="Quote" positionX="-54" positionY="9" width="128" height="74"/>
+    </elements>
+</model>

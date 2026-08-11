@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var viewModel: PoemViewModel
-    @ObservedObject var pcViewModel: PersistenceController
+    @EnvironmentObject var store: PoemStore
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
@@ -24,10 +24,6 @@ struct HomeView: View {
                 }
             }
             .navigationBarHidden(true)
-        }
-        .onAppear {
-            pcViewModel.removeNotificationsOlderThan(days: 14)
-            pcViewModel.fetchViewedPoems()
         }
     }
 
@@ -83,7 +79,7 @@ struct HomeView: View {
     private var recentSection: some View {
         VStack(alignment: .leading) {
             sectionTitle("Recent")
-            if pcViewModel.viewedPoems.isEmpty {
+            if store.recents.isEmpty {
                 ContentUnavailableView("No recents", systemImage: "text.page")
             } else {
                 viewedPoemsList
@@ -94,7 +90,7 @@ struct HomeView: View {
     private var poemCards: some View {
         ForEach(viewModel.randomPoems, id: \.self) { poem in
             NavigationLink {
-                DetailView(pcViewModel: pcViewModel, poem: poem)
+                DetailView(poem: poem)
             } label: {
                 PoemCard(poem: poem)
             }
@@ -103,17 +99,11 @@ struct HomeView: View {
     }
 
     private var viewedPoemsList: some View {
-        ForEach(pcViewModel.viewedPoems, id: \.self) { poem in
+        ForEach(store.recents, id: \.self) { poem in
             NavigationLink {
-                let sentPoem = Poem(
-                    title: poem.title ?? "",
-                    author: poem.author ?? "",
-                    lines: poem.lines ?? [],
-                    linecount: poem.title ?? ""
-                )
-                DetailView(pcViewModel: pcViewModel, poem: sentPoem)
+                DetailView(poem: poem.asPoem())
             } label: {
-                TitleAuthorDateHomeCell(pcViewModel: pcViewModel, poem: poem)
+                TitleAuthorDateHomeCell(poem: poem)
             }
             .buttonStyle(FlatLinkStyle())
         }

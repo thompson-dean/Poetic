@@ -10,7 +10,7 @@ import SwiftUI
 struct DetailView: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var showWebView = false
-    @ObservedObject var pcViewModel: PersistenceController
+    @EnvironmentObject var store: PoemStore
     let poem: Poem
 
     var body: some View {
@@ -53,7 +53,6 @@ struct DetailView: View {
                         VStack(alignment: .leading) {
                             ForEach(0..<poem.lines.count, id: \.self) { index in
                                 PoemView(
-                                    pcViewModel: pcViewModel,
                                     author: poem.author,
                                     title: poem.title,
                                     index: index,
@@ -74,24 +73,9 @@ struct DetailView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        if let entity = pcViewModel.favoritedPoems.first(where: { $0.title == poem.title}) {
-                            pcViewModel.deleteFavoritedPoemFromTappingStar(entity: entity)
-                        } else {
-                            pcViewModel.addFavoritePoem(
-                                id: UUID(),
-                                title: poem.title,
-                                author: poem.author,
-                                lines: poem.lines,
-                                linecount: poem.linecount
-                            )
-                        }
-
+                        store.toggleFavorite(poem)
                     } label: {
-                        if pcViewModel.favoritedPoems.contains(where: { $0.title == poem.title }) {
-                            Image(systemName: "star.fill")
-                        } else {
-                            Image(systemName: "star")
-                        }
+                        Image(systemName: store.isFavorited(poem) ? "star.fill" : "star")
                     }
                 }
                 ToolbarItem {
@@ -111,9 +95,7 @@ struct DetailView: View {
             }
         }
         .onAppear {
-            if pcViewModel.viewedPoems.first(where: { $0.title == poem.title}) == nil {
-                pcViewModel.addViewedPoem(id: UUID(), title: poem.title, author: poem.author, lines: poem.lines)
-            }
+            store.markViewed(poem)
         }
         .sheet(isPresented: $showWebView) {
             if let urlString = Links.authorLinksDictionary[poem.author],

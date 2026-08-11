@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var viewModel = PoemViewModel(apiService: APIService())
-    @StateObject var pcViewModel = PersistenceController()
     @ObservedObject var storeKitManager: StoreKitManager
 
     let notificationManager = NotificationManager()
@@ -17,31 +16,19 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
-            HomeView(
-                viewModel: viewModel,
-                pcViewModel: pcViewModel
-            )
+            HomeView(viewModel: viewModel)
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
-            IntegratedSearchView(
-                viewModel: viewModel,
-                pcViewModel: pcViewModel
-            )
+            IntegratedSearchView(viewModel: viewModel)
                 .tabItem {
                     Label("Explore", systemImage: "magnifyingglass")
                 }
-            FavoritesView(
-                viewModel: viewModel,
-                pcViewModel: pcViewModel
-            )
+            FavoritesView(viewModel: viewModel)
                 .tabItem {
                     Label("Favorites", systemImage: "star")
                 }
-            QuoteView(
-                viewModel: viewModel,
-                pcViewModel: pcViewModel
-            )
+            QuoteView(viewModel: viewModel)
                 .tabItem {
                     Label("Quotes", systemImage: "quote.bubble.fill")
                 }
