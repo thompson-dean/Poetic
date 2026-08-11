@@ -10,7 +10,6 @@ import SwiftUI
 struct IntegratedSearchView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var viewModel: PoemViewModel
-    @ObservedObject var pcViewModel: PersistenceController
     @State private var didFail: Bool = false
     @State private var alertMessage: String = ""
     @FocusState private var isFocused: Bool
@@ -112,11 +111,7 @@ struct IntegratedSearchView: View {
                     id: \.self
                 ) { author in
                     NavigationLink {
-                        AuthorView(
-                            viewModel: viewModel,
-                            pcViewModel: pcViewModel,
-                            author: author
-                        )
+                        AuthorView(viewModel: viewModel, author: author)
                     } label: {
                         AuthorCell(author: author)
                     }
@@ -131,13 +126,7 @@ struct IntegratedSearchView: View {
 
                 ForEach(viewModel.randomPoems, id: \.self) { poem in
                     NavigationLink {
-                        let sentPoem = Poem(
-                            title: poem.title,
-                            author: poem.author,
-                            lines: poem.lines,
-                            linecount: poem.title
-                        )
-                        DetailView(pcViewModel: pcViewModel, poem: sentPoem)
+                        DetailView(poem: poem)
                     } label: {
                         PoemCell(poem: poem, colorScheme: colorScheme)
                     }
@@ -162,8 +151,7 @@ struct IntegratedSearchView: View {
     private var loadedTitleResults: some View {
         ForEach(viewModel.poems, id: \.self) { poem in
             NavigationLink {
-                let sentPoem = Poem(title: poem.title, author: poem.author, lines: poem.lines, linecount: poem.title)
-                DetailView(pcViewModel: pcViewModel, poem: sentPoem)
+                DetailView(poem: poem)
             } label: {
                 LazyVStack {
                     PoemCell(poem: poem, colorScheme: colorScheme)
@@ -179,7 +167,7 @@ struct IntegratedSearchView: View {
             viewModel.searchTerm.isEmpty || author.lowercased().contains(viewModel.searchTerm.lowercased())
         }, id: \.self) { author in
             NavigationLink {
-                AuthorView(viewModel: viewModel, pcViewModel: pcViewModel, author: author)
+                AuthorView(viewModel: viewModel, author: author)
             } label: {
                 AuthorCell(author: author)
             }

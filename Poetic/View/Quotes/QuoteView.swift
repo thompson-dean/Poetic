@@ -10,20 +10,19 @@ import SwiftUI
 struct QuoteView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var viewModel: PoemViewModel
-    @ObservedObject var pcViewModel: PersistenceController
+    @EnvironmentObject var store: PoemStore
 
-    init(viewModel: PoemViewModel, pcViewModel: PersistenceController) {
+    init(viewModel: PoemViewModel) {
         UITableView.appearance().separatorStyle = .none
         UITableView.appearance().backgroundColor = .clear
         UITableView.appearance().showsVerticalScrollIndicator = false
         self.viewModel = viewModel
-        self.pcViewModel = pcViewModel
     }
 
     var body: some View {
         NavigationStack {
             VStack {
-                if pcViewModel.quotes.isEmpty {
+                if store.quotes.isEmpty {
                     ContentUnavailableView(
                         "No favourite quotes yet!",
                         systemImage: "quote.bubble",
@@ -31,29 +30,17 @@ struct QuoteView: View {
                     )
                 } else {
                     List {
-                        ForEach(0..<pcViewModel.quotes.count, id: \.self) { index in
+                        ForEach(0..<store.quotes.count, id: \.self) { index in
                             ZStack {
                                 NavigationLink {
-                                    if let poem = pcViewModel.favoritedQuotesPoem.first(where: {
-                                        $0.title == pcViewModel.quotes[index].title
-                                    }) {
-                                        DetailView(
-                                            pcViewModel: pcViewModel,
-                                            poem: Poem(
-                                                title: poem.title ?? "Unknown",
-                                                author: poem.author ?? "Unknown",
-                                                lines: poem.lines ?? ["Unknown"],
-                                                linecount: "0"
-                                            )
-                                        )
-                                    }
+                                    DetailView(poem: store.quotes[index].poem.asPoem())
                                 } label: {
                                     EmptyView().opacity(0)
                                 }
                                 VStack(alignment: .leading) {
                                     HStack {
                                         VStack(alignment: .leading, spacing: 4) {
-                                            Text(("\(pcViewModel.quotes[index].quote ?? "Unknown Line")")
+                                            Text(store.quotes[index].quote
                                                 .trimmingCharacters(in: .whitespacesAndNewlines)
                                             )
                                             .fixedSize(horizontal: false, vertical: true)
@@ -62,7 +49,7 @@ struct QuoteView: View {
                                                 lineHeight: 24
                                             )
 
-                                            Text(pcViewModel.quotes[index].author ?? "Unknown Title")
+                                            Text(store.quotes[index].poem.author)
                                                 .fixedSize(horizontal: false, vertical: true)
                                                 .fontWithLineHeight(
                                                     font: .systemFont(ofSize: 16, weight: .semibold),
@@ -89,9 +76,9 @@ struct QuoteView: View {
                             .contextMenu {
                                 Button {
                                     Links.shareQuote(
-                                        quote: pcViewModel.quotes[index].quote!,
-                                        title: pcViewModel.quotes[index].title ?? "",
-                                        author: pcViewModel.quotes[index].author ?? ""
+                                        quote: store.quotes[index].quote,
+                                        title: store.quotes[index].poem.title,
+                                        author: store.quotes[index].poem.author
                                     )
                                 } label: {
                                     Label("Share", systemImage: "square.and.arrow.up")
@@ -110,7 +97,9 @@ struct QuoteView: View {
                                                  bottom: 0,
                                                  trailing: 0))
                         }
-                        .onDelete(perform: pcViewModel.deleteQuotes)
+                        .onDelete { indexSet in
+                            store.deleteQuotes(at: indexSet)
+                        }
                     }
                     .scrollIndicators(ScrollIndicatorVisibility.hidden)
                     .cornerRadius(8)
@@ -124,9 +113,6 @@ struct QuoteView: View {
                     .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
                     .ignoresSafeArea()
             )
-            .onAppear {
-                pcViewModel.fetchQuotes()
-            }
             .navigationTitle("Quotes")
             .navigationBarTitleDisplayMode(.inline)
             .foregroundColor(.primary)
@@ -136,8 +122,7 @@ struct QuoteView: View {
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        pcViewModel.quotesFilter.toggle()
-                        pcViewModel.fetchQuotes()
+                        store.quoteSort = store.quoteSort == .quote ? .title : .quote
                     } label: {
                         Image(systemName: "arrow.up.arrow.down")
                     }

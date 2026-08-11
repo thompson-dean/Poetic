@@ -9,12 +9,28 @@ import SwiftUI
 
 @main
 struct PoeticApp: App {
-    @StateObject private var persistenceController = PersistenceController()
+    private let stack: PersistenceStack
+    @StateObject private var store: PoemStore
     @StateObject private var storeKitManager = StoreKitManager()
+
+    init() {
+        let stack = PersistenceStack()
+        self.stack = stack
+        _store = StateObject(wrappedValue: PoemStore(stack: stack))
+    }
+
     var body: some Scene {
         WindowGroup {
-            ContentView(storeKitManager: storeKitManager)
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            if let error = stack.loadError {
+                ContentUnavailableView(
+                    "Couldn't Load Your Library",
+                    systemImage: "exclamationmark.triangle",
+                    description: Text(error.localizedDescription)
+                )
+            } else {
+                ContentView(storeKitManager: storeKitManager)
+                    .environmentObject(store)
+            }
         }
     }
 }
