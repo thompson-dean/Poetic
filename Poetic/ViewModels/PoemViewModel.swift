@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 
+@MainActor
 class PoemViewModel: ObservableObject {
     enum State {
         case idle
@@ -36,81 +37,73 @@ class PoemViewModel: ObservableObject {
     @AppStorage(Constants.featuredAuthor2) var featuredAuthor2: String = ""
     @AppStorage(Constants.featuredAuthor3) var featuredAuthor3: String = ""
 
-    @Published private(set) var poems = [Poem]()
+    @Published private(set) var searchAuthors = [String]()
+    @Published private(set) var searchPoems = [PoemSearchMatch]()
     @Published private(set) var randomPoems = [Poem]()
     @Published private(set) var authorPoems = [Poem]()
     @Published var searchTerm: String = ""
-    @Published var isTitle: Bool = true
     @Published var searchListLoadingError: String = ""
 
-    private let apiService: APIServiceProtocol
+    private let service: PoemServiceProtocol
     private var cancellables: Set<AnyCancellable> = []
+    private var searchTask: Task<Void, Never>?
 
     var authorTitleCache: [String: [Poem]] = [:]
-    var poemTitleSearchCache: [String: [Poem]] = [:]
 
     @Published private(set) var state = State.idle
     @Published private(set) var searchState = SearchTitleState.idle
     @Published private(set) var authorPoemState = AuthorPoemState.idle
 
-    init(apiService: APIServiceProtocol) {
-        self.apiService = apiService
+    init(service: PoemServiceProtocol) {
+        self.service = service
+
+        // Live unified search, subscribed once for the view model's lifetime.
+        // The catalog is local and in-memory, so every keystroke can search —
+        // no debounce needed.
+        $searchTerm
+            .removeDuplicates()
+            .sink { [weak self] query in
+                self?.search(searchTerm: query)
+            }
+            .store(in: &cancellables)
     }
 
     func loadRandomPoems(number: String) {
         state = .loading
-        apiService.fetchPoems(searchTerm: number, filter: .random)
-            .sink { [weak self] (dataResponse) in
-                if let error = dataResponse.error {
-                    self?.createAlert(with: error)
-                    self?.state = .failed
-                } else if let poems = dataResponse.value {
-                    self?.randomPoems = poems
-                    self?.state = .loaded
-                }
-            }.store(in: &cancellables)
+        Task {
+            do {
+                randomPoems = try await service.fetchPoems(searchTerm: number, filter: .random)
+                state = .loaded
+            } catch {
+                createAlert(with: error)
+                state = .failed
+            }
+        }
     }
 
-    func fetchTitles(searchTerm: String) {
-        if let cache = poemTitleSearchCache[searchTerm] {
-            self.searchState = .loaded
-            self.poems = cache
+    func search(searchTerm: String) {
+        let trimmed = searchTerm.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else {
+            searchState = .idle
             return
         }
-        let trimmedString = searchTerm.trimmingCharacters(in: .whitespacesAndNewlines)
-        if trimmedString != "" {
-            searchState = .loading
-            apiService.fetchPoems(searchTerm: trimmedString, filter: .title)
-                .sink { [weak self] (dataResponse) in
-                    if let error = dataResponse.error {
-                        self?.createAlert(with: error)
-                        self?.searchState = .failed
-                    } else if let poems = dataResponse.value {
-                        self?.poems = poems
-                        self?.poemTitleSearchCache[searchTerm] = poems
-                        self?.searchState = .loaded
-                    }
-                }.store(in: &cancellables)
-        } else {
-            searchState = .idle
-        }
-    }
-
-    func listenToSearch() {
-        $searchTerm
-            .debounce(for: .milliseconds(350), scheduler: RunLoop.main, options: .none)
-            .removeDuplicates()
-            .sink { [weak self] delayQuery in
-                guard let self = self else { return }
-                if !delayQuery.isEmpty {
-                    if self.isTitle {
-                        self.fetchTitles(searchTerm: delayQuery)
-                    }
-                } else {
-                    self.searchState = .idle
-                }
+        searchState = .loading
+        // Latest query wins: several lookups can be in flight, and a stale
+        // result must not overwrite a newer one.
+        searchTask?.cancel()
+        searchTask = Task {
+            do {
+                let results = try await service.search(matching: trimmed)
+                guard !Task.isCancelled else { return }
+                searchAuthors = results.authors
+                searchPoems = results.poems
+                searchState = .loaded
+            } catch {
+                guard !Task.isCancelled else { return }
+                createAlert(with: error)
+                searchState = .failed
             }
-            .store(in: &self.cancellables)
+        }
     }
 
     func loadAuthorPoem(searchTerm: String) {
@@ -123,21 +116,22 @@ class PoemViewModel: ObservableObject {
         authorPoems = []
         authorPoemState = .loading
 
-        apiService.fetchPoems(searchTerm: searchTerm, filter: .author)
-            .sink { [weak self] (dataResponse) in
-                if let error = dataResponse.error {
-                    self?.createAlert(with: error)
-                    self?.authorPoemState = .failed
-                } else if let poems = dataResponse.value {
-                    self?.authorPoems = poems
-                    self?.authorTitleCache[searchTerm] = poems
-                    self?.authorPoemState = .loaded
-                }
-            }.store(in: &cancellables)
+        Task {
+            do {
+                let result = try await service.fetchPoems(searchTerm: searchTerm, filter: .author)
+                authorPoems = result
+                authorTitleCache[searchTerm] = result
+                authorPoemState = .loaded
+            } catch {
+                createAlert(with: error)
+                authorPoemState = .failed
+            }
+        }
     }
 
-    func createAlert(with error: NetworkError) {
-        searchListLoadingError = error.localizedDescription
+    func createAlert(with error: Error) {
+        searchListLoadingError = (error as? CatalogError)?.errorDescription
+            ?? "Something went wrong. Please try again."
     }
 
     func resetBadgeCount() {

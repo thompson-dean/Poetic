@@ -24,11 +24,11 @@ struct RedactedPoemCardView: View {
                         PoemCard(poem: Poem.stub)
                             .redacted(reason: .placeholder)
                         VStack(alignment: .center, spacing: 8) {
-                            Image(systemName: "wifi.exclamationmark")
+                            Image(systemName: "exclamationmark.triangle")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 44, height: 44)
-                            Text("Please connect to the internet.")
+                            Text("Couldn't load poems. Pull to refresh.")
                                 .fontWeight(.semibold)
                         }
                         .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)

@@ -54,7 +54,7 @@ struct AuthorView: View {
                                 .frame(width: 44, height: 44)
                                 .padding()
 
-                            Text("Connection error: Connect to the internet and try again")
+                            Text("Couldn't load poems for this author. Please try again.")
                                 .font(.system(.body, design: .serif))
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal)
@@ -90,7 +90,7 @@ struct AuthorView: View {
             .navigationBarTitleDisplayMode(.inline)
 
             .onAppear {
-                viewModel.loadAuthorPoem(searchTerm: author.replacingOccurrences(of: " ", with: "%20"))
+                viewModel.loadAuthorPoem(searchTerm: author)
             }
 
     }

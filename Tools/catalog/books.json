@@ -1,0 +1,173 @@
+[
+  {
+    "id": 64989,
+    "author": "Claude McKay",
+    "book": "Harlem Shadows",
+    "heading": "allcaps",
+    "content_start": "THE EASTER FLOWER",
+    "skip_titles": [
+      "CONTENTS",
+      "HARLEM SHADOWS",
+      "AUTHOR'S WORD",
+      "TO MY MOTHER"
+    ],
+    "max_expected_poems": 100,
+    "roman_headings": "keep"
+  },
+  {
+    "id": 109,
+    "author": "Edna St. Vincent Millay",
+    "book": "Renascence and Other Poems",
+    "heading": "gap",
+    "content_start": "Renascence",
+    "skip_titles": [
+      "Contents",
+      "Renascence and Other Poems"
+    ],
+    "max_expected_poems": 60,
+    "roman_headings": "keep",
+    "content_end": "Biographical Note:"
+  },
+  {
+    "id": 591,
+    "author": "Sara Teasdale",
+    "book": "Flame and Shadow",
+    "heading": "gap",
+    "content_start": "Blue Squills",
+    "skip_titles": [
+      "Contents",
+      "Flame and Shadow",
+      "To E."
+    ],
+    "max_expected_poems": 120,
+    "content_end": "[End of original text.]"
+  },
+  {
+    "id": 32491,
+    "author": "William Butler Yeats",
+    "book": "The Wild Swans at Coole",
+    "heading": "allcaps",
+    "content_start": "THE WILD SWANS AT COOLE",
+    "skip_titles": [
+      "CONTENTS",
+      "PREFACE",
+      "NOTES",
+      "THE MACMILLAN COMPANY"
+    ],
+    "max_expected_poems": 120,
+    "content_end": "NOTE",
+    "roman_headings": "keep"
+  },
+  {
+    "id": 36865,
+    "author": "William Butler Yeats",
+    "book": "Responsibilities and Other Poems",
+    "heading": "allcaps",
+    "content_start": "THE GREY ROCK",
+    "skip_titles": [
+      "CONTENTS",
+      "NOTES",
+      "THE MACMILLAN COMPANY"
+    ],
+    "max_expected_poems": 120,
+    "content_end": "THE HOUR-GLASS",
+    "roman_headings": "keep"
+  },
+  {
+    "id": 261,
+    "author": "Amy Lowell",
+    "book": "A Dome of Many-Coloured Glass",
+    "heading": "gap",
+    "content_start": "Before the Altar",
+    "skip_titles": [
+      "Contents",
+      "Lyrical Poems",
+      "Sonnets",
+      "Verses for Children",
+      "A Dome of Many-coloured Glass"
+    ],
+    "max_expected_poems": 150,
+    "content_end": "By the same author"
+  },
+  {
+    "id": 71305,
+    "author": "Charlotte Mew",
+    "book": "The Farmer's Bride",
+    "heading": "allcaps",
+    "content_start": "THE FARMER\u2019S BRIDE",
+    "skip_titles": [
+      "CONTENTS",
+      "PAGE",
+      "TRANSCRIBER\u2019S NOTES"
+    ],
+    "max_expected_poems": 60
+  },
+  {
+    "id": 22531,
+    "author": "D. H. Lawrence",
+    "book": "Amores",
+    "heading": "allcaps",
+    "content_start": "TEASE",
+    "skip_titles": [
+      "CONTENTS",
+      "AMORES",
+      "D. H. LAWRENCE"
+    ],
+    "max_expected_poems": 100
+  },
+  {
+    "id": 17884,
+    "author": "James Weldon Johnson",
+    "book": "Fifty Years and Other Poems",
+    "heading": "allcaps",
+    "content_start": "FIFTY YEARS",
+    "skip_titles": [
+      "CONTENTS",
+      "JINGLES & CROONS",
+      "FIFTY YEARS & OTHER POEMS"
+    ],
+    "max_expected_poems": 100
+  },
+  {
+    "id": 4399,
+    "author": "Edna St. Vincent Millay",
+    "book": "A Few Figs from Thistles",
+    "heading": "gap",
+    "content_start": "First Fig",
+    "skip_titles": [
+      "Contents",
+      "A Few Figs from Thistles"
+    ],
+    "max_expected_poems": 40,
+    "roman_headings": "first_line_title"
+  },
+  {
+    "id": 442,
+    "author": "Sara Teasdale",
+    "book": "Love Songs",
+    "heading": "gap",
+    "content_start": "Barter",
+    "skip_titles": [
+      "Contents",
+      "Love Songs"
+    ],
+    "max_expected_poems": 120
+  },
+  {
+    "id": 596,
+    "author": "Sara Teasdale",
+    "book": "Rivers to the Sea",
+    "heading": "allcaps",
+    "content_start": "SPRING NIGHT",
+    "skip_titles": [
+      "CONTENTS",
+      "PART I",
+      "PART II",
+      "PART III",
+      "PART IV",
+      "PART V"
+    ],
+    "max_expected_poems": 150,
+    "roman_headings": "keep"
+  }
+]

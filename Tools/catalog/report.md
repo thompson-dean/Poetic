@@ -1,0 +1,505 @@
+# Catalog build report
+
+- poems: 3836
+- authors: 137
+- catalog size: 15.0 MB
+- deduped: 253
+
+## Authors missing from Links.swift (add Wikipedia URLs)
+(none)
+
+## Poems per author
+- Adam Lindsay Gordon: 2
+- Alan Seeger: 6
+- Alexander Pope: 63
+- Algernon Charles Swinburne: 42
+- Ambrose Bierce: 2
+- Amy Levy: 12
+- Amy Lowell: 66
+- Andrew Marvell: 10
+- Ann Taylor: 5
+- Anne Bradstreet: 10
+- Anne Bronte: 13
+- Anne Killigrew: 7
+- Anne Kingsmill Finch: 12
+- Annie Louisa Walker: 1
+- Arthur Hugh Clough: 3
+- Ben Jonson: 13
+- Charles Kingsley: 3
+- Charles Sorley: 2
+- Charlotte Bronte: 8
+- Charlotte Mew: 27
+- Charlotte Smith: 5
+- Christina Rossetti: 13
+- Christopher Marlowe: 1
+- Christopher Smart: 11
+- Claude McKay: 73
+- Coventry Patmore: 1
+- D. H. Lawrence: 60
+- Edgar Allan Poe: 50
+- Edmund Spenser: 15
+- Edna St. Vincent Millay: 46
+- Edward Fitzgerald: 2
+- Edward Lear: 2
+- Edward Taylor: 8
+- Edward Thomas: 135
+- Eliza Cook: 1
+- Elizabeth Barrett Browning: 33
+- Emily Bronte: 14
+- Emily Dickinson: 362
+- Emma Lazarus: 4
+- Ernest Dowson: 1
+- Eugene Field: 32
+- Francis Thompson: 1
+- Geoffrey Chaucer: 30
+- George Eliot: 2
+- George Gordon, Lord Byron: 325
+- George Herbert: 16
+- George Meredith: 9
+- Gerard Manley Hopkins: 26
+- Helen Hunt Jackson: 11
+- Henry David Thoreau: 8
+- Henry Vaughan: 6
+- Henry Wadsworth Longfellow: 39
+- Hugh Henry Brackenridge: 2
+- Isaac Watts: 13
+- James Henry Leigh Hunt: 5
+- James Thomson: 3
+- James Weldon Johnson: 63
+- James Whitcomb Riley: 9
+- Jane Austen: 3
+- Jane Taylor: 4
+- John Clare: 143
+- John Donne: 28
+- John Dryden: 13
+- John Greenleaf Whittier: 12
+- John Keats: 24
+- John McCrae: 1
+- John Milton: 26
+- John Trumbull: 4
+- John Wilmot: 6
+- Jonathan Swift: 3
+- Joseph Warton: 1
+- Joyce Kilmer: 16
+- Julia Ward Howe: 3
+- Jupiter Hammon: 1
+- Katherine Philips: 9
+- Lady Mary Chudleigh: 1
+- Lewis Carroll: 9
+- Lord Alfred Tennyson: 45
+- Louisa May Alcott: 4
+- Major Henry Livingston, Jr.: 7
+- Mark Twain: 1
+- Mary Elizabeth Coleridge: 3
+- Matthew Arnold: 10
+- Matthew Prior: 3
+- Michael Drayton: 43
+- Oliver Goldsmith: 3
+- Oliver Wendell Holmes: 8
+- Oscar Wilde: 10
+- Paul Laurence Dunbar: 9
+- Percy Bysshe Shelley: 313
+- Philip Freneau: 4
+- Phillis Wheatley: 12
+- Ralph Waldo Emerson: 5
+- Richard Crashaw: 7
+- Richard Lovelace: 1
+- Robert Browning: 66
+- Robert Burns: 99
+- Robert Herrick: 63
+- Robert Louis Stevenson: 44
+- Robert Southey: 12
+- Robinson: 54
+- Rupert Brooke: 26
+- Samuel Coleridge: 23
+- Samuel Johnson: 1
+- Sara Teasdale: 255
+- Sarah Flower Adams: 2
+- Sidney Lanier: 17
+- Sir John Suckling: 2
+- Sir Philip Sidney: 11
+- Sir Thomas Wyatt: 3
+- Sir Walter Raleigh: 6
+- Sir Walter Scott: 6
+- Stephen Crane: 24
+- Thomas Campbell: 8
+- Thomas Chatterton: 3
+- Thomas Flatman: 1
+- Thomas Gray: 3
+- Thomas Hood: 10
+- Thomas Moore: 31
+- Thomas Warton: 1
+- Walt Whitman: 67
+- Walter Savage Landor: 13
+- Wilfred Owen: 5
+- William Allingham: 6
+- William Barnes: 5
+- William Blake: 52
+- William Browne: 2
+- William Butler Yeats: 86
+- William Cowper: 23
+- William Cullen Bryant: 7
+- William Ernest Henley: 6
+- William Lisle Bowles: 2
+- William Morris: 12
+- William Shakespeare: 162
+- William Topaz McGonagall: 74
+- William Vaughn Moody: 2
+- William Wordsworth: 2
+
+## Distinct poems renumbered to avoid title collisions
+- Charlotte Bronte — The Wife's Will → The Wife's Will II
+- Edgar Allan Poe — To Helen → To Helen II
+- Edgar Allan Poe — To---- → To---- II
+- Edgar Allan Poe — To Marie Louise (Shew) → To Marie Louise (Shew) II
+- Edward Thomas — Digging → Digging II
+- Edward Thomas — Home → Home II
+- Edward Thomas — An Old Song → An Old Song II
+- Elizabeth Barrett Browning — The Landing of the Pilgrim Fathers → The Landing of the Pilgrim Fathers II
+- George Gordon, Lord Byron — Stanzas to Augusta → Stanzas to Augusta II
+- George Gordon, Lord Byron — To Mr. Murray → To Mr. Murray II
+- George Gordon, Lord Byron — To Mr. Murray → To Mr. Murray III
+- George Gordon, Lord Byron — Stanzas to Augusta → Stanzas to Augusta III
+- George Gordon, Lord Byron — Stanzas for Music → Stanzas for Music II
+- George Gordon, Lord Byron — Stanzas for Music → Stanzas for Music III
+- George Gordon, Lord Byron — Stanzas → Stanzas II
+- George Gordon, Lord Byron — Stanzas for Music → Stanzas for Music IV
+- George Gordon, Lord Byron — A Fragment → A Fragment II
+- George Gordon, Lord Byron — From the French → From the French II
+- George Gordon, Lord Byron — Stanzas for Music → Stanzas for Music V
+- George Gordon, Lord Byron — Stanzas for Music → Stanzas for Music VI
+- George Gordon, Lord Byron — Stanzas for Music → Stanzas for Music VII
+- George Gordon, Lord Byron — To Thomas Moore → To Thomas Moore II
+- George Gordon, Lord Byron — To Thomas Moore → To Thomas Moore III
+- George Gordon, Lord Byron — To M. S. G → To M. S. G II
+- George Gordon, Lord Byron — To Caroline → To Caroline II
+- George Gordon, Lord Byron — To Caroline → To Caroline III
+- George Gordon, Lord Byron — To Caroline → To Caroline IV
+- George Gordon, Lord Byron — To Anne → To Anne II
+- George Gordon, Lord Byron — Sonnet.  to Genevra → Sonnet.  to Genevra II
+- George Gordon, Lord Byron — Epigram → Epigram II
+- John Clare — Song → Song II
+- John Clare — Summer Evening → Summer Evening II
+- John Clare — Song → Song III
+- John Clare — Autumn → Autumn II
+- John Clare — Fragment → Fragment II
+- John Clare — Autumn → Autumn III
+- John Clare — Song → Song IV
+- John Clare — November → November II
+- John Clare — Death → Death II
+- John Clare — Autumn → Autumn IV
+- John Clare — Song → Song V
+- Percy Bysshe Shelley — To Harriet → To Harriet II
+- Percy Bysshe Shelley — To Harriet → To Harriet III
+- Percy Bysshe Shelley — To Harriet → To Harriet IV
+- Percy Bysshe Shelley — To -- → To -- II
+- Percy Bysshe Shelley — To -- → To -- III
+- Percy Bysshe Shelley — To -- → To -- IV
+- Percy Bysshe Shelley — To -- → To -- V
+- Percy Bysshe Shelley — To -- → To -- VI
+- Percy Bysshe Shelley — Song → Song II
+- Percy Bysshe Shelley — Song → Song III
+- Percy Bysshe Shelley — Song → Song IV
+- Percy Bysshe Shelley — Sonnet → Sonnet II
+- Percy Bysshe Shelley — Sonnet → Sonnet III
+- Percy Bysshe Shelley — Sonnet → Sonnet IV
+- Percy Bysshe Shelley — Mutability → Mutability II
+- Percy Bysshe Shelley — Fragment: Rain → Fragment: Rain II
+- Percy Bysshe Shelley — Fragment → Fragment II
+- Percy Bysshe Shelley — To William Shelley → To William Shelley II
+- Percy Bysshe Shelley — To William Shelley → To William Shelley III
+- Percy Bysshe Shelley — Death → Death II
+- Percy Bysshe Shelley — To Mary Shelley → To Mary Shelley II
+- Percy Bysshe Shelley — Fragment: Rain → Fragment: Rain III
+- Percy Bysshe Shelley — Lines → Lines II
+- Percy Bysshe Shelley — Lines → Lines III
+- Percy Bysshe Shelley — To Harriet → To Harriet V
+- Percy Bysshe Shelley — To Harriet → To Harriet VI
+- Percy Bysshe Shelley — To Harriet → To Harriet VII
+- William Blake — Holy Thursday → Holy Thursday II
+- William Blake — Nurse's Song → Nurse's Song II
+- D. H. Lawrence — Dreams Old and Nascent → Dreams Old and Nascent II
+- Sara Teasdale — A Prayer → A Prayer II
+- Sara Teasdale — Spring Night → Spring Night II
+- Sara Teasdale — The Flight → The Flight II
+- Sara Teasdale — New Love and Old → New Love and Old II
+- Sara Teasdale — The Look → The Look II
+- Sara Teasdale — The Kiss → The Kiss II
+- Sara Teasdale — Swans → Swans II
+- Sara Teasdale — The Years → The Years II
+- Sara Teasdale — Peace → Peace II
+- Sara Teasdale — Come → Come II
+- Sara Teasdale — Moods → Moods II
+- Sara Teasdale — April Song → April Song II
+- Sara Teasdale — May Day → May Day II
+- Sara Teasdale — Joy → Joy II
+- Sara Teasdale — I Shall Not Care → I Shall Not Care II
+- Sara Teasdale — After Parting → After Parting II
+- Sara Teasdale — Enough → Enough II
+- Sara Teasdale — Morning → Morning II
+- Sara Teasdale — Summer Night, Riverside → Summer Night, Riverside II
+- Sara Teasdale — After Love → After Love II
+- Sara Teasdale — A Prayer → A Prayer III
+- Sara Teasdale — Twilight → Twilight II
+- Sara Teasdale — Thoughts → Thoughts II
+- Sara Teasdale — The Fountain → The Fountain II
+- Sara Teasdale — Dusk in War Time → Dusk in War Time II
+- Sara Teasdale — Debt → Debt II
+- Sara Teasdale — The River → The River II
+- Sara Teasdale — A Cry → A Cry II
+- Sara Teasdale — Gifts → Gifts II
+
+## Dedupe log (identical bodies dropped)
+- Anne Bradstreet — To My Dear And Loving Husband (poetrydb dropped)
+- George Gordon, Lord Byron — Stanzas to Augusta (poetrydb dropped)
+- George Gordon, Lord Byron — Stanzas to the Po (poetrydb dropped)
+- George Gordon, Lord Byron — Elegy on Newstead Abbey (poetrydb dropped)
+- George Gordon, Lord Byron — Epigram.  From the French of RulhièRes (poetrydb dropped)
+- George Gordon, Lord Byron — Ode From the French (poetrydb dropped)
+- George Gordon, Lord Byron — Stanzas to a Lady, on Leaving England (poetrydb dropped)
+- George Gordon, Lord Byron — Stanzas Composed During a Thunderstorm (poetrydb dropped)
+- George Gordon, Lord Byron — Stanzas for Music (poetrydb dropped)
+- George Gordon, Lord Byron — Stanzas Written on the Road between Florence and Pisa (poetrydb dropped)
+- George Gordon, Lord Byron — Fragment of an Epistle to Thomas Moore (poetrydb dropped)
+- George Gordon, Lord Byron — Epistle to Mr. Murray (poetrydb dropped)
+- George Gordon, Lord Byron — Elegiac Stanzas on the Death of Sir Peter Parker, Bart (poetrydb dropped)
+- George Gordon, Lord Byron — Venice. a Fragment (poetrydb dropped)
+- George Gordon, Lord Byron — Stanzas to a Hindoo Air (poetrydb dropped)
+- George Gordon, Lord Byron — Fragments of School Exercises: From the "Prometheus Vinctus" of Aeschylus, (poetrydb dropped)
+- George Gordon, Lord Byron — Fill the Goblet Again.  a Song (poetrydb dropped)
+- George Gordon, Lord Byron — Translation of the Romaic Song, (poetrydb dropped)
+- George Gordon, Lord Byron — Song for the Luddites (poetrydb dropped)
+- George Gordon, Lord Byron — Translation of the Famous Greek War Song, "δεῦτε παῖδεσ τῶν ἑλλήνων." (poetrydb dropped)
+- George Gordon, Lord Byron — Translation of a Romaic Love Song (poetrydb dropped)
+- George Gordon, Lord Byron — Song to the Suliotes (poetrydb dropped)
+- George Gordon, Lord Byron — Song of Saul Before His Last Battle (poetrydb dropped)
+- George Gordon, Lord Byron — Translation From Anacreon. Ode 1. to His Lyre (poetrydb dropped)
+- George Gordon, Lord Byron — Translation From Anacreon. Ode 3 (poetrydb dropped)
+- George Gordon, Lord Byron — On Leaving Newstead Abbey (poetrydb dropped)
+- George Gordon, Lord Byron — Stanzas to Jessy (poetrydb dropped)
+- George Gordon, Lord Byron — Translation of the Romaic Song, (poetrydb dropped)
+- George Gordon, Lord Byron — Translation From Vittorelli. on a Nun (poetrydb dropped)
+- George Gordon, Lord Byron — Translation of the Famous Greek War Song, "δεῦτε παῖδεσ τῶν ἑλλήνων." (poetrydb dropped)
+- George Gordon, Lord Byron — Translation of a Romaic Love Song (poetrydb dropped)
+- George Gordon, Lord Byron — Translation From the "Medea" of Euripides (poetrydb dropped)
+- George Gordon, Lord Byron — Translation From Catullus. Lugete Veneres Cupidinesque (Carm. III.) (poetrydb dropped)
+- George Gordon, Lord Byron — Translation From Anacreon. Ode 1. to His Lyre (poetrydb dropped)
+- George Gordon, Lord Byron — Translation From Anacreon. Ode 3 (poetrydb dropped)
+- George Gordon, Lord Byron — Translation From Anacreon. Ode (poetrydb dropped)
+- George Gordon, Lord Byron — Translation From Catullus. AD Lesbiam (poetrydb dropped)
+- George Gordon, Lord Byron — Translation From Horace (poetrydb dropped)
+- George Gordon, Lord Byron — Translation of the Epitaph on Virgil and Tibullus, by Domitius Marsus (poetrydb dropped)
+- George Gordon, Lord Byron — Stanzas to a Lady, With the Poems of CamoëNs (poetrydb dropped)
+- George Gordon, Lord Byron — Elegy on Newstead Abbey (poetrydb dropped)
+- George Gordon, Lord Byron — Stanzas to a Lady, on Leaving England (poetrydb dropped)
+- George Gordon, Lord Byron — To a Lady Who Presented to the Author a Lock of Hair Braided With His Own, and Appointed a Night in December to Meet Him in the Garden (poetrydb dropped)
+- George Gordon, Lord Byron — To a Lady Who Presented the Author With the Velvet Band Which Bound Her Tresses (poetrydb dropped)
+- George Gordon, Lord Byron — To a Lady, on Being Asked My Reason for Quitting England in the Spring (poetrydb dropped)
+- George Gordon, Lord Byron — Stanzas to a Lady, With the Poems of CamoëNs (poetrydb dropped)
+- George Gordon, Lord Byron — Stanzas Written in Passing the Ambracian Gulf (poetrydb dropped)
+- George Gordon, Lord Byron — Ode to a Lady Whose Lover Was Killed by a Ball, Which at the Same Time Shivered a Portrait Next His Heart (poetrydb dropped)
+- George Gordon, Lord Byron — Lines to a Lady Weeping (poetrydb dropped)
+- George Gordon, Lord Byron — Impromptu, in Reply to a Friend (poetrydb dropped)
+- George Gordon, Lord Byron — From the Portuguese. "Tu MI Chamas". Another Version (poetrydb dropped)
+- George Gordon, Lord Byron — Song of Saul Before His Last Battle (poetrydb dropped)
+- George Gordon, Lord Byron — To---- (poetrydb dropped)
+- George Gordon, Lord Byron — Answer to----'s Professions of Affection (poetrydb dropped)
+- George Gordon, Lord Byron — Lucietta. a Fragment (poetrydb dropped)
+- George Gordon, Lord Byron — Translation of the Nurse's Dole in the _Medea_ of Euripides (poetrydb dropped)
+- George Gordon, Lord Byron — Epigram.  From the French of RulhièRes (poetrydb dropped)
+- George Gordon, Lord Byron — Epigram on the Braziers' Address to Be Presented in _Armour_ by the Company to Queen Caroline (poetrydb dropped)
+- George Gordon, Lord Byron — E Nihilo Nihil; or an Epigram Bewitched (poetrydb dropped)
+- George Gordon, Lord Byron — Epigrams (poetrydb dropped)
+- George Gordon, Lord Byron — Werner: First Draft (poetrydb dropped)
+- George Gordon, Lord Byron — Epigram on an Old Lady Who Had Some Curious Notions Respecting the Soul (poetrydb dropped)
+- George Gordon, Lord Byron — To Dives. a Fragment (poetrydb dropped)
+- George Gordon, Lord Byron — Answer to----'s Professions of Affection (poetrydb dropped)
+- George Gordon, Lord Byron — Epitaph for Joseph Blacket, Late Poet and Shoemaker (poetrydb dropped)
+- George Gordon, Lord Byron — Epitaph on a Beloved Friend (poetrydb dropped)
+- George Gordon, Lord Byron — Translation of the Epitaph on Virgil and Tibullus, by Domitius Marsus (poetrydb dropped)
+- George Gordon, Lord Byron — Epitaph on John Adams, of Southwell, a Carrier, Who Died of Drunkenness (poetrydb dropped)
+- George Gordon, Lord Byron — Substitute for an Epitaph (poetrydb dropped)
+- George Gordon, Lord Byron — Epitaph for William Pitt (poetrydb dropped)
+- George Gordon, Lord Byron — My Epitaph (poetrydb dropped)
+- Henry Wadsworth Longfellow — AUTUMN (poetrydb dropped)
+- John Keats — Song of the Indian Maid, from 'Endymion' (poetrydb dropped)
+- Percy Bysshe Shelley — Song From the Wandering Jew (poetrydb dropped)
+- Percy Bysshe Shelley — A Bridal Song (poetrydb dropped)
+- Percy Bysshe Shelley — Sonnet.  on Launching Some Bottles Filled With Knowledge into the Bristol Channel (poetrydb dropped)
+- Percy Bysshe Shelley — Sonnet: Political Greatness (poetrydb dropped)
+- Percy Bysshe Shelley — Sonnet to Byron (poetrydb dropped)
+- Percy Bysshe Shelley — The Drowned Lover (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'When Soft Winds and Sunny Skies' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: To the Moon (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Omens (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Supposed to Be an Epithalamium of Francis Ravaillac and Charlotte Corday (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: A Serpent-Face (poetrydb dropped)
+- Percy Bysshe Shelley — On a Fete at Carlton House: Fragment (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: The False Laurel and the True (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment of the Elegy on the Death of Bion (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment From the Wandering Jew (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'Methought I Was a Billow in the Crowd' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Love the Universe to-Day (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Love's Tender Atmosphere (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'When a Lover Clasps His Fairest' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'A Gentle Story of Two Lovers Young' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'I Faint, I Perish With My Love!' (poetrydb dropped)
+- Percy Bysshe Shelley — Sonnet.  to a Balloon Laden With Knowledge (poetrydb dropped)
+- Percy Bysshe Shelley — Fragments of an Unfinished Drama (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: To One Singing (poetrydb dropped)
+- Percy Bysshe Shelley — Another Fragment: To Music (poetrydb dropped)
+- Percy Bysshe Shelley — Fragments Supposed to Be Parts of Otho (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: To a Friend Released From Prison (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: "Igniculus Desiderii" (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'What Men Gain Fairly' (poetrydb dropped)
+- Percy Bysshe Shelley — Sonnet: England in 1819 (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Love the Universe to-Day (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Wedded Souls (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Sufficient Unto the Day (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: To Italy (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Wine of the Fairies (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment of the Elegy on the Death of Bion (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Death in Life (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'The Death Knell Is Ringing' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment of the Elegy on the Death of Adonis (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: The Deserts of Dim Sleep (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Death in Life (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'Unrisen Splendour of the Brightest Sun' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Pater Omnipotens (poetrydb dropped)
+- Percy Bysshe Shelley — Fragments Written for Hellas (poetrydb dropped)
+- Percy Bysshe Shelley — To Constantia, Singing (poetrydb dropped)
+- Percy Bysshe Shelley — A Hate-Song (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: The Lake's Margin (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: To the People of England (poetrydb dropped)
+- Percy Bysshe Shelley — Love's Philosophy (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Love's Tender Atmosphere (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'Is It That in Some Brighter Sphere' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'Ye Gentle Visitations of Calm Thought' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'Wake the Serpent Not' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Rain (poetrydb dropped)
+- Percy Bysshe Shelley — Cancelled Passage of the Ode to Liberty (poetrydb dropped)
+- Percy Bysshe Shelley — Song of Proserpine While Gathering Flowers on the Plain of Enna (poetrydb dropped)
+- Percy Bysshe Shelley — An Ode, Written October, 1819, Before the Spaniards Had Recovered Their Liberty (poetrydb dropped)
+- Percy Bysshe Shelley — Ode to Liberty (poetrydb dropped)
+- Percy Bysshe Shelley — Cancelled Passage of the Ode to Liberty (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'The Viewless and Invisible Consequence' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'Alas! This Is Not What I Thought Life Was' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: To the Mind of Man (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'I Would Not Be a King' (poetrydb dropped)
+- Percy Bysshe Shelley — On Death (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Home (poetrydb dropped)
+- Percy Bysshe Shelley — To Constantia: Stanzas 1 and 2 (poetrydb dropped)
+- Percy Bysshe Shelley — A Fragment: To Music (poetrydb dropped)
+- Percy Bysshe Shelley — Lines to a Critic (poetrydb dropped)
+- Percy Bysshe Shelley — Lines Written on Hearing the News of the Death of Napoleon (poetrydb dropped)
+- Percy Bysshe Shelley — Fragments Supposed to Be Parts of Otho (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Satan Broken Loose (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: "Amor Aeternus" (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Thoughts Come and Go in Solitude (poetrydb dropped)
+- Percy Bysshe Shelley — Lines Written Among the Euganean Hills (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Apostrophe to Silence (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'My Head Is Wild With Weeping' (poetrydb dropped)
+- Percy Bysshe Shelley — Lines Written During the Castlereagh Administration (poetrydb dropped)
+- Percy Bysshe Shelley — Song to the Men of England (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'Follow to the Deep Wood's Weeds' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: The Sepulchre of Memory (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Music and Sweet Poetry (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'When a Lover Clasps His Fairest' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: A Tale Untold (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: A Roman's Chamber (poetrydb dropped)
+- Percy Bysshe Shelley — Variation of the Song of the Moon (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: To the Moon (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'Such Hope, As Is the Sick Despair of Good' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Milton's Spirit (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Supposed to Be an Epithalamium of Francis Ravaillac and Charlotte Corday (poetrydb dropped)
+- Percy Bysshe Shelley — Prince Athanase.  a Fragment (poetrydb dropped)
+- Percy Bysshe Shelley — Cancelled Passage of Mont Blanc (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment of a Ghost Story (poetrydb dropped)
+- Percy Bysshe Shelley — From the Original Draft of the Poem to William Shelley (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: To Byron (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: The Vine-Shroud (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'A Gentle Story of Two Lovers Young' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Rome and Nature (poetrydb dropped)
+- Percy Bysshe Shelley — The Two Spirits: An Allegory (poetrydb dropped)
+- Percy Bysshe Shelley — Lines to a Reviewer (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment of a Satire on Satire (poetrydb dropped)
+- Percy Bysshe Shelley — Time Long Past (poetrydb dropped)
+- Percy Bysshe Shelley — Lines Written on Hearing the News of the Death of Napoleon (poetrydb dropped)
+- Percy Bysshe Shelley — Love, Hope, Desire, and Fear (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment on Keats (poetrydb dropped)
+- Percy Bysshe Shelley — Stanza From a Translation of the Marseillaise Hymn (poetrydb dropped)
+- Percy Bysshe Shelley — Stanzas Written in Dejection, Near Naples (poetrydb dropped)
+- Percy Bysshe Shelley — To Constantia: Stanzas 1 and 2 (poetrydb dropped)
+- Percy Bysshe Shelley — Cancelled Stanza (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: A Wanderer (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: The Lady of the South (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'O Thou Immortal Deity' (poetrydb dropped)
+- Percy Bysshe Shelley — Autumn: A Dirge (poetrydb dropped)
+- Percy Bysshe Shelley — Lines Written in the Bay of Lerici (poetrydb dropped)
+- Percy Bysshe Shelley — Lines: 'We Meet Not As We Parted' (poetrydb dropped)
+- Percy Bysshe Shelley — Another Fragment: To Music (poetrydb dropped)
+- Percy Bysshe Shelley — A Fragment: To Music (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Music and Sweet Poetry (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Life Rounded With Sleep (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'I Faint, I Perish With My Love!' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Zephyrus the Awakener (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: May the Limner (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'The Death Knell Is Ringing' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'I Stood upon a Heaven-Cleaving Turret' (poetrydb dropped)
+- Percy Bysshe Shelley — Lines: 'When the Lamp Is Shattered' (poetrydb dropped)
+- Percy Bysshe Shelley — To Death (poetrydb dropped)
+- Percy Bysshe Shelley — Eyes: A Fragment (poetrydb dropped)
+- Percy Bysshe Shelley — Song. Translated From the German (poetrydb dropped)
+- Percy Bysshe Shelley — Melody to a Scene of Former Times (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'And That I Walk Thus Proudly Crowned' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'The Rude Wind Is Singing' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'Great Spirit' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Beauty's Halo (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment of the Elegy on the Death of Adonis (poetrydb dropped)
+- Percy Bysshe Shelley — To the Moonbeam (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'Such Hope, As Is the Sick Despair of Good' (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'Such Hope, As Is the Sick Despair of Good' (poetrydb dropped)
+- Percy Bysshe Shelley — Love, Hope, Desire, and Fear (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: To the Moon (poetrydb dropped)
+- Percy Bysshe Shelley — To Harriet (poetrydb dropped)
+- Percy Bysshe Shelley — Sonnet.  on Launching Some Bottles Filled With Knowledge into the Bristol Channel (poetrydb dropped)
+- Percy Bysshe Shelley — To a Star (poetrydb dropped)
+- Percy Bysshe Shelley — To the Queen of My Heart (poetrydb dropped)
+- Percy Bysshe Shelley — To Ianthe (poetrydb dropped)
+- Percy Bysshe Shelley — On an Icicle That Clung to the Grass of a Grave (poetrydb dropped)
+- Percy Bysshe Shelley — To Ireland (poetrydb dropped)
+- Percy Bysshe Shelley — Sonnet.  to a Balloon Laden With Knowledge (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: To a Friend Released From Prison (poetrydb dropped)
+- Percy Bysshe Shelley — Lines to a Critic (poetrydb dropped)
+- Percy Bysshe Shelley — To the Nile (poetrydb dropped)
+- Percy Bysshe Shelley — Ode to Heaven (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Sufficient Unto the Day (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: To Italy (poetrydb dropped)
+- Percy Bysshe Shelley — To Edward Williams (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: To the People of England (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: To the Mind of Man (poetrydb dropped)
+- Percy Bysshe Shelley — Song to the Men of England (poetrydb dropped)
+- Percy Bysshe Shelley — Ode to the West Wind (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: 'Follow to the Deep Wood's Weeds' (poetrydb dropped)
+- Percy Bysshe Shelley — To a Skylark (poetrydb dropped)
+- Percy Bysshe Shelley — To the Moon (poetrydb dropped)
+- Percy Bysshe Shelley — Hymn to Intellectual Beauty (poetrydb dropped)
+- Percy Bysshe Shelley — To the Lord Chancellor (poetrydb dropped)
+- Percy Bysshe Shelley — Lines to a Reviewer (poetrydb dropped)
+- Percy Bysshe Shelley — To Emilia Viviani (poetrydb dropped)
+- Percy Bysshe Shelley — Homer's Hymn to the Sun (poetrydb dropped)
+- Percy Bysshe Shelley — The Magnetic Lady to Her Patient (poetrydb dropped)
+- Percy Bysshe Shelley — Melody to a Scene of Former Times (poetrydb dropped)
+- Percy Bysshe Shelley — Homer's Hymn to the Earth: Mother of All (poetrydb dropped)
+- Percy Bysshe Shelley — To the Moonbeam (poetrydb dropped)
+- Percy Bysshe Shelley — Homer's Hymn to the Moon (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment, or the Triumph of Conscience (poetrydb dropped)
+- Percy Bysshe Shelley — To Edward Williams (poetrydb dropped)
+- Percy Bysshe Shelley — Homer's Hymn to the Moon (poetrydb dropped)
+- Percy Bysshe Shelley — Stanzas From Calderon's Cisma De Inglaterra (poetrydb dropped)
+- Percy Bysshe Shelley — Epitaphium (poetrydb dropped)
+- Percy Bysshe Shelley — Love's Rose (poetrydb dropped)
+- Percy Bysshe Shelley — Song. Translated From the Italian (poetrydb dropped)
+- Percy Bysshe Shelley — The Irishman's Song (poetrydb dropped)
+- Percy Bysshe Shelley — To the Republicans of North America (poetrydb dropped)
+- William Topaz McGonagall — Lost in the Prairie (poetrydb dropped)

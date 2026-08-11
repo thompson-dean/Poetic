@@ -20,13 +20,9 @@ struct IntegratedSearchView: View {
             ZStack {
                 backgroundImage
                 VStack(alignment: .leading) {
-                    searchTypePicker
                     searchResultsView
                 }
-                .onAppear {
-                    viewModel.listenToSearch()
-                }
-                .onChange(of: viewModel.searchState) { newState, _ in
+                .onChange(of: viewModel.searchState) { _, newState in
                     if newState == .failed {
                         alertMessage = viewModel.searchListLoadingError
                         didFail = true
@@ -46,7 +42,7 @@ struct IntegratedSearchView: View {
                 }
             }
         }
-        .searchable(text: $viewModel.searchTerm)
+        .searchable(text: $viewModel.searchTerm, prompt: "Poems, lines, or poets")
         .navigationViewStyle(StackNavigationViewStyle())
     }
 
@@ -56,40 +52,20 @@ struct IntegratedSearchView: View {
             .ignoresSafeArea()
     }
 
-    private var searchTypePicker: some View {
-        Picker("", selection: $viewModel.isTitle) {
-            Text("Title").tag(true)
-            Text("Author").tag(false)
-        }
-        .pickerStyle(SegmentedPickerStyle())
-        .padding(.horizontal, 16)
-        .padding(.top, 4)
-        .padding(.bottom, viewModel.isTitle ? 0 : 8)
-    }
-
     @ViewBuilder
     private var searchResultsView: some View {
         VStack(alignment: .leading) {
             ScrollView(showsIndicators: false) {
-                if viewModel.isTitle {
-                    titleSearchResults
-                } else {
-                    authorSearchResults
+                switch viewModel.searchState {
+                case .idle, .failed:
+                    featuredAndRecommendedAuthors
+                case .loading:
+                    loadingView
+                case .loaded:
+                    loadedResults
                 }
             }
             Spacer()
-        }
-    }
-
-    @ViewBuilder
-    private var titleSearchResults: some View {
-        switch viewModel.searchState {
-        case .idle, .failed:
-            featuredAndRecommendedAuthors
-        case .loading:
-            loadingView
-        case .loaded:
-            loadedTitleResults
         }
     }
 
@@ -117,6 +93,20 @@ struct IntegratedSearchView: View {
                     }
                     .buttonStyle(FlatLinkStyle())
                 }
+
+                NavigationLink {
+                    AuthorIndexView(viewModel: viewModel, authors: authors.authors)
+                } label: {
+                    HStack {
+                        Text("Browse all authors")
+                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                        Image(systemName: "chevron.right")
+                    }
+                    .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                    .padding(.horizontal, 16)
+                    .padding(.top, 4)
+                }
+                .buttonStyle(FlatLinkStyle())
 
                 Text("Recommended")
                     .foregroundColor(.primary)
@@ -148,31 +138,114 @@ struct IntegratedSearchView: View {
     }
 
     @ViewBuilder
-    private var loadedTitleResults: some View {
-        ForEach(viewModel.poems, id: \.self) { poem in
-            NavigationLink {
-                DetailView(poem: poem)
-            } label: {
-                LazyVStack {
-                    PoemCell(poem: poem, colorScheme: colorScheme)
+    private var loadedResults: some View {
+        LazyVStack(alignment: .leading) {
+            if !viewModel.searchAuthors.isEmpty {
+                sectionTitle("Poets")
+                ForEach(viewModel.searchAuthors, id: \.self) { author in
+                    NavigationLink {
+                        AuthorView(viewModel: viewModel, author: author)
+                    } label: {
+                        AuthorCell(author: author)
+                    }
+                    .buttonStyle(FlatLinkStyle())
                 }
             }
-            .buttonStyle(FlatLinkStyle())
+
+            if !viewModel.searchPoems.isEmpty {
+                sectionTitle("Poems")
+                ForEach(viewModel.searchPoems, id: \.self) { match in
+                    NavigationLink {
+                        DetailView(poem: match.poem)
+                    } label: {
+                        SearchResultCell(match: match, colorScheme: colorScheme)
+                    }
+                    .buttonStyle(FlatLinkStyle())
+                }
+            }
+
+            if viewModel.searchAuthors.isEmpty && viewModel.searchPoems.isEmpty {
+                ContentUnavailableView.search(text: viewModel.searchTerm)
+                    .padding(.top, 40)
+            }
         }
+        .padding(.top, 8)
     }
 
-    @ViewBuilder
-    private var authorSearchResults: some View {
-        ForEach(authors.authors.filter { author in
-            viewModel.searchTerm.isEmpty || author.lowercased().contains(viewModel.searchTerm.lowercased())
-        }, id: \.self) { author in
-            NavigationLink {
-                AuthorView(viewModel: viewModel, author: author)
-            } label: {
-                AuthorCell(author: author)
+    private func sectionTitle(_ text: String) -> some View {
+        Text(text)
+            .foregroundColor(.primary)
+            .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
+            .padding(.horizontal, 16)
+            .padding(.top, 8)
+    }
+}
+
+struct AuthorIndexView: View {
+    @Environment(\.colorScheme) var colorScheme
+    @ObservedObject var viewModel: PoemViewModel
+    let authors: [String]
+
+    var body: some View {
+        ScrollView(showsIndicators: false) {
+            LazyVStack(alignment: .leading) {
+                ForEach(authors, id: \.self) { author in
+                    NavigationLink {
+                        AuthorView(viewModel: viewModel, author: author)
+                    } label: {
+                        AuthorCell(author: author)
+                    }
+                    .buttonStyle(FlatLinkStyle())
+                }
             }
-            .buttonStyle(FlatLinkStyle())
+            .padding(.top, 8)
         }
+        .background(
+            Image(colorScheme == .light ? "background" : "background-dark")
+                .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+                .ignoresSafeArea()
+        )
+        .navigationTitle("All Authors")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+struct SearchResultCell: View {
+    let match: PoemSearchMatch
+    let colorScheme: ColorScheme
+
+    var body: some View {
+        VStack {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(match.poem.author)
+                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
+                        .foregroundColor(.primary)
+
+                    Text(match.poem.title)
+                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                        .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+
+                    if let line = match.matchedLine {
+                        Text("“\(line)”")
+                            .fontWithLineHeight(font: .italicSystemFont(ofSize: 14), lineHeight: 20)
+                            .foregroundColor(.primary.opacity(0.6))
+                            .lineLimit(1)
+                    }
+                }
+                .padding(.vertical, 8)
+                .padding(.horizontal, 8)
+
+                Spacer()
+
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.primary)
+                    .padding(8)
+            }
+        }
+        .background(colorScheme == .light ? .white : .black)
+        .cornerRadius(8)
+        .padding(.horizontal, 8)
     }
 }
 

@@ -48,3 +48,7 @@ xcuserdata
 
 profile
 .moved-aside
+
+# Catalog pipeline raw downloads
+Tools/catalog/cache/
+__pycache__/

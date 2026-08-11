@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var viewModel = PoemViewModel(apiService: APIService())
+    @StateObject var viewModel = PoemViewModel(service: LocalPoemService())
     @ObservedObject var storeKitManager: StoreKitManager
 
     let notificationManager = NotificationManager()

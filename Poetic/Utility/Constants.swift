@@ -11,9 +11,9 @@ enum Constants {
     static let appName = "Poetic"
     static let darkModeEnable = "darkModeEnabled"
     static let systemThemeEnabled = "systemThemeEnabled"
-    static let featuredAuthor1 = "featuredAuthors"
-    static let featuredAuthor2 = "featuredAuthors"
-    static let featuredAuthor3 = "featuredAuthors"
+    static let featuredAuthor1 = "featuredAuthor1"
+    static let featuredAuthor2 = "featuredAuthor2"
+    static let featuredAuthor3 = "featuredAuthor3"
 
     static let storeKitIdentifiers = [
         "Dean.Thompson.Poetic.smallTip",
