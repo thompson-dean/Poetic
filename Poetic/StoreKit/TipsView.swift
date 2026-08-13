@@ -28,23 +28,49 @@ struct TipsView: View {
                 }
             }
 
-            Text("Enjoying the app so far?")
+            Text("Support Poetic")
                 .font(.system(.title2).bold())
                 .multilineTextAlignment(.center)
 
             // swiftlint:disable line_length
-            Text("If Poetic enriches your days or sparks your imagination, consider leaving a tip. Every contribution, large or small, helps enhance the Poetic App. Thank you for your generosity!")
+            Text("All the poetry in Poetic is free — and it always will be. Becoming a supporter unlocks the Favorites home screen widget (and future little extras) as a thank you.")
                 .multilineTextAlignment(.center)
-                .padding(.bottom, 16)
+                .padding(.bottom, 8)
             // swiftlint:enable line_length
 
-            ForEach(storeKitManager.items) { item in
+            if let supporter = storeKitManager.supporterProduct {
+                SupporterItemView(
+                    item: supporter,
+                    isUnlocked: storeKitManager.isSupporter
+                ) {
+                    Task {
+                        await storeKitManager.purchase(supporter)
+                    }
+                }
+            }
+
+            Text("Just want to leave a tip? These don't unlock anything — they're pure kindness.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.top, 8)
+
+            ForEach(storeKitManager.tips) { item in
                 TipsItemView(item: item) {
                     Task {
                         await storeKitManager.purchase(item)
                     }
                 }
             }
+
+            Button("Restore Purchases") {
+                Task {
+                    await storeKitManager.restorePurchases()
+                }
+            }
+            .font(.footnote)
+            .foregroundStyle(.secondary)
+            .padding(.top, 4)
         }
         .padding(16)
         .background(
@@ -61,6 +87,44 @@ struct TipsView: View {
                 .padding(6)
                 .offset(y: -25)
         }
+    }
+}
+
+struct SupporterItemView: View {
+    @Environment(\.colorScheme) var colorScheme
+    let item: Product
+    let isUnlocked: Bool
+    let purchaseButtonTapped: () -> Void
+
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 3) {
+                Text(item.displayName)
+                    .font(.system(.title3, design: .rounded).bold())
+                Text(item.description)
+                    .font(.system(.callout, design: .rounded).weight(.regular))
+            }
+
+            Spacer()
+
+            if isUnlocked {
+                Label("Unlocked", systemImage: "checkmark.seal.fill")
+                    .font(.callout.bold())
+                    .foregroundStyle(.green)
+            } else {
+                Button(item.displayPrice) {
+                    purchaseButtonTapped()
+                }
+                .tint(colorScheme == .light ? Color.lightThemeColor : Color.darkThemeColor)
+                .buttonStyle(.borderedProminent)
+                .font(.callout.bold())
+            }
+        }
+        .padding(16)
+        .background(
+            Color(UIColor.systemBackground),
+            in: RoundedRectangle(cornerRadius: 10, style: .continuous)
+        )
     }
 }
 

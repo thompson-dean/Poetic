@@ -143,6 +143,16 @@ final class CatalogTests: XCTestCase {
         XCTAssertTrue(results.authors.contains("William Butler Yeats"))
     }
 
+    func test_poemTitledBy_findsExactAndFoldedMatches() async throws {
+        let service = LocalPoemService()
+        let exact = try await service.poem(titled: "Ozymandias", by: "Percy Bysshe Shelley")
+        XCTAssertEqual(exact?.title, "Ozymandias")
+        let folded = try await service.poem(titled: "the road to kerity", by: "charlotte mew")
+        XCTAssertEqual(folded?.title, "The Road to Kérity")
+        let unknown = try await service.poem(titled: "Nonexistent", by: "Nobody")
+        XCTAssertNil(unknown)
+    }
+
     func test_search_emptyQueryReturnsNothing() async throws {
         let service = LocalPoemService()
         let results = try await service.search(matching: "   ")

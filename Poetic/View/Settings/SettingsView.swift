@@ -85,7 +85,7 @@ private extension SettingsView {
                 .font(.system(.title2).bold())
                 .multilineTextAlignment(.center)
 
-            Text("Thank you for your generous tip! Here's to more inspiring verses and enriched experiences, together!")
+            Text("Thank you for supporting Poetic! Here's to more inspiring verses and enriched experiences, together!")
                 .font(.system(.body, design: .rounded))
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 16)
@@ -212,15 +212,15 @@ private extension SettingsView {
                 isShowingTipsView.toggle()
             } label: {
                 HStack {
-                    Image(systemName: "cup.and.saucer")
+                    Image(systemName: "heart")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 32, height: 32)
                         .padding(.trailing)
                     VStack(alignment: .leading, spacing: 3) {
-                        Text("Tip Jar")
+                        Text("Support Poetic")
 
-                        Text("Support the dev. Support the app.")
+                        Text("Unlock the Favorites widget. Poetry stays free.")
                             .font(.caption)
                     }
                     Spacer()

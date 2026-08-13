@@ -16,7 +16,9 @@ struct PoeticApp: App {
     init() {
         let stack = PersistenceStack()
         self.stack = stack
-        _store = StateObject(wrappedValue: PoemStore(stack: stack))
+        _store = StateObject(
+            wrappedValue: PoemStore(stack: stack, widgetSync: LiveWidgetFavoritesSync())
+        )
     }
 
     var body: some Scene {

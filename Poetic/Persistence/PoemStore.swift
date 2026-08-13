@@ -32,12 +32,15 @@ final class PoemStore: ObservableObject {
     }
 
     private let stack: PersistenceStack
+    private let widgetSync: WidgetFavoritesSyncing?
     private var context: NSManagedObjectContext { stack.viewContext }
 
-    init(stack: PersistenceStack) {
+    init(stack: PersistenceStack, widgetSync: WidgetFavoritesSyncing? = nil) {
         self.stack = stack
+        self.widgetSync = widgetSync
         refresh()
         pruneRecents(olderThan: 14)
+        widgetSync?.favoritesDidChange(favorites.map { $0.asPoem() })
     }
 
     // MARK: - Favorites
@@ -150,6 +153,7 @@ final class PoemStore: ObservableObject {
             }
         }
         refresh()
+        widgetSync?.favoritesDidChange(favorites.map { $0.asPoem() })
     }
 
     private func refresh() {

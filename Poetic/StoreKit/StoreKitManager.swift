@@ -7,6 +7,7 @@
 
 import Foundation
 import StoreKit
+import WidgetKit
 
 enum PaymentError: LocalizedError {
     case failedVerification
@@ -47,6 +48,7 @@ typealias TransactionListener = Task<Void, Error>
 @MainActor
 final class StoreKitManager: ObservableObject {
     @Published private(set) var items: [Product] = []
+    @Published private(set) var isSupporter: Bool
     @Published var hasError: Bool = false
     @Published private(set) var paymentState: PaymentState? {
         didSet {
@@ -68,12 +70,27 @@ final class StoreKitManager: ObservableObject {
         }
     }
 
+    /// The one-time supporter unlock; tips remain simple consumables.
+    var supporterProduct: Product? {
+        items.first { $0.id == Constants.supporterIdentifier }
+    }
+
+    var tips: [Product] {
+        items.filter { $0.type == .consumable }
+    }
+
+    private let entitlement: SupporterEntitlement
     private var transactionListener: TransactionListener?
 
-    init() {
-        transactionListener = confiureTransactionListener()
+    init(entitlement: SupporterEntitlement = SupporterEntitlement()) {
+        self.entitlement = entitlement
+        // Cached flag keeps the UI correct offline and before the
+        // entitlement refresh completes.
+        self.isSupporter = entitlement.isSupporter
+        transactionListener = configureTransactionListener()
         Task { [weak self] in
             await self?.retrieveProducts()
+            await self?.refreshEntitlements()
         }
     }
 
@@ -92,25 +109,68 @@ final class StoreKitManager: ObservableObject {
         }
     }
 
+    func restorePurchases() async {
+        do {
+            try await AppStore.sync()
+            await refreshEntitlements()
+        } catch {
+            paymentState = .failed(.system(error))
+        }
+    }
+
+    /// Rebuilds the supporter flag from the App Store's current entitlements.
+    /// currentEntitlements excludes revoked transactions, so setting the
+    /// result unconditionally also handles refunds on next launch.
+    func refreshEntitlements() async {
+        var supporter = false
+        for await result in Transaction.currentEntitlements {
+            guard case .verified(let transaction) = result else { continue }
+            if transaction.productID == Constants.supporterIdentifier,
+               transaction.revocationDate == nil {
+                supporter = true
+            }
+        }
+        setSupporter(supporter)
+    }
+
     func reset() {
         paymentState = nil
     }
 }
 
 private extension StoreKitManager {
-    func confiureTransactionListener() -> TransactionListener {
+    func configureTransactionListener() -> TransactionListener {
         Task.detached(priority: .background) { @MainActor [weak self] in
-            do {
-                for await result in Transaction.updates {
-                    let transaction = try self?.checkVerified(result)
-                    self?.paymentState = .successful
-                    await transaction?.finish()
+            for await result in Transaction.updates {
+                guard let self else { return }
+                // Per-iteration catch: one failed verification must not
+                // kill the listener for the rest of the session.
+                do {
+                    let transaction = try self.checkVerified(result)
+                    self.handle(transaction)
+                    await transaction.finish()
+                } catch {
+                    print("DEBUG: transaction update failed verification: \(error)")
                 }
-            } catch {
-                self?.paymentState = .failed(.system(error))
-                print(error)
             }
         }
+    }
+
+    func handle(_ transaction: Transaction) {
+        if transaction.productID == Constants.supporterIdentifier {
+            // revocationDate is set on refunds — relock.
+            setSupporter(transaction.revocationDate == nil)
+        }
+        if transaction.revocationDate == nil {
+            paymentState = .successful
+        }
+    }
+
+    func setSupporter(_ value: Bool) {
+        entitlement.set(value)
+        guard value != isSupporter else { return }
+        isSupporter = value
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     func retrieveProducts() async {
@@ -129,7 +189,7 @@ private extension StoreKitManager {
         switch result {
         case .success(let verification):
             let transaction = try checkVerified(verification)
-            paymentState = .successful
+            handle(transaction)
             await transaction.finish()
         case .pending:
             paymentState = .pending

@@ -58,16 +58,6 @@ struct PoemCard: View {
     }
 
     private func filteredLines(_ lines: [String]) -> [String] {
-        var result: [String] = []
-        for line in lines {
-            let trimmedLine = line.trimmingCharacters(in: .whitespacesAndNewlines)
-            if !trimmedLine.isEmpty && trimmedLine.count >= 4 {
-                result.append(trimmedLine)
-                if result.count == 3 {
-                    break
-                }
-            }
-        }
-        return result
+        PoemExcerpt.lines(from: lines, limit: 3)
     }
 }

@@ -15,8 +15,10 @@ struct Poem: Codable, Hashable {
 }
 
 extension Poem: Identifiable {
-    var id: UUID {
-        UUID()
+    /// Stable identity matching the app's real poem key — the Core Data
+    /// uniqueness constraint and deep links both use (title, author).
+    var id: String {
+        "\(title)|\(author)"
     }
 }
 

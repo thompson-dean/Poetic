@@ -35,11 +35,6 @@ struct PoemView: View {
                     } label: {
                         Label("Share this quote", systemImage: "square.and.arrow.up")
                     }
-
-                    Button { } label: {
-                        Label("Cancel", systemImage: "delete.left")
-
-                    }
                 }
         } else {
             Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
@@ -59,12 +54,6 @@ struct PoemView: View {
                         )
                     } label: {
                         Label("Share this quote", systemImage: "square.and.arrow.up")
-                    }
-                    Button {
-
-                    } label: {
-                        Label("Cancel", systemImage: "delete.left")
-
                     }
                 }
         }

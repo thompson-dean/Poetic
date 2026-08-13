@@ -15,9 +15,13 @@ enum Constants {
     static let featuredAuthor2 = "featuredAuthor2"
     static let featuredAuthor3 = "featuredAuthor3"
 
-    static let storeKitIdentifiers = [
+    static let supporterIdentifier = "Dean.Thompson.Poetic.supporter"
+
+    static let tipIdentifiers = [
         "Dean.Thompson.Poetic.smallTip",
         "Dean.Thompson.Poetic.mediumTip",
         "Dean.Thompson.Poetic.largeTip"
     ]
+
+    static let storeKitIdentifiers = tipIdentifiers + [supporterIdentifier]
 }

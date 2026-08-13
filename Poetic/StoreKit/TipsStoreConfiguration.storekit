@@ -48,6 +48,21 @@
       "productID" : "Dean.Thompson.Poetic.largeTip",
       "referenceName" : "Large Tip",
       "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "A7C31E90",
+      "localizations" : [
+        {
+          "description" : "Unlocks the Favorites widget and future perks. Poetry stays free, always.",
+          "displayName" : "Poetic Supporter",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "Dean.Thompson.Poetic.supporter",
+      "referenceName" : "Poetic Supporter",
+      "type" : "NonConsumable"
     }
   ],
   "settings" : {

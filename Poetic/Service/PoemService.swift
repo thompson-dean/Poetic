@@ -37,6 +37,12 @@ protocol PoemServiceProtocol {
     /// Unified search over authors, titles, and poem text.
     /// Case- and diacritic-insensitive; poems ranked title-match first.
     func search(matching query: String) async throws -> PoemSearchResults
+
+    /// Exact (folded) title + author lookup — used to resolve deep links.
+    func poem(titled title: String, by author: String) async throws -> Poem?
+
+    /// The entire catalog — used by the widget payload builder.
+    func allPoems() async throws -> [Poem]
 }
 
 /// Serves poems from the bundled `PoemCatalog.json` — no network involved.
@@ -103,6 +109,19 @@ actor LocalPoemService: PoemServiceProtocol {
             .prefix(50)
             .map(\.match)
         return PoemSearchResults(authors: Array(authors.sorted().prefix(10)), poems: Array(rankedPoems))
+    }
+
+    func allPoems() async throws -> [Poem] {
+        try await loadCatalog()
+    }
+
+    func poem(titled title: String, by author: String) async throws -> Poem? {
+        let foldedTitle = Self.fold(title)
+        let foldedAuthor = Self.fold(author)
+        let entries = try await loadIndex()
+        return entries.first {
+            $0.foldedTitle == foldedTitle && $0.foldedAuthor == foldedAuthor
+        }?.poem
     }
 
     // MARK: - Index

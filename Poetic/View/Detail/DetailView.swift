@@ -74,6 +74,7 @@ struct DetailView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         store.toggleFavorite(poem)
+                        HapticFeedbackGenerator.shared.simpleHapticSuccess()
                     } label: {
                         Image(systemName: store.isFavorited(poem) ? "star.fill" : "star")
                     }

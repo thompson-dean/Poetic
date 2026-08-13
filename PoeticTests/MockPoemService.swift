@@ -28,6 +28,21 @@ final class MockPoemService: PoemServiceProtocol, Mockable {
         }
     }
 
+    func allPoems() async throws -> [Poem] {
+        if isFailedResponse {
+            throw CatalogError.loadFailed
+        }
+        return self.loadJSON(filename: "mockResponse", type: Poem.self)
+    }
+
+    func poem(titled title: String, by author: String) async throws -> Poem? {
+        if isFailedResponse {
+            throw CatalogError.loadFailed
+        }
+        let poems: [Poem] = self.loadJSON(filename: "mockResponse", type: Poem.self)
+        return poems.first { $0.title == title && $0.author == author }
+    }
+
     func search(matching query: String) async throws -> PoemSearchResults {
         if isFailedResponse {
             throw CatalogError.loadFailed

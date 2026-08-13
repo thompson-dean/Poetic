@@ -11,9 +11,10 @@ struct HomeView: View {
     @ObservedObject var viewModel: PoemViewModel
     @EnvironmentObject var store: PoemStore
     @Environment(\.colorScheme) var colorScheme
+    @Binding var path: NavigationPath
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             ZStack(alignment: .leading) {
                 backgroundImage
                 ScrollView(.vertical, showsIndicators: false) {
@@ -24,6 +25,9 @@ struct HomeView: View {
                 }
             }
             .navigationBarHidden(true)
+            .navigationDestination(for: Poem.self) { poem in
+                DetailView(poem: poem)
+            }
         }
     }
 

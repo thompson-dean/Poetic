@@ -83,12 +83,6 @@ struct QuoteView: View {
                                 } label: {
                                     Label("Share", systemImage: "square.and.arrow.up")
                                 }
-
-                                Button {
-
-                                } label: {
-                                    Label("Cancel", systemImage: "delete.left")
-                                }
                             }
                             .listRowBackground(Color.clear)
                             .listRowSeparator(.hidden)
