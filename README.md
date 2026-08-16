@@ -1,5 +1,3 @@
-[![Build Status](https://app.bitrise.io/app/e99fded6-87bd-4590-82bd-bbe377b8db99/status.svg?token=BscKkqczQxAiKO6w1Kfucw&branch=main)](https://app.bitrise.io/app/e99fded6-87bd-4590-82bd-bbe377b8db99) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT) 
-
 # Poetic
 
 Poetic is a mobile app designed to bring the world of classic English poetry right to your fingertips. Built to fuel my passion for poetry and my learning journey in iOS development, Poetic allows users to search through thousands of poems, save favorites, share with friends, and discover new poetry easily.
