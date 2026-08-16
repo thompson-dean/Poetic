@@ -61,7 +61,6 @@ struct SettingsView: View {
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
         }
-        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
@@ -261,6 +260,7 @@ private extension SettingsView {
 
     var linksSection: some View {
         Section {
+            Button("FIREBASE TEST CRASH") { fatalError("TEST CRASH")}
             Button {
                 if let url = URL(string: Links.appStoreDeepLink) {
                             UIApplication.shared.open(url)
@@ -383,7 +383,7 @@ private extension SettingsView {
                         .cornerRadius(5)
 
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("Poetic version 3.0.0")
+                        Text("Poetic version \(Bundle.main.appVersion)")
                         HStack(spacing: 3) {
                             Text("Made with love by")
 
