@@ -260,7 +260,6 @@ private extension SettingsView {
 
     var linksSection: some View {
         Section {
-            Button("FIREBASE TEST CRASH") { fatalError("TEST CRASH")}
             Button {
                 if let url = URL(string: Links.appStoreDeepLink) {
                             UIApplication.shared.open(url)
