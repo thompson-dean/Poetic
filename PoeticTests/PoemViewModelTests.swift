@@ -441,5 +441,59 @@ final class PoemViewModelTests: XCTestCase {
             "The cache for the given search term should hold 7 Poem items."
         )
     }
+
+    func test_PoemViewModel_pickFeaturedAuthors_putsPoetOfTheDayFirstWithDistinctPicks() {
+        // Given
+        let allAuthors = ["Alpha", "Beta", "Gamma", "Delta"]
+        viewModel = PoemViewModel(service: MockPoemService())
+
+        // When
+        viewModel.pickFeaturedAuthors(from: allAuthors, poetOfTheDay: "Gamma")
+
+        // Then
+        XCTAssertEqual(viewModel.featuredAuthors.count, 3)
+        XCTAssertEqual(viewModel.featuredAuthors.first, "Gamma")
+        XCTAssertEqual(
+            Set(viewModel.featuredAuthors).count,
+            viewModel.featuredAuthors.count,
+            "Featured authors should never contain duplicates."
+        )
+    }
+
+    func test_PoemViewModel_pickFeaturedAuthors_ignoresPoetNotInRoster() {
+        // Given
+        let allAuthors = ["Alpha", "Beta", "Gamma"]
+        viewModel = PoemViewModel(service: MockPoemService())
+
+        // When
+        viewModel.pickFeaturedAuthors(from: allAuthors, poetOfTheDay: "Nobody")
+
+        // Then
+        XCTAssertEqual(viewModel.featuredAuthors.count, 3)
+        XCTAssertFalse(viewModel.featuredAuthors.contains("Nobody"))
+    }
+
+    func test_PoemViewModel_loadDiscoverPoems_populatesIndependentlyOfRandomPoems() async {
+        let expectation = XCTestExpectation(description: "Discover Poems")
+
+        // Given
+        viewModel = PoemViewModel(service: MockPoemService())
+
+        // When
+        viewModel.loadDiscoverPoems(number: "5")
+
+        // Then
+        viewModel
+            .$discoverPoems
+            .first(where: { !$0.isEmpty })
+            .sink { value in
+                XCTAssertFalse(value.isEmpty, "The discover array should be populated.")
+                expectation.fulfill()
+            }
+            .store(in: &cancellables)
+
+        await fulfillment(of: [expectation], timeout: 2)
+        XCTAssertTrue(viewModel.randomPoems.isEmpty, "Discover must not touch the Home random poems.")
+    }
 }
 // swiftlint:enable type_body_length file_length

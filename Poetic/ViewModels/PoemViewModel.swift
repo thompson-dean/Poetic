@@ -33,10 +33,8 @@ class PoemViewModel: ObservableObject {
 
     @AppStorage(Constants.darkModeEnable) var darkModeEnabled = false
     @AppStorage(Constants.systemThemeEnabled) var systemThemeEnabled = true
-    @AppStorage(Constants.featuredAuthor1) var featuredAuthor1: String = ""
-    @AppStorage(Constants.featuredAuthor2) var featuredAuthor2: String = ""
-    @AppStorage(Constants.featuredAuthor3) var featuredAuthor3: String = ""
-
+    @Published private(set) var featuredAuthors = [String]()
+    @Published private(set) var discoverPoems = [Poem]()
     @Published private(set) var searchAuthors = [String]()
     @Published private(set) var searchPoems = [PoemSearchMatch]()
     @Published private(set) var randomPoems = [Poem]()
@@ -79,6 +77,24 @@ class PoemViewModel: ObservableObject {
                 state = .failed
             }
         }
+    }
+
+    /// Search-tab discovery picks, separate from Home's `randomPoems` so the
+    /// two tabs never show the same list.
+    func loadDiscoverPoems(number: String) {
+        Task {
+            discoverPoems = (try? await service.fetchPoems(searchTerm: number, filter: .random)) ?? []
+        }
+    }
+
+    /// Poet of the Day first, then distinct random picks — never duplicates.
+    func pickFeaturedAuthors(from allAuthors: [String], poetOfTheDay: String?, count: Int = 3) {
+        var picks = [String]()
+        if let poet = poetOfTheDay, allAuthors.contains(poet) {
+            picks.append(poet)
+        }
+        picks += allAuthors.filter { !picks.contains($0) }.shuffled().prefix(max(0, count - picks.count))
+        featuredAuthors = picks
     }
 
     func search(searchTerm: String) {

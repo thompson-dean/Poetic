@@ -12,6 +12,7 @@ struct HomeView: View {
     @EnvironmentObject var store: PoemStore
     @Environment(\.colorScheme) var colorScheme
     @Binding var path: NavigationPath
+    @Binding var showSettings: Bool
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -42,16 +43,28 @@ struct HomeView: View {
             header
             discoverText
             recommendedSection
+            poetOfTheDaySection
             recentSection
         }
         .padding(.top, 24)
     }
 
     private var header: some View {
-        Text("Poetic.")
-            .fontWithLineHeight(font: Fonts.newYorkFont, lineHeight: 48)
-            .foregroundColor(.primary)
-            .padding(.horizontal, 16)
+        HStack {
+            Text("Poetic.")
+                .fontWithLineHeight(font: Fonts.newYorkFont, lineHeight: 48)
+                .foregroundColor(.primary)
+            Spacer()
+            Button {
+                showSettings = true
+            } label: {
+                Image(systemName: "gearshape")
+                    .font(.system(size: 22, weight: .medium))
+                    .foregroundColor(.primary)
+            }
+            .accessibilityLabel("Settings")
+        }
+        .padding(.horizontal, 16)
     }
 
     private var discoverText: some View {
@@ -80,11 +93,29 @@ struct HomeView: View {
         }
     }
 
+    private var poetOfTheDaySection: some View {
+        VStack(alignment: .leading) {
+            if let poet = DailyPoetPicker.poet(for: Date(), in: PoetBios.all) {
+                sectionTitle("Poet of the Day")
+                NavigationLink {
+                    AuthorView(viewModel: viewModel, author: poet.author)
+                } label: {
+                    PoetOfTheDayCard(bio: poet)
+                }
+                .buttonStyle(FlatLinkStyle())
+            }
+        }
+    }
+
     private var recentSection: some View {
         VStack(alignment: .leading) {
             sectionTitle("Recent")
             if store.recents.isEmpty {
-                ContentUnavailableView("No recents", systemImage: "text.page")
+                Text("Poems you read will appear here.")
+                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 22)
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
             } else {
                 viewedPoemsList
             }

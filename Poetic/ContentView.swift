@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum AppTab: Hashable {
-    case home, explore, favorites, quotes, settings
+    case home, explore, favorites, quotes
 }
 
 struct ContentView: View {
@@ -22,13 +22,14 @@ struct ContentView: View {
     @State private var selectedTab: AppTab = .home
     @State private var homePath = NavigationPath()
     @State private var deepLinkFailed = false
+    @State private var showSettings = false
 
     let notificationManager = NotificationManager()
     var authors: Authors = Bundle.main.decode("Authors.json")
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            HomeView(viewModel: viewModel, path: $homePath)
+            HomeView(viewModel: viewModel, path: $homePath, showSettings: $showSettings)
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
@@ -48,16 +49,14 @@ struct ContentView: View {
                     Label("Quotes", systemImage: "quote.bubble.fill")
                 }
                 .tag(AppTab.quotes)
+        }
+        .accentColor(.primary)
+        .sheet(isPresented: $showSettings) {
             SettingsView(
                 viewModel: viewModel,
                 storeKitManager: storeKitManager
             )
-                .tabItem {
-                    Label("Menu", systemImage: "line.3.horizontal")
-                }
-                .tag(AppTab.settings)
         }
-        .accentColor(.primary)
         .onOpenURL { url in
             handle(url)
         }
@@ -75,9 +74,11 @@ struct ContentView: View {
 
             viewModel.resetBadgeCount()
             viewModel.loadRandomPoems(number: "5")
-            viewModel.featuredAuthor1 = authors.authors.randomElement() ?? ""
-            viewModel.featuredAuthor2 = authors.authors.randomElement() ?? ""
-            viewModel.featuredAuthor3 = authors.authors.randomElement() ?? ""
+            viewModel.loadDiscoverPoems(number: "5")
+            viewModel.pickFeaturedAuthors(
+                from: authors.authors,
+                poetOfTheDay: DailyPoetPicker.poet(for: Date(), in: PoetBios.all)?.author
+            )
 
             Task {
                 await WidgetDataRefresher(service: Self.poemService).refreshDailyIfNeeded()
@@ -93,7 +94,8 @@ struct ContentView: View {
         case .favorites:
             selectedTab = .favorites
         case .support:
-            selectedTab = .settings
+            selectedTab = .home
+            showSettings = true
         case .poem(let title, let author):
             Task {
                 if let poem = await resolvePoem(title: title, author: author) {
