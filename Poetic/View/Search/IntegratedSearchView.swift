@@ -84,6 +84,11 @@ struct IntegratedSearchView: View {
                     AuthorCell(author: author, badge: index == 0 ? "Poet of the Day" : nil)
                 }
                 .buttonStyle(FlatLinkStyle())
+                .simultaneousGesture(TapGesture().onEnded {
+                    if index == 0 {
+                        AnalyticsEvents.poetOfTheDayOpened(author: author, surface: "search")
+                    }
+                })
             }
 
             NavigationLink {
@@ -108,7 +113,7 @@ struct IntegratedSearchView: View {
 
             ForEach(viewModel.discoverPoems, id: \.self) { poem in
                 NavigationLink {
-                    DetailView(poem: poem)
+                    DetailView(poem: poem, source: "discover")
                 } label: {
                     PoemCell(poem: poem, colorScheme: colorScheme)
                 }
@@ -140,6 +145,9 @@ struct IntegratedSearchView: View {
                         AuthorCell(author: author)
                     }
                     .buttonStyle(FlatLinkStyle())
+                    .simultaneousGesture(TapGesture().onEnded {
+                        AnalyticsEvents.searchResultOpened(type: "author", matchedLine: false)
+                    })
                 }
             }
 
@@ -147,11 +155,17 @@ struct IntegratedSearchView: View {
                 sectionTitle("Poems")
                 ForEach(viewModel.searchPoems, id: \.self) { match in
                     NavigationLink {
-                        DetailView(poem: match.poem)
+                        DetailView(poem: match.poem, source: "search")
                     } label: {
                         SearchResultCell(match: match, colorScheme: colorScheme)
                     }
                     .buttonStyle(FlatLinkStyle())
+                    .simultaneousGesture(TapGesture().onEnded {
+                        AnalyticsEvents.searchResultOpened(
+                            type: "poem",
+                            matchedLine: match.matchedLine != nil
+                        )
+                    })
                 }
             }
 

@@ -67,6 +67,12 @@
             ReferencedContainer = "container:Poetic.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = " -FIRAnalyticsDebugEnabled"
+            isEnabled = "NO">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <StoreKitConfigurationFileReference
          identifier = "../../Poetic/StoreKit/TipsStoreConfiguration.storekit">
       </StoreKitConfigurationFileReference>

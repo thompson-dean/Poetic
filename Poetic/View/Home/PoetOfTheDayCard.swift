@@ -21,11 +21,11 @@ struct PoetOfTheDayCard: View {
             blurbText
             footer
         }
-        .padding(8)
+        .padding(12)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(cardBackgroundColor)
         .cornerRadius(8)
-        .padding(.horizontal, 16)
+        .padding(.horizontal, 8)
     }
 
     private var nameText: some View {

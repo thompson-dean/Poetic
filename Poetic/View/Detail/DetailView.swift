@@ -12,6 +12,9 @@ struct DetailView: View {
     @State private var showWebView = false
     @EnvironmentObject var store: PoemStore
     let poem: Poem
+    /// Where the poem was opened from — analytics only, defaulted so
+    /// incidental call sites don't have to care.
+    var source: String = "unknown"
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -68,9 +71,6 @@ struct DetailView: View {
 
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    HStack {}
-                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         store.toggleFavorite(poem)
@@ -97,6 +97,7 @@ struct DetailView: View {
         }
         .onAppear {
             store.markViewed(poem)
+            AnalyticsEvents.poemViewed(title: poem.title, author: poem.author, source: source)
         }
         .sheet(isPresented: $showWebView) {
             if let urlString = Links.authorLinksDictionary[poem.author],

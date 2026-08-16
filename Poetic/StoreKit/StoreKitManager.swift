@@ -70,11 +70,6 @@ final class StoreKitManager: ObservableObject {
         }
     }
 
-    /// The one-time supporter unlock; tips remain simple consumables.
-    var supporterProduct: Product? {
-        items.first { $0.id == Constants.supporterIdentifier }
-    }
-
     var tips: [Product] {
         items.filter { $0.type == .consumable }
     }
@@ -102,9 +97,10 @@ final class StoreKitManager: ObservableObject {
         do {
             let result = try await item.purchase()
 
-            try await handlePurchase(from: result)
+            try await handlePurchase(from: result, of: item)
         } catch {
             paymentState = .failed(.system(error))
+            AnalyticsEvents.purchaseFailed(productID: item.id, reason: error.localizedDescription)
             print("DEBUG: \(error.localizedDescription)")
         }
     }
@@ -113,24 +109,26 @@ final class StoreKitManager: ObservableObject {
         do {
             try await AppStore.sync()
             await refreshEntitlements()
+            AnalyticsEvents.restoreCompleted(unlocked: isSupporter)
         } catch {
             paymentState = .failed(.system(error))
         }
     }
 
-    /// Rebuilds the supporter flag from the App Store's current entitlements.
-    /// currentEntitlements excludes revoked transactions, so setting the
-    /// result unconditionally also handles refunds on next launch.
+    /// Any past tip unlocks supporter status. Finished consumables never
+    /// appear in currentEntitlements; they show up in Transaction.all only
+    /// on iOS 18+ with SKIncludeConsumableInAppPurchaseHistory set in the
+    /// Info.plist. Grant-only: an empty history (iOS 17, or Apple trimming
+    /// it) must never revoke a locally stored unlock.
     func refreshEntitlements() async {
-        var supporter = false
-        for await result in Transaction.currentEntitlements {
+        for await result in Transaction.all {
             guard case .verified(let transaction) = result else { continue }
-            if transaction.productID == Constants.supporterIdentifier,
+            if Constants.tipIdentifiers.contains(transaction.productID),
                transaction.revocationDate == nil {
-                supporter = true
+                setSupporter(true)
+                return
             }
         }
-        setSupporter(supporter)
     }
 
     func reset() {
@@ -157,13 +155,13 @@ private extension StoreKitManager {
     }
 
     func handle(_ transaction: Transaction) {
-        if transaction.productID == Constants.supporterIdentifier {
-            // revocationDate is set on refunds — relock.
-            setSupporter(transaction.revocationDate == nil)
+        guard transaction.revocationDate == nil else { return }
+        // Every tip unlocks supporter status, and a refund doesn't take it
+        // back — the flag is deliberately sticky.
+        if Constants.tipIdentifiers.contains(transaction.productID) {
+            setSupporter(true)
         }
-        if transaction.revocationDate == nil {
-            paymentState = .successful
-        }
+        paymentState = .successful
     }
 
     func setSupporter(_ value: Bool) {
@@ -171,6 +169,9 @@ private extension StoreKitManager {
         guard value != isSupporter else { return }
         isSupporter = value
         WidgetCenter.shared.reloadAllTimelines()
+        if value {
+            AnalyticsEvents.widgetUnlocked()
+        }
     }
 
     func retrieveProducts() async {
@@ -185,15 +186,17 @@ private extension StoreKitManager {
         }
     }
 
-    func handlePurchase(from result: PurchaseResult) async throws {
+    func handlePurchase(from result: PurchaseResult, of item: Product) async throws {
         switch result {
         case .success(let verification):
             let transaction = try checkVerified(verification)
             handle(transaction)
             await transaction.finish()
+            AnalyticsEvents.purchaseSuccess(productID: item.id)
         case .pending:
             paymentState = .pending
         case .userCancelled:
+            AnalyticsEvents.purchaseCancelled(productID: item.id)
             print("cancelled")
         @unknown default:
             break

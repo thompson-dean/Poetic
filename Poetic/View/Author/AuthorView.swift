@@ -69,7 +69,7 @@ struct AuthorView: View {
                     ScrollView {
                         ForEach(0..<viewModel.authorPoems.count, id: \.self) { index in
                             NavigationLink {
-                                DetailView(poem: viewModel.authorPoems[index])
+                                DetailView(poem: viewModel.authorPoems[index], source: "author")
                             } label: {
                                 AuthorPoemCell(poem: viewModel.authorPoems[index], indexString: String(index + 1))
                             }
@@ -91,6 +91,7 @@ struct AuthorView: View {
 
             .onAppear {
                 viewModel.loadAuthorPoem(searchTerm: author)
+                AnalyticsEvents.authorViewed(author: author)
             }
 
     }

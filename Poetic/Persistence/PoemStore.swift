@@ -13,18 +13,38 @@ import CoreData
 /// person's favorites, quotes, and two weeks of reading history.
 @MainActor
 final class PoemStore: ObservableObject {
-    enum FavoriteSort {
-        case title, author
+    enum FavoriteSort: String, CaseIterable, Identifiable {
+        case recent, title, author
+
+        var id: String { rawValue }
+
+        var label: String {
+            switch self {
+            case .recent: return "Recently Favorited"
+            case .title: return "Title"
+            case .author: return "Author"
+            }
+        }
     }
-    enum QuoteSort {
+
+    enum QuoteSort: String, CaseIterable, Identifiable {
         case quote, title
+
+        var id: String { rawValue }
+
+        var label: String {
+            switch self {
+            case .quote: return "Quote"
+            case .title: return "Poem Title"
+            }
+        }
     }
 
     @Published private(set) var favorites: [PoemEntity] = []
     @Published private(set) var quotes: [QuoteEntity] = []
     @Published private(set) var recents: [PoemEntity] = []
 
-    @Published var favoriteSort: FavoriteSort = .title {
+    @Published var favoriteSort: FavoriteSort = .recent {
         didSet { refreshFavorites() }
     }
     @Published var quoteSort: QuoteSort = .quote {
@@ -54,6 +74,7 @@ final class PoemStore: ObservableObject {
         entity.isFavorite.toggle()
         entity.favoritedAt = entity.isFavorite ? Date() : nil
         saveAndRefresh()
+        AnalyticsEvents.favoriteToggled(added: entity.isFavorite, author: poem.author)
     }
 
     func deleteFavorites(at offsets: IndexSet) {
@@ -165,8 +186,15 @@ final class PoemStore: ObservableObject {
     private func refreshFavorites() {
         let request = PoemEntity.fetchRequest()
         request.predicate = NSPredicate(format: "isFavorite == YES")
-        let key = favoriteSort == .title ? "title" : "author"
-        request.sortDescriptors = [NSSortDescriptor(key: key, ascending: true)]
+        switch favoriteSort {
+        case .recent:
+            // v1-migrated favorites have no favoritedAt; nil sorts last here.
+            request.sortDescriptors = [NSSortDescriptor(key: "favoritedAt", ascending: false)]
+        case .title:
+            request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        case .author:
+            request.sortDescriptors = [NSSortDescriptor(key: "author", ascending: true)]
+        }
         favorites = (try? context.fetch(request)) ?? []
     }
 

@@ -12,13 +12,6 @@ struct QuoteView: View {
     @ObservedObject var viewModel: PoemViewModel
     @EnvironmentObject var store: PoemStore
 
-    init(viewModel: PoemViewModel) {
-        UITableView.appearance().separatorStyle = .none
-        UITableView.appearance().backgroundColor = .clear
-        UITableView.appearance().showsVerticalScrollIndicator = false
-        self.viewModel = viewModel
-    }
-
     var body: some View {
         NavigationStack {
             VStack {
@@ -30,66 +23,14 @@ struct QuoteView: View {
                     )
                 } else {
                     List {
-                        ForEach(0..<store.quotes.count, id: \.self) { index in
-                            ZStack {
-                                NavigationLink {
-                                    DetailView(poem: store.quotes[index].poem.asPoem())
-                                } label: {
-                                    EmptyView().opacity(0)
-                                }
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        VStack(alignment: .leading, spacing: 4) {
-                                            Text(store.quotes[index].quote
-                                                .trimmingCharacters(in: .whitespacesAndNewlines)
-                                            )
-                                            .fixedSize(horizontal: false, vertical: true)
-                                            .fontWithLineHeight(
-                                                font: .systemFont(ofSize: 16, weight: .bold),
-                                                lineHeight: 24
-                                            )
-
-                                            Text(store.quotes[index].poem.author)
-                                                .fixedSize(horizontal: false, vertical: true)
-                                                .fontWithLineHeight(
-                                                    font: .systemFont(ofSize: 16, weight: .semibold),
-                                                    lineHeight: 24
-                                                )
-                                                .foregroundColor(
-                                                    colorScheme == .light ? .lightThemeColor : .darkThemeColor
-                                                )
-                                        }
-
-                                        Spacer()
-
-                                        Image(systemName: "chevron.right")
-                                            .foregroundColor(.primary)
-                                    }
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 8)
-                                }
-                                .background(colorScheme == .light ? .white : .black)
-                                .cornerRadius(8)
-                                .padding(.vertical, 4)
-
-                            }
-                            .contextMenu {
-                                Button {
-                                    Links.shareQuote(
-                                        quote: store.quotes[index].quote,
-                                        title: store.quotes[index].poem.title,
-                                        author: store.quotes[index].poem.author
-                                    )
-                                } label: {
-                                    Label("Share", systemImage: "square.and.arrow.up")
-                                }
-                            }
-                            .listRowBackground(Color.clear)
-                            .listRowSeparator(.hidden)
-                            .listRowInsets(.init(top: 0,
-                                                 leading: 0,
-                                                 bottom: 0,
-                                                 trailing: 0))
+                        ForEach(store.quotes) { quote in
+                            row(for: quote)
+                                .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
+                                .listRowInsets(.init(top: 0,
+                                                     leading: 0,
+                                                     bottom: 0,
+                                                     trailing: 0))
                         }
                         .onDelete { indexSet in
                             store.deleteQuotes(at: indexSet)
@@ -115,14 +56,97 @@ struct QuoteView: View {
                     EditButton()
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        store.quoteSort = store.quoteSort == .quote ? .title : .quote
-                    } label: {
-                        Image(systemName: "arrow.up.arrow.down")
-                    }
+                    sortMenu
                 }
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+    }
+
+    private var sortMenu: some View {
+        Menu {
+            Picker("Sort by", selection: $store.quoteSort) {
+                ForEach(PoemStore.QuoteSort.allCases) { sort in
+                    Text(sort.label).tag(sort)
+                }
+            }
+        } label: {
+            Image(systemName: "arrow.up.arrow.down")
+        }
+        .accessibilityLabel("Sort quotes")
+    }
+
+    private func row(for quote: QuoteEntity) -> some View {
+        ZStack {
+            NavigationLink {
+                DetailView(poem: quote.poem.asPoem(), source: "quotes")
+            } label: {
+                EmptyView().opacity(0)
+            }
+            QuoteCell(quote: quote, colorScheme: colorScheme)
+        }
+        .contextMenu {
+            shareButton(for: quote)
+        }
+        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+            shareButton(for: quote)
+                .tint(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+        }
+        .swipeActions(edge: .trailing) {
+            Button(role: .destructive) {
+                if let index = store.quotes.firstIndex(of: quote) {
+                    store.deleteQuotes(at: IndexSet(integer: index))
+                }
+            } label: {
+                Label("Delete", systemImage: "trash")
+            }
+        }
+    }
+
+    private func shareButton(for quote: QuoteEntity) -> some View {
+        Button {
+            Links.shareQuote(
+                quote: quote.quote,
+                title: quote.poem.title,
+                author: quote.poem.author
+            )
+        } label: {
+            Label("Share", systemImage: "square.and.arrow.up")
+        }
+    }
+}
+
+private struct QuoteCell: View {
+    let quote: QuoteEntity
+    let colorScheme: ColorScheme
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(quote.quote.trimmingCharacters(in: .whitespacesAndNewlines))
+                        .fixedSize(horizontal: false, vertical: true)
+                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
+
+                    Text(quote.poem.title)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                        .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+
+                    Text(quote.poem.author)
+                        .fontWithLineHeight(font: .systemFont(ofSize: 14, weight: .medium), lineHeight: 20)
+                        .foregroundColor(.secondary)
+                }
+
+                Spacer()
+
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.primary)
+            }
+            .padding(.horizontal, 8)
+            .padding(.vertical, 8)
+        }
+        .background(colorScheme == .light ? .white : Color.black)
+        .cornerRadius(8)
+        .padding(.vertical, 4)
     }
 }
