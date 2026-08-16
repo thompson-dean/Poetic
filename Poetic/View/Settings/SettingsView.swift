@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct SettingsView: View {
     @Environment(\.colorScheme) var colorScheme
@@ -14,7 +15,6 @@ struct SettingsView: View {
     @ObservedObject var storeKitManager: StoreKitManager
 
     @State private var showLoading: Bool = false
-    @State private var isShowingTipsView = false
     @State private var showThankYou: Bool = false
     @State var showPendingAlert: Bool = false
 
@@ -22,6 +22,7 @@ struct SettingsView: View {
         NavigationStack {
             VStack(alignment: .center) {
                 Form {
+                    supportSection
                     appearanceSection
                     notificationsSection
                     resourcesSection
@@ -33,24 +34,10 @@ struct SettingsView: View {
                         thankYouView
                     }
                 }
-                .overlay {
-                    if isShowingTipsView {
-                        Color.black.opacity(0.8)
-                            .ignoresSafeArea()
-                            .transition(.opacity)
-                            .onTapGesture {
-                                isShowingTipsView.toggle()
-                            }
-                        TipsView(storeKitManager: storeKitManager, isShowingTipsView: $isShowingTipsView)
-                            .transition(.move(edge: .bottom).combined(with: .opacity))
-                    }
-                }
-                .animation(.spring(), value: isShowingTipsView)
                 .animation(.spring(), value: showThankYou)
             }
             .onChange(of: storeKitManager.paymentState) { state, _ in
                 if state == .successful {
-                    isShowingTipsView = false
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                         self.showThankYou = true
                         storeKitManager.reset()
@@ -71,7 +58,7 @@ struct SettingsView: View {
             }
             // swiftlint:enable line_length
             .alert(isPresented: $storeKitManager.hasError, error: storeKitManager.error) { }
-            .navigationTitle("Menu")
+            .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
         }
         .navigationViewStyle(StackNavigationViewStyle())
@@ -79,6 +66,100 @@ struct SettingsView: View {
 }
 
 private extension SettingsView {
+    var themeColor: Color {
+        colorScheme == .light ? .lightThemeColor : .darkThemeColor
+    }
+
+    var supportSection: some View {
+        Section {
+            VStack(alignment: .leading, spacing: 6) {
+                Label {
+                    Text("Support Poetic")
+                        .font(.system(.title3, design: .serif).bold())
+                } icon: {
+                    Image(systemName: "heart.fill")
+                        .foregroundColor(themeColor)
+                }
+
+                // swiftlint:disable:next line_length
+                Text("All the poetry in Poetic is free — and it always will be. Any tip, big or small, unlocks the Favorites home screen widget as a thank you.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.vertical, 4)
+
+            if storeKitManager.isSupporter {
+                Label("Widget unlocked — thank you!", systemImage: "checkmark.seal.fill")
+                    .font(.callout.bold())
+                    .foregroundStyle(.green)
+            }
+
+            if storeKitManager.tips.isEmpty {
+                HStack {
+                    Spacer()
+                    ProgressView()
+                    Spacer()
+                }
+            } else {
+                ForEach(storeKitManager.tips) { tip in
+                    tipRow(for: tip)
+                }
+            }
+
+            HStack {
+                Spacer()
+                Button("Restore Purchases") {
+                    Task {
+                        await storeKitManager.restorePurchases()
+                    }
+                }
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(.secondary)
+                Spacer()
+            }
+        } footer: {
+            Text("Tips are one-time purchases — no subscriptions, ever.")
+        }
+    }
+
+    func tipRow(for tip: Product) -> some View {
+        HStack(spacing: 12) {
+            Text(tipEmoji(for: tip))
+                .font(.title3)
+                .frame(width: 40, height: 40)
+                .background(
+                    themeColor.opacity(0.15),
+                    in: RoundedRectangle(cornerRadius: 10, style: .continuous)
+                )
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(tip.displayName)
+                    .font(.body.weight(.semibold))
+                Text(tip.description)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Spacer()
+
+            Button(tip.displayPrice) {
+                Task {
+                    await storeKitManager.purchase(tip)
+                }
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(themeColor)
+            .font(.callout.bold())
+        }
+        .padding(.vertical, 4)
+    }
+
+    func tipEmoji(for tip: Product) -> String {
+        if tip.id.hasSuffix("smallTip") { return "🍫" }
+        if tip.id.hasSuffix("mediumTip") { return "☕️" }
+        return "✨"
+    }
+
     var thankYouView: some View {
         VStack(spacing: 8) {
             Text("Thank you for your support!")
@@ -209,25 +290,6 @@ private extension SettingsView {
                 }
             }
             Button {
-                isShowingTipsView.toggle()
-            } label: {
-                HStack {
-                    Image(systemName: "heart")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 32, height: 32)
-                        .padding(.trailing)
-                    VStack(alignment: .leading, spacing: 3) {
-                        Text("Support Poetic")
-
-                        Text("Unlock the Favorites widget. Poetry stays free.")
-                            .font(.caption)
-                    }
-                    Spacer()
-                }
-                .foregroundColor(.primary)
-            }
-            Button {
                 Links.shareApp()
             } label: {
                 ZStack {
@@ -321,7 +383,7 @@ private extension SettingsView {
                         .cornerRadius(5)
 
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("Poetic version 2.3.0")
+                        Text("Poetic version 3.0.0")
                         HStack(spacing: 3) {
                             Text("Made with love by")
 

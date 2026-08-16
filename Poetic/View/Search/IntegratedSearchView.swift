@@ -71,60 +71,56 @@ struct IntegratedSearchView: View {
 
     @ViewBuilder
     private var featuredAndRecommendedAuthors: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            VStack(alignment: .leading) {
-                Text("Featured Authors")
-                    .foregroundColor(.primary)
-                    .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
-                    .padding(.horizontal, 16)
+        VStack(alignment: .leading) {
+            Text("Featured Authors")
+                .foregroundColor(.primary)
+                .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
+                .padding(.horizontal, 16)
 
-                ForEach(
-                    [
-                        viewModel.featuredAuthor1,
-                        viewModel.featuredAuthor2,
-                        viewModel.featuredAuthor3
-                    ],
-                    id: \.self
-                ) { author in
-                    NavigationLink {
-                        AuthorView(viewModel: viewModel, author: author)
-                    } label: {
-                        AuthorCell(author: author)
-                    }
-                    .buttonStyle(FlatLinkStyle())
-                }
-
+            ForEach(Array(viewModel.featuredAuthors.enumerated()), id: \.element) { index, author in
                 NavigationLink {
-                    AuthorIndexView(viewModel: viewModel, authors: authors.authors)
+                    AuthorView(viewModel: viewModel, author: author)
                 } label: {
-                    HStack {
-                        Text("Browse all authors")
-                            .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                        Image(systemName: "chevron.right")
-                    }
-                    .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
-                    .padding(.horizontal, 16)
-                    .padding(.top, 4)
+                    AuthorCell(author: author, badge: index == 0 ? "Poet of the Day" : nil)
                 }
                 .buttonStyle(FlatLinkStyle())
-
-                Text("Recommended")
-                    .foregroundColor(.primary)
-                    .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
-                    .padding(.horizontal, 16)
-                    .padding(.top, 8)
-
-                ForEach(viewModel.randomPoems, id: \.self) { poem in
-                    NavigationLink {
-                        DetailView(poem: poem)
-                    } label: {
-                        PoemCell(poem: poem, colorScheme: colorScheme)
+                .simultaneousGesture(TapGesture().onEnded {
+                    if index == 0 {
+                        AnalyticsEvents.poetOfTheDayOpened(author: author, surface: "search")
                     }
-                    .buttonStyle(FlatLinkStyle())
-                }
+                })
             }
-            .padding(.top, 8)
+
+            NavigationLink {
+                AuthorIndexView(viewModel: viewModel, authors: authors.authors)
+            } label: {
+                HStack {
+                    Text("Browse all authors")
+                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
+                    Image(systemName: "chevron.right")
+                }
+                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                .padding(.horizontal, 16)
+                .padding(.top, 4)
+            }
+            .buttonStyle(FlatLinkStyle())
+
+            Text("Discover")
+                .foregroundColor(.primary)
+                .fontWithLineHeight(font: .systemFont(ofSize: 24, weight: .bold), lineHeight: 28.64)
+                .padding(.horizontal, 16)
+                .padding(.top, 8)
+
+            ForEach(viewModel.discoverPoems, id: \.self) { poem in
+                NavigationLink {
+                    DetailView(poem: poem, source: "discover")
+                } label: {
+                    PoemCell(poem: poem, colorScheme: colorScheme)
+                }
+                .buttonStyle(FlatLinkStyle())
+            }
         }
+        .padding(.top, 8)
     }
 
     @ViewBuilder
@@ -149,6 +145,9 @@ struct IntegratedSearchView: View {
                         AuthorCell(author: author)
                     }
                     .buttonStyle(FlatLinkStyle())
+                    .simultaneousGesture(TapGesture().onEnded {
+                        AnalyticsEvents.searchResultOpened(type: "author", matchedLine: false)
+                    })
                 }
             }
 
@@ -156,11 +155,17 @@ struct IntegratedSearchView: View {
                 sectionTitle("Poems")
                 ForEach(viewModel.searchPoems, id: \.self) { match in
                     NavigationLink {
-                        DetailView(poem: match.poem)
+                        DetailView(poem: match.poem, source: "search")
                     } label: {
                         SearchResultCell(match: match, colorScheme: colorScheme)
                     }
                     .buttonStyle(FlatLinkStyle())
+                    .simultaneousGesture(TapGesture().onEnded {
+                        AnalyticsEvents.searchResultOpened(
+                            type: "poem",
+                            matchedLine: match.matchedLine != nil
+                        )
+                    })
                 }
             }
 
@@ -275,7 +280,7 @@ struct PoemCell: View {
                     .padding(8)
             }
         }
-        .frame(width: UIScreen.main.bounds.width - 16)
+        .frame(maxWidth: .infinity)
         .background(colorScheme == .light ? .white : .black)
         .cornerRadius(8)
         .padding(.horizontal, 8)

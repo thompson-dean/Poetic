@@ -10,14 +10,9 @@ import SwiftUI
 struct FavoritesView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var viewModel: PoemViewModel
+    @ObservedObject var storeKitManager: StoreKitManager
     @EnvironmentObject var store: PoemStore
-
-    init(viewModel: PoemViewModel) {
-        UITableView.appearance().separatorStyle = .none
-        UITableView.appearance().backgroundColor = .clear
-        UITableView.appearance().showsVerticalScrollIndicator = false
-        self.viewModel = viewModel
-    }
+    @Binding var showSettings: Bool
 
     var body: some View {
         NavigationStack {
@@ -33,7 +28,7 @@ struct FavoritesView: View {
                         ForEach(store.favorites) { poem in
                             ZStack {
                                 NavigationLink {
-                                    DetailView(poem: poem.asPoem())
+                                    DetailView(poem: poem.asPoem(), source: "favorites")
                                 } label: {
                                     EmptyView().opacity(0.0)
                                 }
@@ -55,6 +50,10 @@ struct FavoritesView: View {
                     .padding(8)
                     .listStyle(.plain)
                     .scrollContentBackground(.hidden)
+
+                    if !storeKitManager.isSupporter {
+                        widgetNudge
+                    }
                 }
             }
             .background(
@@ -71,13 +70,38 @@ struct FavoritesView: View {
                 }
 
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        store.favoriteSort = store.favoriteSort == .title ? .author : .title
-                    } label: {
-                        Image(systemName: "arrow.up.arrow.down")
-                    }
+                    sortMenu
                 }
             }
         }
+    }
+
+    private var sortMenu: some View {
+        Menu {
+            Picker("Sort by", selection: $store.favoriteSort) {
+                ForEach(PoemStore.FavoriteSort.allCases) { sort in
+                    Text(sort.label).tag(sort)
+                }
+            }
+        } label: {
+            Image(systemName: "arrow.up.arrow.down")
+        }
+        .accessibilityLabel("Sort favorites")
+    }
+
+    /// The most contextual supporter nudge in the app: the user is looking
+    /// at exactly the poems the gated widget would show.
+    private var widgetNudge: some View {
+        Button {
+            showSettings = true
+        } label: {
+            HStack(spacing: 6) {
+                Image(systemName: "star.square.on.square")
+                Text("Get these on your home screen — leave any tip")
+            }
+            .font(.footnote.weight(.semibold))
+            .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+        }
+        .padding(.bottom, 8)
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum AppTab: Hashable {
-    case home, explore, favorites, quotes, settings
+    case home, explore, favorites, quotes
 }
 
 struct ContentView: View {
@@ -22,13 +22,16 @@ struct ContentView: View {
     @State private var selectedTab: AppTab = .home
     @State private var homePath = NavigationPath()
     @State private var deepLinkFailed = false
+    @State private var showSettings = false
+    @State private var showWidgetAnnouncement = false
+    @AppStorage(Constants.hasSeenWidgetAnnouncement) private var hasSeenWidgetAnnouncement = false
 
     let notificationManager = NotificationManager()
     var authors: Authors = Bundle.main.decode("Authors.json")
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            HomeView(viewModel: viewModel, path: $homePath)
+            HomeView(viewModel: viewModel, path: $homePath, showSettings: $showSettings)
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
@@ -38,7 +41,11 @@ struct ContentView: View {
                     Label("Explore", systemImage: "magnifyingglass")
                 }
                 .tag(AppTab.explore)
-            FavoritesView(viewModel: viewModel)
+            FavoritesView(
+                viewModel: viewModel,
+                storeKitManager: storeKitManager,
+                showSettings: $showSettings
+            )
                 .tabItem {
                     Label("Favorites", systemImage: "star")
                 }
@@ -48,16 +55,33 @@ struct ContentView: View {
                     Label("Quotes", systemImage: "quote.bubble.fill")
                 }
                 .tag(AppTab.quotes)
+        }
+        .accentColor(.primary)
+        .onChange(of: selectedTab) { _, newTab in
+            AnalyticsEvents.tabSelected(String(describing: newTab))
+        }
+        .onChange(of: showSettings) { _, isShowing in
+            if isShowing {
+                AnalyticsEvents.settingsOpened()
+            }
+        }
+        .sheet(isPresented: $showSettings) {
             SettingsView(
                 viewModel: viewModel,
                 storeKitManager: storeKitManager
             )
-                .tabItem {
-                    Label("Menu", systemImage: "line.3.horizontal")
-                }
-                .tag(AppTab.settings)
         }
-        .accentColor(.primary)
+        .sheet(isPresented: $showWidgetAnnouncement) {
+            hasSeenWidgetAnnouncement = true
+        } content: {
+            WidgetAnnouncementView {
+                // Give the announcement sheet a beat to finish dismissing
+                // before presenting settings, or the second sheet is dropped.
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    showSettings = true
+                }
+            }
+        }
         .onOpenURL { url in
             handle(url)
         }
@@ -75,12 +99,22 @@ struct ContentView: View {
 
             viewModel.resetBadgeCount()
             viewModel.loadRandomPoems(number: "5")
-            viewModel.featuredAuthor1 = authors.authors.randomElement() ?? ""
-            viewModel.featuredAuthor2 = authors.authors.randomElement() ?? ""
-            viewModel.featuredAuthor3 = authors.authors.randomElement() ?? ""
+            viewModel.loadDiscoverPoems(number: "5")
+            viewModel.pickFeaturedAuthors(
+                from: authors.authors,
+                poetOfTheDay: DailyPoetPicker.poet(for: Date(), in: PoetBios.all)?.author
+            )
 
             Task {
                 await WidgetDataRefresher(service: Self.poemService).refreshDailyIfNeeded()
+            }
+
+            if !hasSeenWidgetAnnouncement {
+                // Slight delay so the sheet animates in over settled content
+                // rather than fighting the launch transition.
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    showWidgetAnnouncement = true
+                }
             }
         }
     }
@@ -89,12 +123,17 @@ struct ContentView: View {
         guard let link = DeepLink(url: url) else { return }
         switch link {
         case .home:
+            AnalyticsEvents.deepLinkOpened(type: "home")
             selectedTab = .home
         case .favorites:
+            AnalyticsEvents.deepLinkOpened(type: "favorites")
             selectedTab = .favorites
         case .support:
-            selectedTab = .settings
+            AnalyticsEvents.deepLinkOpened(type: "support")
+            selectedTab = .home
+            showSettings = true
         case .poem(let title, let author):
+            AnalyticsEvents.deepLinkOpened(type: "poem")
             Task {
                 if let poem = await resolvePoem(title: title, author: author) {
                     selectedTab = .home

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseCore
 
 @main
 struct PoeticApp: App {
@@ -14,6 +15,7 @@ struct PoeticApp: App {
     @StateObject private var storeKitManager = StoreKitManager()
 
     init() {
+        FirebaseApp.configure()
         let stack = PersistenceStack()
         self.stack = stack
         _store = StateObject(

@@ -20,6 +20,8 @@ final class QuoteEntity: NSManagedObject {
     }
 }
 
+extension QuoteEntity: Identifiable {}
+
 extension QuoteEntity {
     @nonobjc static func fetchRequest() -> NSFetchRequest<QuoteEntity> {
         NSFetchRequest<QuoteEntity>(entityName: "Quote")

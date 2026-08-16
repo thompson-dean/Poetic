@@ -12,6 +12,7 @@ struct HomeView: View {
     @EnvironmentObject var store: PoemStore
     @Environment(\.colorScheme) var colorScheme
     @Binding var path: NavigationPath
+    @Binding var showSettings: Bool
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -24,9 +25,21 @@ struct HomeView: View {
                     viewModel.loadRandomPoems(number: "5")
                 }
             }
-            .navigationBarHidden(true)
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showSettings = true
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
+                    .tint(.primary)
+                    .accessibilityLabel("Settings")
+                }
+            }
             .navigationDestination(for: Poem.self) { poem in
-                DetailView(poem: poem)
+                DetailView(poem: poem, source: "deep_link")
             }
         }
     }
@@ -42,9 +55,9 @@ struct HomeView: View {
             header
             discoverText
             recommendedSection
+            poetOfTheDaySection
             recentSection
         }
-        .padding(.top, 24)
     }
 
     private var header: some View {
@@ -80,11 +93,32 @@ struct HomeView: View {
         }
     }
 
+    private var poetOfTheDaySection: some View {
+        VStack(alignment: .leading) {
+            if let poet = DailyPoetPicker.poet(for: Date(), in: PoetBios.all) {
+                sectionTitle("Poet of the Day")
+                NavigationLink {
+                    AuthorView(viewModel: viewModel, author: poet.author)
+                } label: {
+                    PoetOfTheDayCard(bio: poet)
+                }
+                .buttonStyle(FlatLinkStyle())
+                .simultaneousGesture(TapGesture().onEnded {
+                    AnalyticsEvents.poetOfTheDayOpened(author: poet.author, surface: "home")
+                })
+            }
+        }
+    }
+
     private var recentSection: some View {
         VStack(alignment: .leading) {
             sectionTitle("Recent")
             if store.recents.isEmpty {
-                ContentUnavailableView("No recents", systemImage: "text.page")
+                Text("Poems you read will appear here.")
+                    .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 22)
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
             } else {
                 viewedPoemsList
             }
@@ -94,7 +128,7 @@ struct HomeView: View {
     private var poemCards: some View {
         ForEach(viewModel.randomPoems, id: \.self) { poem in
             NavigationLink {
-                DetailView(poem: poem)
+                DetailView(poem: poem, source: "home_recommended")
             } label: {
                 PoemCard(poem: poem)
             }
@@ -102,10 +136,12 @@ struct HomeView: View {
         }
     }
 
+    /// Capped: recents only expire after 14 days, so a heavy reader could
+    /// otherwise put hundreds of rows on the home screen.
     private var viewedPoemsList: some View {
-        ForEach(store.recents, id: \.self) { poem in
+        ForEach(store.recents.prefix(20), id: \.self) { poem in
             NavigationLink {
-                DetailView(poem: poem.asPoem())
+                DetailView(poem: poem.asPoem(), source: "home_recent")
             } label: {
                 TitleAuthorDateHomeCell(poem: poem)
             }

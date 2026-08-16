@@ -10,8 +10,11 @@
 		07945760025162301BCC615E /* WidgetDataRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0AEFC6202E13552C313627 /* WidgetDataRefresher.swift */; };
 		0A96B10A4B558110AD4C28E5 /* PoeticWidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E226F21FC96D45D0D09A17 /* PoeticWidgetsBundle.swift */; };
 		0C165DEAD6E7B34CAFDD0187 /* SupporterEntitlement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0206F2CEF5B734AF2AC181E /* SupporterEntitlement.swift */; };
+		0D32F9717B9792A01040736E /* PoetBio.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB342E494D2E6C4984B5D4B0 /* PoetBio.swift */; };
+		0DF69F6BF2E165337B1CBD51 /* PoetBiosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B38CC146A259321066C791 /* PoetBiosTests.swift */; };
 		0E59EA362EC431561DD5C213 /* WidgetAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACFB9E50EFDC55E953F4A518 /* WidgetAssets.xcassets */; };
 		1B8DA1DB623DE2ACA3FE2C49 /* WidgetBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2FFD118388DB5ADB6E6A88 /* WidgetBackground.swift */; };
+		21D570EC4BF3983D6484D485 /* PoetBios.json in Resources */ = {isa = PBXBuildFile; fileRef = 86A22BBD8798763AD84D2ED8 /* PoetBios.json */; };
 		22B8D4AF4585E5E735C65C3C /* SupporterEntitlementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB113ABEF431539A6447451 /* SupporterEntitlementTests.swift */; };
 		26D58ADD0877595CB1A3348C /* StoreMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5720601CFD8DF6C5FB5DC5FD /* StoreMigratorTests.swift */; };
 		2A13BE0128B9B42800E79A0E /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A13BE0028B9B42800E79A0E /* DetailView.swift */; };
@@ -20,23 +23,23 @@
 		2A17BA9727D5D8E000E0D755 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A17BA9627D5D8E000E0D755 /* Assets.xcassets */; };
 		2A17BA9A27D5D8E000E0D755 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A17BA9927D5D8E000E0D755 /* Preview Assets.xcassets */; };
 		2A17BAAA27D5D95400E0D755 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17BAA927D5D95400E0D755 /* FavoritesView.swift */; };
-		2A17BAAC27D5D96E00E0D755 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		2A17BAAC27D5D96E00E0D755 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		2A17BAAE27D6418400E0D755 /* Poem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17BAAD27D6418400E0D755 /* Poem.swift */; };
 		2A17BAB027D641D200E0D755 /* PoemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A17BAAF27D641D200E0D755 /* PoemViewModel.swift */; };
 		2A19EA9B27F09E1C00022EFE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A19EA9A27F09E1C00022EFE /* NotificationManager.swift */; };
 		2A1ABA4928F2CEAA00D48AA1 /* IntegratedSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1ABA4828F2CEAA00D48AA1 /* IntegratedSearchView.swift */; };
 		2A1ABA5428F3FBA400D48AA1 /* SearchFIlter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1ABA5328F3FBA400D48AA1 /* SearchFIlter.swift */; };
-		2A1ABA5828F4016900D48AA1 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		2A1ABA5A28F4090000D48AA1 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		2A1ABA5828F4016900D48AA1 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		2A1ABA5A28F4090000D48AA1 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		2A1EC6B72A68C4A40012F138 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A1EC6B62A68C4A40012F138 /* StoreKit.framework */; };
 		2A1EC6BE2A68CA4F0012F138 /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1EC6BD2A68CA4F0012F138 /* StoreKitManager.swift */; };
 		2A1EC6C02A68CBB50012F138 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1EC6BF2A68CBB50012F138 /* Constants.swift */; };
-		2A1EC6C32A68D2350012F138 /* TipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1EC6C22A68D2350012F138 /* TipsView.swift */; };
+		2A1EC6C32A68D2350012F138 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		2A304724288FB01500E43820 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A304723288FB01500E43820 /* HomeView.swift */; };
 		2A3190142C13086B009BC3A0 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3190132C13086B009BC3A0 /* SafariWebView.swift */; };
 		2A37937B27D8D48A00FA48ED /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A37937A27D8D48A00FA48ED /* Bundle-Decodable.swift */; };
 		2A38CF7927DF74BB00A44268 /* Poetic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2A38CF7727DF74BB00A44268 /* Poetic.xcdatamodeld */; };
-		2A38CF7B27DF74CC00A44268 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		2A38CF7B27DF74CC00A44268 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		2A42F5E0299A623200122847 /* TitleAuthorFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42F5DF299A623200122847 /* TitleAuthorFavoriteCell.swift */; };
 		2A42F5E2299A62B500122847 /* TitleAuthorDateHomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42F5E1299A62B500122847 /* TitleAuthorDateHomeCell.swift */; };
 		2A42F5E5299A691A00122847 /* AuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42F5E4299A691A00122847 /* AuthorView.swift */; };
@@ -53,6 +56,7 @@
 		2A81C48628C45B4300437EC3 /* View+FontWithLineHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A81C48528C45B4300437EC3 /* View+FontWithLineHeight.swift */; };
 		2A81C48828C4D25C00437EC3 /* PoemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A81C48728C4D25C00437EC3 /* PoemCard.swift */; };
 		2A8ADBC62A69019F001630B1 /* View+ToAnyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8ADBC52A69019F001630B1 /* View+ToAnyView.swift */; };
+		2A8F97EB3031A95B00D78EC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A8F97EA3031A95B00D78EC9 /* GoogleService-Info.plist */; };
 		2AB4B9A827E05F1C008FB84B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4B9A727E05F1C008FB84B /* Color.swift */; };
 		2ABCC207285095A900CA0FB3 /* PoemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABCC206285095A900CA0FB3 /* PoemView.swift */; };
 		2ACC8A3D27E86E3B002F5B6D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACC8A3C27E86E3B002F5B6D /* SettingsView.swift */; };
@@ -60,22 +64,27 @@
 		2ACC8A4327E8A441002F5B6D /* DevView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACC8A4227E8A441002F5B6D /* DevView.swift */; };
 		2ACC8A4727E8AFC9002F5B6D /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACC8A4627E8AFC9002F5B6D /* Links.swift */; };
 		2ACC8A4927E8C39E002F5B6D /* SystemThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACC8A4827E8C39E002F5B6D /* SystemThemeManager.swift */; };
-		2AF5D93A2A63EE5E006725A8 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		2AF5D93A2A63EE5E006725A8 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		2AF8600327DB16EA00B3BC40 /* Authors.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AF8600227DB16EA00B3BC40 /* Authors.json */; };
 		2AF8600527DC5B2C00B3BC40 /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8600427DC5B2C00B3BC40 /* QuoteView.swift */; };
 		2AF98E3B27DE2E00004D21DA /* Authors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF98E3A27DE2E00004D21DA /* Authors.swift */; };
 		2DF9DD848C1646B9FDDFD259 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4B9A727E05F1C008FB84B /* Color.swift */; };
+		30DE242A1137752B26DA7437 /* DailyPoetPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADCD3F40F53F7701C87B6DC /* DailyPoetPicker.swift */; };
+		3619E78A3C294816E079FA42 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = FD7191FB405C5E34FA69EBF1 /* FirebaseCrashlytics */; };
 		3A4D51A5C248FB47B3E0F8E0 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D03140BD48856ED9CC03DD /* SharedConstants.swift */; };
 		3E771D5138A2DD31E4FC6AC4 /* FavoritesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944FF62B8DA225FC1790DFDA /* FavoritesWidget.swift */; };
 		53AC4896A3971EADB2C55432 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB440A85443385E1509D2446 /* DeepLink.swift */; };
 		5E1B00C7F535F2ED61093A45 /* StoreMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271266EE6BFB86A46AC534DC /* StoreMigrator.swift */; };
+		5EE325FC0CD0E702CBC5FE32 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 52BE1C40A44F79DFBB844337 /* FirebaseAnalytics */; };
 		5F46AD852948D751F8B30220 /* PersistenceStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907CB719B29BC00C2C4A16A /* PersistenceStack.swift */; };
 		77D143A5F0E0545B47531FEB /* CatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B974AF0889446B93B882D28C /* CatalogTests.swift */; };
 		78A3E49EE585D66C2A712C4A /* PoemStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A76E1BD67ED8F2EC5B38144 /* PoemStoreTests.swift */; };
 		8865CB8B03FBF0D89CDD204E /* PoemCatalog.json in Resources */ = {isa = PBXBuildFile; fileRef = F7B01C2C2198A14A80923098 /* PoemCatalog.json */; };
 		9376B9C50DA465E57A7A67A4 /* WidgetPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0127A528C99037ADA72F6 /* WidgetPayload.swift */; };
 		970657F525DE1D9BE7D0E27D /* PoemOfTheDayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5A0C0F7743D8470D83A4E /* PoemOfTheDayWidget.swift */; };
+		A0363C177E48801480F5B0AC /* AnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDD7E0DA8930A0F716A44B4 /* AnalyticsEvents.swift */; };
 		A2FBD56DC3011C619B74D2F2 /* PoemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5F910B6B866823690BDBB8 /* PoemService.swift */; };
+		A5A8E5589292B94F9CED7562 /* PoetOfTheDayCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E51ACC5CD3E425BE51873E0 /* PoetOfTheDayCard.swift */; };
 		B17085DF409AB4D8EC91A172 /* SupporterEntitlement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0206F2CEF5B734AF2AC181E /* SupporterEntitlement.swift */; };
 		B33FA7660BB953C8C4BEC987 /* WidgetFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2758DC693027862F1844078C /* WidgetFoundationTests.swift */; };
 		BE402AB96C3F31D8A9D08281 /* PoeticWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8EAF6B5007791C7129227731 /* PoeticWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -85,6 +94,7 @@
 		CF44D6F57B2D2D034F52F76C /* PoemWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6646B928069B39AF3D806A66 /* PoemWidgetView.swift */; };
 		D6362BE02BE4DBFCF675E16D /* WidgetDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA678634449AF6AD4DB06BA /* WidgetDataStore.swift */; };
 		DA5E3E5F9D3FC703F849CD7A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4A6A44E31DC3024353356FD /* Foundation.framework */; };
+		DFB467355965B3D92F3EE062 /* WidgetAnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D9B672D25331C710F73D7 /* WidgetAnnouncementView.swift */; };
 		E46FFFD398517BDBB13C22BA /* QuoteEntity+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AC0FC82F6F86335CCDFC05 /* QuoteEntity+CoreData.swift */; };
 		E49C3A2F4694A69A2F34A313 /* PoemEntity+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F714190FD0774CCBE5EA56F /* PoemEntity+CoreData.swift */; };
 		EBE1897E3EF4168183446BAC /* PoemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0498492E65D473073EAFE476 /* PoemStore.swift */; };
@@ -129,9 +139,11 @@
 /* Begin PBXFileReference section */
 		045B5E23375C6CBB3317E5A9 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0498492E65D473073EAFE476 /* PoemStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PoemStore.swift; sourceTree = "<group>"; };
+		0CDD7E0DA8930A0F716A44B4 /* AnalyticsEvents.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnalyticsEvents.swift; sourceTree = "<group>"; };
 		11A5A0C0F7743D8470D83A4E /* PoemOfTheDayWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PoemOfTheDayWidget.swift; sourceTree = "<group>"; };
 		1A76E1BD67ED8F2EC5B38144 /* PoemStoreTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PoemStoreTests.swift; sourceTree = "<group>"; };
 		1D5F910B6B866823690BDBB8 /* PoemService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PoemService.swift; sourceTree = "<group>"; };
+		1E51ACC5CD3E425BE51873E0 /* PoetOfTheDayCard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PoetOfTheDayCard.swift; sourceTree = "<group>"; };
 		271266EE6BFB86A46AC534DC /* StoreMigrator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StoreMigrator.swift; sourceTree = "<group>"; };
 		2758DC693027862F1844078C /* WidgetFoundationTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetFoundationTests.swift; sourceTree = "<group>"; };
 		2A13BE0028B9B42800E79A0E /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
@@ -150,7 +162,6 @@
 		2A1EC6BB2A68C8380012F138 /* TipsStoreConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = TipsStoreConfiguration.storekit; sourceTree = "<group>"; };
 		2A1EC6BD2A68CA4F0012F138 /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
 		2A1EC6BF2A68CBB50012F138 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		2A1EC6C22A68D2350012F138 /* TipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsView.swift; sourceTree = "<group>"; };
 		2A304723288FB01500E43820 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2A3190102C11DBA9009BC3A0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		2A3190132C13086B009BC3A0 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
@@ -172,6 +183,7 @@
 		2A81C48528C45B4300437EC3 /* View+FontWithLineHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+FontWithLineHeight.swift"; sourceTree = "<group>"; };
 		2A81C48728C4D25C00437EC3 /* PoemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoemCard.swift; sourceTree = "<group>"; };
 		2A8ADBC52A69019F001630B1 /* View+ToAnyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ToAnyView.swift"; sourceTree = "<group>"; };
+		2A8F97EA3031A95B00D78EC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2AB4B9A727E05F1C008FB84B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		2ABCC206285095A900CA0FB3 /* PoemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoemView.swift; sourceTree = "<group>"; };
 		2ACC8A3C27E86E3B002F5B6D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -185,6 +197,7 @@
 		2AF98E3A27DE2E00004D21DA /* Authors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authors.swift; sourceTree = "<group>"; };
 		3DB113ABEF431539A6447451 /* SupporterEntitlementTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SupporterEntitlementTests.swift; sourceTree = "<group>"; };
 		4867CC4CE5F5CF0595D373B2 /* DailyPoemPicker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyPoemPicker.swift; sourceTree = "<group>"; };
+		4ADCD3F40F53F7701C87B6DC /* DailyPoetPicker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyPoetPicker.swift; sourceTree = "<group>"; };
 		5720601CFD8DF6C5FB5DC5FD /* StoreMigratorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StoreMigratorTests.swift; sourceTree = "<group>"; };
 		60E226F21FC96D45D0D09A17 /* PoeticWidgetsBundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PoeticWidgetsBundle.swift; sourceTree = "<group>"; };
 		6646B928069B39AF3D806A66 /* PoemWidgetView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PoemWidgetView.swift; sourceTree = "<group>"; };
@@ -193,19 +206,23 @@
 		6F714190FD0774CCBE5EA56F /* PoemEntity+CoreData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "PoemEntity+CoreData.swift"; sourceTree = "<group>"; };
 		7B2FFD118388DB5ADB6E6A88 /* WidgetBackground.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetBackground.swift; sourceTree = "<group>"; };
 		7CB0127A528C99037ADA72F6 /* WidgetPayload.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetPayload.swift; sourceTree = "<group>"; };
+		86A22BBD8798763AD84D2ED8 /* PoetBios.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; path = PoetBios.json; sourceTree = "<group>"; };
 		8EAF6B5007791C7129227731 /* PoeticWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PoeticWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		93DE97723B47E314D2BB3BB5 /* Poetic.xcdatamodel */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcdatamodel; path = Poetic.xcdatamodel; sourceTree = "<group>"; };
 		944FF62B8DA225FC1790DFDA /* FavoritesWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FavoritesWidget.swift; sourceTree = "<group>"; };
+		968D9B672D25331C710F73D7 /* WidgetAnnouncementView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetAnnouncementView.swift; sourceTree = "<group>"; };
 		96D03140BD48856ED9CC03DD /* SharedConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SharedConstants.swift; sourceTree = "<group>"; };
 		A4C668F013A6F5BE10B1BB1A /* PoemExcerpt.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PoemExcerpt.swift; sourceTree = "<group>"; };
 		A907CB719B29BC00C2C4A16A /* PersistenceStack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PersistenceStack.swift; sourceTree = "<group>"; };
 		ACFB9E50EFDC55E953F4A518 /* WidgetAssets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = WidgetAssets.xcassets; sourceTree = "<group>"; };
 		B40E67165FC9296D7C32F377 /* PoeticWidgets.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = PoeticWidgets.entitlements; sourceTree = "<group>"; };
 		B974AF0889446B93B882D28C /* CatalogTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CatalogTests.swift; sourceTree = "<group>"; };
+		B9B38CC146A259321066C791 /* PoetBiosTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PoetBiosTests.swift; sourceTree = "<group>"; };
 		CB440A85443385E1509D2446 /* DeepLink.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		CF0AEFC6202E13552C313627 /* WidgetDataRefresher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetDataRefresher.swift; sourceTree = "<group>"; };
 		D5AC0FC82F6F86335CCDFC05 /* QuoteEntity+CoreData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "QuoteEntity+CoreData.swift"; sourceTree = "<group>"; };
 		E4A6A44E31DC3024353356FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		EB342E494D2E6C4984B5D4B0 /* PoetBio.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PoetBio.swift; sourceTree = "<group>"; };
 		F0206F2CEF5B734AF2AC181E /* SupporterEntitlement.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SupporterEntitlement.swift; sourceTree = "<group>"; };
 		F7B01C2C2198A14A80923098 /* PoemCatalog.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; path = PoemCatalog.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -216,6 +233,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A1EC6B72A68C4A40012F138 /* StoreKit.framework in Frameworks */,
+				5EE325FC0CD0E702CBC5FE32 /* FirebaseAnalytics in Frameworks */,
+				3619E78A3C294816E079FA42 /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +281,7 @@
 		2A17BA9127D5D8E000E0D755 /* Poetic */ = {
 			isa = PBXGroup;
 			children = (
+				2A8F97EA3031A95B00D78EC9 /* GoogleService-Info.plist */,
 				2A17BA9227D5D8E000E0D755 /* PoeticApp.swift */,
 				2A17BA9427D5D8E000E0D755 /* ContentView.swift */,
 				2A3190102C11DBA9009BC3A0 /* PrivacyInfo.xcprivacy */,
@@ -299,6 +319,7 @@
 				2A77337628C6212A00C115E9 /* Quotes */,
 				2A77337728C6213300C115E9 /* Settings */,
 				2A77337828C6216100C115E9 /* Detail */,
+				4D855D064BE08D2D3E5F7702 /* Announcement */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -320,6 +341,7 @@
 				6F714190FD0774CCBE5EA56F /* PoemEntity+CoreData.swift */,
 				D5AC0FC82F6F86335CCDFC05 /* QuoteEntity+CoreData.swift */,
 				271266EE6BFB86A46AC534DC /* StoreMigrator.swift */,
+				EB342E494D2E6C4984B5D4B0 /* PoetBio.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -332,6 +354,9 @@
 				2AF8600227DB16EA00B3BC40 /* Authors.json */,
 				1D5F910B6B866823690BDBB8 /* PoemService.swift */,
 				F7B01C2C2198A14A80923098 /* PoemCatalog.json */,
+				4ADCD3F40F53F7701C87B6DC /* DailyPoetPicker.swift */,
+				86A22BBD8798763AD84D2ED8 /* PoetBios.json */,
+				0CDD7E0DA8930A0F716A44B4 /* AnalyticsEvents.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -359,7 +384,6 @@
 			isa = PBXGroup;
 			children = (
 				2A1EC6BD2A68CA4F0012F138 /* StoreKitManager.swift */,
-				2A1EC6C22A68D2350012F138 /* TipsView.swift */,
 				2A1EC6BB2A68C8380012F138 /* TipsStoreConfiguration.storekit */,
 				F0206F2CEF5B734AF2AC181E /* SupporterEntitlement.swift */,
 			);
@@ -406,6 +430,7 @@
 				2A42F5E1299A62B500122847 /* TitleAuthorDateHomeCell.swift */,
 				2A81C48728C4D25C00437EC3 /* PoemCard.swift */,
 				2A77337D28C8C6B000C115E9 /* FailedPoemCard.swift */,
+				1E51ACC5CD3E425BE51873E0 /* PoetOfTheDayCard.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -465,6 +490,7 @@
 				B974AF0889446B93B882D28C /* CatalogTests.swift */,
 				2758DC693027862F1844078C /* WidgetFoundationTests.swift */,
 				3DB113ABEF431539A6447451 /* SupporterEntitlementTests.swift */,
+				B9B38CC146A259321066C791 /* PoetBiosTests.swift */,
 			);
 			path = PoeticTests;
 			sourceTree = "<group>";
@@ -476,6 +502,15 @@
 				0498492E65D473073EAFE476 /* PoemStore.swift */,
 			);
 			path = Persistence;
+			sourceTree = "<group>";
+		};
+		4D855D064BE08D2D3E5F7702 /* Announcement */ = {
+			isa = PBXGroup;
+			children = (
+				968D9B672D25331C710F73D7 /* WidgetAnnouncementView.swift */,
+			);
+			name = Announcement;
+			path = Announcement;
 			sourceTree = "<group>";
 		};
 		595375346E6B1A7533CA2DF0 /* iOS */ = {
@@ -535,6 +570,7 @@
 				2A17BA8D27D5D8E000E0D755 /* Resources */,
 				2ABBE02A2D4F67E9001B14FA /* Swiftlint */,
 				69CDD69E8BC5A256C12A9BA8 /* Embed Foundation Extensions */,
+				DABB6B27F229057B25D1A4B8 /* Upload Crashlytics dSYMs */,
 			);
 			buildRules = (
 			);
@@ -542,6 +578,10 @@
 				5E74A2F1BC22C4023C9F1894 /* PBXTargetDependency */,
 			);
 			name = Poetic;
+			packageProductDependencies = (
+				52BE1C40A44F79DFBB844337 /* FirebaseAnalytics */,
+				FD7191FB405C5E34FA69EBF1 /* FirebaseCrashlytics */,
+			);
 			productName = Poetic;
 			productReference = 2A17BA8F27D5D8E000E0D755 /* Poetic.app */;
 			productType = "com.apple.product-type.application";
@@ -609,6 +649,9 @@
 				Base,
 			);
 			mainGroup = 2A17BA8627D5D8E000E0D755;
+			packageReferences = (
+				6CC30E39DC1DD32B131AFBB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 2A17BA9027D5D8E000E0D755 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -630,6 +673,8 @@
 				2A17BA9727D5D8E000E0D755 /* Assets.xcassets in Resources */,
 				8865CB8B03FBF0D89CDD204E /* PoemCatalog.json in Resources */,
 				EEAE32E5857440DC619A6538 /* PrivacyInfo.xcprivacy in Resources */,
+				21D570EC4BF3983D6484D485 /* PoetBios.json in Resources */,
+				2A8F97EB3031A95B00D78EC9 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,6 +716,28 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [[ \"$(uname -m)\" == arm64 ]]\nthen\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif command -v swiftlint >/dev/null 2>&1\nthen\n    swiftlint --fix && swiftlint\nelse\n    echo \"warning: `swiftlint` command not found - See https://github.com/realm/SwiftLint#installation for installation instructions.\"\nfi\n";
 		};
+		DABB6B27F229057B25D1A4B8 /* Upload Crashlytics dSYMs */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "Upload Crashlytics dSYMs";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -685,9 +752,9 @@
 				2A81C48828C4D25C00437EC3 /* PoemCard.swift in Sources */,
 				2A7FD5E22A626E8200E924EE /* HapticFeedBackGenerator.swift in Sources */,
 				2A304724288FB01500E43820 /* HomeView.swift in Sources */,
-				2A1ABA5828F4016900D48AA1 /* (null) in Sources */,
+				2A1ABA5828F4016900D48AA1 /* BuildFile in Sources */,
 				2A1EC6C02A68CBB50012F138 /* Constants.swift in Sources */,
-				2A17BAAC27D5D96E00E0D755 /* (null) in Sources */,
+				2A17BAAC27D5D96E00E0D755 /* BuildFile in Sources */,
 				2A42F5E7299BBF9A00122847 /* AuthorCell.swift in Sources */,
 				2A42F5E9299BBFBC00122847 /* AuthorPoemCell.swift in Sources */,
 				2A19EA9B27F09E1C00022EFE /* NotificationManager.swift in Sources */,
@@ -696,8 +763,8 @@
 				2ACC8A4927E8C39E002F5B6D /* SystemThemeManager.swift in Sources */,
 				2ACC8A4727E8AFC9002F5B6D /* Links.swift in Sources */,
 				2A77337A28C777C700C115E9 /* FlatLinkStyle.swift in Sources */,
-				2A1EC6C32A68D2350012F138 /* TipsView.swift in Sources */,
-				2A1ABA5A28F4090000D48AA1 /* (null) in Sources */,
+				2A1EC6C32A68D2350012F138 /* BuildFile in Sources */,
+				2A1ABA5A28F4090000D48AA1 /* BuildFile in Sources */,
 				2A13BE0128B9B42800E79A0E /* DetailView.swift in Sources */,
 				2A42F5E0299A623200122847 /* TitleAuthorFavoriteCell.swift in Sources */,
 				2A38CF7927DF74BB00A44268 /* Poetic.xcdatamodeld in Sources */,
@@ -709,7 +776,7 @@
 				2A17BAAE27D6418400E0D755 /* Poem.swift in Sources */,
 				2A1EC6BE2A68CA4F0012F138 /* StoreKitManager.swift in Sources */,
 				2A1ABA4928F2CEAA00D48AA1 /* IntegratedSearchView.swift in Sources */,
-				2A38CF7B27DF74CC00A44268 /* (null) in Sources */,
+				2A38CF7B27DF74CC00A44268 /* BuildFile in Sources */,
 				2AB4B9A827E05F1C008FB84B /* Color.swift in Sources */,
 				2A77337E28C8C6B000C115E9 /* FailedPoemCard.swift in Sources */,
 				2AF98E3B27DE2E00004D21DA /* Authors.swift in Sources */,
@@ -733,6 +800,11 @@
 				ED22438140A114FF24251D80 /* DeepLink.swift in Sources */,
 				07945760025162301BCC615E /* WidgetDataRefresher.swift in Sources */,
 				B17085DF409AB4D8EC91A172 /* SupporterEntitlement.swift in Sources */,
+				0D32F9717B9792A01040736E /* PoetBio.swift in Sources */,
+				30DE242A1137752B26DA7437 /* DailyPoetPicker.swift in Sources */,
+				A5A8E5589292B94F9CED7562 /* PoetOfTheDayCard.swift in Sources */,
+				A0363C177E48801480F5B0AC /* AnalyticsEvents.swift in Sources */,
+				DFB467355965B3D92F3EE062 /* WidgetAnnouncementView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,13 +814,14 @@
 			files = (
 				2A7FD5F12A627D7600E924EE /* MockPoemService.swift in Sources */,
 				2A7FD5F52A627F8500E924EE /* Mockable.swift in Sources */,
-				2AF5D93A2A63EE5E006725A8 /* (null) in Sources */,
+				2AF5D93A2A63EE5E006725A8 /* BuildFile in Sources */,
 				2A7FD5F72A62862D00E924EE /* PoemViewModelTests.swift in Sources */,
 				26D58ADD0877595CB1A3348C /* StoreMigratorTests.swift in Sources */,
 				78A3E49EE585D66C2A712C4A /* PoemStoreTests.swift in Sources */,
 				77D143A5F0E0545B47531FEB /* CatalogTests.swift in Sources */,
 				B33FA7660BB953C8C4BEC987 /* WidgetFoundationTests.swift in Sources */,
 				22B8D4AF4585E5E735C65C3C /* SupporterEntitlementTests.swift in Sources */,
+				0DF69F6BF2E165337B1CBD51 /* PoetBiosTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1099,6 +1172,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6CC30E39DC1DD32B131AFBB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.16.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		52BE1C40A44F79DFBB844337 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CC30E39DC1DD32B131AFBB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		FD7191FB405C5E34FA69EBF1 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CC30E39DC1DD32B131AFBB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		2A38CF7727DF74BB00A44268 /* Poetic.xcdatamodeld */ = {
