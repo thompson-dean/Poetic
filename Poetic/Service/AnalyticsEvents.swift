@@ -6,6 +6,7 @@
 //
 
 import FirebaseAnalytics
+import StoreKit
 
 /// The only place Firebase Analytics is called. Every event and parameter
 /// name lives here so the funnel can't drift into inconsistent strings.
@@ -61,8 +62,14 @@ enum AnalyticsEvents {
         Analytics.logEvent("tab_selected", parameters: ["tab": tab])
     }
 
-    static func settingsOpened() {
-        Analytics.logEvent("settings_opened", parameters: [:])
+    /// `source` is a `SettingsSource` raw value — which entry point
+    /// brought the user to Settings (and the tip jar at its top).
+    static func themeSelected(_ theme: String) {
+        Analytics.logEvent("theme_selected", parameters: ["theme": theme])
+    }
+
+    static func settingsOpened(source: String) {
+        Analytics.logEvent("settings_opened", parameters: ["source": source])
     }
 
     /// `type` is "home", "favorites", "support", or "poem" — every widget
@@ -72,6 +79,20 @@ enum AnalyticsEvents {
     }
 
     // MARK: - Support / tips
+
+    /// Fires once per Settings presentation, when the tip section actually
+    /// appears — the top of the tip funnel. `source` matches settings_opened.
+    static func supporterScreenViewed(source: String) {
+        Analytics.logEvent("supporter_screen_viewed", parameters: ["source": source])
+    }
+
+    /// Hands a verified StoreKit 2 transaction to Firebase, which logs an
+    /// `in_app_purchase` event with real price and currency. StoreKit 2
+    /// purchases aren't picked up automatically, so without this GA4
+    /// revenue stays at 0.
+    static func logTransaction(_ transaction: Transaction) {
+        Analytics.logTransaction(transaction)
+    }
 
     // MARK: - Widget announcement
 

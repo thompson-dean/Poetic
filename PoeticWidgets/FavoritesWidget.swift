@@ -93,6 +93,6 @@ struct FavoritesWidget: Widget {
         }
         .configurationDisplayName("Favorites")
         .description("Your favorite poems, rotating through the day. A thank-you for leaving any tip.")
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }

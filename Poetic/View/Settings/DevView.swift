@@ -89,8 +89,7 @@ struct DevView: View {
             }
 
         }.background(
-            Image(colorScheme == .light ? "background" : "background-dark")
-                .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+            ThemeBackgroundView()
                 .ignoresSafeArea()
 
         )

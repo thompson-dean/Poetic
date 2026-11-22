@@ -28,7 +28,7 @@ struct PoemOfTheDayProvider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<DailyPoemEntry>) -> Void) {
         let now = Date()
-        let calendar = Calendar.current
+        let calendar = WidgetDateKey.calendar
         let todayKey = WidgetDateKey.string(for: now)
 
         guard let payload = store.readDaily() else {
@@ -45,7 +45,7 @@ struct PoemOfTheDayProvider: TimelineProvider {
         for entry in payload.days where entry.dateKey >= todayKey {
             if entry.dateKey == todayKey {
                 entries.append(DailyPoemEntry(date: now, poem: entry.poem))
-            } else if let date = dateFromKey(entry.dateKey, calendar: calendar) {
+            } else if let date = WidgetDateKey.date(from: entry.dateKey) {
                 entries.append(DailyPoemEntry(date: calendar.startOfDay(for: date), poem: entry.poem))
             }
         }
@@ -53,13 +53,6 @@ struct PoemOfTheDayProvider: TimelineProvider {
             entries = [DailyPoemEntry(date: now, poem: nil)]
         }
         completion(Timeline(entries: entries, policy: .atEnd))
-    }
-
-    private func dateFromKey(_ key: String, calendar: Calendar) -> Date? {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        formatter.calendar = calendar
-        return formatter.date(from: key)
     }
 }
 

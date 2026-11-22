@@ -140,4 +140,36 @@ final class PoemStoreTests: XCTestCase {
         XCTAssertEqual(store.favorites.count, 1)
         XCTAssertEqual(store.favorites.first?.title, "Ode")
     }
+
+    // MARK: - Favorites widget sync
+
+    func test_widgetSync_onlyWhenFavoritesChange() {
+        let sync = CountingWidgetSync()
+        let store = PoemStore(stack: PersistenceStack(inMemory: true), widgetSync: sync)
+        XCTAssertEqual(sync.calls, 1, "launch always syncs once")
+
+        store.markViewed(Poem.stub)
+        XCTAssertEqual(sync.calls, 1, "opening a poem must not rewrite the widget")
+
+        store.toggleFavorite(Poem.stub)
+        XCTAssertEqual(sync.calls, 2)
+        XCTAssertEqual(sync.lastPoems.map(\.title), [Poem.stub.title])
+
+        store.markViewed(Poem.stub)
+        XCTAssertEqual(sync.calls, 2)
+
+        store.toggleFavorite(Poem.stub)
+        XCTAssertEqual(sync.calls, 3)
+        XCTAssertTrue(sync.lastPoems.isEmpty)
+    }
+}
+
+private final class CountingWidgetSync: WidgetFavoritesSyncing {
+    private(set) var calls = 0
+    private(set) var lastPoems: [Poem] = []
+
+    func favoritesDidChange(_ favorites: [Poem]) {
+        calls += 1
+        lastPoems = favorites
+    }
 }

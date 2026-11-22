@@ -14,6 +14,7 @@ struct PoemWidgetView: View {
 
     let poem: WidgetPoem
     let eyebrow: String
+    private let theme = WidgetTheme.current
 
     var body: some View {
         Group {
@@ -46,7 +47,7 @@ struct PoemWidgetView: View {
 
     private var titleText: some View {
         Text(poem.title)
-            .font(.system(size: 15, weight: .bold, design: .serif))
+            .font(theme.widgetFont(size: 15, bold: true))
             .foregroundStyle(.primary)
     }
 
@@ -56,16 +57,36 @@ struct PoemWidgetView: View {
             .foregroundStyle(.secondary)
     }
 
+    /// Title, then as many opening lines as fit (up to 3), then the poet.
+    /// A short title leaves room for more of the poem.
     private var small: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 3) {
             eyebrowText
             titleText
-                .lineLimit(3)
-            Spacer(minLength: 0)
+                .lineLimit(2)
+            ViewThatFits(in: .vertical) {
+                smallExcerpt(lineLimit: 3)
+                smallExcerpt(lineLimit: 2)
+                smallExcerpt(lineLimit: 1)
+                Color.clear.frame(height: 0)
+            }
+            .frame(maxHeight: .infinity, alignment: .top)
             authorText
                 .lineLimit(1)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    }
+
+    private func smallExcerpt(lineLimit: Int) -> some View {
+        VStack(alignment: .leading, spacing: 1) {
+            ForEach(Array(poem.excerptLines.prefix(lineLimit).enumerated()), id: \.offset) { _, line in
+                Text(line)
+                    .font(theme.widgetFont(size: 12))
+                    .foregroundStyle(.primary.opacity(0.85))
+                    .lineLimit(1)
+            }
+        }
+        .padding(.top, 2)
     }
 
     private var medium: some View {
@@ -92,12 +113,30 @@ struct PoemWidgetView: View {
                 RoundedRectangle(cornerRadius: 1)
                     .foregroundStyle(themeColor)
                     .frame(width: 2)
-                excerpt(lineLimit: 7)
+                largeExcerpt
             }
             .padding(.top, 4)
-            Spacer(minLength: 0)
+            .frame(maxHeight: .infinity, alignment: .top)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    }
+
+    /// Fills the large widget: a short poem is shown whole at a bigger size,
+    /// a long one gets as many lines as fit. ViewThatFits takes the first
+    /// candidate that fits the remaining height, so order is best-first.
+    private var largeExcerpt: some View {
+        let count = poem.excerptLines.count
+        return ViewThatFits(in: .vertical) {
+            excerpt(lineLimit: count, fontSize: 17)
+            excerpt(lineLimit: count, fontSize: 15)
+            excerpt(lineLimit: count, fontSize: 13)
+            excerpt(lineLimit: 16, fontSize: 13)
+            excerpt(lineLimit: 14, fontSize: 13)
+            excerpt(lineLimit: 12, fontSize: 13)
+            excerpt(lineLimit: 10, fontSize: 13)
+            excerpt(lineLimit: 8, fontSize: 13)
+            excerpt(lineLimit: 6, fontSize: 13)
+        }
     }
 
     private var accessory: some View {
@@ -117,17 +156,18 @@ struct PoemWidgetView: View {
         .widgetAccentable()
     }
 
-    private func excerpt(lineLimit: Int) -> some View {
+    private func excerpt(lineLimit: Int, fontSize: CGFloat = 13) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             ForEach(Array(poem.excerptLines.prefix(lineLimit).enumerated()), id: \.offset) { _, line in
                 Text(line)
-                    .font(.system(size: 13, design: .serif))
+                    .font(theme.widgetFont(size: fontSize))
                     .foregroundStyle(.primary.opacity(0.85))
                     .lineLimit(1)
+                    .minimumScaleFactor(0.85)
             }
             if poem.totalLineCount > lineLimit {
                 Text("…")
-                    .font(.system(size: 13, design: .serif))
+                    .font(theme.widgetFont(size: fontSize))
                     .foregroundStyle(.secondary)
             }
         }

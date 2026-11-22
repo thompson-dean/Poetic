@@ -38,9 +38,6 @@ protocol PoemServiceProtocol {
     /// Case- and diacritic-insensitive; poems ranked title-match first.
     func search(matching query: String) async throws -> PoemSearchResults
 
-    /// Exact (folded) title + author lookup — used to resolve deep links.
-    func poem(titled title: String, by author: String) async throws -> Poem?
-
     /// The entire catalog — used by the widget payload builder.
     func allPoems() async throws -> [Poem]
 }
@@ -115,6 +112,7 @@ actor LocalPoemService: PoemServiceProtocol {
         try await loadCatalog()
     }
 
+    /// Exact (folded) title + author lookup — used to resolve deep links.
     func poem(titled title: String, by author: String) async throws -> Poem? {
         let foldedTitle = Self.fold(title)
         let foldedAuthor = Self.fold(author)

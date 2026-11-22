@@ -19,8 +19,7 @@ struct AuthorView: View {
 
                 case .idle:
                     ZStack {
-                        Image(colorScheme == .light ? "background" : "background-dark")
-                            .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+                        ThemeBackgroundView()
                             .ignoresSafeArea()
 
                         VStack(alignment: .center) {
@@ -31,8 +30,7 @@ struct AuthorView: View {
 
                 case .loading:
                     ZStack {
-                        Image(colorScheme == .light ? "background" : "background-dark")
-                            .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+                        ThemeBackgroundView()
                             .ignoresSafeArea()
 
                         VStack(alignment: .center) {
@@ -43,8 +41,7 @@ struct AuthorView: View {
 
                 case .failed:
                     ZStack {
-                        Image(colorScheme == .light ? "background" : "background-dark")
-                            .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+                        ThemeBackgroundView()
                             .ignoresSafeArea()
 
                         VStack(alignment: .center) {
@@ -76,8 +73,7 @@ struct AuthorView: View {
                         }
                     }
                     .background(
-                        Image(colorScheme == .light ? "background" : "background-dark")
-                            .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+                        ThemeBackgroundView()
                             .ignoresSafeArea()
 
                     )

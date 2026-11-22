@@ -23,11 +23,7 @@ enum Links {
 Available here:  \(Self.appStoreWebsiteLink)
 """
         let activityViewController = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
-
-        let scenes = UIApplication.shared.connectedScenes
-        let windowScene = scenes.first as? UIWindowScene
-        let window = windowScene?.windows.first
-        window?.rootViewController?.present(activityViewController, animated: true, completion: nil)
+        presentFromTop(activityViewController)
 
     }
 
@@ -38,19 +34,13 @@ Found on Poetic, your favorite classical poetry app.
 Available here:  \(Self.appStoreWebsiteLink)
 """
         let activityViewController = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
-        let scenes = UIApplication.shared.connectedScenes
-        let windowScene = scenes.first as? UIWindowScene
-        let window = windowScene?.windows.first
-        window?.rootViewController?.present(activityViewController, animated: true, completion: nil)
+        presentFromTop(activityViewController)
     }
 
     static func shareApp() {
         let sharedString = Self.appStoreWebsiteLink
         let activityViewController = UIActivityViewController(activityItems: [sharedString], applicationActivities: nil)
-        let scenes = UIApplication.shared.connectedScenes
-        let windowScene = scenes.first as? UIWindowScene
-        let window = windowScene?.windows.first
-        window?.rootViewController?.present(activityViewController, animated: true, completion: nil)
+        presentFromTop(activityViewController)
     }
 
     static let authorLinksDictionary: [String: String] = [
@@ -192,4 +182,19 @@ Available here:  \(Self.appStoreWebsiteLink)
         "William Vaughn Moody": "https://mypoeticside.com/poets/william-vaughn-moody-poems",
         "William Wordsworth": "https://mypoeticside.com/poets/william-wordsworth-poems"
     ]
+
+    /// Presents from the topmost view controller, so sharing works from
+    /// inside sheets (e.g. Settings) — the root controller can't present
+    /// while it's already presenting something.
+    private static func presentFromTop(_ controller: UIViewController) {
+        let keyWindow = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap(\.windows)
+            .first { $0.isKeyWindow }
+        var top = keyWindow?.rootViewController
+        while let presented = top?.presentedViewController {
+            top = presented
+        }
+        top?.present(controller, animated: true)
+    }
 }

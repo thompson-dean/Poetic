@@ -7,13 +7,16 @@
 
 import SwiftUI
 
-/// The app's paper texture in light mode; a near-black card in dark mode
-/// (the app's dark background image is not tileable at widget sizes).
+/// The selected theme's background. Paper uses its texture in light mode
+/// and a near-black card in dark mode (the app's dark background image is
+/// not tileable at widget sizes).
 struct WidgetBackground: View {
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        if colorScheme == .light {
+        if let color = WidgetTheme.current.backgroundColor(for: colorScheme) {
+            color
+        } else if colorScheme == .light {
             Image("background")
                 .resizable(resizingMode: .tile)
         } else {
@@ -23,12 +26,16 @@ struct WidgetBackground: View {
 }
 
 extension Color {
-    /// Matches the app's theme accent (Extensions/Color.swift).
-    static var widgetTheme: Color {
-        Color.lightThemeColor
-    }
-
+    /// The selected theme's accent (see AppTheme).
     static func widgetTheme(for colorScheme: ColorScheme) -> Color {
-        colorScheme == .light ? .lightThemeColor : .darkThemeColor
+        WidgetTheme.current.accent(for: colorScheme)
+    }
+}
+
+enum WidgetTheme {
+    /// Read fresh on every render — the app reloads timelines when the
+    /// theme or supporter status changes.
+    static var current: AppTheme {
+        ThemeStore().effectiveTheme(isSupporter: SupporterEntitlement().isSupporter)
     }
 }

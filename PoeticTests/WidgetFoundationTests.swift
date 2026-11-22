@@ -101,7 +101,7 @@ final class DailyPoemPickerTests: XCTestCase {
             catalog: catalog, from: start, days: 14, appVersion: "2.4.0"
         )
         XCTAssertEqual(payload.days.count, 14)
-        let calendar = Calendar.current
+        let calendar = WidgetDateKey.calendar
         for (offset, entry) in payload.days.enumerated() {
             let expected = calendar.date(byAdding: .day, value: offset, to: start)!
             XCTAssertEqual(entry.dateKey, WidgetDateKey.string(for: expected))
@@ -111,13 +111,13 @@ final class DailyPoemPickerTests: XCTestCase {
         XCTAssertEqual(titles.count, 3)
     }
 
-    func test_excerpt_capsAtEightMeaningfulLines() {
+    func test_excerpt_capsAtWidgetExcerptLimit() {
         let entry = DailyPoemPicker.makePayload(
-            catalog: [poem("Another", "D Poet", lineCount: 20)],
+            catalog: [poem("Another", "D Poet", lineCount: 24)],
             from: Date(timeIntervalSince1970: 0), days: 1, appVersion: "2.4.0"
         ).days[0]
-        XCTAssertEqual(entry.poem.excerptLines.count, 8)
-        XCTAssertEqual(entry.poem.totalLineCount, 20)
+        XCTAssertEqual(entry.poem.excerptLines.count, Poem.widgetExcerptLimit)
+        XCTAssertEqual(entry.poem.totalLineCount, 24)
         XCTAssertTrue(entry.poem.excerptLines.allSatisfy { $0.count >= 4 })
     }
 
@@ -155,5 +155,31 @@ final class DeepLinkTests: XCTestCase {
         XCTAssertNil(DeepLink(url: URL(string: "poetic://unknown")!))
         XCTAssertNil(DeepLink(url: URL(string: "poetic://poem?title=OnlyTitle")!))
         XCTAssertNil(DeepLink(url: URL(string: "poetic://poem?title=&author=")!))
+    }
+
+    // MARK: - Calendar independence
+
+    func test_dateKey_isGregorian_regardlessOfUserCalendar() {
+        // 2026-11-22 12:00 in the current time zone.
+        var components = DateComponents()
+        components.year = 2026; components.month = 11; components.day = 22; components.hour = 12
+        let date = WidgetDateKey.calendar.date(from: components)!
+
+        XCTAssertEqual(WidgetDateKey.string(for: date), "2026-11-22")
+        XCTAssertEqual(WidgetDateKey.date(from: "2026-11-22").map(WidgetDateKey.string(for:)), "2026-11-22")
+        XCTAssertEqual(WidgetDateKey.calendar.identifier, .gregorian)
+    }
+
+    func test_japaneseCalendar_wouldPickDifferently() {
+        // Why the picker must not use the user's calendar: the Japanese
+        // calendar counts days per era, so the same instant gets a different
+        // day ordinal (and therefore a different poem).
+        let date = Date(timeIntervalSince1970: 1_800_000_000)
+        var japanese = Calendar(identifier: .japanese)
+        japanese.timeZone = .current
+        XCTAssertNotEqual(
+            japanese.ordinality(of: .day, in: .era, for: date),
+            WidgetDateKey.calendar.ordinality(of: .day, in: .era, for: date)
+        )
     }
 }

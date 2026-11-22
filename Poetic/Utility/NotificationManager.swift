@@ -50,13 +50,16 @@ class NotificationManager: ObservableObject {
 
     func requestAuthorization() {
         let options: UNAuthorizationOptions = [.alert, .badge, .sound]
-        center.requestAuthorization(options: options) { _, error in
+        center.requestAuthorization(options: options) { granted, error in
             if let error = error {
                 print("ERROR: \(error.localizedDescription)")
-            } else {
-                self.deleteNotification()
-                self.addNotification()
+                return
             }
+            // Refresh the weekly reminders only for users who allow them
+            // and haven't switched them off in Settings.
+            self.deleteNotification()
+            guard granted, self.notificationOn else { return }
+            self.addNotification()
         }
     }
 

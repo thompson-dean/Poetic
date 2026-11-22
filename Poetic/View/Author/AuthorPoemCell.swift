@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AuthorPoemCell: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.appTheme) private var theme
     let poem: Poem
     let indexString: String
 
@@ -20,7 +21,7 @@ struct AuthorPoemCell: View {
 
                         Text("\(indexString).")
                             .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
-                            .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                            .foregroundColor(theme.accent(for: colorScheme))
 
                         Text(poem.title)
                             .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 24)
@@ -42,7 +43,7 @@ struct AuthorPoemCell: View {
             }
         }
         .frame(width: UIScreen.main.bounds.width - 16)
-        .background(colorScheme == .light ? .white : .black)
+        .background(theme.card(for: colorScheme))
         .cornerRadius(8)
         .padding(.horizontal, 8)
     }

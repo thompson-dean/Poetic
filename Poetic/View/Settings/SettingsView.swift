@@ -10,10 +10,14 @@ import StoreKit
 
 struct SettingsView: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.appTheme) private var theme
     @StateObject var notificationManager = NotificationManager()
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var storeKitManager: StoreKitManager
+    /// Where this presentation came from, for the tip funnel.
+    let source: SettingsSource
 
+    @State private var hasLoggedSupporterView = false
     @State private var showLoading: Bool = false
     @State private var showThankYou: Bool = false
     @State var showPendingAlert: Bool = false
@@ -21,8 +25,13 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .center) {
+                ScrollViewReader { proxy in
                 Form {
                     supportSection
+                        .id(SettingsSection.support)
+                    ThemePickerSection(storeKitManager: storeKitManager) {
+                        withAnimation { proxy.scrollTo(SettingsSection.support, anchor: .top) }
+                    }
                     appearanceSection
                     notificationsSection
                     resourcesSection
@@ -35,8 +44,9 @@ struct SettingsView: View {
                     }
                 }
                 .animation(.spring(), value: showThankYou)
+                }
             }
-            .onChange(of: storeKitManager.paymentState) { state, _ in
+            .onChange(of: storeKitManager.paymentState) { _, state in
                 if state == .successful {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                         self.showThankYou = true
@@ -64,9 +74,13 @@ struct SettingsView: View {
     }
 }
 
+private enum SettingsSection: Hashable {
+    case support
+}
+
 private extension SettingsView {
     var themeColor: Color {
-        colorScheme == .light ? .lightThemeColor : .darkThemeColor
+        theme.accent(for: colorScheme)
     }
 
     var supportSection: some View {
@@ -81,27 +95,35 @@ private extension SettingsView {
                 }
 
                 // swiftlint:disable:next line_length
-                Text("All the poetry in Poetic is free — and it always will be. Any tip, big or small, unlocks the Favorites home screen widget as a thank you.")
+                Text("All the poetry in Poetic is free – and it always will be. Any tip, big or small, unlocks the Favorites home screen widget as a thank you.")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
             .padding(.vertical, 4)
 
             if storeKitManager.isSupporter {
-                Label("Widget unlocked — thank you!", systemImage: "checkmark.seal.fill")
+                Label("Widget unlocked – thank you!", systemImage: "checkmark.seal.fill")
                     .font(.callout.bold())
                     .foregroundStyle(.green)
             }
 
             if storeKitManager.tips.isEmpty {
-                HStack {
-                    Spacer()
-                    ProgressView()
-                    Spacer()
+                if storeKitManager.productsLoadFailed {
+                    TipsUnavailableRow {
+                        Task { await storeKitManager.loadProductsIfNeeded() }
+                    }
+                } else {
+                    HStack {
+                        Spacer()
+                        ProgressView()
+                        Spacer()
+                    }
                 }
             } else {
                 ForEach(storeKitManager.tips) { tip in
-                    tipRow(for: tip)
+                    TipRow(tip: tip, isFeatured: tip.id == storeKitManager.tips.first?.id) {
+                        Task { await storeKitManager.purchase(tip) }
+                    }
                 }
             }
 
@@ -117,46 +139,16 @@ private extension SettingsView {
                 Spacer()
             }
         } footer: {
-            Text("Tips are one-time purchases — no subscriptions, ever.")
+            Text("Tips are one-time purchases – no subscriptions, ever.")
         }
-    }
-
-    func tipRow(for tip: Product) -> some View {
-        HStack(spacing: 12) {
-            Text(tipEmoji(for: tip))
-                .font(.title3)
-                .frame(width: 40, height: 40)
-                .background(
-                    themeColor.opacity(0.15),
-                    in: RoundedRectangle(cornerRadius: 10, style: .continuous)
-                )
-
-            VStack(alignment: .leading, spacing: 2) {
-                Text(tip.displayName)
-                    .font(.body.weight(.semibold))
-                Text(tip.description)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-
-            Spacer()
-
-            Button(tip.displayPrice) {
-                Task {
-                    await storeKitManager.purchase(tip)
-                }
-            }
-            .buttonStyle(.borderedProminent)
-            .tint(themeColor)
-            .font(.callout.bold())
+        .task {
+            await storeKitManager.loadProductsIfNeeded()
         }
-        .padding(.vertical, 4)
-    }
-
-    func tipEmoji(for tip: Product) -> String {
-        if tip.id.hasSuffix("smallTip") { return "🍫" }
-        if tip.id.hasSuffix("mediumTip") { return "☕️" }
-        return "✨"
+        .onAppear {
+            guard !hasLoggedSupporterView else { return }
+            hasLoggedSupporterView = true
+            AnalyticsEvents.supporterScreenViewed(source: source.rawValue)
+        }
     }
 
     var thankYouView: some View {
@@ -179,7 +171,7 @@ private extension SettingsView {
                     .frame(height: 55)
                     .frame(maxWidth: .infinity)
                     .background(
-                        colorScheme == .light ? Color.lightThemeColor : Color.darkThemeColor,
+                        theme.accent(for: colorScheme),
                         in: RoundedRectangle(cornerRadius: 10, style: .continuous)
                     )
             }

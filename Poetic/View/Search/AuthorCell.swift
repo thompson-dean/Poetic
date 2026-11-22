@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AuthorCell: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.appTheme) private var theme
     let author: String
     var badge: String?
 
@@ -21,7 +22,7 @@ struct AuthorCell: View {
                     if let badge {
                         Text(badge)
                             .fontWithLineHeight(font: .systemFont(ofSize: 12, weight: .semibold), lineHeight: 16)
-                            .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                            .foregroundColor(theme.accent(for: colorScheme))
                     }
 
                     Text(bio?.name ?? author)
@@ -45,7 +46,7 @@ struct AuthorCell: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .background(colorScheme == .light ? .white : .black)
+        .background(theme.card(for: colorScheme))
         .cornerRadius(8)
         .padding(.horizontal, 8)
     }

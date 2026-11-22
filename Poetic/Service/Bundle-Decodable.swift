@@ -9,7 +9,7 @@ import Foundation
 
 extension Bundle {
     var appVersion: String {
-        object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "—"
+        object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "–"
     }
 
     func decode<T: Codable>(_ file: String) -> T {

@@ -49,6 +49,9 @@ typealias TransactionListener = Task<Void, Error>
 final class StoreKitManager: ObservableObject {
     @Published private(set) var items: [Product] = []
     @Published private(set) var isSupporter: Bool
+    /// True when the tip products couldn't be loaded (offline, App Store
+    /// hiccup). Settings shows a retry instead of an endless spinner.
+    @Published private(set) var productsLoadFailed = false
     @Published var hasError: Bool = false
     @Published private(set) var paymentState: PaymentState? {
         didSet {
@@ -70,8 +73,9 @@ final class StoreKitManager: ObservableObject {
         }
     }
 
+    /// Largest first: the generous option is the first thing people see.
     var tips: [Product] {
-        items.filter { $0.type == .consumable }
+        items.filter { $0.type == .consumable }.sorted { $0.price > $1.price }
     }
 
     private let entitlement: SupporterEntitlement
@@ -94,6 +98,9 @@ final class StoreKitManager: ObservableObject {
     }
 
     func purchase(_ item: Product) async {
+        // Clear the last outcome so every purchase produces a fresh change
+        // for the Settings sheet to react to.
+        paymentState = nil
         do {
             let result = try await item.purchase()
 
@@ -103,6 +110,12 @@ final class StoreKitManager: ObservableObject {
             AnalyticsEvents.purchaseFailed(productID: item.id, reason: error.localizedDescription)
             print("DEBUG: \(error.localizedDescription)")
         }
+    }
+
+    /// Settings calls this on appear, so a failed load retries itself.
+    func loadProductsIfNeeded() async {
+        guard items.isEmpty else { return }
+        await retrieveProducts()
     }
 
     func restorePurchases() async {
@@ -156,6 +169,9 @@ private extension StoreKitManager {
 
     func handle(_ transaction: Transaction) {
         guard transaction.revocationDate == nil else { return }
+        // Both the direct purchase path and Transaction.updates (Ask to Buy
+        // approvals, interrupted purchases) land here, each transaction once.
+        AnalyticsEvents.logTransaction(transaction)
         // Every tip unlocks supporter status, and a refund doesn't take it
         // back — the flag is deliberately sticky.
         if Constants.tipIdentifiers.contains(transaction.productID) {
@@ -174,14 +190,18 @@ private extension StoreKitManager {
         }
     }
 
+    /// A load failure is shown inline in Settings (with a retry), not as
+    /// the purchase-error alert — that alert would pop up out of context.
     func retrieveProducts() async {
+        productsLoadFailed = false
         do {
             let products = try await Product.products(
                 for: Constants.storeKitIdentifiers
             ).sorted(by: { $0.price < $1.price})
             items = products
+            productsLoadFailed = products.isEmpty
         } catch {
-            paymentState = .failed(.system(error))
+            productsLoadFailed = true
             print("DEBUG: \(error.localizedDescription)")
         }
     }

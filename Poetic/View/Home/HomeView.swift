@@ -11,8 +11,9 @@ struct HomeView: View {
     @ObservedObject var viewModel: PoemViewModel
     @EnvironmentObject var store: PoemStore
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.appTheme) private var theme
     @Binding var path: NavigationPath
-    @Binding var showSettings: Bool
+    @Binding var settingsSource: SettingsSource?
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -30,7 +31,7 @@ struct HomeView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        showSettings = true
+                        settingsSource = .home
                     } label: {
                         Image(systemName: "gearshape")
                     }
@@ -38,15 +39,14 @@ struct HomeView: View {
                     .accessibilityLabel("Settings")
                 }
             }
-            .navigationDestination(for: Poem.self) { poem in
-                DetailView(poem: poem, source: "deep_link")
+            .navigationDestination(for: PoemRoute.self) { route in
+                DetailView(poem: route.poem, source: route.source)
             }
         }
     }
 
     private var backgroundImage: some View {
-        Image(colorScheme == .light ? "background" : "background-dark")
-            .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+        ThemeBackgroundView()
             .ignoresSafeArea(.all)
     }
 
@@ -54,6 +54,7 @@ struct HomeView: View {
         VStack(alignment: .leading) {
             header
             discoverText
+            todaysPoemSection
             recommendedSection
             poetOfTheDaySection
             recentSection
@@ -62,7 +63,7 @@ struct HomeView: View {
 
     private var header: some View {
         Text("Poetic.")
-            .fontWithLineHeight(font: Fonts.newYorkFont, lineHeight: 48)
+            .fontWithLineHeight(font: theme.titleFont(size: 48), lineHeight: 48)
             .foregroundColor(.primary)
             .padding(.horizontal, 16)
     }
@@ -70,7 +71,7 @@ struct HomeView: View {
     private var discoverText: some View {
         Text("Discover Classic Poetry!")
             .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 16)
-            .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+            .foregroundColor(theme.accent(for: colorScheme))
             .padding(.horizontal, 16)
     }
 
@@ -89,6 +90,20 @@ struct HomeView: View {
                     }
                 }
                 .padding(.leading, 8)
+            }
+        }
+    }
+
+    private var todaysPoemSection: some View {
+        VStack(alignment: .leading) {
+            if let poem = viewModel.todaysPoem {
+                sectionTitle("Today's Poem")
+                NavigationLink {
+                    DetailView(poem: poem, source: "home_today")
+                } label: {
+                    TodaysPoemCard(poem: poem)
+                }
+                .buttonStyle(FlatLinkStyle())
             }
         }
     }
