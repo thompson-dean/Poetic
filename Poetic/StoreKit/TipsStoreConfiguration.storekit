@@ -10,7 +10,7 @@
       "internalID" : "B00CC257",
       "localizations" : [
         {
-          "description" : "Sugar for new app features.",
+          "description" : "A sweet little thank-you",
           "displayName" : "Chocolate",
           "locale" : "en_US"
         }
@@ -25,7 +25,7 @@
       "internalID" : "D4D4BAFC",
       "localizations" : [
         {
-          "description" : "Coffee for focus.",
+          "description" : "Coffee for the next poem",
           "displayName" : "Coffee",
           "locale" : "en_US"
         }
@@ -40,8 +40,8 @@
       "internalID" : "F6082485",
       "localizations" : [
         {
-          "description" : "Sugar and caffeine - hyperfocus.",
-          "displayName" : "Coffee and Chocolate",
+          "description" : "Fuel for new features",
+          "displayName" : "Coffee & Chocolate",
           "locale" : "en_US"
         }
       ],

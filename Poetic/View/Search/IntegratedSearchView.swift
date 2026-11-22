@@ -9,6 +9,7 @@ import SwiftUI
 
 struct IntegratedSearchView: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.appTheme) private var theme
     @ObservedObject var viewModel: PoemViewModel
     @State private var didFail: Bool = false
     @State private var alertMessage: String = ""
@@ -47,8 +48,7 @@ struct IntegratedSearchView: View {
     }
 
     private var backgroundImage: some View {
-        Image(colorScheme == .light ? "background" : "background-dark")
-            .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+        ThemeBackgroundView()
             .ignoresSafeArea()
     }
 
@@ -99,7 +99,7 @@ struct IntegratedSearchView: View {
                         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
                     Image(systemName: "chevron.right")
                 }
-                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                .foregroundColor(theme.accent(for: colorScheme))
                 .padding(.horizontal, 16)
                 .padding(.top, 4)
             }
@@ -206,8 +206,7 @@ struct AuthorIndexView: View {
             .padding(.top, 8)
         }
         .background(
-            Image(colorScheme == .light ? "background" : "background-dark")
-                .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+            ThemeBackgroundView()
                 .ignoresSafeArea()
         )
         .navigationTitle("All Authors")
@@ -218,6 +217,7 @@ struct AuthorIndexView: View {
 struct SearchResultCell: View {
     let match: PoemSearchMatch
     let colorScheme: ColorScheme
+    @Environment(\.appTheme) private var theme
 
     var body: some View {
         VStack {
@@ -229,7 +229,7 @@ struct SearchResultCell: View {
 
                     Text(match.poem.title)
                         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                        .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                        .foregroundColor(theme.accent(for: colorScheme))
 
                     if let line = match.matchedLine {
                         Text("“\(line)”")
@@ -248,7 +248,7 @@ struct SearchResultCell: View {
                     .padding(8)
             }
         }
-        .background(colorScheme == .light ? .white : .black)
+        .background(theme.card(for: colorScheme))
         .cornerRadius(8)
         .padding(.horizontal, 8)
     }
@@ -257,6 +257,7 @@ struct SearchResultCell: View {
 struct PoemCell: View {
     let poem: Poem
     let colorScheme: ColorScheme
+    @Environment(\.appTheme) private var theme
 
     var body: some View {
         VStack {
@@ -268,7 +269,7 @@ struct PoemCell: View {
 
                     Text(poem.title)
                         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                        .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                        .foregroundColor(theme.accent(for: colorScheme))
                 }
                 .padding(.vertical, 8)
                 .padding(.horizontal, 8)
@@ -281,7 +282,7 @@ struct PoemCell: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .background(colorScheme == .light ? .white : .black)
+        .background(theme.card(for: colorScheme))
         .cornerRadius(8)
         .padding(.horizontal, 8)
     }

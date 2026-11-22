@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PoemCard: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.appTheme) private var theme
     let poem: Poem
 
     var body: some View {
@@ -35,7 +36,7 @@ struct PoemCard: View {
 
     private var titleText: some View {
         Text(poem.title)
-            .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+            .foregroundColor(theme.accent(for: colorScheme))
             .lineLimit(2)
             .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 24)
             .padding(.bottom, 8)
@@ -54,7 +55,7 @@ struct PoemCard: View {
     }
 
     private var cardBackgroundColor: Color {
-        colorScheme == .light ? .white : .black
+        theme.card(for: colorScheme)
     }
 
     private func filteredLines(_ lines: [String]) -> [String] {

@@ -9,10 +9,11 @@ import SwiftUI
 
 struct FavoritesView: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.appTheme) private var theme
     @ObservedObject var viewModel: PoemViewModel
     @ObservedObject var storeKitManager: StoreKitManager
     @EnvironmentObject var store: PoemStore
-    @Binding var showSettings: Bool
+    @Binding var settingsSource: SettingsSource?
 
     var body: some View {
         NavigationStack {
@@ -57,8 +58,7 @@ struct FavoritesView: View {
                 }
             }
             .background(
-                Image(colorScheme == .light ? "background" : "background-dark")
-                    .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+                ThemeBackgroundView()
                     .ignoresSafeArea(.all)
             )
             .navigationTitle("Favorites")
@@ -93,14 +93,14 @@ struct FavoritesView: View {
     /// at exactly the poems the gated widget would show.
     private var widgetNudge: some View {
         Button {
-            showSettings = true
+            settingsSource = .favoritesNudge
         } label: {
             HStack(spacing: 6) {
                 Image(systemName: "star.square.on.square")
-                Text("Get these on your home screen — leave any tip")
+                Text("Get these on your home screen – leave any tip")
             }
             .font(.footnote.weight(.semibold))
-            .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+            .foregroundColor(theme.accent(for: colorScheme))
         }
         .padding(.bottom, 8)
     }

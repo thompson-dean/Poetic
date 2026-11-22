@@ -18,7 +18,7 @@ struct WidgetPoem: Codable, Hashable {
 
 struct DailyPayload: Codable, Equatable {
     struct DayEntry: Codable, Equatable {
-        /// "yyyy-MM-dd" in the user's current calendar and time zone.
+        /// "yyyy-MM-dd" in the Gregorian calendar and the user's time zone.
         let dateKey: String
         let poem: WidgetPoem
     }
@@ -26,6 +26,10 @@ struct DailyPayload: Codable, Equatable {
     let version: Int
     let appVersion: String
     let days: [DayEntry]
+
+    /// Bump when the payload's contents change shape (v2: 20-line excerpts
+    /// for the large widget) so existing payloads get rebuilt.
+    static let currentVersion = 2
 }
 
 struct FavoritesPayload: Codable, Equatable {
@@ -35,14 +39,32 @@ struct FavoritesPayload: Codable, Equatable {
     static let maximumPoems = 30
 }
 
+/// Day keys and day arithmetic for Poem of the Day. Always Gregorian with a
+/// fixed locale: with the user's own calendar (e.g. Japanese), "yyyy" is the
+/// era year and day counts restart each era, so keys and picks would differ
+/// from everyone else's — and break if the setting changed.
 enum WidgetDateKey {
-    private static let formatter: DateFormatter = {
+    /// Recomputed each time so a time zone change is picked up.
+    static var calendar: Calendar {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = .current
+        return calendar
+    }
+
+    private static func makeFormatter() -> DateFormatter {
         let formatter = DateFormatter()
+        formatter.calendar = calendar
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = .current
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
-    }()
+    }
 
     static func string(for date: Date) -> String {
-        formatter.string(from: date)
+        makeFormatter().string(from: date)
+    }
+
+    static func date(from key: String) -> Date? {
+        makeFormatter().date(from: key)
     }
 }

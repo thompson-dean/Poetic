@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PoemView: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.appTheme) private var theme
     @EnvironmentObject var store: PoemStore
 
     let author: String
@@ -23,8 +24,8 @@ struct PoemView: View {
     var body: some View {
         if store.hasQuote(poemLines[index], in: poem) {
             Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
-                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 18)
-                .background(colorScheme == . light ? Color.lightHighlightThemeColor : Color.darkHighlightThemeColor)
+                .fontWithLineHeight(font: theme.bodyFont(size: 16), lineHeight: 18)
+                .background(theme.highlight(for: colorScheme))
                 .contextMenu {
                     Button {
                         Links.shareQuote(
@@ -38,7 +39,7 @@ struct PoemView: View {
                 }
         } else {
             Text(poemLines[index].trimmingCharacters(in: .whitespacesAndNewlines))
-                .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 18)
+                .fontWithLineHeight(font: theme.bodyFont(size: 16), lineHeight: 18)
                 .contextMenu {
                     Button {
                         store.addQuote(poemLines[index], to: poem)

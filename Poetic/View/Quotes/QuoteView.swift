@@ -9,6 +9,7 @@ import SwiftUI
 
 struct QuoteView: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.appTheme) private var theme
     @ObservedObject var viewModel: PoemViewModel
     @EnvironmentObject var store: PoemStore
 
@@ -44,8 +45,7 @@ struct QuoteView: View {
                 }
             }
             .background(
-                Image(colorScheme == .light ? "background" : "background-dark")
-                    .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+                ThemeBackgroundView()
                     .ignoresSafeArea()
             )
             .navigationTitle("Quotes")
@@ -89,7 +89,7 @@ struct QuoteView: View {
         }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             shareButton(for: quote)
-                .tint(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                .tint(theme.accent(for: colorScheme))
         }
         .swipeActions(edge: .trailing) {
             Button(role: .destructive) {
@@ -118,6 +118,7 @@ struct QuoteView: View {
 private struct QuoteCell: View {
     let quote: QuoteEntity
     let colorScheme: ColorScheme
+    @Environment(\.appTheme) private var theme
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -130,7 +131,7 @@ private struct QuoteCell: View {
                     Text(quote.poem.title)
                         .fixedSize(horizontal: false, vertical: true)
                         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                        .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                        .foregroundColor(theme.accent(for: colorScheme))
 
                     Text(quote.poem.author)
                         .fontWithLineHeight(font: .systemFont(ofSize: 14, weight: .medium), lineHeight: 20)
@@ -145,7 +146,7 @@ private struct QuoteCell: View {
             .padding(.horizontal, 8)
             .padding(.vertical, 8)
         }
-        .background(colorScheme == .light ? .white : Color.black)
+        .background(theme.card(for: colorScheme))
         .cornerRadius(8)
         .padding(.vertical, 4)
     }

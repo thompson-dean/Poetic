@@ -13,6 +13,7 @@ struct PoeticApp: App {
     private let stack: PersistenceStack
     @StateObject private var store: PoemStore
     @StateObject private var storeKitManager = StoreKitManager()
+    @StateObject private var themeController = ThemeController()
 
     init() {
         FirebaseApp.configure()
@@ -34,6 +35,11 @@ struct PoeticApp: App {
             } else {
                 ContentView(storeKitManager: storeKitManager)
                     .environmentObject(store)
+                    .environmentObject(themeController)
+                    .environment(
+                        \.appTheme,
+                        themeController.effectiveTheme(isSupporter: storeKitManager.isSupporter)
+                    )
             }
         }
     }

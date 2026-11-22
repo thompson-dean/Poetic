@@ -38,6 +38,8 @@ class PoemViewModel: ObservableObject {
     @Published private(set) var searchAuthors = [String]()
     @Published private(set) var searchPoems = [PoemSearchMatch]()
     @Published private(set) var randomPoems = [Poem]()
+    /// Same pick as the Poem of the Day widget.
+    @Published private(set) var todaysPoem: Poem?
     @Published private(set) var authorPoems = [Poem]()
     @Published var searchTerm: String = ""
     @Published var searchListLoadingError: String = ""
@@ -76,6 +78,13 @@ class PoemViewModel: ObservableObject {
                 createAlert(with: error)
                 state = .failed
             }
+        }
+    }
+
+    func loadTodaysPoem(on date: Date = Date()) {
+        Task {
+            guard let catalog = try? await service.allPoems() else { return }
+            todaysPoem = DailyPoemPicker.poem(for: date, in: DailyPoemPicker.eligiblePoems(in: catalog))
         }
     }
 

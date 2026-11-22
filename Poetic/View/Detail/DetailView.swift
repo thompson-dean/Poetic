@@ -5,11 +5,23 @@
 //  Created by Dean Thompson on 2022/08/27.
 //
 
+import StoreKit
 import SwiftUI
+
+extension Notification.Name {
+    /// Posted when the reading screen goes away — ContentView uses it to
+    /// show the widget announcement after a new user's first poem.
+    static let poemDidClose = Notification.Name("poemDidClose")
+}
 
 struct DetailView: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.appTheme) private var theme
+    @Environment(\.requestReview) private var requestReview
     @State private var showWebView = false
+    @Environment(\.isPresented) private var isPresented
+    @State private var openedAt = Date()
+    @State private var hasLoggedView = false
     @EnvironmentObject var store: PoemStore
     let poem: Poem
     /// Where the poem was opened from — analytics only, defaulted so
@@ -18,34 +30,33 @@ struct DetailView: View {
 
     var body: some View {
         ZStack(alignment: .leading) {
-            Image(colorScheme == .light ? "background" : "background-dark")
-                .resizable(capInsets: EdgeInsets(), resizingMode: .tile)
+            ThemeBackgroundView()
                 .ignoresSafeArea(.all)
 
             ScrollView(.vertical, showsIndicators: true) {
                 VStack(alignment: .leading) {
 
                     Text("Poetic.")
-                        .fontWithLineHeight(font: Fonts.smallNewYorkFont, lineHeight: 16)
+                        .fontWithLineHeight(font: theme.titleFont(size: 16), lineHeight: 16)
                         .foregroundColor(.primary)
 
                     Text("Discover Classic Poetry!")
                         .fontWithLineHeight(font: .systemFont(ofSize: 8, weight: .medium), lineHeight: 8)
-                        .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                        .foregroundColor(theme.accent(for: colorScheme))
 
                     Text(poem.author)
-                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .bold), lineHeight: 18)
+                        .fontWithLineHeight(font: theme.bodyFont(size: 16, weight: .bold), lineHeight: 18)
                         .foregroundColor(.primary)
                         .padding(.top, 16)
 
                     Text(poem.title)
-                        .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 14.32)
-                        .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                        .fontWithLineHeight(font: theme.bodyFont(size: 16, weight: .semibold), lineHeight: 14.32)
+                        .foregroundColor(theme.accent(for: colorScheme))
                         .padding(.bottom, 16)
                     ZStack(alignment: .leading) {
                         HStack {
                             RoundedRectangle(cornerRadius: 1)
-                                .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                                .foregroundColor(theme.accent(for: colorScheme))
                                 .frame(width: 2, alignment: .leading)
                                 .padding(.top, 2)
 
@@ -96,8 +107,31 @@ struct DetailView: View {
             }
         }
         .onAppear {
+            // onAppear also fires when returning from another tab; count the
+            // visit once.
+            guard !hasLoggedView else { return }
+            hasLoggedView = true
             store.markViewed(poem)
             AnalyticsEvents.poemViewed(title: poem.title, author: poem.author, source: source)
+            openedAt = Date()
+            ReviewPrompter().recordPoemOpened()
+        }
+        .onChange(of: isPresented) { _, presented in
+            // Unlike onDisappear (which also fires on a tab switch or when
+            // something is pushed on top), this flips only on a real "back".
+            guard !presented else { return }
+            NotificationCenter.default.post(name: .poemDidClose, object: nil)
+            // Ask only as someone leaves a poem they loved — never mid-read.
+            let prompter = ReviewPrompter()
+            guard prompter.shouldPrompt(
+                poemIsFavorited: store.isFavorited(poem),
+                secondsOnPoem: Date().timeIntervalSince(openedAt),
+                favoritesCount: store.favorites.count
+            ) else { return }
+            prompter.markPrompted()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                requestReview()
+            }
         }
         .sheet(isPresented: $showWebView) {
             if let urlString = Links.authorLinksDictionary[poem.author],

@@ -12,6 +12,8 @@ enum Constants {
     static let darkModeEnable = "darkModeEnabled"
     static let systemThemeEnabled = "systemThemeEnabled"
     static let hasSeenWidgetAnnouncement = "hasSeenWidgetAnnouncement"
+    static let hasCompletedFirstLaunch = "hasCompletedFirstLaunch"
+    static let lastSeenAnnouncementVersion = "lastSeenAnnouncementVersion"
 
     static let tipIdentifiers = [
         "Dean.Thompson.Poetic.smallTip",

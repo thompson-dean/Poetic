@@ -53,14 +53,29 @@ final class PoemStore: ObservableObject {
 
     private let stack: PersistenceStack
     private let widgetSync: WidgetFavoritesSyncing?
+    /// What the Favorites widget was last given, in order — so opening a
+    /// poem (which saves recents) doesn't rewrite and reload the widget.
+    private var lastSyncedFavoriteIDs: [String]?
     private var context: NSManagedObjectContext { stack.viewContext }
 
     init(stack: PersistenceStack, widgetSync: WidgetFavoritesSyncing? = nil) {
         self.stack = stack
         self.widgetSync = widgetSync
         refresh()
+        // Always sync once at launch: a new app version may change the
+        // payload's contents (e.g. longer excerpts). Done before pruning so
+        // the prune's save doesn't trigger a second, redundant sync.
+        syncFavoritesWidget(force: true)
         pruneRecents(olderThan: 14)
-        widgetSync?.favoritesDidChange(favorites.map { $0.asPoem() })
+    }
+
+    private func syncFavoritesWidget(force: Bool = false) {
+        guard let widgetSync else { return }
+        let poems = favorites.map { $0.asPoem() }
+        let ids = poems.map(\.id)
+        guard force || ids != lastSyncedFavoriteIDs else { return }
+        lastSyncedFavoriteIDs = ids
+        widgetSync.favoritesDidChange(poems)
     }
 
     // MARK: - Favorites
@@ -174,7 +189,7 @@ final class PoemStore: ObservableObject {
             }
         }
         refresh()
-        widgetSync?.favoritesDidChange(favorites.map { $0.asPoem() })
+        syncFavoritesWidget()
     }
 
     private func refresh() {

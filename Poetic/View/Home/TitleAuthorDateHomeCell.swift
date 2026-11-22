@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TitleAuthorDateHomeCell: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.appTheme) private var theme
     let poem: PoemEntity
 
     var body: some View {
@@ -29,7 +30,7 @@ struct TitleAuthorDateHomeCell: View {
 
                     Text(poem.title)
                         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .semibold), lineHeight: 24)
-                        .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                        .foregroundColor(theme.accent(for: colorScheme))
                 }
                 .padding(.vertical, 8)
                 .padding(.horizontal, 8)
@@ -41,7 +42,7 @@ struct TitleAuthorDateHomeCell: View {
                     .padding(8)
             }
         }
-        .background(colorScheme == .light ? .white : .black)
+        .background(theme.card(for: colorScheme))
         .cornerRadius(8)
         .padding(.horizontal, 8)    }
 }

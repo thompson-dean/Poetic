@@ -11,11 +11,15 @@ import Foundation
 // be loaded inside the widget extension.
 
 extension Poem {
+    /// Enough lines to fill a large widget at its smallest font size; the
+    /// widget view picks how many it can actually fit.
+    static let widgetExcerptLimit = 20
+
     var asWidgetPoem: WidgetPoem {
         WidgetPoem(
             title: title,
             author: author,
-            excerptLines: PoemExcerpt.lines(from: lines, limit: 8),
+            excerptLines: PoemExcerpt.lines(from: lines, limit: Self.widgetExcerptLimit),
             totalLineCount: lines.count
         )
     }
@@ -36,7 +40,7 @@ enum DailyPoemPicker {
             }
     }
 
-    static func poem(for date: Date, in eligible: [Poem], calendar: Calendar = .current) -> Poem? {
+    static func poem(for date: Date, in eligible: [Poem], calendar: Calendar = WidgetDateKey.calendar) -> Poem? {
         guard !eligible.isEmpty,
               let dayOrdinal = calendar.ordinality(of: .day, in: .era, for: date) else {
             return nil
@@ -47,9 +51,9 @@ enum DailyPoemPicker {
     static func makePayload(
         catalog: [Poem],
         from startDate: Date = Date(),
-        days: Int = 14,
+        days: Int = 90,
         appVersion: String,
-        calendar: Calendar = .current
+        calendar: Calendar = WidgetDateKey.calendar
     ) -> DailyPayload {
         let eligible = eligiblePoems(in: catalog)
         var entries = [DailyPayload.DayEntry]()
@@ -60,6 +64,6 @@ enum DailyPoemPicker {
                 DailyPayload.DayEntry(dateKey: WidgetDateKey.string(for: date), poem: poem.asWidgetPoem)
             )
         }
-        return DailyPayload(version: 1, appVersion: appVersion, days: entries)
+        return DailyPayload(version: DailyPayload.currentVersion, appVersion: appVersion, days: entries)
     }
 }

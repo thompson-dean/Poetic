@@ -1,5 +1,5 @@
 //
-//  WidgetAnnouncementView.swift
+//  WhatsNewView.swift
 //  Poetic
 //
 //  Created by Dean Thompson on 2026/08/16.
@@ -7,80 +7,93 @@
 
 import SwiftUI
 
-/// One-time "widgets have arrived" sheet, shown on the first launch of a
-/// build that ships widgets. Dismissal is recorded by the caller via the
-/// `hasSeenWidgetAnnouncement` default.
-struct WidgetAnnouncementView: View {
+/// "New in Poetic" sheet, shown once per announcement version (see
+/// `ContentView.currentAnnouncement`): on launch for people updating, after
+/// their first poem for new installs. Dismissal is recorded by the caller.
+struct WhatsNewView: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.appTheme) private var theme
     @Environment(\.dismiss) private var dismiss
 
-    /// Set when the user chooses "unlock Favorites" — the caller opens the
-    /// settings sheet after this one closes.
-    let openSupport: () -> Void
+    let isSupporter: Bool
+    /// Called when the user taps the main button — the caller opens Settings
+    /// (tips and the theme picker) after this sheet closes.
+    let openSettings: () -> Void
 
-    private var themeColor: Color {
-        colorScheme == .light ? .lightThemeColor : .darkThemeColor
+    private var accent: Color {
+        theme.accent(for: colorScheme)
     }
 
     var body: some View {
         VStack(spacing: 20) {
-            Text("Poetic, now on your\nHome Screen")
+            Text("New in Poetic")
                 .font(.system(.title, design: .serif).bold())
-                .multilineTextAlignment(.center)
                 .padding(.top, 32)
 
             HStack(spacing: 16) {
                 mockWidget(
+                    in: .sepia,
                     eyebrow: "POEM OF THE DAY",
                     lines: ["I wandered lonely", "as a cloud..."],
                     footer: "William Wordsworth",
                     locked: false
                 )
                 mockWidget(
+                    in: .midnight,
                     eyebrow: "FROM YOUR FAVORITES",
                     lines: ["Shall I compare thee", "to a summer's day?"],
                     footer: "William Shakespeare",
-                    locked: true
+                    locked: !isSupporter
                 )
             }
 
             VStack(alignment: .leading, spacing: 12) {
-                announcementRow(
+                row(
+                    symbol: "paintpalette.fill",
+                    text: "Six reading themes – Sepia, Sage, Midnight, Rose and more. "
+                        + "Your widgets match your theme."
+                )
+                row(
                     symbol: "sparkles",
-                    text: "A hand-picked short poem on your Home Screen, new every morning. Free, always."
+                    text: "Today's Poem on Home, and a free Poem of the Day widget. "
+                        + "Large widgets now show the whole poem."
                 )
-                announcementRow(
+                row(
                     symbol: "star.fill",
-                    text: "The Favorites widget rotates through your own anthology — unlocked by any tip."
+                    text: isSupporter
+                        ? "Your Favorites widget rotates through your own anthology – now in large too."
+                        : "Any tip unlocks every theme and the Favorites widget, "
+                            + "which rotates through your own anthology."
                 )
-                announcementRow(
+                row(
                     symbol: "plus.circle",
-                    text: "Press and hold your Home Screen, tap the ➕, and search for Poetic."
+                    text: "To add a widget, press and hold your Home Screen, tap Edit, "
+                        + "then Add Widget, and search for Poetic."
                 )
             }
             .padding(.horizontal, 24)
 
-            Spacer()
+            Spacer(minLength: 0)
 
             Button {
-                AnalyticsEvents.widgetPromoAction(action: "support")
+                AnalyticsEvents.widgetPromoAction(action: isSupporter ? "themes" : "support")
                 dismiss()
-                openSupport()
+                openSettings()
             } label: {
-                Text("Unlock the Favorites widget")
+                Text(isSupporter ? "Choose a theme" : "Unlock themes & widgets")
                     .font(.system(.body).bold())
                     .frame(maxWidth: .infinity)
                     .frame(height: 50)
             }
             .buttonStyle(.borderedProminent)
-            .tint(themeColor)
+            .tint(accent)
             .padding(.horizontal, 24)
 
             Button {
                 AnalyticsEvents.widgetPromoAction(action: "dismiss")
                 dismiss()
             } label: {
-                Text("Maybe later")
+                Text(isSupporter ? "Close" : "Maybe later")
                     .font(.footnote.weight(.semibold))
                     .foregroundColor(.secondary)
             }
@@ -91,28 +104,33 @@ struct WidgetAnnouncementView: View {
         }
     }
 
+    /// A miniature widget drawn in a given theme, to show that widgets
+    /// follow the chosen theme.
     private func mockWidget(
+        in mockTheme: AppTheme,
         eyebrow: String,
         lines: [String],
         footer: String,
         locked: Bool
     ) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
+        let mockAccent = mockTheme.accent(for: colorScheme)
+        return VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 4) {
                 Text(eyebrow)
                     .font(.system(size: 9, weight: .bold))
-                    .foregroundColor(themeColor)
+                    .foregroundColor(mockAccent)
                     .lineLimit(1)
                 if locked {
                     Image(systemName: "lock.fill")
                         .font(.system(size: 8))
-                        .foregroundColor(themeColor)
+                        .foregroundColor(mockAccent)
                 }
             }
 
             ForEach(lines, id: \.self) { line in
                 Text(line)
-                    .font(.system(size: 12, design: .serif).italic())
+                    .font(mockTheme.widgetFont(size: 12))
+                    .italic()
                     .lineLimit(1)
             }
 
@@ -127,16 +145,16 @@ struct WidgetAnnouncementView: View {
         .frame(width: 150, height: 150, alignment: .leading)
         .background(
             RoundedRectangle(cornerRadius: 28, style: .continuous)
-                .fill(colorScheme == .light ? Color.white : Color.black)
+                .fill(mockTheme.backgroundColor(for: colorScheme) ?? mockTheme.card(for: colorScheme))
                 .shadow(color: .black.opacity(0.25), radius: 10, y: 4)
         )
     }
 
-    private func announcementRow(symbol: String, text: String) -> some View {
+    private func row(symbol: String, text: String) -> some View {
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: symbol)
                 .font(.system(size: 18, weight: .semibold))
-                .foregroundColor(themeColor)
+                .foregroundColor(accent)
                 .frame(width: 26)
             Text(text)
                 .font(.subheadline)

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PoetOfTheDayCard: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.appTheme) private var theme
     let bio: PoetBio
 
     var body: some View {
@@ -21,7 +22,9 @@ struct PoetOfTheDayCard: View {
             blurbText
             footer
         }
-        .padding(12)
+        // 8 + 8 aligns the text with the 16pt section headings.
+        .padding(.vertical, 12)
+        .padding(.horizontal, 8)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(cardBackgroundColor)
         .cornerRadius(8)
@@ -54,11 +57,11 @@ struct PoetOfTheDayCard: View {
                 .font(.system(size: 12, weight: .semibold))
         }
         .fontWithLineHeight(font: .systemFont(ofSize: 16, weight: .medium), lineHeight: 24)
-        .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+        .foregroundColor(theme.accent(for: colorScheme))
         .padding(.top, 4)
     }
 
     private var cardBackgroundColor: Color {
-        colorScheme == .light ? .white : .black
+        theme.card(for: colorScheme)
     }
 }

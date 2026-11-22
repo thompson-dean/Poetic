@@ -14,6 +14,7 @@ struct RedactedPoemCardView: View {
 
     let type: RedactedType
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.appTheme) private var theme
 
     var body: some View {
         ForEach(0..<5) { _ in
@@ -31,11 +32,11 @@ struct RedactedPoemCardView: View {
                             Text("Couldn't load poems. Pull to refresh.")
                                 .fontWeight(.semibold)
                         }
-                        .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                        .foregroundColor(theme.accent(for: colorScheme))
                     case .idle:
                         PoemCard(poem: Poem.stub)
                             .redacted(reason: .placeholder)
-                            .foregroundColor(colorScheme == .light ? .lightThemeColor : .darkThemeColor)
+                            .foregroundColor(theme.accent(for: colorScheme))
                     }
                 }
             }

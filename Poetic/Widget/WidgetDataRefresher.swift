@@ -26,13 +26,16 @@ struct WidgetDataRefresher {
         self.appVersion = appVersion
     }
 
-    /// Rebuilds the 14-day daily payload when it's stale (covers fewer than
-    /// 7 days from today) or was written by a different app version.
+    /// Rebuilds the 90-day daily payload when it's stale (covers fewer than
+    /// 30 days from today) or was written by a different app version. 90
+    /// days keeps the widget working for people who rarely open the app.
     func refreshDailyIfNeeded(now: Date = Date()) async {
-        if let existing = store.readDaily(), existing.appVersion == appVersion {
+        if let existing = store.readDaily(),
+           existing.appVersion == appVersion,
+           existing.version == DailyPayload.currentVersion {
             let today = WidgetDateKey.string(for: now)
             let remaining = existing.days.drop { $0.dateKey < today }
-            if remaining.count >= 7 {
+            if remaining.count >= 30 {
                 return
             }
         }

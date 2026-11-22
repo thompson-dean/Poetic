@@ -11,6 +11,7 @@ import Foundation
 enum SharedConstants {
     static let appGroupID = "group.Dean.Thompson.Poetic"
     static let supporterDefaultsKey = "isSupporter"
+    static let themeDefaultsKey = "selectedTheme"
     static let dailyWidgetKind = "PoemOfTheDayWidget"
     static let favoritesWidgetKind = "FavoritesWidget"
 }
