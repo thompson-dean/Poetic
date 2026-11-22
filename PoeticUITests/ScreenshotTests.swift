@@ -270,6 +270,53 @@ final class ScreenshotTests: XCTestCase {
         sleep(3)
     }
 
+    /// 3.1 themed captures. Run once per theme after testA has seeded data;
+    /// the host script writes the theme into the App Group defaults and
+    /// passes `TEST_RUNNER_SHOT_TAG` (e.g. "sepia-light") to name the shots.
+    func testE_captureThemed() {
+        let tag = ProcessInfo.processInfo.environment["SHOT_TAG"] ?? "themed"
+        app.launch()
+        dismissAnnouncementIfPresent()
+        waitForHome()
+        app.swipeDown() // make sure Home is scrolled to the top
+        settle()
+        snap("home-\(tag)")
+
+        openDetailFromRecents(containing: "Sonnet 18")
+        settle()
+        snap("detail-\(tag)")
+        goBack()
+
+        openTab("Favorites")
+        settle()
+        snap("favorites-\(tag)")
+
+        openTab("Quotes")
+        settle()
+        snap("quotes-\(tag)")
+
+        openTab("Explore")
+        settle()
+        snap("explore-\(tag)")
+        openTab("Home")
+    }
+
+    /// The theme grid in Settings (run with supporter unlocked).
+    func testF_captureThemePicker() {
+        let tag = ProcessInfo.processInfo.environment["SHOT_TAG"] ?? "themed"
+        app.launch()
+        dismissAnnouncementIfPresent()
+        waitForHome()
+        app.buttons["Settings"].firstMatch.tap()
+        settle(2)
+        // Drag the sheet's list up until the theme grid sits mid-screen.
+        let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.8))
+        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.52))
+        start.press(forDuration: 0.1, thenDragTo: end)
+        settle(2)
+        snap("settings-\(tag)")
+    }
+
     // MARK: - Helpers
 
     private func snap(_ name: String) {
