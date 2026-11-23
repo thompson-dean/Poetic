@@ -69,6 +69,7 @@
 		3619E78A3C294816E079FA42 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = FD7191FB405C5E34FA69EBF1 /* FirebaseCrashlytics */; };
 		3A4D51A5C248FB47B3E0F8E0 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D03140BD48856ED9CC03DD /* SharedConstants.swift */; };
 		3E771D5138A2DD31E4FC6AC4 /* FavoritesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944FF62B8DA225FC1790DFDA /* FavoritesWidget.swift */; };
+		4971349BED594CB0EFF9543B /* FittingLinesLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D00F9532F9C354B70B3ADA /* FittingLinesLayout.swift */; };
 		4F840FCD0795383D63076070 /* ThemeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63E82BC0B205A5C8C383101 /* ThemeController.swift */; };
 		53AC4896A3971EADB2C55432 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB440A85443385E1509D2446 /* DeepLink.swift */; };
 		5E1B00C7F535F2ED61093A45 /* StoreMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271266EE6BFB86A46AC534DC /* StoreMigrator.swift */; };
@@ -150,6 +151,7 @@
 /* Begin PBXFileReference section */
 		045B5E23375C6CBB3317E5A9 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0498492E65D473073EAFE476 /* PoemStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PoemStore.swift; sourceTree = "<group>"; };
+		04D00F9532F9C354B70B3ADA /* FittingLinesLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FittingLinesLayout.swift; sourceTree = "<group>"; };
 		0CDD7E0DA8930A0F716A44B4 /* AnalyticsEvents.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnalyticsEvents.swift; sourceTree = "<group>"; };
 		11A5A0C0F7743D8470D83A4E /* PoemOfTheDayWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PoemOfTheDayWidget.swift; sourceTree = "<group>"; };
 		13F392736D82823A35A215AA /* ScreenshotTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScreenshotTests.swift; sourceTree = "<group>"; };
@@ -573,6 +575,7 @@
 			children = (
 				6646B928069B39AF3D806A66 /* PoemWidgetView.swift */,
 				7B2FFD118388DB5ADB6E6A88 /* WidgetBackground.swift */,
+				04D00F9532F9C354B70B3ADA /* FittingLinesLayout.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -921,6 +924,7 @@
 				53AC4896A3971EADB2C55432 /* DeepLink.swift in Sources */,
 				0C165DEAD6E7B34CAFDD0187 /* SupporterEntitlement.swift in Sources */,
 				1D3C564322B861479FB0EE2B /* AppTheme.swift in Sources */,
+				4971349BED594CB0EFF9543B /* FittingLinesLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -958,7 +962,7 @@
 				INFOPLIST_FILE = PoeticWidgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Poetic;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = Dean.Thompson.Poetic.PoeticWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1117,7 +1121,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = Dean.Thompson.Poetic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1151,7 +1155,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = Dean.Thompson.Poetic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1169,7 +1173,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = Dean.Thompson.PoeticTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1188,7 +1192,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = Dean.Thompson.PoeticTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1227,7 +1231,7 @@
 				INFOPLIST_FILE = PoeticWidgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Poetic;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = Dean.Thompson.Poetic.PoeticWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
