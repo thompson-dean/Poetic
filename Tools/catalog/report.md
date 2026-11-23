@@ -6,6 +6,21 @@
 - deduped: 4
 - near-duplicates dropped: 312
 
+## Text clean-up (lines changed per fix)
+- -- dashes: 23276
+- asterisk dividers: 28
+- backtick quotes: 1503
+- broken dashes (‹): 17
+- caret superscripts: 1
+- html entities: 5
+- ligature braces: 6
+- margin line numbers: 20
+- mojibake: 6
+- noise markers: 119
+- soft hyphens: 195
+- underscore italics: 9195
+- verse numbering prefixes: 566
+
 ## Authors missing from Links.swift (add Wikipedia URLs)
 (none)
 

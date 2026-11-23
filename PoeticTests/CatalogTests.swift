@@ -159,4 +159,26 @@ final class CatalogTests: XCTestCase {
         XCTAssertTrue(results.poems.isEmpty)
         XCTAssertTrue(results.authors.isEmpty)
     }
+
+    /// Transcription junk that Tools/catalog/clean_text.py removes must never
+    /// come back (underscore italics, "--", backticks, mojibake, HTML
+    /// entities, soft hyphens, margin numbers, leftover markers).
+    func test_catalog_hasNoTranscriptionJunk() throws {
+        let url = try XCTUnwrap(Bundle.main.url(forResource: "PoemCatalog", withExtension: "json"))
+        let poems = try JSONDecoder().decode([Poem].self, from: Data(contentsOf: url))
+        let patterns = try [
+            "(?<!\\w)_(?=[A-Za-z])", "--", "`", "Ã", "â€", "&[#a-zA-Z0-9]+;", "\u{00AD}",
+            "\\S\\s{3,}\\d{1,4}\\s*$", "\\[(back|Image)\\]"
+        ].map { try NSRegularExpression(pattern: $0) }
+        var offenders: [String] = []
+        for poem in poems {
+            for line in poem.lines {
+                let range = NSRange(line.startIndex..., in: line)
+                if patterns.contains(where: { $0.firstMatch(in: line, range: range) != nil }) {
+                    offenders.append("\(poem.author) – \(poem.title): \(line)")
+                }
+            }
+        }
+        XCTAssertTrue(offenders.isEmpty, "\(offenders.count) junk lines, e.g. \(offenders.prefix(3))")
+    }
 }

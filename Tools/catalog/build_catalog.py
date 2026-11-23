@@ -12,6 +12,7 @@ import pathlib
 import re
 import sys
 
+import clean_text
 import parse_gutenberg
 
 HERE = pathlib.Path(__file__).parent
@@ -118,6 +119,14 @@ def main() -> int:
     # same author already has: the same text from another edition, possibly
     # under another title.
     shipped = set(json.loads(SHIPPED_KEYS.read_text())) if SHIPPED_KEYS.exists() else set()
+
+    # Clean every poem's text; titles only for poems that haven't shipped
+    # (a shipped title is the identity users' favorites are stored under).
+    for poem in poetrydb + gutenberg:
+        poem["lines"] = clean_text.clean_lines(poem["lines"], poem["author"])
+        poem["linecount"] = str(len(poem["lines"]))
+        if f"{poem['title']}|{poem['author']}" not in shipped:
+            poem["title"] = clean_text.clean_title(poem["title"])
     merged: dict[tuple[str, str], dict] = {}
     words_by_author: dict[str, list[list[str]]] = {}
     dedupe_log = []
@@ -190,6 +199,9 @@ def main() -> int:
         f"- catalog size: {catalog_path.stat().st_size / 1_000_000:.1f} MB",
         f"- deduped: {len(dedupe_log)}",
         f"- near-duplicates dropped: {len(near_dupe_log)}",
+        "",
+        "## Text clean-up (lines changed per fix)",
+        *[f"- {name}: {n}" for name, n in sorted(clean_text.STATS.items())],
         "",
         "## Authors missing from Links.swift (add Wikipedia URLs)",
         *([f"- {a}" for a in missing_links] or ["(none)"]),
