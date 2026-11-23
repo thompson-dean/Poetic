@@ -22,6 +22,7 @@ struct DetailView: View {
     @Environment(\.isPresented) private var isPresented
     @State private var openedAt = Date()
     @State private var hasLoggedView = false
+    @StateObject private var reader = PoemReader()
     @EnvironmentObject var store: PoemStore
     let poem: Poem
     /// Where the poem was opened from — analytics only, defaulted so
@@ -33,6 +34,7 @@ struct DetailView: View {
             ThemeBackgroundView()
                 .ignoresSafeArea(.all)
 
+            ScrollViewReader { proxy in
             ScrollView(.vertical, showsIndicators: true) {
                 VStack(alignment: .leading) {
 
@@ -70,8 +72,10 @@ struct DetailView: View {
                                     author: poem.author,
                                     title: poem.title,
                                     index: index,
-                                    poemLines: poem.lines
+                                    poemLines: poem.lines,
+                                    isSpoken: reader.currentLine == index
                                 )
+                                .id(index)
 
                             }
                         }
@@ -81,7 +85,26 @@ struct DetailView: View {
                 .padding(16)
 
             }
+            // Keep the line being read in view.
+            .onChange(of: reader.currentLine) { _, line in
+                guard let line else { return }
+                withAnimation(.easeInOut(duration: 0.4)) {
+                    proxy.scrollTo(line, anchor: .center)
+                }
+            }
+            }
             .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        if reader.state == .idle {
+                            AnalyticsEvents.poemListenStarted(title: poem.title, author: poem.author)
+                        }
+                        reader.toggle(poem.lines)
+                    } label: {
+                        Image(systemName: reader.state == .speaking ? "pause.circle" : "play.circle")
+                    }
+                    .accessibilityLabel(reader.state == .speaking ? "Pause reading" : "Read aloud")
+                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         store.toggleFavorite(poem)
@@ -115,6 +138,9 @@ struct DetailView: View {
             AnalyticsEvents.poemViewed(title: poem.title, author: poem.author, source: source)
             openedAt = Date()
             ReviewPrompter().recordPoemOpened()
+        }
+        .onDisappear {
+            reader.stop()
         }
         .onChange(of: isPresented) { _, presented in
             // Unlike onDisappear (which also fires on a tab switch or when

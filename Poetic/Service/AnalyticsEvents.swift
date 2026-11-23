@@ -25,6 +25,13 @@ enum AnalyticsEvents {
         ])
     }
 
+    static func poemListenStarted(title: String, author: String) {
+        Analytics.logEvent("poem_listen_started", parameters: [
+            "poem_title": String(title.prefix(90)),
+            "poem_author": author
+        ])
+    }
+
     static func authorViewed(author: String) {
         Analytics.logEvent("author_viewed", parameters: ["poem_author": author])
     }

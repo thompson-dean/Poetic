@@ -14,6 +14,7 @@
 		0D32F9717B9792A01040736E /* PoetBio.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB342E494D2E6C4984B5D4B0 /* PoetBio.swift */; };
 		0DF69F6BF2E165337B1CBD51 /* PoetBiosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B38CC146A259321066C791 /* PoetBiosTests.swift */; };
 		0E59EA362EC431561DD5C213 /* WidgetAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACFB9E50EFDC55E953F4A518 /* WidgetAssets.xcassets */; };
+		135431F0D69E591F8F34DBE0 /* PoemReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B732E078FE80DED94A435CA4 /* PoemReader.swift */; };
 		1B8DA1DB623DE2ACA3FE2C49 /* WidgetBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2FFD118388DB5ADB6E6A88 /* WidgetBackground.swift */; };
 		1D3C564322B861479FB0EE2B /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE8DFA56F93ED47E82B673 /* AppTheme.swift */; };
 		21D570EC4BF3983D6484D485 /* PoetBios.json in Resources */ = {isa = PBXBuildFile; fileRef = 86A22BBD8798763AD84D2ED8 /* PoetBios.json */; };
@@ -60,7 +61,7 @@
 		2ACC8A4327E8A441002F5B6D /* DevView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACC8A4227E8A441002F5B6D /* DevView.swift */; };
 		2ACC8A4727E8AFC9002F5B6D /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACC8A4627E8AFC9002F5B6D /* Links.swift */; };
 		2ACC8A4927E8C39E002F5B6D /* SystemThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACC8A4827E8C39E002F5B6D /* SystemThemeManager.swift */; };
-		2AF5D93A2A63EE5E006725A8 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		2AF5D93A2A63EE5E006725A8 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2AF8600327DB16EA00B3BC40 /* Authors.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AF8600227DB16EA00B3BC40 /* Authors.json */; };
 		2AF8600527DC5B2C00B3BC40 /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF8600427DC5B2C00B3BC40 /* QuoteView.swift */; };
 		2AF98E3B27DE2E00004D21DA /* Authors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF98E3A27DE2E00004D21DA /* Authors.swift */; };
@@ -233,6 +234,7 @@
 		B264E32670C81C73031FDFC5 /* WhatsNewView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WhatsNewView.swift; sourceTree = "<group>"; };
 		B40E67165FC9296D7C32F377 /* PoeticWidgets.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = PoeticWidgets.entitlements; sourceTree = "<group>"; };
 		B63E82BC0B205A5C8C383101 /* ThemeController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ThemeController.swift; sourceTree = "<group>"; };
+		B732E078FE80DED94A435CA4 /* PoemReader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PoemReader.swift; sourceTree = "<group>"; };
 		B974AF0889446B93B882D28C /* CatalogTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CatalogTests.swift; sourceTree = "<group>"; };
 		B9B38CC146A259321066C791 /* PoetBiosTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PoetBiosTests.swift; sourceTree = "<group>"; };
 		CB440A85443385E1509D2446 /* DeepLink.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 				86A22BBD8798763AD84D2ED8 /* PoetBios.json */,
 				0CDD7E0DA8930A0F716A44B4 /* AnalyticsEvents.swift */,
 				5F4B317EBBB92E7D89CA30F1 /* ReviewPrompter.swift */,
+				B732E078FE80DED94A435CA4 /* PoemReader.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -875,6 +878,7 @@
 				050FEF856F820F727C84A79E /* ThemePickerSection.swift in Sources */,
 				6AF0E4AFA3B625B9003AFFE5 /* TipRow.swift in Sources */,
 				8638EA6819EEB62D2DAE61FE /* WhatsNewView.swift in Sources */,
+				135431F0D69E591F8F34DBE0 /* PoemReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -884,7 +888,7 @@
 			files = (
 				2A7FD5F12A627D7600E924EE /* MockPoemService.swift in Sources */,
 				2A7FD5F52A627F8500E924EE /* Mockable.swift in Sources */,
-				2AF5D93A2A63EE5E006725A8 /* BuildFile in Sources */,
+				2AF5D93A2A63EE5E006725A8 /* (null) in Sources */,
 				2A7FD5F72A62862D00E924EE /* PoemViewModelTests.swift in Sources */,
 				26D58ADD0877595CB1A3348C /* StoreMigratorTests.swift in Sources */,
 				78A3E49EE585D66C2A712C4A /* PoemStoreTests.swift in Sources */,
@@ -958,7 +962,7 @@
 				INFOPLIST_FILE = PoeticWidgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Poetic;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Dean.Thompson.Poetic.PoeticWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1105,10 +1109,12 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Poetic/Info.plist;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
@@ -1117,7 +1123,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Dean.Thompson.Poetic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1139,10 +1145,12 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Poetic/Info.plist;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
@@ -1151,7 +1159,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Dean.Thompson.Poetic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1169,7 +1177,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Dean.Thompson.PoeticTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1188,7 +1196,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Dean.Thompson.PoeticTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1227,7 +1235,7 @@
 				INFOPLIST_FILE = PoeticWidgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Poetic;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Dean.Thompson.Poetic.PoeticWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
