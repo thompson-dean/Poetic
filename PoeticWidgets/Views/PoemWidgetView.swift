@@ -57,36 +57,26 @@ struct PoemWidgetView: View {
             .foregroundStyle(.secondary)
     }
 
-    /// Title, then as many opening lines as fit (up to 3), then the poet.
-    /// A short title leaves room for more of the poem.
+    /// One fixed size per widget family, so every day's poem looks the
+    /// same: no per-line shrinking, no switching sizes by poem length.
+    private enum LineFont {
+        static let small: CGFloat = 12
+        static let medium: CGFloat = 13
+        static let large: CGFloat = 14
+    }
+
+    /// Title, then as many whole opening lines as fit, then the poet.
     private var small: some View {
         VStack(alignment: .leading, spacing: 3) {
             eyebrowText
             titleText
                 .lineLimit(2)
-            ViewThatFits(in: .vertical) {
-                smallExcerpt(lineLimit: 3)
-                smallExcerpt(lineLimit: 2)
-                smallExcerpt(lineLimit: 1)
-                Color.clear.frame(height: 0)
-            }
-            .frame(maxHeight: .infinity, alignment: .top)
+            fittingExcerpt(fontSize: LineFont.small)
+                .padding(.top, 2)
             authorText
                 .lineLimit(1)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-    }
-
-    private func smallExcerpt(lineLimit: Int) -> some View {
-        VStack(alignment: .leading, spacing: 1) {
-            ForEach(Array(poem.excerptLines.prefix(lineLimit).enumerated()), id: \.offset) { _, line in
-                Text(line)
-                    .font(theme.widgetFont(size: 12))
-                    .foregroundStyle(.primary.opacity(0.85))
-                    .lineLimit(1)
-            }
-        }
-        .padding(.top, 2)
     }
 
     private var medium: some View {
@@ -96,10 +86,10 @@ struct PoemWidgetView: View {
                 .lineLimit(2)
             authorText
                 .lineLimit(1)
-            Spacer(minLength: 2)
-            excerpt(lineLimit: 2)
+            fittingExcerpt(fontSize: LineFont.medium)
+                .padding(.top, 2)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
 
     private var large: some View {
@@ -113,7 +103,7 @@ struct PoemWidgetView: View {
                 RoundedRectangle(cornerRadius: 1)
                     .foregroundStyle(themeColor)
                     .frame(width: 2)
-                largeExcerpt
+                fittingExcerpt(fontSize: LineFont.large)
             }
             .padding(.top, 4)
             .frame(maxHeight: .infinity, alignment: .top)
@@ -121,22 +111,30 @@ struct PoemWidgetView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
 
-    /// Fills the large widget: a short poem is shown whole at a bigger size,
-    /// a long one gets as many lines as fit. ViewThatFits takes the first
-    /// candidate that fits the remaining height, so order is best-first.
-    private var largeExcerpt: some View {
-        let count = poem.excerptLines.count
-        return ViewThatFits(in: .vertical) {
-            excerpt(lineLimit: count, fontSize: 17)
-            excerpt(lineLimit: count, fontSize: 15)
-            excerpt(lineLimit: count, fontSize: 13)
-            excerpt(lineLimit: 16, fontSize: 13)
-            excerpt(lineLimit: 14, fontSize: 13)
-            excerpt(lineLimit: 12, fontSize: 13)
-            excerpt(lineLimit: 10, fontSize: 13)
-            excerpt(lineLimit: 8, fontSize: 13)
-            excerpt(lineLimit: 6, fontSize: 13)
+    /// The excerpt stops before the poem does (the payload carries at most
+    /// 20 lines), so a "…" belongs at the end even if every line fits.
+    private var poemContinues: Bool {
+        poem.excerptLines.count >= 20 && poem.totalLineCount > poem.excerptLines.count
+    }
+
+    /// As many whole poem lines as fit the space left, measured at the real
+    /// widget width: long lines wrap instead of being cut off with "…", and
+    /// a line that doesn't fit completely is left out (FittingLinesLayout).
+    private func fittingExcerpt(fontSize: CGFloat) -> some View {
+        FittingLinesLayout(spacing: 2, poemContinues: poemContinues) {
+            ForEach(Array(poem.excerptLines.enumerated()), id: \.offset) { _, line in
+                Text(line)
+                    .font(theme.widgetFont(size: fontSize))
+                    .foregroundStyle(.primary.opacity(0.85))
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Text("…")
+                .font(theme.widgetFont(size: fontSize))
+                .foregroundStyle(.secondary)
+                .layoutValue(key: IsMoreMarker.self, value: true)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .clipped()
     }
 
     private var accessory: some View {
@@ -154,23 +152,6 @@ struct PoemWidgetView: View {
             }
         }
         .widgetAccentable()
-    }
-
-    private func excerpt(lineLimit: Int, fontSize: CGFloat = 13) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
-            ForEach(Array(poem.excerptLines.prefix(lineLimit).enumerated()), id: \.offset) { _, line in
-                Text(line)
-                    .font(theme.widgetFont(size: fontSize))
-                    .foregroundStyle(.primary.opacity(0.85))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.85)
-            }
-            if poem.totalLineCount > lineLimit {
-                Text("…")
-                    .font(theme.widgetFont(size: fontSize))
-                    .foregroundStyle(.secondary)
-            }
-        }
     }
 }
 
