@@ -1,0 +1,20 @@
+{
+  "trim_head": {
+    "ISABELLA;": 3,
+    "THE": 1,
+    "POEMS.": 1,
+    "HYPERION.": 1,
+    "ROBIN HOOD.": 1
+  },
+  "cut_at": {
+    "HYPERION.": "THE END."
+  },
+  "rename": {
+    "ISABELLA;": "Isabella; or, The Pot of Basil",
+    "THE": "The Eve of St. Agnes",
+    "POEMS.": "Ode to a Nightingale",
+    "ODE.": "Ode (Bards of Passion and of Mirth)",
+    "LINES ON THE MERMAID TAVERN.": "Lines on the Mermaid Tavern",
+    "ROBIN HOOD.": "Robin Hood: To a Friend"
+  }
+}

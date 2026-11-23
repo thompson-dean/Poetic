@@ -1,18 +1,21 @@
 # Catalog build report
 
-- poems: 3836
-- authors: 137
-- catalog size: 15.0 MB
-- deduped: 253
+- poems: 5388
+- authors: 144
+- catalog size: 17.6 MB
+- deduped: 4
+- near-duplicates dropped: 312
 
 ## Authors missing from Links.swift (add Wikipedia URLs)
 (none)
 
 ## Poems per author
+- A. E. Housman: 105
 - Adam Lindsay Gordon: 2
 - Alan Seeger: 6
 - Alexander Pope: 63
 - Algernon Charles Swinburne: 42
+- Alice Meynell: 39
 - Ambrose Bierce: 2
 - Amy Levy: 12
 - Amy Lowell: 66
@@ -30,21 +33,22 @@
 - Charlotte Bronte: 8
 - Charlotte Mew: 27
 - Charlotte Smith: 5
-- Christina Rossetti: 13
+- Christina Rossetti: 143
 - Christopher Marlowe: 1
 - Christopher Smart: 11
 - Claude McKay: 73
+- Countee Cullen: 74
 - Coventry Patmore: 1
 - D. H. Lawrence: 60
 - Edgar Allan Poe: 50
 - Edmund Spenser: 15
 - Edna St. Vincent Millay: 46
 - Edward Fitzgerald: 2
-- Edward Lear: 2
+- Edward Lear: 20
 - Edward Taylor: 8
 - Edward Thomas: 135
 - Eliza Cook: 1
-- Elizabeth Barrett Browning: 33
+- Elizabeth Barrett Browning: 62
 - Emily Bronte: 14
 - Emily Dickinson: 362
 - Emma Lazarus: 4
@@ -56,7 +60,7 @@
 - George Gordon, Lord Byron: 325
 - George Herbert: 16
 - George Meredith: 9
-- Gerard Manley Hopkins: 26
+- Gerard Manley Hopkins: 76
 - Helen Hunt Jackson: 11
 - Henry David Thoreau: 8
 - Henry Vaughan: 6
@@ -73,7 +77,7 @@
 - John Donne: 28
 - John Dryden: 13
 - John Greenleaf Whittier: 12
-- John Keats: 24
+- John Keats: 57
 - John McCrae: 1
 - John Milton: 26
 - John Trumbull: 4
@@ -96,11 +100,13 @@
 - Michael Drayton: 43
 - Oliver Goldsmith: 3
 - Oliver Wendell Holmes: 8
+- Omar Khayyam: 1
 - Oscar Wilde: 10
-- Paul Laurence Dunbar: 9
+- Paul Laurence Dunbar: 422
 - Percy Bysshe Shelley: 313
 - Philip Freneau: 4
 - Phillis Wheatley: 12
+- Rabindranath Tagore: 188
 - Ralph Waldo Emerson: 5
 - Richard Crashaw: 7
 - Richard Lovelace: 1
@@ -110,6 +116,7 @@
 - Robert Louis Stevenson: 44
 - Robert Southey: 12
 - Robinson: 54
+- Rudyard Kipling: 38
 - Rupert Brooke: 26
 - Samuel Coleridge: 23
 - Samuel Johnson: 1
@@ -126,6 +133,7 @@
 - Thomas Chatterton: 3
 - Thomas Flatman: 1
 - Thomas Gray: 3
+- Thomas Hardy: 257
 - Thomas Hood: 10
 - Thomas Moore: 31
 - Thomas Warton: 1
@@ -145,7 +153,7 @@
 - William Shakespeare: 162
 - William Topaz McGonagall: 74
 - William Vaughn Moody: 2
-- William Wordsworth: 2
+- William Wordsworth: 179
 
 ## Distinct poems renumbered to avoid title collisions
 - Charlotte Bronte — The Wife's Will → The Wife's Will II
@@ -248,17 +256,37 @@
 - Sara Teasdale — The River → The River II
 - Sara Teasdale — A Cry → A Cry II
 - Sara Teasdale — Gifts → Gifts II
+- William Wordsworth — To Sleep → To Sleep II
+- William Wordsworth — To Sleep → To Sleep III
+- William Wordsworth — October, 1803 → October, 1803 II
+- William Wordsworth — October, 1803 → October, 1803 III
+- William Wordsworth — October, 1803 → October, 1803 IV
+- William Wordsworth — To a Butterfly → To a Butterfly II
+- William Wordsworth — To the Daisy → To the Daisy II
+- William Wordsworth — To the Same Flower → To the Same Flower II
+- Paul Laurence Dunbar — Hymn → Hymn II
+- Paul Laurence Dunbar — Dreams → Dreams II
+- Paul Laurence Dunbar — Song → Song II
+- Paul Laurence Dunbar — Parted → Parted II
+- Paul Laurence Dunbar — A Song → A Song II
+- Alice Meynell — Sonnet → Sonnet II
+- Alice Meynell — Song → Song II
+- Alice Meynell — Sonnet → Sonnet III
 
 ## Dedupe log (identical bodies dropped)
-- Anne Bradstreet — To My Dear And Loving Husband (poetrydb dropped)
 - George Gordon, Lord Byron — Stanzas to Augusta (poetrydb dropped)
+- George Gordon, Lord Byron — Stanzas for Music (poetrydb dropped)
+- Percy Bysshe Shelley — Fragment: Rain (poetrydb dropped)
+- Percy Bysshe Shelley — To Harriet (poetrydb dropped)
+
+## Near-duplicates dropped (same poem, another edition)
+- Anne Bradstreet — To My Dear And Loving Husband (poetrydb dropped)
 - George Gordon, Lord Byron — Stanzas to the Po (poetrydb dropped)
 - George Gordon, Lord Byron — Elegy on Newstead Abbey (poetrydb dropped)
 - George Gordon, Lord Byron — Epigram.  From the French of RulhièRes (poetrydb dropped)
 - George Gordon, Lord Byron — Ode From the French (poetrydb dropped)
 - George Gordon, Lord Byron — Stanzas to a Lady, on Leaving England (poetrydb dropped)
 - George Gordon, Lord Byron — Stanzas Composed During a Thunderstorm (poetrydb dropped)
-- George Gordon, Lord Byron — Stanzas for Music (poetrydb dropped)
 - George Gordon, Lord Byron — Stanzas Written on the Road between Florence and Pisa (poetrydb dropped)
 - George Gordon, Lord Byron — Fragment of an Epistle to Thomas Moore (poetrydb dropped)
 - George Gordon, Lord Byron — Epistle to Mr. Murray (poetrydb dropped)
@@ -376,7 +404,6 @@
 - Percy Bysshe Shelley — Fragment: 'Is It That in Some Brighter Sphere' (poetrydb dropped)
 - Percy Bysshe Shelley — Fragment: 'Ye Gentle Visitations of Calm Thought' (poetrydb dropped)
 - Percy Bysshe Shelley — Fragment: 'Wake the Serpent Not' (poetrydb dropped)
-- Percy Bysshe Shelley — Fragment: Rain (poetrydb dropped)
 - Percy Bysshe Shelley — Cancelled Passage of the Ode to Liberty (poetrydb dropped)
 - Percy Bysshe Shelley — Song of Proserpine While Gathering Flowers on the Plain of Enna (poetrydb dropped)
 - Percy Bysshe Shelley — An Ode, Written October, 1819, Before the Spaniards Had Recovered Their Liberty (poetrydb dropped)
@@ -461,7 +488,6 @@
 - Percy Bysshe Shelley — Fragment: 'Such Hope, As Is the Sick Despair of Good' (poetrydb dropped)
 - Percy Bysshe Shelley — Love, Hope, Desire, and Fear (poetrydb dropped)
 - Percy Bysshe Shelley — Fragment: To the Moon (poetrydb dropped)
-- Percy Bysshe Shelley — To Harriet (poetrydb dropped)
 - Percy Bysshe Shelley — Sonnet.  on Launching Some Bottles Filled With Knowledge into the Bristol Channel (poetrydb dropped)
 - Percy Bysshe Shelley — To a Star (poetrydb dropped)
 - Percy Bysshe Shelley — To the Queen of My Heart (poetrydb dropped)
@@ -503,3 +529,66 @@
 - Percy Bysshe Shelley — The Irishman's Song (poetrydb dropped)
 - Percy Bysshe Shelley — To the Republicans of North America (poetrydb dropped)
 - William Topaz McGonagall — Lost in the Prairie (poetrydb dropped)
+- William Wordsworth — Lines Written in Early Spring (gutenberg:8905 dropped)
+- John Keats — To Hope (gutenberg:8209 dropped)
+- John Keats — To My Brother George (gutenberg:8209 dropped)
+- John Keats — To My Brother George (Sonnet) (gutenberg:8209 dropped)
+- John Keats — To a Friend Who Sent Me Some Roses (gutenberg:8209 dropped)
+- John Keats — To My Brothers (gutenberg:8209 dropped)
+- John Keats — On First Looking into Chapman's Homer (gutenberg:8209 dropped)
+- John Keats — Happy is England! I could be content (gutenberg:8209 dropped)
+- John Keats — Ode on a Grecian Urn (gutenberg:23684 dropped)
+- John Keats — Ode (Bards of Passion and of Mirth) (gutenberg:23684 dropped)
+- John Keats — To Autumn (gutenberg:23684 dropped)
+- John Keats — Hyperion (gutenberg:23684 dropped)
+- Christina Rossetti — At Home (gutenberg:16950 dropped)
+- Christina Rossetti — A Birthday (gutenberg:16950 dropped)
+- Christina Rossetti — My Secret (gutenberg:16950 dropped)
+- Christina Rossetti — 'No, Thank You, John' (gutenberg:16950 dropped)
+- Christina Rossetti — A Better Resurrection (gutenberg:16950 dropped)
+- Christina Rossetti — Spring Quiet (gutenberg:16950 dropped)
+- Christina Rossetti — 'Before the Paling of the Stars' (gutenberg:16950 dropped)
+- Gerard Manley Hopkins — Heaven-Haven: A Nun Takes the Veil (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — The Starlight Night (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — Spring (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — The Sea and the Skylark (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — Pied Beauty (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — The Loss of the Eurydice (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — Peace (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — Brothers (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — Spring and Fall (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — To what serves Mortal Beauty? (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — The Soldier (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — I wake and feel the fell of dark, not day (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — That Nature is a Heraclitean Fire and of the Comfort of the Resurrection (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — To R. B. (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — What being in rank-old nature should earlier have that breath been (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — On the Portrait of Two Beautiful Young People (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — The sea took pity: it interposed with doom (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — Hope holds to Christ (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — The furl of fresh-leaved dogrose down (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — Moonrise (gutenberg:22403 dropped)
+- Gerard Manley Hopkins — 'The child is father to the man' (gutenberg:22403 dropped)
+- Paul Laurence Dunbar — Merry Autumn (gutenberg:18338 dropped)
+- Paul Laurence Dunbar — Sympathy (gutenberg:18338 dropped)
+- Paul Laurence Dunbar — My Little March Girl (gutenberg:18338 dropped)
+- Paul Laurence Dunbar — Little Brown Baby (gutenberg:18338 dropped)
+- Paul Laurence Dunbar — Encouragement (gutenberg:18338 dropped)
+- Paul Laurence Dunbar — Life's Tragedy (gutenberg:18338 dropped)
+- Paul Laurence Dunbar — Encouraged (gutenberg:18338 dropped)
+- Edward Lear — The Dong with a Luminous Nose (gutenberg:13649 dropped)
+- Elizabeth Barrett Browning — Sonnets from the Portuguese VII (gutenberg:2002 dropped)
+- Elizabeth Barrett Browning — Sonnets from the Portuguese IX (gutenberg:2002 dropped)
+- Elizabeth Barrett Browning — Sonnets from the Portuguese XII (gutenberg:2002 dropped)
+- Elizabeth Barrett Browning — Sonnets from the Portuguese XVI (gutenberg:2002 dropped)
+- Elizabeth Barrett Browning — Sonnets from the Portuguese XIX (gutenberg:2002 dropped)
+- Elizabeth Barrett Browning — Sonnets from the Portuguese XXI (gutenberg:2002 dropped)
+- Elizabeth Barrett Browning — Sonnets from the Portuguese XXII (gutenberg:2002 dropped)
+- Elizabeth Barrett Browning — Sonnets from the Portuguese XXIII (gutenberg:2002 dropped)
+- Elizabeth Barrett Browning — Sonnets from the Portuguese XXX (gutenberg:2002 dropped)
+- Elizabeth Barrett Browning — Sonnets from the Portuguese XXXII (gutenberg:2002 dropped)
+- Elizabeth Barrett Browning — Sonnets from the Portuguese XXXIII (gutenberg:2002 dropped)
+- Elizabeth Barrett Browning — Sonnets from the Portuguese XXXIV (gutenberg:2002 dropped)
+- Elizabeth Barrett Browning — Sonnets from the Portuguese XXXVIII (gutenberg:2002 dropped)
+- Elizabeth Barrett Browning — Sonnets from the Portuguese XL (gutenberg:2002 dropped)
+- Elizabeth Barrett Browning — Sonnets from the Portuguese XLIV (gutenberg:2002 dropped)

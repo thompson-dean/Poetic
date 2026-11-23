@@ -44,10 +44,12 @@ Available here:  \(Self.appStoreWebsiteLink)
     }
 
     static let authorLinksDictionary: [String: String] = [
+        "A. E. Housman": "https://en.wikipedia.org/wiki/A._E._Housman",
         "Adam Lindsay Gordon": "https://mypoeticside.com/poets/adam-lindsay-gordon-poems",
         "Alan Seeger": "https://mypoeticside.com/poets/alan-seeger-poems",
         "Alexander Pope": "https://mypoeticside.com/poets/alexander-pope-poems",
         "Algernon Charles Swinburne": "https://mypoeticside.com/poets/algernon-charles-swinburne-poems",
+        "Alice Meynell": "https://en.wikipedia.org/wiki/Alice_Meynell",
         "Ambrose Bierce": "https://mypoeticside.com/poets/ambrose-bierce-poems",
         "Amy Levy": "https://poets.org/poet/amy-levy",
         "Amy Lowell": "https://en.wikipedia.org/wiki/Amy_Lowell",
@@ -69,8 +71,13 @@ Available here:  \(Self.appStoreWebsiteLink)
         "Christopher Marlowe": "https://mypoeticside.com/poets/christopher-marlowe-poems",
         "Christopher Smart": "https://mypoeticside.com/poets/christopher-smart-poems",
         "Claude McKay": "https://en.wikipedia.org/wiki/Claude_McKay",
+        "Countee Cullen": "https://en.wikipedia.org/wiki/Countee_Cullen",
         "James Weldon Johnson": "https://en.wikipedia.org/wiki/James_Weldon_Johnson",
+        "Omar Khayyam": "https://en.wikipedia.org/wiki/Omar_Khayyam",
+        "Rabindranath Tagore": "https://en.wikipedia.org/wiki/Rabindranath_Tagore",
+        "Rudyard Kipling": "https://en.wikipedia.org/wiki/Rudyard_Kipling",
         "Sara Teasdale": "https://en.wikipedia.org/wiki/Sara_Teasdale",
+        "Thomas Hardy": "https://en.wikipedia.org/wiki/Thomas_Hardy",
         "William Butler Yeats": "https://en.wikipedia.org/wiki/W._B._Yeats",
         "Coventry Patmore": "https://mypoeticside.com/poets/coventry-patmore-poems",
         "D. H. Lawrence": "https://en.wikipedia.org/wiki/D._H._Lawrence",

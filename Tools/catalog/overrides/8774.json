@@ -1,0 +1,48 @@
+{
+  "trim_head": {
+    "To H. C.,": 1,
+    "POEMS COMPOSED DURING A TOUR, CHIEFLY ON FOOT.": 1,
+    "SONNETS.": 1,
+    "...._they are of the sky,": 2,
+    "12. FROM THE SAME.": 1,
+    "_Written in very early Youth_.": 1,
+    "September 1st, 1802.": 1,
+    "September, 1802.": 1,
+    "_LONDON_, 1802.": 1,
+    "October, 1803.": 1,
+    "23. _TO THE MEN OF KENT_.": 1,
+    "25. _ANTICIPATION_.": 1,
+    "November, 1803.": 1
+  },
+  "rename": {
+    "_The REDBREAST and the BUTTERFLY_.": "The Redbreast and the Butterfly",
+    "_TO THE SMALL CELANDINE_ [Footnote: Common Pilewort.]": "To the Small Celandine",
+    "CHARACTER of the HAPPY WARRIOR.": "Character of the Happy Warrior",
+    "THE AFFLICTION of MARGARET ---- OF ----": "The Affliction of Margaret ---- of ----",
+    "To H. C.,": "To H. C., Six Years Old",
+    "POEMS COMPOSED DURING A TOUR, CHIEFLY ON FOOT.": "Beggars",
+    "2. _TO A SKY-LARK_.": "To a Sky-Lark",
+    "\"With how sad steps, O Moon thou climb'st the sky.": "With How Sad Steps, O Moon, Thou Climb'st the Sky",
+    "SONNETS.": "Prefatory Sonnet",
+    "3. COMPOSED after a Journey across THE HAMILTON HILLS, YORKSHIRE.": "Composed after a Journey across the Hamilton Hills, Yorkshire",
+    "...._they are of the sky,": "These Words Were Utter'd in a Pensive Mood",
+    "12. FROM THE SAME.": "From the Same. To the Supreme Being",
+    "_Written in very early Youth_.": "Written in Very Early Youth",
+    "14. COMPOSED UPON WESTMINSTER BRIDGE, Sept. 3, 1803.": "Composed upon Westminster Bridge, Sept. 3, 1803",
+    "17. _To the_ ----.": "To the ----",
+    "20. TO THE MEMORY OF _RAISLEY CALVERT_.": "To the Memory of Raisley Calvert",
+    "1. COMPOSED BY THE _SEA-SIDE, near CALAIS_, August, 1802.": "Composed by the Sea-Side, near Calais, August, 1802",
+    "2. _CALAIS_, August, 1802.": "Calais, August, 1802",
+    "3. TO A FRIEND, COMPOSED NEAR CALAIS, On the Road leading to Ardres, August 7th, 1802.": "To a Friend, Composed near Calais, on the Road Leading to Ardres, August 7th, 1802",
+    "5. _CALAIS_. August 15th, 1802.": "Calais, August 15th, 1802",
+    "6. ON THE EXTINCTION OF THE _VENETIAN REPUBLIC_.": "On the Extinction of the Venetian Republic",
+    "8. _TO TOUSSAINT L'OUVERTURE_.": "To Toussaint L'Ouverture",
+    "10. COMPOSED IN THE _VALLEY, near DOVER_, On the Day of landing.": "Composed in the Valley, near Dover, on the Day of Landing",
+    "12. THOUGHT OF A BRITON ON THE _SUBJUGATION OF SWITZERLAND_.": "Thought of a Briton on the Subjugation of Switzerland",
+    "13. WRITTEN IN LONDON, September, 1802.": "Written in London, September, 1802",
+    "_LONDON_, 1802.": "London, 1802"
+  },
+  "cut_at": {
+    "CHARACTER of the HAPPY WARRIOR.": "_The above Verses mere written soon after tidings had been"
+  }
+}

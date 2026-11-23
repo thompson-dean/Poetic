@@ -106,9 +106,44 @@ final class DailyPoemPickerTests: XCTestCase {
             let expected = calendar.date(byAdding: .day, value: offset, to: start)!
             XCTAssertEqual(entry.dateKey, WidgetDateKey.string(for: expected))
         }
-        // Consecutive days pick consecutive eligible poems (wrap-around mod 3).
-        let titles = Set(payload.days.map(\.poem.title))
-        XCTAssertEqual(titles.count, 3)
+        // Every pick comes from the eligible set.
+        let eligibleTitles = Set(DailyPoemPicker.eligiblePoems(in: catalog).map(\.title))
+        XCTAssertTrue(payload.days.allSatisfy { eligibleTitles.contains($0.poem.title) })
+    }
+
+    func test_addingPoems_barelyChangesTheSchedule() {
+        // 300 eligible poems, then 30 more (10% growth): only days a new poem
+        // wins should change – expected ~9%, nowhere near a full reshuffle.
+        let base = (0..<300).map { poem("Poem \($0)", "Poet \($0 % 40)", lineCount: 10) }
+        let grown = base + (0..<30).map { poem("New \($0)", "New Poet", lineCount: 10) }
+        let start = Date(timeIntervalSince1970: 1_800_000_000)
+        let before = DailyPoemPicker.makePayload(catalog: base, from: start, days: 365, appVersion: "t")
+        let after = DailyPoemPicker.makePayload(catalog: grown, from: start, days: 365, appVersion: "t")
+        let changed = zip(before.days, after.days).filter { $0.poem.title != $1.poem.title }
+        XCTAssertTrue(changed.allSatisfy { $0.1.poem.author == "New Poet" }, "only new poems may take a day")
+        XCTAssertLessThan(changed.count, 365 / 5)
+    }
+
+    func test_scheduleSpreadsAcrossThePool() {
+        let pool = (0..<50).map { poem("Poem \($0)", "Poet", lineCount: 10) }
+        let payload = DailyPoemPicker.makePayload(
+            catalog: pool, from: Date(timeIntervalSince1970: 1_800_000_000), days: 120, appVersion: "t"
+        )
+        XCTAssertGreaterThan(Set(payload.days.map(\.poem.title)).count, 35)
+    }
+
+    func test_stableHash_isFixed() {
+        // Guards against accidental algorithm changes, which would silently
+        // reshuffle everyone's Poem of the Day.
+        // Reference value computed independently (Python) – must never change.
+        XCTAssertEqual(
+            StableHash.score(poemKey: "Ozymandias|Percy Bysshe Shelley|", day: Array("2026-12-01".utf8)),
+            9250944285681892136
+        )
+        XCTAssertNotEqual(
+            StableHash.score(poemKey: "Ozymandias|Percy Bysshe Shelley|", day: Array("2026-12-01".utf8)),
+            StableHash.score(poemKey: "Ozymandias|Percy Bysshe Shelley|", day: Array("2026-12-02".utf8))
+        )
     }
 
     func test_excerpt_capsAtWidgetExcerptLimit() {

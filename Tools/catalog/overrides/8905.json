@@ -1,0 +1,34 @@
+{
+  "keep_title_line": [
+    "Up! up! my friend, and clear your looks,",
+    "The little hedge-row birds"
+  ],
+  "drop": [
+    "THE COMPLAINT OF A FORSAKEN INDIAN WOMAN.",
+    "THE ANCIENT MARINER,"
+  ],
+  "trim_head": {
+    "LINES": 3,
+    "GOODY BLAKE & HARRY GILL,": 1,
+    "THE IDIOT BOY.": 1,
+    "_The ANCIENT MARINER_.": 1
+  },
+  "rename": {
+    "Up! up! my friend, and clear your looks,": "The Tables Turned",
+    "The little hedge-row birds": "Animal Tranquillity and Decay",
+    "THE COMPLAINT, etc.": "The Complaint of a Forsaken Indian Woman",
+    "LINES": "Lines Left upon a Seat in a Yew-tree",
+    "THE FOSTER-MOTHER'S TALE. _A Narration in Dramatic Blank Verse_.": "The Foster-Mother's Tale",
+    "GOODY BLAKE & HARRY GILL,": "Goody Blake and Harry Gill",
+    "_ANECDOTE for FATHERS, Shewing how the practice of Lying may be taught._": "Anecdote for Fathers",
+    "_LINES Written at a small distance from my House, and sent by my little boy to the person to whom they are addressed._": "Lines Written at a Small Distance from My House",
+    "_SIMON LEE, THE OLD HUNTSMAN, With an incident in which he was concerned._": "Simon Lee, the Old Huntsman",
+    "_LINES Written in early Spring_.": "Lines Written in Early Spring",
+    "_The NIGHTINGALE. Written in April, 1798._": "The Nightingale",
+    "_LINES Written when sailing in a Boat At EVENING._": "Lines Written When Sailing in a Boat at Evening",
+    "_LINES Written near Richmond upon the Thames._": "Lines Written near Richmond, upon the Thames",
+    "_The MAD MOTHER_.": "The Mad Mother",
+    "_The ANCIENT MARINER_.": "The Ancient Mariner",
+    "_LINES_ _Written a few miles above TINTERN ABBEY, an revisiting the banks of the WYE during a Tour_. _July 13, 1798_.": "Lines Written a Few Miles above Tintern Abbey"
+  }
+}

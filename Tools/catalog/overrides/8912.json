@@ -1,0 +1,79 @@
+{
+  "keep_title_line": [
+    "There was a Boy, ye knew him well, ye Cliffs",
+    "Strange fits of passion I have known,",
+    "A slumber did my spirit seal,",
+    "Three years she grew in sun and shower,"
+  ],
+  "not_headings": [
+    "_PART SECOND_.",
+    "These Tourists, Heaven preserve us! needs must live",
+    "Fair Ellen Irwin, when she sate",
+    "Though the torrents from their fountains",
+    "When Ruth was left half desolate,",
+    "A fig for your languages, German and Norse,",
+    "The class of Beggars to which the old man here described belongs,",
+    "I saw an aged Beggar in my walk,",
+    "Art thou a Statesman, in the van",
+    "If from the public way you turn your steps",
+    "Upon the Forest-side in Grasmere Vale",
+    "Great How is a single and conspicuous hill, which rises towards the"
+  ],
+  "drop": [
+    "POEMS ON THE _NAMING OF PLACES_."
+  ],
+  "split": {
+    "_POEMS on the NAMING of PLACES_.": "Poems on the Naming of Places"
+  },
+  "trim_head": {
+    "HART-LEAP WELL": 6,
+    "THE": 3,
+    "The OAK and the BROOM,": 1,
+    "_The IDLE SHEPHERD-BOYS_,": 3,
+    "SONG": 2,
+    "RUTH.": 1,
+    "_Written in GERMANY, On one of the coldest days of the Century_.": 3,
+    "THE OLD CUMBERLAND BEGGAR. _A DESCRIPTION._": 8,
+    "Poems on the Naming of Places II": 1,
+    "Poems on the Naming of Places V": 1,
+    "MICHAEL, _A PASTORAL POEM_.": 2
+  },
+  "cut_at": {
+    "Poems on the Naming of Places II": "NOTE.",
+    "_RURAL ARCHITECTURE_.": "Great How is a single and conspicuous hill, which rises towards the"
+  },
+  "rename": {
+    "There was a Boy, ye knew him well, ye Cliffs": "There Was a Boy",
+    "Strange fits of passion I have known,": "Strange Fits of Passion I Have Known",
+    "A slumber did my spirit seal,": "A Slumber Did My Spirit Seal",
+    "Three years she grew in sun and shower,": "Three Years She Grew in Sun and Shower",
+    "THE": "The Brothers",
+    "_ELLEN IRWIN, Or the BRAES of KIRTLE_. [4]": "Ellen Irwin, or the Braes of Kirtle",
+    "_The WATERFALL and the EGLANTINE_.": "The Waterfall and the Eglantine",
+    "The OAK and the BROOM,": "The Oak and the Broom",
+    "_The IDLE SHEPHERD-BOYS_,": "The Idle Shepherd-Boys, or Dungeon-Gill Force",
+    "INSCRIPTION _For the Spot where the_ HERMITAGE _stood on St. Herbert's Island, Derwent-Water_.": "Inscription for the Spot Where the Hermitage Stood on St. Herbert's Island, Derwent-Water",
+    "_INSCRIPTION For the House (an Outhouse) on the Island at Grasmere_.": "Inscription for the House (an Outhouse) on the Island at Grasmere",
+    "_To a SEXTON_.": "To a Sexton",
+    "_The TWO THIEVES, Or the last Stage of AVARICE_.": "The Two Thieves, or the Last Stage of Avarice",
+    "SONG": "Song for the Wandering Jew",
+    "RUTH.": "Ruth",
+    "_LINES Written with a Slate-pencil upon a Stone, the largest of a heap lying near a deserted Quarry, upon one of the Islands at Rydale_.": "Lines Written with a Slate-Pencil upon a Stone",
+    "_In the School of ---- is a tablet on which are inscribed, in gilt letters, the names of the federal persons who have been Schoolmasters there since the foundation of the School, with the time at which they entered upon and quitted their office. Opposite one of those names the Author wrote the following lines_.": "Lines Written on a Tablet in a School",
+    "The FOUNTAIN, _A Conversation_.": "The Fountain, a Conversation",
+    "_Written in GERMANY, On one of the coldest days of the Century_.": "Written in Germany, on One of the Coldest Days of the Century",
+    "_The CHILDLESS FATHER_.": "The Childless Father",
+    "THE OLD CUMBERLAND BEGGAR. _A DESCRIPTION._": "The Old Cumberland Beggar",
+    "_RURAL ARCHITECTURE_.": "Rural Architecture",
+    "_A POET'S EPITAPH_.": "A Poet's Epitaph",
+    "_A CHARACTER_, _In the antithetical Manner_.": "A Character, in the Antithetical Manner",
+    "Poems on the Naming of Places 1": "It Was an April Morning",
+    "Poems on the Naming of Places II": "To Joanna",
+    "Poems on the Naming of Places III": "There Is an Eminence",
+    "Poems on the Naming of Places IV": "A Narrow Girdle of Rough Stones and Crags",
+    "Poems on the Naming of Places V": "To M. H.",
+    "MICHAEL, _A PASTORAL POEM_.": "Michael, a Pastoral Poem",
+    "HART-LEAP WELL": "Hart-Leap Well",
+    "The Pet-Lamb, A Pastoral.": "The Pet-Lamb, a Pastoral"
+  }
+}

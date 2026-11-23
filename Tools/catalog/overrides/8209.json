@@ -1,0 +1,27 @@
+{
+  "keep_title_line": [
+    "Woman! when I behold thee flippant, vain,"
+  ],
+  "drop": [
+    "EPISTLES"
+  ],
+  "trim_head": {
+    "DEDICATION.": 1,
+    "CALIDORE.": 1,
+    "SONNETS": 1,
+    "SLEEP AND POETRY": 6
+  },
+  "rename": {
+    "DEDICATION.": "Dedication: To Leigh Hunt, Esq.",
+    "\"Places of nestling green for Poets made.\" STORY OF RIMINI.": "I Stood Tip-toe upon a Little Hill",
+    "CALIDORE.": "Calidore: A Fragment",
+    "ON RECEIVING A CURIOUS SHELL, AND A COPY OF VERSES, FROM THE SAME LADIES.": "On Receiving a Curious Shell, and a Copy of Verses, from the Same Ladies",
+    "Woman! when I behold thee flippant, vain,": "Woman! When I Behold Thee Flippant, Vain",
+    "SONNETS": "To My Brother George (Sonnet)",
+    "III. _Written on the day that Mr. Leigh Hunt left Prison._": "Written on the Day That Mr. Leigh Hunt Left Prison",
+    "V. _To a Friend who sent me some Roses._": "To a Friend Who Sent Me Some Roses",
+    "XI. _On first looking into Chapman's Homer._": "On First Looking into Chapman's Homer",
+    "XII. _On leaving some Friends at an early Hour._": "On Leaving Some Friends at an Early Hour",
+    "XV. _On the Grasshopper and Cricket._": "On the Grasshopper and Cricket"
+  }
+}

@@ -94,11 +94,11 @@
     "author": "Charlotte Mew",
     "book": "The Farmer's Bride",
     "heading": "allcaps",
-    "content_start": "THE FARMER\u2019S BRIDE",
+    "content_start": "THE FARMER’S BRIDE",
     "skip_titles": [
       "CONTENTS",
       "PAGE",
-      "TRANSCRIBER\u2019S NOTES"
+      "TRANSCRIBER’S NOTES"
     ],
     "max_expected_poems": 60
   },
@@ -169,5 +169,609 @@
     ],
     "max_expected_poems": 150,
     "roman_headings": "keep"
+  },
+  {
+    "id": 8905,
+    "author": "William Wordsworth",
+    "book": "Lyrical Ballads, with Other Poems, 1800, Volume 1",
+    "heading": "gap",
+    "content_start": "EXPOSTULATION AND REPLY.",
+    "content_end": "_NOTES_",
+    "roman_headings": "keep",
+    "title_continuation": true,
+    "title_cleanup": true,
+    "clean": [
+      "footnotes"
+    ],
+    "max_expected_poems": 40
+  },
+  {
+    "id": 8912,
+    "author": "William Wordsworth",
+    "book": "Lyrical Ballads, with Other Poems, 1800, Volume 2",
+    "heading": "gap",
+    "content_start": "HART-LEAP WELL",
+    "content_end": "NOTES TO THE POEM of THE BROTHERS.",
+    "roman_headings": "keep",
+    "numbered_headings": true,
+    "title_continuation": true,
+    "title_cleanup": true,
+    "clean": [
+      "footnotes"
+    ],
+    "max_expected_poems": 60
+  },
+  {
+    "id": 8774,
+    "author": "William Wordsworth",
+    "book": "Poems in Two Volumes, Volume 1",
+    "heading": "gap",
+    "content_start": "TO THE DAISY.",
+    "content_end": "_NOTES to the FIRST VOLUME_",
+    "roman_headings": "first_line_title",
+    "numbered_headings": true,
+    "title_continuation": true,
+    "title_cleanup": true,
+    "title_prefix_regex": "^\\d+\\.\\s+",
+    "clean": [
+      "footnotes",
+      "line_numbers",
+      "ornaments"
+    ],
+    "max_expected_poems": 90
+  },
+  {
+    "id": 8824,
+    "author": "William Wordsworth",
+    "book": "Poems in Two Volumes, Volume 2",
+    "heading": "gap",
+    "content_start": "POEMS _WRITTEN DURING A TOUR_ IN SCOTLAND.",
+    "content_end": "_NOTES to the SECOND VOLUME_.",
+    "roman_headings": "first_line_title",
+    "numbered_headings": true,
+    "title_continuation": true,
+    "title_cleanup": true,
+    "title_prefix_regex": "^\\d+\\.\\s+",
+    "clean": [
+      "footnotes",
+      "line_numbers",
+      "ornaments"
+    ],
+    "max_expected_poems": 80
+  },
+  {
+    "id": 8209,
+    "author": "John Keats",
+    "book": "Poems 1817",
+    "heading": "gap",
+    "content_start": "DEDICATION.",
+    "content_end": "_Finis_.",
+    "roman_headings": "first_line_title",
+    "title_continuation": true,
+    "title_cleanup": true,
+    "title_prefix_regex": "^[IVXLC]+\\.\\s+",
+    "max_expected_poems": 50
+  },
+  {
+    "id": 23684,
+    "author": "John Keats",
+    "book": "Keats: Poems Published in 1820",
+    "heading": "gap",
+    "content_start": "LAMIA.",
+    "content_end": "NOTES.",
+    "roman_headings": "keep",
+    "title_continuation": true,
+    "title_cleanup": true,
+    "clean": [
+      "footnotes",
+      "line_numbers"
+    ],
+    "max_expected_poems": 30
+  },
+  {
+    "id": 3167,
+    "author": "Thomas Hardy",
+    "book": "Wessex Poems and Other Verses",
+    "heading": "allcaps",
+    "content_start": "THE TEMPORARY THE ALL",
+    "roman_headings": "keep",
+    "text_substitutions": [
+      [
+        " ?\\{\\d+\\}",
+        ""
+      ],
+      [
+        "(\\[Picture:[^\\]]*\\][ \\t]*\\n)(?:[ \\t]*\\n)*[ \\t]*\\* \\* \\* \\* \\*[ \\t]*$",
+        "\\1"
+      ],
+      [
+        "^[ \\t]*\\[Picture:[^\\]]*\\][ \\t]*$",
+        ""
+      ],
+      [
+        "^[ \\t]{20,}_(?:(?:Published|Printed) in|Written)_.*$",
+        ""
+      ],
+      [
+        "\\n\\n([ \\t]{6,}(?![ \\t]|[IVXLC]+\\.?[ \\t]*$)[^a-z\\n]*[A-Z]{2}[^a-z\\n]*)$",
+        "\\n\\1"
+      ],
+      [
+        "^   ",
+        ""
+      ]
+    ],
+    "join_heading_lines": {
+      "first": "[^a-z\\s][^a-z]*",
+      "next": "[^a-z(][^a-z]*",
+      "sep": ": "
+    },
+    "title_substitutions": [
+      [
+        ": ([IVXLC]+)$",
+        " \\1"
+      ]
+    ],
+    "skip_titles": [
+      "CONTENTS",
+      "ADDITIONS",
+      "PREFACE TO WESSEX POEMS"
+    ],
+    "max_expected_poems": 70
+  },
+  {
+    "id": 3168,
+    "author": "Thomas Hardy",
+    "book": "Poems of the Past and the Present",
+    "heading": "allcaps",
+    "content_start": "V.R.  1819–1901: A REVERIE",
+    "content_end": "FOOTNOTES",
+    "roman_headings": "keep",
+    "text_substitutions": [
+      [
+        "^ἈΓΝΩΣΤΩι ΘΕΩι\\.$",
+        "ἈΓΝΩΣΤΩΙ ΘΕΩΙ."
+      ],
+      [
+        " ?\\{\\d+\\}",
+        ""
+      ],
+      [
+        "(\\[Picture:[^\\]]*\\][ \\t]*\\n)(?:[ \\t]*\\n)*[ \\t]*\\* \\* \\* \\* \\*[ \\t]*$",
+        "\\1"
+      ],
+      [
+        "^[ \\t]*\\[Picture:[^\\]]*\\][ \\t]*$",
+        ""
+      ],
+      [
+        "^[ \\t]{20,}_(?:(?:Published|Printed) in|Written)_.*$",
+        ""
+      ],
+      [
+        "\\n\\n([ \\t]{6,}(?![ \\t]|[IVXLC]+\\.?[ \\t]*$)[^a-z\\n]*[A-Z]{2}[^a-z\\n]*)$",
+        "\\n\\1"
+      ],
+      [
+        "^   ",
+        ""
+      ]
+    ],
+    "join_heading_lines": {
+      "first": "[^a-z\\s][^a-z]*",
+      "next": "[^a-z(][^a-z]*",
+      "sep": ": "
+    },
+    "title_substitutions": [
+      [
+        ": ([IVXLC]+)$",
+        " \\1"
+      ]
+    ],
+    "skip_titles": [
+      "CONTENTS",
+      "WAR POEMS",
+      "POEMS OF PILGRIMAGE",
+      "MISCELLANEOUS POEMS",
+      "IMITATIONS, ETC.",
+      "RETROSPECT"
+    ],
+    "max_expected_poems": 120
+  },
+  {
+    "id": 2863,
+    "author": "Thomas Hardy",
+    "book": "Satires of Circumstance, Lyrics and Reveries",
+    "heading": "allcaps",
+    "content_start": "IN FRONT OF THE LANDSCAPE",
+    "roman_headings": "keep",
+    "text_substitutions": [
+      [
+        " ?\\{\\d+\\}",
+        ""
+      ],
+      [
+        "(\\[Picture:[^\\]]*\\][ \\t]*\\n)(?:[ \\t]*\\n)*[ \\t]*\\* \\* \\* \\* \\*[ \\t]*$",
+        "\\1"
+      ],
+      [
+        "^[ \\t]*\\[Picture:[^\\]]*\\][ \\t]*$",
+        ""
+      ],
+      [
+        "^[ \\t]{20,}_(?:(?:Published|Printed) in|Written)_.*$",
+        ""
+      ],
+      [
+        "\\n\\n([ \\t]{6,}(?![ \\t]|[IVXLC]+\\.?[ \\t]*$)[^a-z\\n]*[A-Z]{2}[^a-z\\n]*)$",
+        "\\n\\1"
+      ],
+      [
+        "^   ",
+        ""
+      ],
+      [
+        "\\n\\n\\n(PART I+)$",
+        "\\n\\1"
+      ]
+    ],
+    "join_heading_lines": {
+      "first": "[^a-z\\s][^a-z]*",
+      "next": "[^a-z(][^a-z]*",
+      "sep": ": "
+    },
+    "title_substitutions": [
+      [
+        "^[IVXLC]+: ",
+        ""
+      ]
+    ],
+    "skip_titles": [
+      "CONTENTS",
+      "LYRICS AND REVERIES",
+      "SATIRES OF CIRCUMSTANCES: IN FIFTEEN GLIMPSES",
+      "POEMS OF 1912–13",
+      "MISCELLANEOUS PIECES"
+    ],
+    "max_expected_poems": 130
+  },
+  {
+    "id": 5720,
+    "author": "A. E. Housman",
+    "book": "A Shropshire Lad",
+    "heading": "regex",
+    "content_start": "A SHROPSHIRE LAD",
+    "roman_headings": "first_line_title",
+    "numbered_title_regex": "[^a-z]+",
+    "text_substitutions": [
+      [
+        "^[ \\t]*\\(1\\) .*$",
+        ""
+      ],
+      [
+        " \\(1\\)$",
+        ""
+      ],
+      [
+        "^([ \\t]*)_ ",
+        "\\1"
+      ],
+      [
+        " _$",
+        ""
+      ],
+      [
+        "^([ \\t]*)I Hoed ",
+        "\\1I hoed "
+      ]
+    ],
+    "title_substitutions": [
+      [
+        "^\"",
+        ""
+      ],
+      [
+        "[,;:.\"-]+$",
+        ""
+      ]
+    ],
+    "skip_titles": [
+      "A SHROPSHIRE LAD"
+    ],
+    "max_expected_poems": 70
+  },
+  {
+    "id": 7848,
+    "author": "A. E. Housman",
+    "book": "Last Poems",
+    "heading": "regex",
+    "heading_regex": "[IVXL]+\\.\\s+\\S.*",
+    "content_start": "September 1922",
+    "roman_headings": "first_line_title",
+    "numbered_title_regex": "[^a-z]+",
+    "title_substitutions": [
+      [
+        "^[IVXL]+\\.\\s+",
+        ""
+      ],
+      [
+        "^[\"']",
+        ""
+      ],
+      [
+        "[,;:.\"'-]+$",
+        ""
+      ]
+    ],
+    "max_expected_poems": 50
+  },
+  {
+    "id": 2819,
+    "author": "Rudyard Kipling",
+    "book": "Barrack-Room Ballads",
+    "heading": "gap",
+    "content_start": "Danny Deever",
+    "text_substitutions": [
+      [
+        "^Second Series \\(1896\\)[ \\t]*\\n",
+        ""
+      ]
+    ],
+    "max_expected_poems": 50
+  },
+  {
+    "id": 16950,
+    "author": "Christina Rossetti",
+    "book": "Goblin Market, The Prince's Progress, and Other Poems",
+    "heading": "allcaps",
+    "content_start": "GOBLIN MARKET",
+    "roman_headings": "keep",
+    "text_substitutions": [
+      [
+        "[ \\t]{3,}\\d+[ \\t]*$",
+        ""
+      ],
+      [
+        "^(THE HOUR AND THE GHOST\\n)\\n\\n(  BRIDE)$",
+        "\\1\\n\\2"
+      ],
+      [
+        "^(THE THREE ENEMIES\\n)\\n\\n(THE FLESH)$",
+        "\\1\\n\\2"
+      ],
+      [
+        "^SONG(\\n\\n\\nOh roses)",
+        "SONG 1\\1"
+      ],
+      [
+        "^SONG(\\n\\n\\nTwo doves)",
+        "SONG 2\\1"
+      ],
+      [
+        "^SONG(\\n\\n\\nShe sat and sang)",
+        "SONG 3\\1"
+      ],
+      [
+        "^SONG(\\n\\n\\nWhen I am dead)",
+        "SONG 4\\1"
+      ]
+    ],
+    "skip_titles": [
+      "CONTENTS",
+      "DEVOTIONAL PIECES",
+      "THE PRINCE'S PROGRESS, AND OTHER POEMS, 1866",
+      "MISCELLANEOUS POEMS, 1848-69"
+    ],
+    "max_expected_poems": 200
+  },
+  {
+    "id": 22403,
+    "author": "Gerard Manley Hopkins",
+    "book": "Poems of Gerard Manley Hopkins Now First Published",
+    "heading": "regex",
+    "heading_regex": "_\\d+ .*",
+    "content_start": "_1 For a Picture of St. Dorothea_",
+    "content_end": "EDITOR'S NOTES",
+    "text_substitutions": [
+      [
+        "^_POEMS 1876-1889_$",
+        ""
+      ],
+      [
+        "^UNFINISHED POEMS\\n& FRAGMENTS$",
+        ""
+      ],
+      [
+        "^A Brother and Sister_$",
+        "A Brother and Sister"
+      ],
+      [
+        "^_6\\nThe Silver Jubilee:\\nTo James First Bishop of Shrewsbury on the 25th Year\\nof his Episcopate July 28\\. 1876_$",
+        "_6 SILVER JUBILEE_"
+      ],
+      [
+        "^_36\\nThe Leaden Echo and the Golden Echo\\n\\n(\\(Maidens' song from St\\. Winefred's Well\\))_$",
+        "_36 The Leaden Echo and the Golden Echo_\\n\\n\\1"
+      ],
+      [
+        "^_48\\nThat Nature is a Heraclitean Fire and of\\nthe comfort of the Resurrection_$",
+        "_48 HERACLITEAN FIRE_"
+      ],
+      [
+        "^_49\\nIn honour of\\nSt\\. Alphonsus Rodriguez\\nLaybrother of the Society of Jesus_$",
+        "_49 ALPHONSUS RODRIGUEZ_"
+      ],
+      [
+        "^_50_$",
+        "_50 Thou art indeed just, Lord_"
+      ],
+      [
+        "^_57_\\n\\n([ \\t]+\\.[ .]*\\n)(HOPE holds to Christ[^\\n]*)$",
+        "_57 Hope holds to Christ_\\n\\n\\1\\2"
+      ],
+      [
+        "^_(\\d+)\\n\\n([^\\n]+_)$",
+        "_\\1 \\2"
+      ],
+      [
+        "^_(\\d+)_?\\n\\n([^\\n]+)$",
+        "_\\1 \\2_\\n\\n\\2"
+      ],
+      [
+        "^_(\\d+)\\n(?=\\S)",
+        "_\\1 "
+      ],
+      [
+        "^(_\\d+ [^\\n]*[:;])\\n\\n([^\\n]{1,60}_)$",
+        "\\1 \\2"
+      ],
+      [
+        "^(_\\d+ [^\\n]*[^_\\n])\\n\\n([^\\n]{1,60}_)$",
+        "\\1: \\2"
+      ],
+      [
+        "^(_\\d+ [^\\n]*[^_\\n])\\n(?=\\S)",
+        "\\1 "
+      ],
+      [
+        "^(_\\d+ [^\\n]*[^_\\n])\\n(?=\\S)",
+        "\\1 "
+      ],
+      [
+        "^(_\\d+ [^\\n]*[^_\\n])\\n(?=\\S)",
+        "\\1 "
+      ]
+    ],
+    "title_substitutions": [
+      [
+        "^_\\d+ ",
+        ""
+      ],
+      [
+        "_$",
+        ""
+      ],
+      [
+        "^\\((.*)\\)$",
+        "\\1"
+      ],
+      [
+        "[,;:.]+$",
+        ""
+      ]
+    ],
+    "max_expected_poems": 90
+  },
+  {
+    "id": 7164,
+    "author": "Rabindranath Tagore",
+    "book": "Gitanjali",
+    "heading": "none",
+    "content_start": "1.",
+    "number_prefix": "Gitanjali",
+    "roman_headings": "keep",
+    "max_expected_poems": 110
+  },
+  {
+    "id": 6686,
+    "author": "Rabindranath Tagore",
+    "book": "The Gardener",
+    "heading": "none",
+    "content_start": "1",
+    "number_prefix": "The Gardener",
+    "roman_headings": "keep",
+    "max_expected_poems": 90,
+    "content_end": "INDEX OF FIRST WORDS"
+  },
+  {
+    "id": 246,
+    "author": "Omar Khayyam",
+    "book": "The Rubaiyat of Omar Khayyam",
+    "heading": "none",
+    "content_start": "First Edition",
+    "content_end": "TAMAM SHUD.",
+    "roman_headings": "keep",
+    "max_expected_poems": 1,
+    "drop_line_regex": "^[IVXLC]+\\.$"
+  },
+  {
+    "id": 70543,
+    "author": "Countee Cullen",
+    "book": "Color",
+    "heading": "regex",
+    "heading_regex": "^(?!_For Donald Duff_)(_[^_]+_(\\[[A-Z]\\])?|\\(_(She|He) Crosses_\\))$",
+    "strip_heading_markup": true,
+    "content_start": "_To You Who Read My Book_",
+    "content_end": "TRANSCRIBER’S NOTES:",
+    "drop_line_regex": "^\\[[A-Z]\\] ",
+    "skip_titles": [
+      "Color",
+      "Epitaphs",
+      "For Love’s Sake",
+      "Varia"
+    ],
+    "max_expected_poems": 90
+  },
+  {
+    "id": 18338,
+    "author": "Paul Laurence Dunbar",
+    "book": "The Complete Poems of Paul Laurence Dunbar",
+    "heading": "allcaps",
+    "content_start": "ERE SLEEP COMES DOWN TO SOOTHE THE WEARY EYES",
+    "roman_headings": "keep",
+    "skip_titles": [
+      "LYRICS OF LOWLY LIFE",
+      "LYRICS OF THE HEARTHSIDE",
+      "LYRICS OF LOVE AND LAUGHTER",
+      "LYRICS OF SUNSHINE AND SHADOW"
+    ],
+    "max_expected_poems": 430,
+    "strip_heading_markup": true,
+    "content_end": "TRANSCRIBER'S NOTES",
+    "drop_line_regex": "^\\[Illustration[^\\]]*\\]$"
+  },
+  {
+    "id": 13647,
+    "author": "Edward Lear",
+    "book": "Nonsense Songs",
+    "heading": "allcaps",
+    "strip_heading_markup": true,
+    "content_start": "THE OWL AND THE PUSSY-CAT.",
+    "content_end": "NONSENSE STORIES.",
+    "drop_line_regex": "^(\\[Illustration[^\\]]*\\]|(\\*\\s*)+|[IVXLC]+\\.)$",
+    "max_expected_poems": 12,
+    "roman_headings": "keep"
+  },
+  {
+    "id": 13649,
+    "author": "Edward Lear",
+    "book": "Laughable Lyrics",
+    "heading": "allcaps",
+    "strip_heading_markup": true,
+    "content_start": "THE DONG WITH A LUMINOUS NOSE.",
+    "content_end": "NONSENSE BOTANY.",
+    "drop_line_regex": "^(\\[Illustration[^\\]]*\\]|(\\*\\s*)+|[IVXLC]+\\.)$",
+    "cut_line_regex": "^NOTE\\.--",
+    "max_expected_poems": 15,
+    "roman_headings": "keep"
+  },
+  {
+    "id": 1186,
+    "author": "Alice Meynell",
+    "book": "Poems",
+    "heading": "allcaps",
+    "content_start": "SONNET--MY HEART SHALL BE THY GARDEN",
+    "max_expected_poems": 45,
+    "subtitles": true
+  },
+  {
+    "id": 2002,
+    "author": "Elizabeth Barrett Browning",
+    "book": "Sonnets from the Portuguese",
+    "heading": "none",
+    "content_start": "I",
+    "number_prefix": "Sonnets from the Portuguese",
+    "roman_headings": "numbered",
+    "max_expected_poems": 44
   }
 ]

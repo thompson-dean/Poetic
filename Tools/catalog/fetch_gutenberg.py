@@ -12,21 +12,40 @@ import urllib.request
 HERE = pathlib.Path(__file__).parent
 CACHE = HERE / "cache" / "gutenberg"
 BOOKS = HERE / "books.json"
-RETRIES = 3
+RETRIES = 2
+
+
+MIRROR = "https://gutenberg.pglaf.org"
+
+
+def mirror_dir(book_id: int) -> str:
+    """Mirror layout: every digit but the last is a directory (8905 -> 8/9/0/8905)."""
+    digits = str(book_id)
+    parents = "0" if len(digits) == 1 else "/".join(digits[:-1])
+    return f"{MIRROR}/{parents}/{digits}"
 
 
 def fetch(book_id: int) -> str:
+    # gutenberg.org first; the official pglaf mirror as fallback (the main
+    # site sometimes answers automated requests with 503).
     urls = [
         f"https://www.gutenberg.org/ebooks/{book_id}.txt.utf-8",
         f"https://www.gutenberg.org/cache/epub/{book_id}/pg{book_id}.txt",
+        f"{MIRROR}/cache/epub/{book_id}/pg{book_id}.txt",
+        f"{mirror_dir(book_id)}/{book_id}-0.txt",
+        f"{mirror_dir(book_id)}/{book_id}.txt",
     ]
     last_error = None
     for url in urls:
         for attempt in range(1, RETRIES + 1):
             try:
                 request = urllib.request.Request(url, headers={"User-Agent": "poetic-catalog-tool"})
-                with urllib.request.urlopen(request, timeout=60) as response:
-                    return response.read().decode("utf-8-sig")
+                with urllib.request.urlopen(request, timeout=120) as response:
+                    raw = response.read()
+                try:
+                    return raw.decode("utf-8-sig")
+                except UnicodeDecodeError:
+                    return raw.decode("latin-1")
             except Exception as error:  # noqa: BLE001
                 last_error = error
                 time.sleep(attempt * 2)

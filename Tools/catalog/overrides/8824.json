@@ -1,0 +1,46 @@
+{
+  "not_headings": [
+    "Oft do I sit by thee at ease,"
+  ],
+  "trim_head": {
+    "POEMS _WRITTEN DURING A TOUR_ IN SCOTLAND.": 6,
+    "3. _STEPPING WESTWARD_.": 7,
+    "5. _THE MATRON OF JEDBOROUGH AND HER HUSBAND_.": 3,
+    "6. _TO A HIGHLAND GIRL_.": 1,
+    "9. _YARROW UNVISITED_.": 5,
+    "MOODS OF MY OWN MIND.": 1,
+    "THE BLIND HIGHLAND BOY; WITH _OTHER POEMS_.": 2,
+    "_SONNET_.#1": 4,
+    "_SONNET_.#2": 2,
+    "_SONNET_.#3": 2,
+    "ODE.": 2
+  },
+  "cut_at": {
+    "_TO A YOUNG LADY_, Who had been reproached for taking long Walks in the Country.": "\"--_Pleasure is spread through the earth"
+  },
+  "rename": {
+    "POEMS _WRITTEN DURING A TOUR_ IN SCOTLAND.": "Rob Roy's Grave",
+    "4. _GLEN-ALMAIN_, or the NARROW GLEN": "Glen-Almain, or the Narrow Glen",
+    "6. _TO A HIGHLAND GIRL_.": "To a Highland Girl (At Inversneyde, upon Loch Lomond)",
+    "7. _SONNET_. (Composed at ---- Castle.)": "Sonnet, Composed at ---- Castle",
+    "8. ADDRESS _TO THE SONS OF BURNS_ after visiting their Father's Grave (August 14th, 1803.)": "Address to the Sons of Burns after Visiting Their Father's Grave",
+    "MOODS OF MY OWN MIND.": "To a Butterfly",
+    "5. _WRITTEN IN MARCH_, While resting on the Bridge at the Foot of Brother's Water.": "Written in March, While Resting on the Bridge at the Foot of Brother's Water",
+    "6. _THE SMALL CELANDINE_. Common Pilewort.": "The Small Celandine",
+    "THE BLIND HIGHLAND BOY; WITH _OTHER POEMS_.": "The Blind Highland Boy",
+    "_TO A YOUNG LADY_, Who had been reproached for taking long Walks in the Country.": "To a Young Lady, Who Had Been Reproached for Taking Long Walks in the Country",
+    "_TO THE DAISY_. The two following Poems were overflowings of the mind in composing the one which stands first in the first Volume.": "To the Daisy",
+    "_INCIDENT_, Characteristic of a favourite Dog, which belonged to a Friend of the Author.": "Incident, Characteristic of a Favourite Dog",
+    "_SONNET_.#1": "Admonition",
+    "_SONNET_.#2": "Sonnet (Though Narrow Be That Old Man's Cares)",
+    "_SONNET_.#3": "A Prophecy. Feb. 1807",
+    "_SONNET_, TO THOMAS CLARKSON, On the final passing of the Bill for the Abolition of the Slave Trade, March, 1807.": "To Thomas Clarkson, on the Final Passing of the Bill for the Abolition of the Slave Trade",
+    "_FORESIGHT_. Or the Charge of a Child to his younger Companion.": "Foresight, or the Charge of a Child to His Younger Companion",
+    "_TO THE SPADE OF A FRIEND_, (AN AGRICULTURIST.) Composed while we were labouring together in his Pleasure-Ground.": "To the Spade of a Friend (an Agriculturist)",
+    "_SONG_, AT THE FEAST OF BROUGHAM CASTLE, Upon the RESTORATION OF LORD CLIFFORD, the SHEPHERD, to the Estates and Honours of his Ancestors.": "Song at the Feast of Brougham Castle",
+    "_LINES_, Composed at GRASMERE, during a walk, one Evening, after a stormy day, the Author having just read in a Newspaper that the dissolution of MR. FOX was hourly expected.": "Lines Composed at Grasmere",
+    "_ELEGIAC STANZAS_, Suggested by a Picture of PEELE CASTLE, in a Storm, _painted_ BY SIR GEORGE BEAUMONT.": "Elegiac Stanzas, Suggested by a Picture of Peele Castle, in a Storm",
+    "ODE.": "Ode: Intimations of Immortality",
+    "I wandered lonely as a Cloud": "I wandered lonely as a Cloud (1807)"
+  }
+}

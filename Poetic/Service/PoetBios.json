@@ -1,5 +1,10 @@
 [
   {
+    "author": "A. E. Housman",
+    "years": "1859–1936",
+    "blurb": "English classical scholar whose 'A Shropshire Lad' (1896) became one of the best-loved books of English poetry. Its spare ballads of doomed youth, lost love and the English countryside spoke powerfully to the generation of the First World War."
+  },
+  {
     "author": "Adam Lindsay Gordon",
     "years": "1833–1870",
     "blurb": "Australian bush poet and horseman, celebrated for galloping ballads of riding and colonial life. His 'Bush Ballads and Galloping Rhymes' gave early Australia a poetic voice, and he is honoured with a memorial in Westminster Abbey."
@@ -18,6 +23,11 @@
     "author": "Algernon Charles Swinburne",
     "years": "1837–1909",
     "blurb": "Victorian poet whose musical, rebellious verse scandalised and dazzled his contemporaries. His 'Poems and Ballads' brought a new sensuality and metrical daring to English poetry."
+  },
+  {
+    "author": "Alice Meynell",
+    "years": "1847–1922",
+    "blurb": "English poet, essayist and campaigner for women's suffrage, twice proposed for Poet Laureate. Her concise, contemplative lyrics, such as 'Renouncement', were admired by Tennyson, Ruskin and Francis Thompson."
   },
   {
     "author": "Ambrose Bierce",
@@ -123,6 +133,11 @@
     "author": "Claude McKay",
     "years": "1889–1948",
     "blurb": "Jamaican-born poet and novelist, a central figure of the Harlem Renaissance. His sonnet 'If We Must Die' became an anthem of resistance and dignity."
+  },
+  {
+    "author": "Countee Cullen",
+    "years": "1903–1946",
+    "blurb": "Leading poet of the Harlem Renaissance. His debut collection 'Color' (1925), written while he was still a student, joined classical forms to searching poems on race, faith and identity, including 'Heritage' and 'Yet Do I Marvel'."
   },
   {
     "author": "Coventry Patmore",
@@ -436,6 +451,11 @@
     "blurb": "Boston physician, essayist, and one of the 'Fireside Poets'. 'Old Ironsides' helped save the USS Constitution, and 'The Chambered Nautilus' was a schoolroom staple for generations."
   },
   {
+    "author": "Omar Khayyam",
+    "years": "1048–1131",
+    "blurb": "Persian mathematician, astronomer and poet. His quatrains on fate, wine and the passing moment reached English readers through Edward FitzGerald's free 1859 translation, 'The Rubáiyát of Omar Khayyám', one of the most popular poems of the Victorian age."
+  },
+  {
     "author": "Oscar Wilde",
     "years": "1854–1900",
     "blurb": "Irish wit, playwright, and author of 'The Picture of Dorian Gray'. 'The Ballad of Reading Gaol', written after his imprisonment, is his poetic masterpiece."
@@ -459,6 +479,11 @@
     "author": "Phillis Wheatley",
     "years": "c. 1753–1784",
     "blurb": "Kidnapped from West Africa and enslaved in Boston, she became the first African-American author of a published book of poetry. Her 1773 'Poems on Various Subjects' made her famous on both sides of the Atlantic."
+  },
+  {
+    "author": "Rabindranath Tagore",
+    "years": "1861–1941",
+    "blurb": "Bengali poet, composer and philosopher, and in 1913 the first non-European to win the Nobel Prize in Literature. His own English renderings in 'Gitanjali', devotional songs of quiet wonder, introduced his work to readers around the world."
   },
   {
     "author": "Ralph Waldo Emerson",
@@ -505,6 +530,11 @@
     "displayName": "Mary Robinson",
     "years": "1757–1800",
     "blurb": "English Romantic poet, actress, and celebrity known as 'the English Sappho'. Famous first as 'Perdita' on the London stage, she became a prolific poet admired by Coleridge."
+  },
+  {
+    "author": "Rudyard Kipling",
+    "years": "1865–1936",
+    "blurb": "Bombay-born English writer and, in 1907, the first English-language winner of the Nobel Prize in Literature. His 'Barrack-Room Ballads' gave voice to the ordinary soldier, and poems such as 'If' and 'Gunga Din' are still widely quoted."
   },
   {
     "author": "Rupert Brooke",
@@ -586,6 +616,11 @@
     "author": "Thomas Gray",
     "years": "1716–1771",
     "blurb": "English poet and Cambridge scholar. His 'Elegy Written in a Country Churchyard' is one of the most quoted poems in the English language."
+  },
+  {
+    "author": "Thomas Hardy",
+    "years": "1840–1928",
+    "blurb": "English novelist of 'Tess of the d'Urbervilles' who turned to poetry in his fifties. His plain-spoken, melancholy lyrics of Wessex, love and loss, among them 'The Darkling Thrush', shaped much of twentieth-century English verse."
   },
   {
     "author": "Thomas Hood",

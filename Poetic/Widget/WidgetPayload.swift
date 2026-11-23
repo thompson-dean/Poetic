@@ -27,9 +27,10 @@ struct DailyPayload: Codable, Equatable {
     let appVersion: String
     let days: [DayEntry]
 
-    /// Bump when the payload's contents change shape (v2: 20-line excerpts
-    /// for the large widget) so existing payloads get rebuilt.
-    static let currentVersion = 2
+    /// Bump when the payload's contents change (v2: 20-line excerpts for the
+    /// large widget; v3: rendezvous-hash daily picks) so existing payloads
+    /// get rebuilt.
+    static let currentVersion = 3
 }
 
 struct FavoritesPayload: Codable, Equatable {
